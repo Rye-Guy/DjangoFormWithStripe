@@ -1,0 +1,32 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Hello World</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+<div class="content">
+  <form action="/payment/" method="POST">
+    {% csrf_token %}
+    <h2>Fair Locations</h2>
+    {% for field in form.select_cities %}
+            {{field}}
+    {% endfor %}
+    <div id="fair_dates_and_options_container"></div>
+    <input type="submit" value="Submit!">
+  </form>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src='{% static "js/main.js" %}'></script>
+
+</html>
