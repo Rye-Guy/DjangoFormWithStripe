@@ -26,8 +26,10 @@
         <h3>Toronto Fair Dates</h3>
         <div class="date-options">{{form.toronto_dates}}</div>
         <h3>Toronto Booth Options</h3>
-
-        <div class="booth-options"><label>{{form.toronto_booth_options}} All Booths - $1995</label></div>
+        <div class="booth-options">
+          <label>{{form.toronto_booth_options}}</label><br>
+          <label>{{form.additional_booth_option}} Extra Booths?</label>
+        </div>
         <h3>Toronto Fair Options</h3>
         <div class="fair-options">{{form.toronto_options}}</div>
       </div>
@@ -58,10 +60,15 @@
     </div>
     <input type="submit" value="Submit!">
   </form>
+  <div class="shopping-cart-container">
+    <h3>Your Cart:</h3>
+      <ul id="shoppingCart"></ul>
+  </div>
 </div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src='{% static "js/main.js" %}'></script>
+<script src='{% static "js/shoppingCart.js" %}'></script>
 
 </html>
