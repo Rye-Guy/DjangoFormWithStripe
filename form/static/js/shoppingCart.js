@@ -11,9 +11,11 @@ boothOptions = null
 
 
 allDatesCheckboxes = document.querySelectorAll('input.dates-select')
-allOptionsCheckboxes = document.querySelectorAll('input.booth-options-select')
+allBoothOptionsCheckboxes = document.querySelectorAll('input.booth-options-select')
+allAdditionalOptions = document.querySelectorAll('input.fair-options')
+console.log(allAdditionalOptions)
 
-console.log(allOptionsCheckboxes)
+additonalBoothsSelect = document.getElementById('id_additional_booth_option')
 
 allDatesCheckboxes.forEach((input) =>{
     input.addEventListener('click', ()=>{
@@ -25,6 +27,7 @@ allDatesCheckboxes.forEach((input) =>{
              shoppingCart.append(cartItem)
              numberOfBooths++
              console.log(numberOfBooths)
+             console.log(additonalBoothsSelect.value)
         }else if(!input.checked){
             findInputId = input.parentElement.innerText
             document.getElementById(findInputId).remove()
@@ -47,7 +50,7 @@ allBoothOptionsCheckboxes.forEach((input) =>{
            console.log(boothType)
         }else if(!input.checked){
            boothValue = parseInt(input.getAttribute('value'))
-           boothType += boothValue
+           boothType -= boothValue
            findInputId = input.parentElement.innerText
            document.getElementById(findInputId).remove()
            console.log(boothType)
@@ -55,7 +58,20 @@ allBoothOptionsCheckboxes.forEach((input) =>{
     })
 })
 
-console.log(allOptionsCheckboxes)
+allAdditionalOptions.forEach((input)=>{
+    input.addEventListener('click', ()=>{
+        if(input.checked){
+            cartItemText = input.parentElement.innerText
+            cartItem = document.createElement('li')
+            cartItem.id = cartItemText
+            cartItem.innerText = cartItemText
+            shoppingCart.append(cartItem)
+        }else if(!input.checked){
+           findInputId = input.parentElement.innerText
+           document.getElementById(findInputId).remove()
+        }
+    })
+})
 
 function clearDiv(id){
     document.getElementById(id).innerHTML = ''

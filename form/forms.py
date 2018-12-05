@@ -81,22 +81,25 @@ class PaymentForm(forms.Form):
     )
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES)
+
+
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES)
     toronto_booth_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS)
     additional_booth_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    toronto_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=TORONTO_FAIR_OPTIONS)
+    toronto_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=TORONTO_FAIR_OPTIONS)
 
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES)
     calgary_booth_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS)
-    calgary_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CALGARY_FAIR_OPTIONS)
+    calgary_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=CALGARY_FAIR_OPTIONS)
+
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES)
     edmonton_booth_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS)
-    edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+    edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
                                             choices=EDMONTON_FAIR_OPTIONS)
 
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES)
     winnipeg_booth_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS)
-    winnipeg_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+    winnipeg_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
                                                         choices=WINNIPEG_FAIR_OPTIONS)

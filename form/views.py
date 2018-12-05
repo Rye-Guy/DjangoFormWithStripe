@@ -13,3 +13,5 @@ class IndexPageView(TemplateView):
         context = super(IndexPageView, self).get_context_data(**kwargs)
         context.update({'some_text': self.some_text, 'form': self.form})
         return context
+
+

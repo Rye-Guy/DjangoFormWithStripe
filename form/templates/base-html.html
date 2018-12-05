@@ -38,6 +38,7 @@
         <div class="date-options">{{form.calgary_dates}}</div>
         <h3>Calgary Booth Options</h3>
         <div class="booth-options">{{form.calgary_booth_options}}</div>
+
         <h3>Calgary Fair Options</h3>
         <div class="fair-options">{{form.calgary_options}}</div>
       </div>
@@ -65,6 +66,19 @@
       <ul id="shoppingCart"></ul>
   </div>
 </div>
+
+<form action="/payment/" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+    data-amount="999"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-zip-code="true">
+  </script>
+</form>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

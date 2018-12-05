@@ -11,7 +11,7 @@ checkboxes.forEach((elem) =>{
             }else if(checked_box_name === 'Toronto' && clicked_box_id.checked == false){
                 torontoContainer.style = 'display: none'
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked){
-                calgaryContainer = document.getElementById('CalgaryFairOcptionsContainer')
+                calgaryContainer = document.getElementById('CalgaryFairOptionsContainer')
                 calgaryContainer.style = 'display: block'
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked == false){
                 calgaryContainer.style = 'display: none'
