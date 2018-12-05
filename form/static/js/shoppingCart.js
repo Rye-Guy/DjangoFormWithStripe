@@ -11,6 +11,9 @@ boothOptions = null
 
 
 allDatesCheckboxes = document.querySelectorAll('input.dates-select')
+allOptionsCheckboxes = document.querySelectorAll('input.booth-options-select')
+
+console.log(allOptionsCheckboxes)
 
 allDatesCheckboxes.forEach((input) =>{
     input.addEventListener('click', ()=>{
@@ -31,7 +34,28 @@ allDatesCheckboxes.forEach((input) =>{
     })
 })
 
+allBoothOptionsCheckboxes.forEach((input) =>{
+    input.addEventListener('click', ()=>{
+        if(input.checked){
+           cartItemText = input.parentElement.innerText
+           cartItem = document.createElement('li')
+           cartItem.id = cartItemText
+           cartItem.innerText = cartItemText
+           boothValue = parseInt(input.getAttribute('value'))
+           boothType += boothValue
+           shoppingCart.append(cartItem)
+           console.log(boothType)
+        }else if(!input.checked){
+           boothValue = parseInt(input.getAttribute('value'))
+           boothType += boothValue
+           findInputId = input.parentElement.innerText
+           document.getElementById(findInputId).remove()
+           console.log(boothType)
+        }
+    })
+})
 
+console.log(allOptionsCheckboxes)
 
 function clearDiv(id){
     document.getElementById(id).innerHTML = ''
