@@ -30,8 +30,6 @@
           <label>{{form.toronto_booth_options}}</label><br>
           <label>{{form.toronto_additional_booth_option}} Extra Booths?</label>
         </div>
-        <h3>Toronto Fair Options</h3>
-        <div class="fair-options">{{form.toronto_options}}</div>
       </div>
       <div id="CalgaryFairOptionsContainer" style="display: none;">
         <h3>Calgary Fair Dates</h3>
@@ -57,11 +55,12 @@
         <h3>Winnipeg Booth Options</h3>
         <div class="booth-options">{{form.winnipeg_booth_options}}</div>
         <label>{{form.winnipeg_additional_booth_option}} Extra Booths?</label>
-        <h3>Winnipeg Fair Options</h3>
-        <div class="fair-options">{{form.winnipeg_options}}</div>
       </div>
     </div>
     <input type="submit" value="Submit!">
+  </form>
+  <form>
+      {{customer_form}}
   </form>
   <div class="shopping-cart-container">
     <h3>Your Cart Total: <span id="cart-total"></span></h3>

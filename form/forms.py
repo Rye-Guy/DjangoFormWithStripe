@@ -1,4 +1,10 @@
 from django import forms
+from .models import CustomerModelForm
+
+class CustomerModelFormClass(forms.ModelForm):
+    class Meta:
+        model = CustomerModelForm
+        fields = '__all__'#['company_name', 'contact_name']
 
 class PaymentForm(forms.Form):
     CITY_CHOICES = (
@@ -13,10 +19,6 @@ class PaymentForm(forms.Form):
         ('date3', 'September 17h, 2019')
     )
 
-    TORONTO_FAIR_OPTIONS = (
-        ('option1', 'Electricity'),
-        ('option2', 'Wifi')
-    )
     CALGARY_DATES = (
         ('date1', 'March 12th, 2019'),
         ('date2', 'June 26th, 2019'),
@@ -49,10 +51,6 @@ class PaymentForm(forms.Form):
         ('date3', 'July 23rd, 2019')
     )
 
-    WINNIPEG_FAIR_OPTIONS = (
-        ('option1', 'Internet Access'),
-        ('option2', 'Electricity')
-    )
 
     TORONTO_BOOTH_OPTIONS = (
         ('2995', 'Platinum - $2995'),
@@ -87,7 +85,6 @@ class PaymentForm(forms.Form):
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES)
     toronto_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS)
     toronto_additional_booth_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    toronto_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=TORONTO_FAIR_OPTIONS)
     toronto_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
 
 
@@ -106,5 +103,3 @@ class PaymentForm(forms.Form):
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES)
     winnipeg_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS)
     winnipeg_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
-    winnipeg_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
-                                                        choices=WINNIPEG_FAIR_OPTIONS)
