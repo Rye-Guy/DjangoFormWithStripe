@@ -14,9 +14,8 @@ class PaymentForm(forms.Form):
         ('Edmonton', 'Edmonton')
     )
     TORONTO_DATES = (
-        ('date1', 'September 19th, 2018'),
-        ('date2', 'April 24th, 2018'),
-        ('date3', 'September 17h, 2019')
+        ('date1', 'April 24th, 2018'),
+        ('date2', 'September 17h, 2019')
     )
 
     CALGARY_DATES = (
@@ -25,25 +24,11 @@ class PaymentForm(forms.Form):
         ('date3', 'October 22nd, 2019')
     )
 
-    CALGARY_FAIR_OPTIONS = (
-        ('option1', 'Extra Lunch'),
-        ('option2', 'Access to Electricity'),
-        ('option3', 'Special Diet Request'),
-        ('option4', 'Internet Access')
-    )
     EDMONTON_DATES = (
         ('date1', 'January 29th, 2019'),
         ('date2', 'May 28th, 2019'),
         ('date3', 'August 13th, 2019'),
         ('date3', 'November 19th, 2019')
-    )
-
-    EDMONTON_FAIR_OPTIONS = (
-        ('option1', 'Extra Breakfast'),
-        ('option2', 'Extra Lunch'),
-        ('option3', 'Special Diet Request'),
-        ('option4', 'Access to Electricity'),
-        ('option5', 'Internet Access')
     )
     WINNIPEG_DATES = (
         ('date1', 'July 10th, 2019'),
@@ -78,6 +63,16 @@ class PaymentForm(forms.Form):
         ('1495', 'Bronze - $1495')
     )
 
+    CALGARY_FAIR_OPTIONS = (
+        ('option1', 'Access to Electricity'),
+        ('option2', 'Internet Access')
+    )
+
+    EDMONTON_FAIR_OPTIONS = (
+        ('option1', 'Access to Electricity'),
+        ('option2s', 'Internet Access')
+    )
+
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES)
 
 
@@ -85,21 +80,34 @@ class PaymentForm(forms.Form):
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES)
     toronto_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS)
     toronto_additional_booth_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    toronto_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
 
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES)
     calgary_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS)
     calgary_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
+    calgary_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
+    calgary_electricity_access = forms.BooleanField(label='Electricity Access?')
+    calgary_internet_access = forms.BooleanField(label='Internet Access?')
+    calgary_diet_request = forms.CharField(max_length=500)
     calgary_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=CALGARY_FAIR_OPTIONS)
+
 
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES)
     edmonton_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS)
     edmonton_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
+    edmonton_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
+    edmonton_additional_breakfast_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
+    edmonton_diet_request = forms.CharField(max_length=500)
     edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
-                                            choices=EDMONTON_FAIR_OPTIONS)
+                                                 choices=EDMONTON_FAIR_OPTIONS)
+
+
 
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES)
     winnipeg_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS)
     winnipeg_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
+    winnipeg_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
+    winnipeg_diet_request = forms.CharField(max_length=500)
+
+
