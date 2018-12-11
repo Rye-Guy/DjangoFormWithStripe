@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from form.views import IndexPageView
+from form.views import IndexPageView #, PaymentSuccessView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

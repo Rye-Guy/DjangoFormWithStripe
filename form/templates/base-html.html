@@ -14,12 +14,15 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 <div class="content">
-  <form action="/payment/" method="POST">
+  <form action="/" method="POST">
     {% csrf_token %}
     <h2>Fair Locations</h2>
     {% for field in form.select_cities %}
             {{field}}
     {% endfor %}
+    {% if form.errors %}
+      {{form.errors.select_cities}}
+    {% endif %}
     <div id="fair_dates_and_options_container">
 
       <div id="TorontoFairOptionsContainer" style="display: none;">
