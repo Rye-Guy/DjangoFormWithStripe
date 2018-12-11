@@ -4,6 +4,9 @@ from django.views.generic.base import TemplateView
 
 from form.forms import PaymentForm, CustomerModelFormClass
 
+import datetime
+
+
 class IndexPageView(TemplateView):
     template_name = 'base-html.html'
     formPayment = PaymentForm()
