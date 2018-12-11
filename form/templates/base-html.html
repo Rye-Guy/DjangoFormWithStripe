@@ -13,6 +13,9 @@
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
+   {% if form.errors %}
+      {{form.errors}}
+    {% endif %}
 <div class="content">
   <form action="/" method="POST">
     {% csrf_token %}
@@ -29,6 +32,9 @@
         <h3>Toronto Fair Dates</h3>
         <div class="date-options">{{form.toronto_dates}}</div>
         <h3>Toronto Booth Options</h3>
+          {% if form.errors.toronto_booth_options %}
+              {{form.errors.toronto_booth_options}}
+          {% endif %}
         <div class="booth-options">
           <label>{{form.toronto_booth_options}}</label>
         </div>

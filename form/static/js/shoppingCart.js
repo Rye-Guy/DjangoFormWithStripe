@@ -31,6 +31,7 @@ allDatesCheckboxes.forEach((input) =>{
              shoppingCart.append(cartItem)
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
+                console.log('date added')
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
                 calgaryCart[0]++
@@ -76,6 +77,7 @@ allBoothOptionsRadios.forEach((input) =>{
               shoppingCart.append(cartItem)
               torontoCart[1] = boothValue
               amountSpent = calculateTotal('toronto', torontoCart)
+              torontoCart[2] = parseInt(document.getElementById('id_toronto_additional_booth_option').value) * 995
               document.getElementById('torontoCartNumber').innerText = amountSpent
               calculateGrandTotal()
            }
@@ -86,6 +88,7 @@ allBoothOptionsRadios.forEach((input) =>{
               cartItem.id = 'calgarySingleCartItem'
               shoppingCart.append(cartItem)
               calgaryCart[1] = boothValue
+
               amountSpent = calculateTotal('calgary', calgaryCart)
               document.getElementById('calgaryCartNumber').innerText = amountSpent
               calculateGrandTotal()
@@ -132,14 +135,8 @@ allAdditionalOptions.forEach((input)=>{
     })
 })
 
-function uniqueAdditionalOptions(){
-
-}
-
-
 function calculateTotal(boothZone, cartName){
-            additionalBoothValue = parseInt(document.getElementById(`id_${boothZone}_additional_booth_option`).value) * 995
-            additionalBoothValue = cartName[2]
+
             totalBreakfastCostEdmonton = parseInt(document.getElementById('id_edmonton_additional_breakfast_option').value) * 23
             totalLunchCostEdmonton = parseInt(document.getElementById('id_edmonton_additional_lunch_option').value) * 29
             edmontonCart[3] = totalBreakfastCostEdmonton + totalLunchCostEdmonton

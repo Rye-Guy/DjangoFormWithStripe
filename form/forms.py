@@ -79,7 +79,7 @@ class PaymentForm(forms.Form):
 
 
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES)
-    toronto_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS, required=False)
+    toronto_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS, required=False)
     toronto_additional_booth_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
 
 
@@ -117,9 +117,16 @@ class PaymentForm(forms.Form):
         cities = cleaned_data.get('select_cities')
         print(cities)
 
+        def clean_toronto(self, *args, **kwargs):
+            toronto_dates = cleaned_data.get('toronto_dates')
+            toronto_options = cleaned_data.get('toronto_booth_options')
+            if toronto_dates and not toronto_options:
+                raise forms.ValidationError({'toronto_booth_options': 'You have selected a date but not a booth option!'})
+
         if cities == None:
             raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
         if 'Toronto' in cities:
+            clean_toronto(self)
             raise forms.ValidationError({'select_cities': 'Dont Select Toronto'}, code='invalid')
         if 'winnipeg' in cities:
             pass
