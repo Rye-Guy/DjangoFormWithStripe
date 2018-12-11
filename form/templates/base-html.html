@@ -96,6 +96,7 @@
 
 <form action="/payment/" method="POST">
   <script
+  {% csrf_token %}
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
     data-amount=cartTotal
