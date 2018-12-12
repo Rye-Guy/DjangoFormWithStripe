@@ -19,6 +19,7 @@ class IndexPageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        print(self)
         if form.has_error('select_cities'):
             pass
         if form.is_valid():
