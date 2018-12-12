@@ -19,5 +19,6 @@ from form.views import IndexPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register_success/', views.success, name='success'), # new
     path('', IndexPageView.as_view(), name="index")
 ]

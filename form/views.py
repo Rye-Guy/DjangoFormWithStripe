@@ -22,29 +22,17 @@ class IndexPageView(TemplateView):
         return context
 
 
-def register(request):
-    if request.method == "POST"
-    if form.is_valid():
-        try: 
-            customer = stripe.charge.create(
-                amount = 499,
-                currency = CAD,
-                description = form.cleaned_data['stripe_id']
+    def get_context_data(self, **kwargs): # new
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
 
-            )
-
-            form.saved()
-
-            redirect('/register_success')
-        except stripe.CardError, e:
-            form.add_error('your card has been declined')
-
-    else
-        form = CustomUserForm()
-
-    args = {}
-    args.update(csrf(request))
-    args['forms'] = form
-  
-def register_success(request):
-    return render_to_response('register_success.html')  
+def charge(request): # new
+    if request.method == 'POST':
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='cad',
+            description='A Django stripe charge',
+            source=request.POST['stripeToken']
+        )
+        return render(request, 'register_success.html')
