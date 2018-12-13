@@ -140,6 +140,11 @@ class PaymentForm(forms.Form):
             city_dates_2 = cleaned_data.get(city_name_2 + '_dates')
             city_options_2 = cleaned_data.get(city_name_2 + '_booth_options')
 
+            if city_dates_2 and not city_options_2 and not city_dates_1 and city_options_1:
+                raise forms.ValidationError({
+                    city_name_1 + '_dates': 'You not selected a date option!',
+                    city_name_2 + '_booth_options': 'You have not selected a date option!'
+                })
 
             if not city_dates_2 and city_options_2 and city_dates_1 and not city_options_1:
                 raise forms.ValidationError({
@@ -168,18 +173,64 @@ class PaymentForm(forms.Form):
                     })
             return self
 
+        def clean_three_cities(self, city_name_1, city_name_2, city_name_3):
+            city_dates_1 = cleaned_data.get(city_name_1 + '_dates')
+            city_options_1 = cleaned_data.get(city_name_1 + '_booth_options')
+            city_dates_2 = cleaned_data.get(city_name_2 + '_dates')
+            city_options_2 = cleaned_data.get(city_name_2 + '_booth_options')
+            city_dates_3 = cleaned_data.get(city_name_3 + '_dates')
+            city_options_3 = cleaned_data.get(city_name_3 + '_booth_options')
+
+            if not city_dates_1 and not city_options_1 and not city_dates_2 and not city_options_2 and not city_dates_3 and city_options_3:
+                raise forms.ValidationError({
+                    city_name_2 + '_dates': 'You not selected a date option!',
+                    city_name_2 + '_booth_options': 'You have not selected a date option!',
+                    city_name_1 + '_dates': 'You not selected a date option!',
+                    city_name_1 + '_booth_options': 'You have not selected a date option!',
+                    city_name_3 + '_dates': 'You not selected a date option!',
+                    city_name_3 + '_booth_options': 'You have not selected a date option!'
+                })
 
         if cities == []:
             raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
-        if 'Toronto' and 'Winnipeg' in cities:
-            clean_two_cities(self, 'toronto', 'winnipeg')
-            clean_city(self, 'toronto')
-            clean_city(self, 'winnipeg')
-        if 'Toronto' in cities:
-            clean_city(self, 'toronto')
-        if 'Winnipeg' in cities:
-            clean_city(self, 'winnipeg')
-        if 'Calgary' in cities:
-            clean_city(self, 'calgary')
-        if 'Edmonton' in cities:
-            clean_city(self, 'edmonton')
+        # if 'Toronto' and 'Winnipeg' and 'Calgary' in cities:
+        #     clean_three_cities(self, 'toronto', 'winnipeg', 'calgary')
+        #     clean_city(self, 'toronto')
+        #     clean_city(self, 'winnipeg')
+        #     clean_city(self, 'calgary')
+
+        if len(cities) == 2:
+            if ['Toronto', 'Winnipeg'] == cities:
+                clean_two_cities(self, 'toronto', 'winnipeg')
+                clean_city(self, 'toronto')
+                clean_city(self, 'winnipeg')
+            if ['Calgary', 'Edmonton'] == cities:
+                clean_two_cities(self, 'calgary', 'edmonton')
+                clean_city(self, 'calgary')
+                clean_city(self, 'edmonton')
+            if ['Toronto', 'Calgary'] == cities:
+                clean_two_cities(self, 'toronto', 'calgary')
+                clean_city(self, 'toronto')
+                clean_city(self, 'calgary')
+            if ['Winnipeg', 'Calgary'] == cities:
+                clean_two_cities(self, 'winnipeg', 'calgary')
+                clean_city(self, 'winnipeg')
+                clean_city(self, 'calgary')
+            if ['Toronto', 'Edmonton'] == cities:
+                clean_two_cities(self, 'edmonton', 'toronto')
+                clean_city(self, 'edmonton')
+                clean_city(self, 'toronto')
+            if ['Winnipeg', 'Edmonton'] == cities:
+                clean_two_cities(self, 'winnipeg', 'edmonton')
+                clean_city(self, 'winnipeg')
+                clean_city(self, 'edmonton')
+
+        if len(cities) == 1 or len(cities) > 2:
+            if 'Toronto' in cities:
+                clean_city(self, 'toronto')
+            elif 'Winnipeg' in cities:
+                clean_city(self, 'winnipeg')
+            elif 'Calgary' in cities:
+                clean_city(self, 'calgary')
+            elif 'Edmonton' in cities:
+                clean_city(self, 'edmonton')
