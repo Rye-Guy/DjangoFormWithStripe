@@ -24,7 +24,7 @@ class IndexPageView(TemplateView):
             pass
         if form.is_valid():
             print('valid')
-            return HttpResponseRedirect('/success')
+            return HttpResponseRedirect('/')
 
         return render(request, self.template_name, {'form': form})
 

@@ -84,7 +84,7 @@ class PaymentForm(forms.Form):
 
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES, required=False)
-    calgary_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)
+    calgary_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)
     calgary_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
     calgary_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
     calgary_electricity_access = forms.BooleanField(label='Electricity Access?', required=False)
@@ -95,7 +95,7 @@ class PaymentForm(forms.Form):
 
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES, required=False)
-    edmonton_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS, required=False)
+    edmonton_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS, required=False)
     edmonton_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
     edmonton_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
     edmonton_additional_breakfast_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
@@ -106,7 +106,7 @@ class PaymentForm(forms.Form):
 
 
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES, required=False)
-    winnipeg_booth_options = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS, required=False)
+    winnipeg_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS, required=False)
     winnipeg_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
     winnipeg_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
     winnipeg_diet_request = forms.CharField(max_length=500, required=False)
@@ -134,10 +134,48 @@ class PaymentForm(forms.Form):
                 raise forms.ValidationError({city_name+'_dates': 'You not selected a date option!', city_name+'_booth_options': 'You have not selected a date option!'})
             return self
 
+        def clean_two_cities(self, city_name_1, city_name_2):
+            city_dates_1 = cleaned_data.get(city_name_1 + '_dates')
+            city_options_1 = cleaned_data.get(city_name_1 + '_booth_options')
+            city_dates_2 = cleaned_data.get(city_name_2 + '_dates')
+            city_options_2 = cleaned_data.get(city_name_2 + '_booth_options')
+
+
+            if not city_dates_2 and city_options_2 and city_dates_1 and not city_options_1:
+                raise forms.ValidationError({
+                    city_name_2 + '_dates': 'You not selected a date option!',
+                    city_name_1 + '_booth_options': 'You have not selected a date option!'
+                })
+
+            if not city_dates_2 and city_options_2 and not city_dates_1 and city_options_1:
+                raise forms.ValidationError({
+                    city_name_2 + '_dates': 'You not selected a date option!',
+                    city_name_1 + '_dates': 'You not selected a date option!'
+                    })
+
+            if city_dates_2 and not city_options_2 and city_dates_1 and not city_options_1:
+                raise forms.ValidationError({
+                    city_name_2 + '_booth_options': 'You have not selected a booth option!',
+                    city_name_1 + '_booth_options': 'You have not selected a booth option!'
+                    })
+
+            if not city_dates_2 and not city_options_2 and not city_dates_1 and not city_options_1:
+                raise forms.ValidationError({
+                    city_name_2 + '_dates': 'You not selected a date option!',
+                    city_name_2 + '_booth_options': 'You have not selected a date option!',
+                    city_name_1 + '_dates': 'You not selected a date option!',
+                    city_name_1 + '_booth_options': 'You have not selected a date option!'
+                    })
+            return self
+
 
         if cities == []:
             raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
-        if 'Toronto' and 'Winnipeg' and 'Calgary' and 'Edmonton' in cities:
+        if 'Toronto' and 'Winnipeg' in cities:
+            clean_two_cities(self, 'toronto', 'winnipeg')
+            clean_city(self, 'toronto')
+            clean_city(self, 'winnipeg')
+        if 'Toronto' in cities:
             clean_city(self, 'toronto')
         if 'Winnipeg' in cities:
             clean_city(self, 'winnipeg')
