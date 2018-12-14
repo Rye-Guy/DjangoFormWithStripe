@@ -109,13 +109,15 @@
           <label>{{form.winnipeg_diet_request}} Special Diet/Allergy Request?</label>
       </div>
     </div>
+    <input type="hidden" id="priceInput" name="price" value="">
     <input type="submit" value="Submit!">
+
   </form>
   <form>
 
   </form>
   <div class="shopping-cart-container">
-    <h3>Your Cart Total: <span id="cart-total"></span></h3>
+    <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
       <ul id="shoppingCart">
           <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
           <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>

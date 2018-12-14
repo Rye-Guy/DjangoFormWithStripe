@@ -156,8 +156,11 @@ function calculateGrandTotal(){
        roughTaxCal = grandTotal * .13
        overallTotalWithTax = grandTotal + roughTaxCal
        document.getElementById('cart-total').innerText = overallTotalWithTax
+       document.getElementById('priceInput').value = overallTotalWithTax
        return overallTotalWithTax
 }
+
+
 
 cartTotal = document.getElementById('cart-total')
 

@@ -19,9 +19,10 @@ class IndexPageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        print(self)
+        print(request.POST)
+        print(request.POST.get('price', ''))
         if form.has_error('select_cities'):
-            pass
+            form.add_error()
         if form.is_valid():
             print('valid')
             return HttpResponseRedirect('/')

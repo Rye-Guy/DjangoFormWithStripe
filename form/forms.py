@@ -1,5 +1,6 @@
 from django import forms
 from .models import CustomerModelForm
+from contextlib import suppress
 
 class CustomerModelFormClass(forms.ModelForm):
     class Meta:
@@ -113,11 +114,12 @@ class PaymentForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        print(cleaned_data)
+        # print(cleaned_data)
         cities = cleaned_data.get('select_cities')
         print(cities)
 
-        def get_cities(self, *args, **kwargs):
+
+        def clean_cities(self, *args, **kwargs):
             if cities == []:
                 raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
             else:
@@ -127,110 +129,27 @@ class PaymentForm(forms.Form):
             city_dates = cleaned_data.get(city_name+'_dates')
             city_options = cleaned_data.get(city_name+'_booth_options')
             if not city_dates and city_options:
-                raise forms.ValidationError({city_name+'_dates': 'You have selected a booth option but not a date option!'})
+                self.add_error(city_name+'_dates', 'You have selected a booth option but not a date option!')
+                #raise forms.add({city_name+'_dates': 'You have selected a booth option but not a date option!'})
             if city_dates and not city_options:
-                raise forms.ValidationError({city_name+'_booth_options': 'You have selected a date but not a booth option!'})
+                self.add_error(city_name+'_booth_options', 'You have selected a date but not a booth option!')
+                #raise forms.ValidationError({city_name+'_booth_options': 'You have selected a date but not a booth option!'})
             if not city_dates and not city_options:
-                raise forms.ValidationError({city_name+'_dates': 'You not selected a date option!', city_name+'_booth_options': 'You have not selected a date option!'})
-            return self
+                self.add_error(city_name+'_dates', 'You not selected a date option!')
+                self.add_error(city_name+'_booth_options', 'You have not selected a date option!')
+                #raise forms.ValidationError({city_name+'_dates': 'You not selected a date option!', city_name+'_booth_options': 'You have not selected a date option!'})
 
-        def clean_two_cities(self, city_name_1, city_name_2):
-            city_dates_1 = cleaned_data.get(city_name_1 + '_dates')
-            city_options_1 = cleaned_data.get(city_name_1 + '_booth_options')
-            city_dates_2 = cleaned_data.get(city_name_2 + '_dates')
-            city_options_2 = cleaned_data.get(city_name_2 + '_booth_options')
-
-            if city_dates_2 and not city_options_2 and not city_dates_1 and city_options_1:
-                raise forms.ValidationError({
-                    city_name_1 + '_dates': 'You not selected a date option!',
-                    city_name_2 + '_booth_options': 'You have not selected a date option!'
-                })
-
-            if not city_dates_2 and city_options_2 and city_dates_1 and not city_options_1:
-                raise forms.ValidationError({
-                    city_name_2 + '_dates': 'You not selected a date option!',
-                    city_name_1 + '_booth_options': 'You have not selected a date option!'
-                })
-
-            if not city_dates_2 and city_options_2 and not city_dates_1 and city_options_1:
-                raise forms.ValidationError({
-                    city_name_2 + '_dates': 'You not selected a date option!',
-                    city_name_1 + '_dates': 'You not selected a date option!'
-                    })
-
-            if city_dates_2 and not city_options_2 and city_dates_1 and not city_options_1:
-                raise forms.ValidationError({
-                    city_name_2 + '_booth_options': 'You have not selected a booth option!',
-                    city_name_1 + '_booth_options': 'You have not selected a booth option!'
-                    })
-
-            if not city_dates_2 and not city_options_2 and not city_dates_1 and not city_options_1:
-                raise forms.ValidationError({
-                    city_name_2 + '_dates': 'You not selected a date option!',
-                    city_name_2 + '_booth_options': 'You have not selected a date option!',
-                    city_name_1 + '_dates': 'You not selected a date option!',
-                    city_name_1 + '_booth_options': 'You have not selected a date option!'
-                    })
-            return self
-
-        def clean_three_cities(self, city_name_1, city_name_2, city_name_3):
-            city_dates_1 = cleaned_data.get(city_name_1 + '_dates')
-            city_options_1 = cleaned_data.get(city_name_1 + '_booth_options')
-            city_dates_2 = cleaned_data.get(city_name_2 + '_dates')
-            city_options_2 = cleaned_data.get(city_name_2 + '_booth_options')
-            city_dates_3 = cleaned_data.get(city_name_3 + '_dates')
-            city_options_3 = cleaned_data.get(city_name_3 + '_booth_options')
-
-            if not city_dates_1 and not city_options_1 and not city_dates_2 and not city_options_2 and not city_dates_3 and city_options_3:
-                raise forms.ValidationError({
-                    city_name_2 + '_dates': 'You not selected a date option!',
-                    city_name_2 + '_booth_options': 'You have not selected a date option!',
-                    city_name_1 + '_dates': 'You not selected a date option!',
-                    city_name_1 + '_booth_options': 'You have not selected a date option!',
-                    city_name_3 + '_dates': 'You not selected a date option!',
-                    city_name_3 + '_booth_options': 'You have not selected a date option!'
-                })
 
         if cities == []:
-            raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
-        # if 'Toronto' and 'Winnipeg' and 'Calgary' in cities:
-        #     clean_three_cities(self, 'toronto', 'winnipeg', 'calgary')
-        #     clean_city(self, 'toronto')
-        #     clean_city(self, 'winnipeg')
-        #     clean_city(self, 'calgary')
+            clean_cities(self)
+        if 'Toronto' in cities:
+            clean_city(self, 'toronto')
+        if 'Winnipeg' in cities:
+            clean_city(self, 'winnipeg')
+        if 'Calgary' in cities:
+            clean_city(self, 'calgary')
+        if 'Edmonton' in cities:
+            clean_city(self, 'edmonton')
 
-        if len(cities) == 2:
-            if ['Toronto', 'Winnipeg'] == cities:
-                clean_two_cities(self, 'toronto', 'winnipeg')
-                clean_city(self, 'toronto')
-                clean_city(self, 'winnipeg')
-            if ['Calgary', 'Edmonton'] == cities:
-                clean_two_cities(self, 'calgary', 'edmonton')
-                clean_city(self, 'calgary')
-                clean_city(self, 'edmonton')
-            if ['Toronto', 'Calgary'] == cities:
-                clean_two_cities(self, 'toronto', 'calgary')
-                clean_city(self, 'toronto')
-                clean_city(self, 'calgary')
-            if ['Winnipeg', 'Calgary'] == cities:
-                clean_two_cities(self, 'winnipeg', 'calgary')
-                clean_city(self, 'winnipeg')
-                clean_city(self, 'calgary')
-            if ['Toronto', 'Edmonton'] == cities:
-                clean_two_cities(self, 'edmonton', 'toronto')
-                clean_city(self, 'edmonton')
-                clean_city(self, 'toronto')
-            if ['Winnipeg', 'Edmonton'] == cities:
-                clean_two_cities(self, 'winnipeg', 'edmonton')
-                clean_city(self, 'winnipeg')
-                clean_city(self, 'edmonton')
 
-        if len(cities) == 1 or len(cities) > 2:
-            if 'Toronto' in cities:
-                clean_city(self, 'toronto')
-            elif 'Winnipeg' in cities:
-                clean_city(self, 'winnipeg')
-            elif 'Calgary' in cities:
-                clean_city(self, 'calgary')
-            elif 'Edmonton' in cities:
-                clean_city(self, 'edmonton')
+
