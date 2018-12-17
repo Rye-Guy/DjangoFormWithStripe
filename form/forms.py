@@ -17,7 +17,7 @@ class PaymentForm(forms.Form):
     )
     TORONTO_DATES = (
         ('date1', 'April 24th, 2018'),
-        ('date2', 'September 17h, 2019')
+        ('date2', 'September 17th, 2019')
     )
 
     CALGARY_DATES = (
@@ -77,71 +77,38 @@ class PaymentForm(forms.Form):
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
 
-
-
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES, required=False)
     toronto_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS, required=False)
-    toronto_additional_booth_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES, required=False)
     calgary_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)
-    calgary_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
-    calgary_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    calgary_electricity_access = forms.BooleanField(label='Electricity Access?', required=False)
-    calgary_internet_access = forms.BooleanField(label='Internet Access?', required=False)
-    calgary_diet_request = forms.CharField(max_length=500, required=False)
     calgary_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=CALGARY_FAIR_OPTIONS, required=False)
-
-
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES, required=False)
     edmonton_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS, required=False)
-    edmonton_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
-    edmonton_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    edmonton_additional_breakfast_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
-    edmonton_diet_request = forms.CharField(max_length=500, required=False)
     edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
                                                  choices=EDMONTON_FAIR_OPTIONS, required=False)
 
-
-
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES, required=False)
     winnipeg_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS, required=False)
-    winnipeg_additional_booth_option = forms.ChoiceField(choices=((0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
-    winnipeg_additional_lunch_option = forms.ChoiceField(choices=((0,0),(1,1),(2,2),(3,3),(4,4),(5,5)))
-    winnipeg_diet_request = forms.CharField(max_length=500, required=False)
 
     def clean(self):
         cleaned_data = super().clean()
-        # print(cleaned_data)
         cities = cleaned_data.get('select_cities')
-        print(cities)
-
-
-        def clean_cities(self, *args, **kwargs):
-            if cities == []:
-                raise forms.ValidationError({'select_cities': 'Please Select at Least One City'}, code='invalid')
-            else:
-                return self
 
         def clean_city(self, city_name):
             city_dates = cleaned_data.get(city_name+'_dates')
             city_options = cleaned_data.get(city_name+'_booth_options')
             if not city_dates and city_options:
                 self.add_error(city_name+'_dates', 'You have selected a booth option but not a date option!')
-                #raise forms.add({city_name+'_dates': 'You have selected a booth option but not a date option!'})
             if city_dates and not city_options:
                 self.add_error(city_name+'_booth_options', 'You have selected a date but not a booth option!')
-                #raise forms.ValidationError({city_name+'_booth_options': 'You have selected a date but not a booth option!'})
             if not city_dates and not city_options:
                 self.add_error(city_name+'_dates', 'You not selected a date option!')
                 self.add_error(city_name+'_booth_options', 'You have not selected a date option!')
-                #raise forms.ValidationError({city_name+'_dates': 'You not selected a date option!', city_name+'_booth_options': 'You have not selected a date option!'})
-
 
         if cities == []:
-            clean_cities(self)
+            self.add_error('select_cities', 'You have not selected any fair locations!')
         if 'Toronto' in cities:
             clean_city(self, 'toronto')
         if 'Winnipeg' in cities:

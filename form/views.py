@@ -22,7 +22,7 @@ class IndexPageView(TemplateView):
         print(request.POST)
         print(request.POST.get('price', ''))
         if form.has_error('select_cities'):
-            form.add_error()
+            pass
         if form.is_valid():
             print('valid')
             return HttpResponseRedirect('/')

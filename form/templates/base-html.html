@@ -29,11 +29,6 @@
     <div id="fair_dates_and_options_container">
 
       <div id="TorontoFairOptionsContainer" style="display: none;">
-        <h3>Toronto Fair Dates</h3>
-          {% if form.errors.toronto_dates %}
-            {{form.errors.toronto_dates}}
-          {% endif %}
-        <div class="date-options">{{form.toronto_dates}}</div>
         <h3>Toronto Booth Options</h3>
           {% if form.errors.toronto_booth_options %}
               {{form.errors.toronto_booth_options}}
@@ -41,58 +36,48 @@
         <div class="booth-options">
           <label>{{form.toronto_booth_options}}</label>
         </div>
-        <div class="additional-options">
-          <h3>Additional Options</h3>
-          <label>{{form.toronto_additional_booth_option}} Extra Booths?</label>
-        </div>
+        <h3>Toronto Fair Dates & Options</h3>
+          {% if form.errors.toronto_dates %}
+            {{form.errors.toronto_dates}}
+          {% endif %}
+        <div class="date-options">{{form.toronto_dates}}</div>
+
       </div>
       <div id="CalgaryFairOptionsContainer" style="display: none;">
+        <h3>Calgary Booth Options</h3>
+        <div class="booth-options">{{form.calgary_booth_options}}</div>
+          {% if form.errors.calgary_booth_options %}
+            {{form.errors.calgary_booth_options}}
+          {% endif %}
         <h3>Calgary Fair Dates</h3>
           {% if form.errors.calgary_dates %}
             {{form.errors.calgary_dates}}
           {% endif %}
         <div class="date-options">{{form.calgary_dates}}</div>
-        <h3>Calgary Booth Options</h3>
-          {% if form.errors.calgary_booth_options %}
-            {{form.errors.calgary_booth_options}}
-          {% endif %}
-        <div class="booth-options">{{form.calgary_booth_options}}</div>
-
-        <h3>Calgary Fair Options</h3>
-        <div class="additional-options">
-          <label>{{form.calgary_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.calgary_additional_lunch_option}} Extra Lunches? (One Included)</label><br>
-          <label>{{form.calgary_diet_request}} Special Diet/Allergy Request?</label>
-        </div>
         <h3>Venue Options</h3>
         <div class="venue-options">
             {{form.calgary_options}}
         </div>
       </div>
       <div id="EdmontonFairOptionsContainer" style="display: none;">
-        <h3>Edmonton Fair Dates</h3>
-          {% if form.errors.edmonton_dates %}
-            {{form.errors.edmonton_dates}}
-          {% endif %}
-        <div class="date-options">{{form.edmonton_dates}}</div>
         <h3>Edmonton Booth Options</h3>
           {% if form.errors.edmonton_booth_options %}
             {{form.errors.edmonton_booth_options}}
           {% endif %}
         <div class="booth-options">{{form.edmonton_booth_options}}</div>
-        <h3>Edmonton Fair Options</h3>
-        <div class="additional-options">
-          <label>{{form.edmonton_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.edmonton_additional_breakfast_option}} Extra Breakfast?</label></br>
-          <label>{{form.edmonton_additional_lunch_option}} Extra Lunch?</label><br>
-          <label>{{form.edmonton_diet_request}} Special Diet/Allergy Request?</label>
-        </div>
+        <h3>Edmonton Fair Dates</h3>
+          {% if form.errors.edmonton_dates %}
+            {{form.errors.edmonton_dates}}
+          {% endif %}
+        <div class="date-options">{{form.edmonton_dates}}</div>
         <h3>Venue Options</h3>
         <div class="venue-options">
           {{form.edmonton_options}}
         </div>
       </div>
       <div id="WinnipegFairOptionsContainer" style="display: none;">
+        <h3>Winnipeg Booth Options</h3>
+        <div class="booth-options">{{form.winnipeg_booth_options}}</div>
         <h3>Winnipeg Fair Dates</h3>
           {% if form.errors.winnipeg_dates %}
             {{form.errors.winnipeg_dates}}
@@ -101,12 +86,6 @@
           {% if form.errors.winnipeg_booth_options %}
             {{form.errors.winnipeg_booth_options}}
           {% endif %}
-        <h3>Winnipeg Booth Options</h3>
-        <div class="booth-options">{{form.winnipeg_booth_options}}</div>
-        <h3>Winnipeg Fair Options</h3>
-          <label>{{form.winnipeg_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.winnipeg_additional_lunch_option}} Extra Lunch?</label><br>
-          <label>{{form.winnipeg_diet_request}} Special Diet/Allergy Request?</label>
       </div>
     </div>
     <input type="hidden" id="priceInput" name="price" value="">
