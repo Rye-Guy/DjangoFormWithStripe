@@ -225,6 +225,10 @@ function calculateTotal(boothZone, cartName){
 }
 
 function calculateGrandTotal(){
+       torontoCart[3] = 0
+       winnipegCart[3] = 0
+       edmontonCart[3] = 0
+       calgaryCart[3] = 0
        additionalCartItems('toronto', ' April 24th, 2018', torontoCart)
        additionalCartItems('toronto', ' September 17th, 2019', torontoCart)
        additionalCartItems('winnipeg', ' July 10th, 2019', winnipegCart)
