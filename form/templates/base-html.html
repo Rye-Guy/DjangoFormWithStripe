@@ -7,84 +7,109 @@
   <title>Hello World</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!--<link rel="stylesheet" href='{% static "css/materialize.css" %}'>-->
 </head>
 
 <body>
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
+   {% if form.errors %}
+      {{form.errors}}
+    {% endif %}
 <div class="content">
-  <form action="/payment/" method="POST">
+  <form action="/" method="POST">
     {% csrf_token %}
     <h2>Fair Locations</h2>
     {% for field in form.select_cities %}
             {{field}}
     {% endfor %}
+    {% if form.errors %}
+      {{form.errors.select_cities}}
+    {% endif %}
     <div id="fair_dates_and_options_container">
 
       <div id="TorontoFairOptionsContainer" style="display: none;">
-        <h3>Toronto Fair Dates</h3>
-        <div class="date-options">{{form.toronto_dates}}</div>
         <h3>Toronto Booth Options</h3>
+          {% if form.errors.toronto_booth_options %}
+              {{form.errors.toronto_booth_options}}
+          {% endif %}
         <div class="booth-options">
           <label>{{form.toronto_booth_options}}</label>
         </div>
-        <div class="additional-options">
-          <h3>Additional Options</h3>
-          <label>{{form.toronto_additional_booth_option}} Extra Booths?</label>
-        </div>
+        <h3>Toronto Fair Dates & Options</h3>
+          {% if form.errors.toronto_dates %}
+            {{form.errors.toronto_dates}}
+          {% endif %}
+        <div class="date-options">{{form.toronto_dates}}</div>
+
       </div>
       <div id="CalgaryFairOptionsContainer" style="display: none;">
-        <h3>Calgary Fair Dates</h3>
-        <div class="date-options">{{form.calgary_dates}}</div>
         <h3>Calgary Booth Options</h3>
         <div class="booth-options">{{form.calgary_booth_options}}</div>
-        <h3>Calgary Fair Options</h3>
-        <div class="additional-options">
-          <label>{{form.calgary_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.calgary_additional_lunch_option}} Extra Lunches? (One Included)</label><br>
-          <label>{{form.calgary_diet_request}} Special Diet/Allergy Request?</label>
-        </div>
+          {% if form.errors.calgary_booth_options %}
+            {{form.errors.calgary_booth_options}}
+          {% endif %}
+        <h3>Calgary Fair Dates</h3>
+          {% if form.errors.calgary_dates %}
+            {{form.errors.calgary_dates}}
+          {% endif %}
+        <div class="date-options">{{form.calgary_dates}}</div>
         <h3>Venue Options</h3>
         <div class="venue-options">
             {{form.calgary_options}}
         </div>
       </div>
       <div id="EdmontonFairOptionsContainer" style="display: none;">
-        <h3>Edmonton Fair Dates</h3>
-        <div class="date-options">{{form.edmonton_dates}}</div>
         <h3>Edmonton Booth Options</h3>
+          {% if form.errors.edmonton_booth_options %}
+            {{form.errors.edmonton_booth_options}}
+          {% endif %}
         <div class="booth-options">{{form.edmonton_booth_options}}</div>
-        <h3>Edmonton Fair Options</h3>
-        <div class="additional-options">
-          <label>{{form.edmonton_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.edmonton_additional_breakfast_option}} Extra Breakfast?</label></br>
-          <label>{{form.edmonton_additional_lunch_option}} Extra Lunch?</label><br>
-          <label>{{form.edmonton_diet_request}} Special Diet/Allergy Request?</label>
-        </div>
+        <h3>Edmonton Fair Dates</h3>
+          {% if form.errors.edmonton_dates %}
+            {{form.errors.edmonton_dates}}
+          {% endif %}
+        <div class="date-options">{{form.edmonton_dates}}</div>
         <h3>Venue Options</h3>
         <div class="venue-options">
           {{form.edmonton_options}}
         </div>
       </div>
       <div id="WinnipegFairOptionsContainer" style="display: none;">
-        <h3>Winnipeg Fair Dates</h3>
-        <div class="date-options">{{form.winnipeg_dates}}</div>
         <h3>Winnipeg Booth Options</h3>
         <div class="booth-options">{{form.winnipeg_booth_options}}</div>
-        <h3>Winnipeg Fair Options</h3>
-          <label>{{form.winnipeg_additional_booth_option}} Extra Booths?</label><br>
-          <label>{{form.winnipeg_additional_lunch_option}} Extra Lunch?</label><br>
-          <label>{{form.winnipeg_diet_request}} Special Diet/Allergy Request?</label>
+        <h3>Winnipeg Fair Dates</h3>
+          {% if form.errors.winnipeg_dates %}
+            {{form.errors.winnipeg_dates}}
+          {% endif %}
+        <div class="date-options">{{form.winnipeg_dates}}</div>
+          {% if form.errors.winnipeg_booth_options %}
+            {{form.errors.winnipeg_booth_options}}
+          {% endif %}
       </div>
     </div>
+    <input type="hidden" id="priceInput" name="price" value="">
+    <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_a7U192xASjxwJjzWoBEJtXEg"
+    data-amount="overallTotalWithTax"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-zip-code="true">
+  </script>
     <input type="submit" value="Submit!">
+
   </form>
   <form>
 
   </form>
   <div class="shopping-cart-container">
-    <h3>Your Cart Total: <span id="cart-total"></span></h3>
+    <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
       <ul id="shoppingCart">
           <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
           <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>
@@ -95,23 +120,13 @@
 </div>
 
 <form action="/payment/" method="POST">
-  <script
   {% csrf_token %}
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-    data-amount=cartTotal
-    data-name="Stripe.com"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto"
-    data-zip-code="true">
-  </script>
+ 
 </form>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src='{% static "js/main.js" %}'></script>
 <script src='{% static "js/shoppingCart.js" %}'></script>
-<script src='{% static "js/checkout.js" %}'></script>
-
+<script src='{% static "js/materialize.js" %}'></script>
 </html>

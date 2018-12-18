@@ -19,6 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'm#=^9pi0f-lm_v_zbki)$62$%ht1w^b#*fq%bzk$gq1+e17jz+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'form',
     'stripe',
+    'form',
 ]
 
 MIDDLEWARE = [
@@ -119,7 +121,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-# SECURITY WARNING: keep the secret key used in production secret!
 STRIPE_SECRET_KEY = 'sk_test_bYfxBI6vsLYZOKOSfJj8wtr1'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_a7U192xASjxwJjzWoBEJtXEg'

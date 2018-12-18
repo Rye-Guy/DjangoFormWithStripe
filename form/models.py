@@ -1,7 +1,4 @@
 from django.db import models
-from django.conf import settings
-
-import stripe
 
 class CustomerModelForm(models.Model):
     company_name = models.CharField(max_length=255)
