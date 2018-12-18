@@ -30,7 +30,7 @@ class IndexPageView(TemplateView):
             form.add_error(self, form.select_cities)
         if form.is_valid():
             print('valid')
-            charge = stripe.Charge.create(
+            stripe.Charge.create(
                 amount=price,
                 currency='cad',
                 description='Django stripe charge',
