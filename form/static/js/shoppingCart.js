@@ -24,13 +24,11 @@ function createOptions(elem){
     }
 }
 
-//Keeps track of selected dates and add event listeners for click events and run our conditionals to make sure the proper card receives the relevant selection.
-allDatesCheckboxes.forEach((input) =>{
-    input.addEventListener('click', ()=>{
-    //parent elements will contain our ID for making sure we are editing the appropriate Cart.
-    parentUl = input.parentElement.parentElement.parentElement.id
-        //for now I created an LI item for the cart UL and append it just to see what has been selected. This will be updated at some point with a cleaner looking cart for clients
-        if(input.checked){
+function dateCheck(input){
+  //parent elements will contain our ID for making sure we are editing the appropriate Cart.
+  parentUl = input.parentElement.parentElement.parentElement.id
+  console.log('yes')
+  if(input.checked){
              cartText = input.parentElement.innerText
              cartItem = document.createElement('li')
              cartItem.id = cartText
@@ -100,28 +98,44 @@ allDatesCheckboxes.forEach((input) =>{
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
-        }else if(!input.checked){
+        }
+
+}
+
+//Keeps track of selected dates and add event listeners for click events and run our conditionals to make sure the proper card receives the relevant selection.
+allDatesCheckboxes.forEach((input)=>{
+    input.addEventListener('click', ()=>{
+        dateCheck(input)
+        if(!input.checked){
             if(!input.checked && input.nextElementSibling){
                 while(input.nextElementSibling){
                     input.nextElementSibling.remove()
                 }
             }
         //find the input id witch will match the id that we added to the LI cart item. remove it from the UL and go check its parent UL and find out what cart it belongs to and substract it from the cart value at its index.
-            findInputId = input.parentElement.innerText
-            document.getElementById(findInputId).remove()
-
+            if(document.getElementById('shoppingCart').childNodes.length > 9){
+                    findInputId = input.parentElement.innerText
+                if(document.getElementById(findInputId)){
+                    document.getElementById(findInputId).remove()
+                }
+            }
             if(parentUl == 'id_toronto_dates'){
                 torontoCart[0]--
             }if(parentUl == 'id_calgary_dates'){
                 calgaryCart[0]--
             }if(parentUl == 'id_edmonton_dates'){
              edmontonCart[0]--
-            }if(parentUl =  'id_winnipeg_dates'){
+            }if(parentUl ==  'id_winnipeg_dates'){
              winnipegCart[0]--
              }
-
         }
     })
+//    for(i = document.getElementById('shoppingCart').childNodes.length; i >= 9; i--){
+//        if(document.getElementById('shoppingCart').childNodes.length > 9){
+//            document.getElementById('shoppingCart').childNodes[i].remove()
+//        }
+//    }
+    dateCheck(input)
 })
 
 //forEach loop that adds the functionality for booth options. Similar logic as the dates with the main difference is we are capturing the inputs 'value' attribute and assigning the value of that to our booth value. Then we find the right cart and update it. Also I had to add a check that will remove other booths form the cart Ul that the users sees unlike our dates where you can select multiple, they can only have one booth option.
@@ -182,6 +196,8 @@ allBoothOptionsRadios.forEach((input) =>{
         }
     })
 })
+
+
 
 allAdditionalOptions.forEach((input)=>{
     input.addEventListener('click', ()=>{
@@ -251,3 +267,4 @@ function calculateGrandTotal(){
 }
 
 cartTotal = document.getElementById('cart-total')
+

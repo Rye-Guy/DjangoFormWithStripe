@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 
 from form.forms import PaymentForm, CustomerModelFormClass
 
-import datetime
 import stripe
 
 class IndexPageView(TemplateView):
@@ -26,17 +25,14 @@ class IndexPageView(TemplateView):
         form = self.form_class(request.POST)
         print(request.POST)
         price = request.POST.get('price', '')
-        if form.has_error('select_cities'):
-            form.add_error(self, form.select_cities)
         if form.is_valid():
-            print('valid')
-            stripe.Charge.create(
-                amount=price,
-                currency='cad',
-                description='Django stripe charge',
-                source=request.POST['stripeToken']
-            )
-            return HttpResponseRedirect('/payment.html')
+            # stripe.Charge.create(
+            #     amount=price,
+            #     currency='cad',
+            #     description='Django stripe charge',
+            #     source=request.POST['stripeToken']
+            # )
+            return HttpResponseRedirect('/')
 
         return render(request, self.template_name, {'form': form})
 

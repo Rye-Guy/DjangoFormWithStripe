@@ -67,20 +67,3 @@ checkboxes.forEach((elem) =>{
         }
     })
 })
-
-window.addEventListener('load', ()=>{
-            if(document.getElementById('id_select_cities_0').checked){
-                document.getElementById('TorontoFairOptionsContainer').style = 'display: block'
-            }
-            if(document.getElementById('id_select_cities_1').checked){
-                document.getElementById('WinnipegFairOptionsContainer').style = 'display: block'
-            }
-            if(document.getElementById('id_select_cities_2').checked){
-                document.getElementById('CalgaryFairOptionsContainer').style = 'display: block'
-            }
-            if(document.getElementById('id_select_cities_3').checked){
-                 document.getElementById('EdmontonFairOptionsContainer').style = 'display: block'
-
-            }
-})
-
