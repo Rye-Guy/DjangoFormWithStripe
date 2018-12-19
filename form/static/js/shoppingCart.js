@@ -137,10 +137,7 @@ allDatesCheckboxes.forEach((input)=>{
 //    }
     dateCheck(input)
 })
-
-//forEach loop that adds the functionality for booth options. Similar logic as the dates with the main difference is we are capturing the inputs 'value' attribute and assigning the value of that to our booth value. Then we find the right cart and update it. Also I had to add a check that will remove other booths form the cart Ul that the users sees unlike our dates where you can select multiple, they can only have one booth option.
-allBoothOptionsRadios.forEach((input) =>{
-    input.addEventListener('click', ()=>{
+function boothOptionCheck(input){
         parentUl = input.parentElement.parentElement.parentElement.id
         cartItem = document.createElement('li')
         cartItemText = input.parentElement.innerText
@@ -193,8 +190,15 @@ allBoothOptionsRadios.forEach((input) =>{
               document.getElementById('winnipegCartNumber').innerText = amountSpent
               calculateGrandTotal()
            }
-        }
+    }
+}
+
+//forEach loop that adds the functionality for booth options. Similar logic as the dates with the main difference is we are capturing the inputs 'value' attribute and assigning the value of that to our booth value. Then we find the right cart and update it. Also I had to add a check that will remove other booths form the cart Ul that the users sees unlike our dates where you can select multiple, they can only have one booth option.
+allBoothOptionsRadios.forEach((input) =>{
+    input.addEventListener('click', ()=>{
+        boothOptionCheck(input)
     })
+    boothOptionCheck(input)
 })
 
 
