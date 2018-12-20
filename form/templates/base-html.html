@@ -7,9 +7,33 @@
   <title>Hello World</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
-</head>
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <style>
+    /*.header-img{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-img img{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    z-index: 100;
+}*/
+  </style>
+ </head>
+
 <body>
+<div class="header-img"><img src='{% static "images/CF_Banner_May.jpg" %}'></div>
+
+
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -17,8 +41,8 @@
       {{form.errors}}
     {% endif %}
 <div class="content">
+  <h1>Purchase a Booth</h1>
   <form action="/" method="POST">
-    <div class="paymentForm">
     {% csrf_token %}
     <h2>Fair Locations</h2>
     {% for field in form.select_cities %}
@@ -28,7 +52,9 @@
       {{form.errors.select_cities}}
     {% endif %}
     <div id="fair_dates_and_options_container">
+
       <div id="TorontoFairOptionsContainer" style="display: none;">
+        <div class="div1">
         <h3>Toronto Booth Options</h3>
           {% if form.errors.toronto_booth_options %}
               {{form.errors.toronto_booth_options}}
@@ -36,49 +62,71 @@
         <div class="booth-options">
           <label>{{form.toronto_booth_options}}</label>
         </div>
+      </div>
+      <div class="div2">
         <h3>Toronto Fair Dates & Options</h3>
           {% if form.errors.toronto_dates %}
             {{form.errors.toronto_dates}}
           {% endif %}
         <div class="date-options">{{form.toronto_dates}}</div>
       </div>
+      </div>
+
       <div id="CalgaryFairOptionsContainer" style="display: none;">
+        <div class="div1">
         <h3>Calgary Booth Options</h3>
         <div class="booth-options">{{form.calgary_booth_options}}</div>
           {% if form.errors.calgary_booth_options %}
             {{form.errors.calgary_booth_options}}
           {% endif %}
+        </div>
+
+        <div class="div2">
         <h3>Calgary Fair Dates</h3>
           {% if form.errors.calgary_dates %}
             {{form.errors.calgary_dates}}
           {% endif %}
         <div class="date-options">{{form.calgary_dates}}</div>
+        </div>
+
+        <div class="div3">
         <h3>Venue Options</h3>
         <div class="venue-options">
             {{form.calgary_options}}
         </div>
-      </div>
-      <div id="EdmontonFairOptionsContainer" style="display: none;">
+        </div>
 
+      </div>
+
+      <div id="EdmontonFairOptionsContainer" style="display: none;">
+        <div class="div1">
         <h3>Edmonton Booth Options</h3>
           {% if form.errors.edmonton_booth_options %}
             {{form.errors.edmonton_booth_options}}
           {% endif %}
         <div class="booth-options">{{form.edmonton_booth_options}}</div>
+        </div>
+        <div class="div2">
         <h3>Edmonton Fair Dates</h3>
           {% if form.errors.edmonton_dates %}
             {{form.errors.edmonton_dates}}
           {% endif %}
         <div class="date-options">{{form.edmonton_dates}}</div>
+        </div>
 
+        <div class="div3">
         <h3>Venue Options</h3>
         <div class="venue-options">
           {{form.edmonton_options}}
         </div>
       </div>
+      </div>
       <div id="WinnipegFairOptionsContainer" style="display: none;">
+        <div class="div1">
         <h3>Winnipeg Booth Options</h3>
         <div class="booth-options">{{form.winnipeg_booth_options}}</div>
+        </div>
+        <div class="div2">
         <h3>Winnipeg Fair Dates</h3>
           {% if form.errors.winnipeg_dates %}
             {{form.errors.winnipeg_dates}}
@@ -87,29 +135,26 @@
           {% if form.errors.winnipeg_booth_options %}
             {{form.errors.winnipeg_booth_options}}
           {% endif %}
+          </div>
       </div>
     </div>
-    </div>
-
     <input type="hidden" id="priceInput" name="price" value="">
-
-    <input type="submit" value="Submit!">
-    <button id="nextSlide">Billing Info ==></button>
-
-    <!--<div id="billingForm">-->
-    <!--{{customer_form}}-->
-    <!--</div>-->
-  </form>
-        <script
+    <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-    data-amount="999"
+    data-key="pk_test_a7U192xASjxwJjzWoBEJtXEg"
+    data-amount="overallTotalWithTax"
     data-name="Stripe.com"
     data-description="Widget"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
     data-locale="auto"
     data-zip-code="true">
   </script>
+    <input type="submit" value="Submit!">
+
+  </form>
+  <form>
+
+  </form>
   <div class="shopping-cart-container">
     <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
       <ul id="shoppingCart">
@@ -120,11 +165,13 @@
       </ul>
   </div>
 </div>
+
+<form action="/payment/" method="POST">
+  {% csrf_token %}
+
+</form>
+
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src='{% static "js/main.js" %}'></script>
 <script src='{% static "js/shoppingCart.js" %}'></script>
-<script src='{% static "js/dataStorage.js" %}'></script>
-
-
 </html>

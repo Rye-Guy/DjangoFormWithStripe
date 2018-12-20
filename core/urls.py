@@ -19,6 +19,6 @@ from form.views import IndexPageView #, PaymentSuccessView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexPageView.as_view(), name="index")
+    path('', IndexPageView.as_view(), name="index"),
     path('payment/', IndexPageView.as_view(), name="payment"),
 ]
