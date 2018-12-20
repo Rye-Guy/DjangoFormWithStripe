@@ -39,17 +39,13 @@ allDatesCheckboxes.forEach((input) =>{
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
-             dietRequest = document.createElement('input')
-             dietRequest.setAttribute('type', 'text')
-             dietRequestLabel = document.createElement('label')
-             dietRequestLabel.innerText = 'Diet & Allergy Request: '
-             dietRequestLabel.append(dietRequest)
              breakfastLabel = document.createElement('label')
              breakfastLabel.innerText = ' Extra Breakfast: '
              lunchLabel = document.createElement('label')
              lunchLabel.innerText = ' Extra Lunch: '
              selectLabel = document.createElement('label')
              selectLabel.innerText = ' Extra Booth: '
+
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto'+cartText)
@@ -67,8 +63,7 @@ allDatesCheckboxes.forEach((input) =>{
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                dietRequest.setAttribute('name', 'calgary_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel)
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton'+cartText)
@@ -83,8 +78,7 @@ allDatesCheckboxes.forEach((input) =>{
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
                 breakfastLabel.append(additionalBreakfastOption)
-                dietRequest.setAttribute('name', 'edmonton_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel)
                 edmontonCart[0]++
              }else if(parentUl ==  'id_winnipeg_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg'+cartText)
@@ -95,8 +89,7 @@ allDatesCheckboxes.forEach((input) =>{
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                dietRequest.setAttribute('name', 'winnipeg_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel)
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
@@ -217,15 +210,14 @@ function additionalCartItems(cityName, fairDate, cart){
 
 }
 
+
+
+
 function calculateTotal(boothZone, cartName){
     return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2])
 }
 
 function calculateGrandTotal(){
-       torontoCart[3] = 0
-       winnipegCart[3] = 0
-       edmontonCart[3] = 0
-       calgaryCart[3] = 0
        additionalCartItems('toronto', ' April 24th, 2018', torontoCart)
        additionalCartItems('toronto', ' September 17th, 2019', torontoCart)
        additionalCartItems('winnipeg', ' July 10th, 2019', winnipegCart)

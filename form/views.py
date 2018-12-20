@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
 # Create your views here.
@@ -8,6 +9,7 @@ from form.forms import PaymentForm, CustomerModelFormClass
 
 import datetime
 import stripe
+
 
 class IndexPageView(TemplateView):
     template_name = 'base-html.html'
@@ -27,7 +29,7 @@ class IndexPageView(TemplateView):
         print(request.POST)
         price = request.POST.get('price', '')
         if form.has_error('select_cities'):
-            form.add_error(self, form.select_cities)
+            pass
         if form.is_valid():
             print('valid')
             charge = stripe.Charge.create(
