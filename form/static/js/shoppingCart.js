@@ -238,7 +238,7 @@ function additionalCartItems(cityName, fairDate, cart){
 }
 
 function calculateTotal(boothZone, cartName){
-    return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2])
+    return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2]) + cartName[3]
 }
 
 function calculateGrandTotal(){
