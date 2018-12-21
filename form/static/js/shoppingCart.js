@@ -152,8 +152,7 @@ function boothOptionCheck(input){
               cartItem.id = 'torontoSingleCartItem'
               shoppingCart.append(cartItem)
               torontoCart[1] = boothValue
-              amountSpent = calculateTotal('toronto', torontoCart)
-              document.getElementById('torontoCartNumber').innerText = amountSpent
+              amountSpent = calculateTotal(torontoCart)
               calculateGrandTotal()
            }
            if(parentUl == 'id_calgary_booth_options'){
@@ -163,9 +162,7 @@ function boothOptionCheck(input){
               cartItem.id = 'calgarySingleCartItem'
               shoppingCart.append(cartItem)
               calgaryCart[1] = boothValue
-
-              amountSpent = calculateTotal('calgary', calgaryCart)
-              document.getElementById('calgaryCartNumber').innerText = amountSpent
+              amountSpent = calculateTotal(calgaryCart)
               calculateGrandTotal()
            }
            if(parentUl == 'id_edmonton_booth_options'){
@@ -175,8 +172,7 @@ function boothOptionCheck(input){
               cartItem.id = 'edmontonSingleCartItem'
               shoppingCart.append(cartItem)
               edmontonCart[1] = boothValue
-              amountSpent = calculateTotal('edmonton', edmontonCart)
-              document.getElementById('edmontonCartNumber').innerText = amountSpent
+              amountSpent = calculateTotal(edmontonCart)
               calculateGrandTotal()
            }
            if(parentUl == 'id_winnipeg_booth_options'){
@@ -186,8 +182,7 @@ function boothOptionCheck(input){
               cartItem.id = 'winnipegSingleCartItem'
               shoppingCart.append(cartItem)
               winnipegCart[1] = boothValue
-              amountSpent = calculateTotal('winnipeg', winnipegCart)
-              document.getElementById('winnipegCartNumber').innerText = amountSpent
+              amountSpent = calculateTotal(winnipegCart)
               calculateGrandTotal()
            }
     }
@@ -237,7 +232,7 @@ function additionalCartItems(cityName, fairDate, cart){
 
 }
 
-function calculateTotal(boothZone, cartName){
+function calculateTotal(cartName){
     return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2]) + cartName[3]
 }
 
@@ -258,10 +253,10 @@ function calculateGrandTotal(){
        additionalCartItems('edmonton', ' May 28th, 2019', edmontonCart)
        additionalCartItems('edmonton', ' August 13th, 2019', edmontonCart)
        additionalCartItems('edmonton', ' November 19th, 2019', edmontonCart)
-       value1 = calculateTotal('toronto', torontoCart)
-       value2 = calculateTotal('winnipeg', winnipegCart)
-       value3 = calculateTotal('calgary', calgaryCart)
-       value4 = calculateTotal('edmonton', edmontonCart)
+       value1 = calculateTotal(torontoCart)
+       value2 = calculateTotal(winnipegCart)
+       value3 = calculateTotal(calgaryCart)
+       value4 = calculateTotal(edmontonCart)
        grandTotal = value1 + value2 + value3 + value4
        roughTaxCal = grandTotal * .13
        overallTotalWithTax = grandTotal + roughTaxCal
