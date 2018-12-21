@@ -10,6 +10,7 @@
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
+  <link type="text/css" href='{% static "css/animate-min.css" %}' rel="stylesheet">
   <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
   <style>
@@ -139,20 +140,20 @@
       </div>
     </div>
     <input type="hidden" id="priceInput" name="price" value="">
-
-      {{customer_form.company_name}}
-      {{customer_form.contact_name}}
-      {{customer_form.address}}
-      {{customer_form.city_or_province}}
-      {{customer_form.postal_code}}
-      {{customer_form.contact_email}}
-      {{customer_form.office_phone_number}}
-      {{customer_form.direct_phone_number}}
-      {{customer_form.facebook_link}}
-      {{customer_form.website_link}}
-      {{customer_form.twitter_link}}
-
-
+    <div id="billingInfoContainer">
+      <label>Company Name: {{customer_form.company_name}}</label><br>
+      <label>Contact Name: {{customer_form.contact_name}}</label><br>
+      <label>Address: {{customer_form.address}}</label><br>
+      <label>City or Province: {{customer_form.city_or_province}}</label><br>
+      <label>Postal Code: {{customer_form.postal_code}}</label><br>
+      <label>Contact Email: {{customer_form.contact_email}}</label><br>
+      <label>Office Phone:  {{customer_form.office_phone_number}}</label><br>
+      <label>Direct Phone:  {{customer_form.direct_phone_number}}</label><br>
+      <label>Facebook Link:  {{customer_form.facebook_link}}</label><br>
+      <label>Website Link:  {{customer_form.website_link}}</label><br>
+      <label>Twitter Link:  {{customer_form.twitter_link}}</label>
+    </div>
+    <button value="Billing Info" id="sideTrigger">Fill Billing Info</button>
     <input type="submit" value="Submit!">
   </form>
   <form>
@@ -186,4 +187,5 @@
 </body>
 <script src='{% static "js/main.js" %}'></script>
 <script src='{% static "js/shoppingCart.js" %}'></script>
+<script src='{% static "js/animationTiggers.js" %}'></script>
 </html>
