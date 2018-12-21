@@ -139,18 +139,21 @@
       </div>
     </div>
     <input type="hidden" id="priceInput" name="price" value="">
-    <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_a7U192xASjxwJjzWoBEJtXEg"
-    data-amount="overallTotalWithTax"
-    data-name="Stripe.com"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto"
-    data-zip-code="true">
-  </script>
-    <input type="submit" value="Submit!">
 
+      {{customer_form.company_name}}
+      {{customer_form.contact_name}}
+      {{customer_form.address}}
+      {{customer_form.city_or_province}}
+      {{customer_form.postal_code}}
+      {{customer_form.contact_email}}
+      {{customer_form.office_phone_number}}
+      {{customer_form.direct_phone_number}}
+      {{customer_form.facebook_link}}
+      {{customer_form.website_link}}
+      {{customer_form.twitter_link}}
+
+
+    <input type="submit" value="Submit!">
   </form>
   <form>
 
@@ -168,7 +171,16 @@
 
 <form action="/payment/" method="POST">
   {% csrf_token %}
-
+ <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_a7U192xASjxwJjzWoBEJtXEg"
+    data-amount="overallTotalWithTax"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-zip-code="true">
+  </script>
 </form>
 
 </body>
