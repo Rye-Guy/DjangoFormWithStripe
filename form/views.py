@@ -13,6 +13,7 @@ class IndexPageView(TemplateView):
     formPayment = PaymentForm()
     form_class = PaymentForm
     formContactInfo = CustomerModelFormClass()
+    customerFormClass = CustomerModelFormClass
     some_text = "YEAH! PUT SOME TEXT IN ME!!!"
     stripeApiKey = settings.STRIPE_SECRET_KEY
 
@@ -23,9 +24,11 @@ class IndexPageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        customer_form = self.customerFormClass(request.POST)
         print(request.POST)
         price = request.POST.get('price', '')
-        if form.is_valid():
+        if form.is_valid() and customer_form.is_valid():
+            print('valid form data')
             # stripe.Charge.create(
             #     amount=price,
             #     currency='cad',
@@ -34,5 +37,5 @@ class IndexPageView(TemplateView):
             # )
             return HttpResponseRedirect('/')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'customer_form': customer_form})
 
