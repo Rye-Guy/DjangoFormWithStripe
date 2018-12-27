@@ -141,17 +141,17 @@
     </div>
     <input type="hidden" id="priceInput" name="price" value="">
     <div id="billingInfoContainer">
-      <label>Company Name: {{customer_form.company_name}}</label><br>
-      <label>Contact Name: {{customer_form.contact_name}}</label><br>
-      <label>Address: {{customer_form.address}}</label><br>
-      <label>City or Province: {{customer_form.city_or_province}}</label><br>
-      <label>Postal Code: {{customer_form.postal_code}}</label><br>
-      <label>Contact Email: {{customer_form.contact_email}}</label><br>
-      <label>Office Phone:  {{customer_form.office_phone_number}}</label><br>
-      <label>Direct Phone:  {{customer_form.direct_phone_number}}</label><br>
-      <label>Facebook Link:  {{customer_form.facebook_link}}</label><br>
-      <label>Website Link:  {{customer_form.website_link}}</label><br>
-      <label>Twitter Link:  {{customer_form.twitter_link}}</label>
+      <label class="billingInfoLabels">{{customer_form.company_name}}<span class="helperText">Company Name:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.address}}<span class="helperText">Address:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.city_or_province}}<span class="helperText">City or Province:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
+      <label class="billingInfoLabels">{{customer_form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.website_link}}<span class="helperText">Website Link:</span></label><br>
+      <label class="billingInfoLabels">{{customer_form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
     </div>
     <button value="Billing Info" id="sideTrigger">Fill Billing Info</button>
     <input type="submit" value="Submit!">
