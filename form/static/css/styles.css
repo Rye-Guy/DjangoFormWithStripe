@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/icon?family=Roboto");
 
 *{
-    transition: ease all .5s
+    transition: ease all .5s;
+    font-family: 'Roboto', sans-serif;
 }
 
 .content{
@@ -38,7 +39,6 @@ h1{
 }
 
 h1, h2, h3, h4, p, li{
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;    
 }
 h2{
@@ -236,8 +236,8 @@ input[type='checkbox']:checked {
     color: red;
     position: relative;
     z-index: 1;
-    padding-top: 12px;
-    border-bottom: 1px solid;
+    padding-top: 26px;
+    width: 300px;
 }
 
 .billingInfoLabels:last-child{
@@ -246,7 +246,7 @@ input[type='checkbox']:checked {
 
 
 .billingInfoLabels input{
-        background-color: #EAEAEA;
+    background-color: #EAEAEA;
     border-bottom: 1px solid;
     position: fixed;
     border-radius: 12px;
@@ -273,11 +273,17 @@ input[type='checkbox']:checked {
 }
 
 input:empty + span{
-    top: 40px;
+    top: 10px;
 }
 
 input:focus + span{
     top: -24px
 }
+
+.helperTextRemain{
+    position: relative;
+    top: -24px !important;
+}
+
 
 
