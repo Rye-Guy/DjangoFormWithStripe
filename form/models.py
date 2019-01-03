@@ -16,6 +16,10 @@ class CustomerModelForm(models.Model):
 
 
 class SalesFormData(models.Model):
+
+    class Meta:
+        verbose_name = 'Career Fair Form'
+
     company_name = models.CharField(max_length=255, blank=False)
     contact_name = models.CharField(max_length=255, blank=False)
     address = models.CharField(max_length=255, blank=False, default='Not Provided')
@@ -27,9 +31,33 @@ class SalesFormData(models.Model):
     facebook_link = models.URLField(max_length=255, blank=True)
     website_link = models.URLField(max_length=255, blank=True)
     twitter_link = models.URLField(max_length=255, blank=True)
+
     select_cities = models.CharField(max_length=255, blank=False, default='You will never see me')
-    toronto_dates = models.CharField(max_length=400, blank=False, default='Sept 30th')
+
+    toronto_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    toronto_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    toronto_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
+    toronto_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
+
+    calgary_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    calgary_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    calgary_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    calgary_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
+    calgary_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
+    calgary_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
+
+    edmonton_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    edmonton_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    edmonton_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    edmonton_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_booth_option_4 = models.CharField(max_length=400, default='N/A')
+
+    winnipeg_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    winnipeg_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    winnipeg_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
+    winnipeg_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
+    winnipeg_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
 
 
-    def __str__(self):
-        return self.select_cities

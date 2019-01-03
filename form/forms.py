@@ -72,7 +72,7 @@ class PaymentForm(forms.Form):
 
     EDMONTON_FAIR_OPTIONS = (
         ('option1', 'Access to Electricity'),
-        ('option2s', 'Internet Access')
+        ('option2', 'Internet Access')
     )
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)

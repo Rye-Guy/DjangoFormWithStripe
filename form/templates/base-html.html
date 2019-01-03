@@ -138,14 +138,7 @@
           {% endif %}
           </div>
       </div>
-    </div>
-    <input type="hidden" id="priceInput" name="price" value="">
-
-    <button value="Billing Info" id="sideTrigger">Fill Billing Info</button>
-    <input type="submit" value="Submit!">
-  </form>
-  <form>
-<div id="billingInfoContainer">
+      <div id="billingInfoContainer">
       <label class="billingInfoLabels">{{customer_form.company_name}}<span class="helperText">Company Name:</span></label><br>
       <label class="billingInfoLabels">{{customer_form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
       <label class="billingInfoLabels">{{customer_form.address}}<span class="helperText">Address:</span></label><br>
@@ -158,6 +151,16 @@
       <label class="billingInfoLabels">{{customer_form.website_link}}<span class="helperText">Website Link:</span></label><br>
       <label class="billingInfoLabels">{{customer_form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
     </div>
+    </div>
+
+    <input type="hidden" id="priceInput" name="price" value="">
+
+    <button value="Billing Info" id="sideTrigger">Fill Billing Info</button>
+    <input type="submit" value="Submit!">
+
+  </form>
+  <form>
+
   </form>
   <div class="shopping-cart-container">
     <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
