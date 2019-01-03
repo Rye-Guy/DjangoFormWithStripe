@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, QueryDict
 # Create your views here.
 
 from form.forms import PaymentForm, CustomerModelFormClass
+from form.models import SalesFormData
 
 import stripe
 
@@ -26,9 +27,44 @@ class IndexPageView(TemplateView):
         form = self.form_class(request.POST)
         customer_form = self.customerFormClass(request.POST)
         print(request.POST)
-        price = request.POST.get('price', '')
-        if form.is_valid() and customer_form.is_valid():
-            print('valid form data')
+        if form and customer_form:
+
+
+            company_name = request.POST.get('company_name', '')
+            contact_name = request.POST.get('contact_name', '')
+            address = request.POST.get('address', '')
+            city_or_province = request.POST.get('city_or_province', '')
+            postal_code = request.POST.get('postal_code', '')
+            contact_email = request.POST.get('contact_email', '')
+            office_phone_number = request.POST.get('office_phone_number', '')
+            direct_phone_number = request.POST.get('direct_phone_number', '')
+            facebook_link = request.POST.get('facebook_link', '')
+            website_link = request.POST.get('website_link', '')
+            twitter_link = request.POST.get('twitter_link', '')
+            toronto_dates = request.POST.getlist('toronto_dates')
+            select_cities = request.POST.getlist('select_cities')
+
+            select_cities_for_db = ', '.join(select_cities)
+
+
+            m = SalesFormData(
+                company_name=company_name,
+                contact_name=contact_name,
+                address=address,
+                city_or_province=city_or_province,
+                postal_code=postal_code,
+                contact_email=contact_email,
+                office_phone_number=office_phone_number,
+                direct_phone_number=direct_phone_number,
+                facebook_link=facebook_link,
+                website_link=website_link,
+                twitter_link=twitter_link,
+                select_cities=select_cities_for_db,
+                toronto_dates=toronto_dates)
+
+            m.save()
+
+
             # stripe.Charge.create(
             #     amount=price,
             #     currency='cad',
