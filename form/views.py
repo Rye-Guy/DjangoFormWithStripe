@@ -27,8 +27,8 @@ class IndexPageView(TemplateView):
         form = self.form_class(request.POST)
         customer_form = self.customerFormClass(request.POST)
         print(request.POST)
-        price = request.POST.get('price', '')
         if form and customer_form:
+
 
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
@@ -41,11 +41,29 @@ class IndexPageView(TemplateView):
             facebook_link = request.POST.get('facebook_link', '')
             website_link = request.POST.get('website_link', '')
             twitter_link = request.POST.get('twitter_link', '')
+            toronto_dates = request.POST.getlist('toronto_dates')
+            select_cities = request.POST.getlist('select_cities')
+
+            select_cities_for_db = ', '.join(select_cities)
 
 
-            m = SalesFormData(company_name=company_name, contact_name=contact_name, address=address, city_or_province=city_or_province, postal_code=postal_code, contact_email=contact_email, office_phone_number=office_phone_number, direct_phone_number=direct_phone_number, facebook_link=facebook_link, website_link=website_link, twitter_link=twitter_link)
+            m = SalesFormData(
+                company_name=company_name,
+                contact_name=contact_name,
+                address=address,
+                city_or_province=city_or_province,
+                postal_code=postal_code,
+                contact_email=contact_email,
+                office_phone_number=office_phone_number,
+                direct_phone_number=direct_phone_number,
+                facebook_link=facebook_link,
+                website_link=website_link,
+                twitter_link=twitter_link,
+                select_cities=select_cities_for_db,
+                toronto_dates=toronto_dates)
+
             m.save()
-            print('valid form data')
+
 
             # stripe.Charge.create(
             #     amount=price,

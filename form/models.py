@@ -27,4 +27,9 @@ class SalesFormData(models.Model):
     facebook_link = models.URLField(max_length=255, blank=True)
     website_link = models.URLField(max_length=255, blank=True)
     twitter_link = models.URLField(max_length=255, blank=True)
-    select_cities = models.CharField(max_length=500, blank=False, default='You will never see me')
+    select_cities = models.CharField(max_length=255, blank=False, default='You will never see me')
+    toronto_dates = models.CharField(max_length=400, blank=False, default='Sept 30th')
+
+
+    def __str__(self):
+        return self.select_cities
