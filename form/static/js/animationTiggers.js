@@ -23,7 +23,7 @@ function helperTextCheck(input){
         else{
             console.log(input.nextSibling)
             input.nextSibling.className = 'helperTextRemain'
-            console.log('remove initial helper text')
+            console.log('remove initial helper text style')
         }
     })
 }
