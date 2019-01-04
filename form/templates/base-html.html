@@ -94,6 +94,7 @@
         <h3>Venue Options</h3>
         <div class="venue-options">
             {{form.calgary_options}}
+          <label>Diet Request:{{form.calgary_diet_request}}</label>
         </div>
         </div>
 
@@ -119,6 +120,7 @@
         <h3>Venue Options</h3>
         <div class="venue-options">
           {{form.edmonton_options}}
+          <label>Diet Request:{{form.edmonton_diet_request}}</label>
         </div>
       </div>
       </div>
@@ -136,21 +138,27 @@
           {% if form.errors.winnipeg_booth_options %}
             {{form.errors.winnipeg_booth_options}}
           {% endif %}
+          <div class="div3">
+            <h3>Venue Options</h3>
+              <div class="venue-options">
+                  <label>Diet Request:{{form.winnipeg_diet_request}}</label>
+              </div>
           </div>
+        </div>
       </div>
       <div id="billingInfoContainer">
-      <label class="billingInfoLabels">{{customer_form.company_name}}<span class="helperText">Company Name:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.address}}<span class="helperText">Address:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.city_or_province}}<span class="helperText">City or Province:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
-      <label class="billingInfoLabels">{{customer_form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.website_link}}<span class="helperText">Website Link:</span></label><br>
-      <label class="billingInfoLabels">{{customer_form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
-    </div>
+        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.city_or_province}}<span class="helperText">City or Province:</span></label><br>
+        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
+        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
+        <label class="billingInfoLabels">{{form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
+      </div>
     </div>
 
     <input type="hidden" id="priceInput" name="price" value="">

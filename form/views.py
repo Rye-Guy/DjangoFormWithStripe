@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.http import HttpResponseRedirect, QueryDict
+from django.http import HttpResponseRedirect
 # Create your views here.
 
-from form.forms import PaymentForm, CustomerModelFormClass
+from form.forms import PaymentForm
 from form.models import SalesFormData
 
 
@@ -14,21 +14,19 @@ class IndexPageView(TemplateView):
     template_name = 'base-html.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
-    formContactInfo = CustomerModelFormClass()
-    customerFormClass = CustomerModelFormClass
-    some_text = "YEAH! PUT SOME TEXT IN ME!!!"
+
+
     stripeApiKey = settings.STRIPE_SECRET_KEY
 
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)
-        context.update({'some_text': self.some_text, 'form': self.formPayment, 'customer_form': self.formContactInfo})
+        context.update({'form': self.formPayment})
         return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        customer_form = self.customerFormClass(request.POST)
         print(request.POST)
-        if form and customer_form:
+        if form.is_valid():
 
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
@@ -67,9 +65,13 @@ class IndexPageView(TemplateView):
 
             winnipeg_dates = request.POST.get('winnipeg_date', '')
             winnipeg_booth_options = request.POST.get('winnipeg_booth_options', '')
-            winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg November 19th, 2019', 'N/A')
-            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg November 19th, 2019', 'N/A')
-            winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg November 19th, 2019', 'N/A')
+            winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg July 10th, 2019', 'N/A')
+            winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg July 10th, 2019', 'N/A')
+            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg April 2nd, 2019', 'N/A')
+            winnipeg_additional_lunch_option_2 = request.POST.get('additional_lunch_option_winnipeg April 2nd, 2019', 'N/A')
+            winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg July 23rd, 2019', 'N/A')
+            winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg July 23rd, 2019', 'N/A')
+            winnipeg_diet_request = request.POST.get('winnipeg_diet_request', 'N/A')
 
             m = SalesFormData(
                 company_name=company_name,
@@ -110,7 +112,11 @@ class IndexPageView(TemplateView):
                 winnipeg_booth_options=winnipeg_booth_options,
                 winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
                 winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,
-                winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3
+                winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3,
+                winnipeg_additional_lunch_option_1=winnipeg_additional_lunch_option_1,
+                winnipeg_additional_lunch_option_2=winnipeg_additional_lunch_option_2,
+                winnipeg_additional_lunch_option_3=winnipeg_additional_lunch_option_3,
+                winnipeg_diet_request=winnipeg_diet_request
                 )
             m.save()
 
@@ -123,5 +129,5 @@ class IndexPageView(TemplateView):
             # )
             return HttpResponseRedirect('/')
 
-        return render(request, self.template_name, {'form': form, 'customer_form': customer_form})
+        return render(request, self.template_name, {'form': form})
 
