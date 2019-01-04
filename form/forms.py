@@ -1,13 +1,11 @@
 from django import forms
-from .models import CustomerModelForm
-from contextlib import suppress
+from .models import SalesFormData
 
-class CustomerModelFormClass(forms.ModelForm):
+class PaymentForm(forms.ModelForm):
+
     class Meta:
-        model = CustomerModelForm
-        fields = '__all__'#['company_name', 'contact_name']
-
-class PaymentForm(forms.Form):
+        model = SalesFormData
+        fields = ['company_name','contact_name','address','city_or_province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'calgary_diet_request', 'edmonton_diet_request', 'winnipeg_diet_request']
 
     CITY_CHOICES = (
         ('Toronto', 'Toronto'),

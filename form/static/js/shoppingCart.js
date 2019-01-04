@@ -37,11 +37,7 @@ function dateCheck(input){
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
-             dietRequest = document.createElement('input')
-             dietRequest.setAttribute('type', 'text')
-             dietRequestLabel = document.createElement('label')
-             dietRequestLabel.innerText = 'Diet & Allergy Request: '
-             dietRequestLabel.append(dietRequest)
+
              breakfastLabel = document.createElement('label')
              breakfastLabel.innerText = ' Extra Breakfast: '
              lunchLabel = document.createElement('label')
@@ -65,8 +61,7 @@ function dateCheck(input){
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                dietRequest.setAttribute('name', 'calgary_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton'+cartText)
@@ -81,8 +76,8 @@ function dateCheck(input){
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
                 breakfastLabel.append(additionalBreakfastOption)
-                dietRequest.setAttribute('name', 'edmonton_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'))
                 edmontonCart[0]++
              }else if(parentUl ==  'id_winnipeg_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg'+cartText)
@@ -93,8 +88,7 @@ function dateCheck(input){
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                dietRequest.setAttribute('name', 'winnipeg_diet_allergy_request_for'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
