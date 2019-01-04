@@ -30,29 +30,35 @@ class SalesFormData(models.Model):
     calgary_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
     calgary_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
     calgary_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
+    calgary_additional_lunch_option_1 = models.CharField(max_length=400, default='N/A')
+    calgary_additional_lunch_option_2 = models.CharField(max_length=400, default='N/A')
+    calgary_additional_lunch_option_3 = models.CharField(max_length=400, default='N/A')
     calgary_diet_request = models.CharField(max_length=400, blank=True, default='')
+    calgary_venue_options = models.CharField(max_length=255, blank=False, default='N/A')
 
     edmonton_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     edmonton_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
-    edmonton_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     edmonton_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
     edmonton_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
     edmonton_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
     edmonton_additional_booth_option_4 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_lunch_option_1 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_lunch_option_2 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_lunch_option_3 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_lunch_option_4 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_breakfast_option_1 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_breakfast_option_2 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_breakfast_option_3 = models.CharField(max_length=400, default='N/A')
+    edmonton_additional_breakfast_option_4 = models.CharField(max_length=400, default='N/A')
     edmonton_diet_request = models.CharField(max_length=400, blank=True, default='')
+    edmonton_venue_options = models.CharField(max_length=255, blank=False, default='N/A')
 
     winnipeg_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     winnipeg_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     winnipeg_additional_booth_option_1 = models.CharField(max_length=400, default='N/A')
     winnipeg_additional_booth_option_2 = models.CharField(max_length=400, default='N/A')
     winnipeg_additional_booth_option_3 = models.CharField(max_length=400, default='N/A')
-    
     winnipeg_additional_lunch_option_1 = models.CharField(max_length=400, default='N/A')
-
     winnipeg_additional_lunch_option_2 = models.CharField(max_length=400, default='N/A')
-
     winnipeg_additional_lunch_option_3 = models.CharField(max_length=400, default='N/A')
-
     winnipeg_diet_request = models.CharField(max_length=400, blank=True, default='')
-
-
