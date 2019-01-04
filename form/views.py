@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect
 
 from form.forms import PaymentForm
 from form.models import SalesFormData
-
-
 import stripe
 
 class IndexPageView(TemplateView):
@@ -44,26 +42,63 @@ class IndexPageView(TemplateView):
             select_cities_for_db = ', '.join(select_cities)
 
             toronto_dates = request.POST.getlist('toronto_dates')
+            toronto_dates_for_db = ', '.join(toronto_dates)
+
             toronto_booth_options = request.POST.get('toronto_booth_options', '')
             toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto April 24th, 2018', 'N/A')
             toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto September 17th, 2019', 'N/A')
 
             calgary_dates = request.POST.getlist('calgary_dates')
+            calgary_dates_for_db = ', '.join(calgary_dates)
+
             calgary_booth_options = request.POST.get('calgary_booth_options', '')
+
             calgary_options = request.POST.getlist('calgary_options')
+            calgary_options_for_db = ', '.join(calgary_options)
+
             calgary_additional_booth_option_1 = request.POST.get('additional_booth_option_calgary March 12th, 2019', 'N/A')
+            calgary_additional_lunch_option_1 = request.POST.get('additional_lunch_option_calgary March 12th, 2019', 'N/A')
             calgary_additional_booth_option_2 = request.POST.get('additional_booth_option_calgary June 26th, 2019', 'N/A')
+            calgary_additional_lunch_option_2 = request.POST.get('additional_booth_option_calgary June 26th, 2019', 'N/A')
             calgary_additional_booth_option_3 = request.POST.get('additional_booth_option_calgary October 22nd, 2019', 'N/A')
+            calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary October 22nd, 2019', 'N/A')
+
+            calgary_venue_options = request.POST.getlist('calgary_options')
+            calgary_venue_options_for_db = ', '.join(select_cities)
+
+            calgary_diet_request = request.POST.get('calgary_diet_request', 'N/A')
+
 
             edmonton_dates = request.POST.getlist('edmonton_dates')
-            edmonton_booth_options = request.POST.get('edmonton_booth_options', '')
-            edmonton_options = request.POST.getlist('edmonton_options')
-            edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton January 29th, 2019', 'N/A')
-            edmonton_additional_booth_option_2 = request.POST.get('additional_booth_option_edmonton May 28th, 2019', 'N/A')
-            edmonton_additional_booth_option_3 = request.POST.get('additional_booth_option_edmonton August 13th, 2019', 'N/A')
-            edmonton_additional_booth_option_4 = request.POST.get('additional_booth_option_edmonton November 19th, 2019', 'N/A')
+            edmonton_dates_for_db = ', '.join(edmonton_dates)
 
-            winnipeg_dates = request.POST.get('winnipeg_date', '')
+            edmonton_booth_options = request.POST.get('edmonton_booth_options', '')
+
+            edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton January 29th, 2019', 'N/A')
+            edmonton_additional_lunch_option_1 = request.POST.get('additional_lunch_option_edmonton January 29th, 2019', 'N/A')
+            edmonton_additional_breakfast_option_1 = request.POST.get('additional_breakfast_option_edmonton January 29th, 2019', 'N/A')
+
+            edmonton_additional_booth_option_2 = request.POST.get('additional_booth_option_edmonton May 28th, 2019', 'N/A')
+            edmonton_additional_lunch_option_2 = request.POST.get('additional_lunch_option_edmonton May 28th, 2019', 'N/A')
+            edmonton_additional_breakfast_option_2 = request.POST.get('additional_breakfast_option_edmonton May 28th, 2019', 'N/A')
+
+            edmonton_additional_booth_option_3 = request.POST.get('additional_booth_option_edmonton August 13th, 2019', 'N/A')
+            edmonton_additional_lunch_option_3 = request.POST.get('additional_lunch_option_edmonton August 13th, 2019', 'N/A')
+            edmonton_additional_breakfast_option_3 = request.POST.get('additional_breakfast_option_edmonton August 13th, 2019', 'N/A')
+
+            edmonton_additional_booth_option_4 = request.POST.get('additional_booth_option_edmonton November 19th, 2019', 'N/A')
+            edmonton_additional_lunch_option_4 = request.POST.get('additional_lunch_option_edmonton January 29th, 2019', 'N/A')
+            edmonton_additional_breakfast_option_4 = request.POST.get('additional_breakfast_option_edmonton January 29th, 2019', 'N/A')
+
+            edmonton_venue_options = request.POST.getlist('edmonton_options')
+            edmonton_venue_options_for_db = ', '.join(edmonton_venue_options)
+
+            edmonton_diet_request = request.POST.get('edmonton_diet_request', 'N/A')
+
+
+            winnipeg_dates = request.POST.getlist('winnipeg_dates')
+            winnipeg_dates_for_db = ', '.join(winnipeg_dates)
+
             winnipeg_booth_options = request.POST.get('winnipeg_booth_options', '')
             winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg July 10th, 2019', 'N/A')
             winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg July 10th, 2019', 'N/A')
@@ -88,27 +123,40 @@ class IndexPageView(TemplateView):
 
                 select_cities=select_cities_for_db,
 
-                toronto_dates=toronto_dates,
+                toronto_dates=toronto_dates_for_db,
                 toronto_booth_options=toronto_booth_options,
                 toronto_additional_booth_option_1=toronto_additional_booth_option_1,
                 toronto_additional_booth_option_2=toronto_additional_booth_option_2,
 
-                calgary_dates=calgary_dates,
+                calgary_dates=calgary_dates_for_db,
                 calgary_booth_options=calgary_booth_options,
-                calgary_options=calgary_options,
                 calgary_additional_booth_option_1=calgary_additional_booth_option_1,
                 calgary_additional_booth_option_2=calgary_additional_booth_option_2,
                 calgary_additional_booth_option_3=calgary_additional_booth_option_3,
+                calgary_additional_lunch_option_1=calgary_additional_lunch_option_1,
+                calgary_additional_lunch_option_2=calgary_additional_lunch_option_2,
+                calgary_additional_lunch_option_3=calgary_additional_lunch_option_3,
+                calgary_venue_options=calgary_venue_options_for_db,
+                calgary_diet_request=calgary_diet_request,
 
-                edmonton_dates=edmonton_dates,
+                edmonton_dates=edmonton_dates_for_db,
                 edmonton_booth_options=edmonton_booth_options,
-                edmonton_options=edmonton_options,
                 edmonton_additional_booth_option_1=edmonton_additional_booth_option_1,
                 edmonton_additional_booth_option_2=edmonton_additional_booth_option_2,
                 edmonton_additional_booth_option_3=edmonton_additional_booth_option_3,
                 edmonton_additional_booth_option_4=edmonton_additional_booth_option_4,
+                edmonton_additional_lunch_option_1=edmonton_additional_lunch_option_1,
+                edmonton_additional_lunch_option_2=edmonton_additional_lunch_option_2,
+                edmonton_additional_lunch_option_3=edmonton_additional_lunch_option_3,
+                edmonton_additional_lunch_option_4=edmonton_additional_lunch_option_4,
+                edmonton_additional_breakfast_option_1=edmonton_additional_breakfast_option_1,
+                edmonton_additional_breakfast_option_2=edmonton_additional_breakfast_option_2,
+                edmonton_additional_breakfast_option_3=edmonton_additional_breakfast_option_3,
+                edmonton_additional_breakfast_option_4=edmonton_additional_breakfast_option_4,
+                edmonton_venue_options=edmonton_venue_options_for_db,
+                edmonton_diet_request=edmonton_diet_request,
 
-                winnipeg_dates=winnipeg_dates,
+                winnipeg_dates=winnipeg_dates_for_db,
                 winnipeg_booth_options=winnipeg_booth_options,
                 winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
                 winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,

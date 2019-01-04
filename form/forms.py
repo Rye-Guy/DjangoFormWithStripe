@@ -14,26 +14,26 @@ class PaymentForm(forms.ModelForm):
         ('Edmonton', 'Edmonton')
     )
     TORONTO_DATES = (
-        ('date1', 'April 24th, 2018'),
-        ('date2', 'September 17th, 2019')
+        ('TO APR-24-2018', 'April 24th, 2018'),
+        ('TO SEPT-17-2019', 'September 17th, 2019')
     )
 
     CALGARY_DATES = (
-        ('date1', 'March 12th, 2019'),
-        ('date2', 'June 26th, 2019'),
-        ('date3', 'October 22nd, 2019')
+        ('CAL MAR-12-2019', 'March 12th, 2019'),
+        ('CAL JUN-26-2019', 'June 26th, 2019'),
+        ('CAL OCT-22-2019', 'October 22nd, 2019')
     )
 
     EDMONTON_DATES = (
-        ('date1', 'January 29th, 2019'),
-        ('date2', 'May 28th, 2019'),
-        ('date3', 'August 13th, 2019'),
-        ('date3', 'November 19th, 2019')
+        ('EDM JAN-29-2019', 'January 29th, 2019'),
+        ('EDM MAY-28-2019', 'May 28th, 2019'),
+        ('EDM AUG-13-2019', 'August 13th, 2019'),
+        ('EDM NOV-19-2019', 'November 19th, 2019')
     )
     WINNIPEG_DATES = (
-        ('date1', 'July 10th, 2019'),
-        ('date2', 'April 2nd, 2019'),
-        ('date3', 'July 23rd, 2019')
+        ('WIN JUL-10-2019', 'July 10th, 2019'),
+        ('WIN APR-02-2019', 'April 2nd, 2019'),
+        ('WIN JUL-23-2019', 'July 23rd, 2019')
     )
 
 
@@ -64,13 +64,13 @@ class PaymentForm(forms.ModelForm):
     )
 
     CALGARY_FAIR_OPTIONS = (
-        ('option1', 'Access to Electricity'),
-        ('option2', 'Internet Access')
+        ('Electricity', 'Access to Electricity'),
+        ('Internet', 'Internet Access')
     )
 
     EDMONTON_FAIR_OPTIONS = (
-        ('option1', 'Access to Electricity'),
-        ('option2', 'Internet Access')
+        ('Electricity', 'Access to Electricity'),
+        ('Internet', 'Internet Access')
     )
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
