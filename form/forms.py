@@ -115,6 +115,3 @@ class PaymentForm(forms.ModelForm):
             clean_city(self, 'calgary')
         if 'Edmonton' in cities:
             clean_city(self, 'edmonton')
-
-
-
