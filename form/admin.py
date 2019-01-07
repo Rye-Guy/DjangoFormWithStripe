@@ -10,7 +10,6 @@ class MyModelAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(MyModelAdmin, self).get_queryset(request)
-        print(request.user)
         if request.user.is_superuser:
             return SalesFormData.objects.all()
         return SalesFormData.objects.filter(sales_rep=request.user)
