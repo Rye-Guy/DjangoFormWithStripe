@@ -2,7 +2,18 @@ from django.contrib import admin
 from .models import SalesFormData
 from django.http import HttpResponse, request
 
+
 class MyModelAdmin(admin.ModelAdmin):
+
+
+    list_display = ['id', 'sales_rep','company_name', 'contact_name']
+
+    def get_queryset(self, request):
+        qs = super(MyModelAdmin, self).get_queryset(request)
+        print(request.user)
+        if request.user.is_superuser:
+            return SalesFormData.objects.all()
+        return SalesFormData.objects.filter(sales_rep=request.user)
 
     def export_csv(modeladmin, request, queryset):
         import csv
@@ -10,7 +21,7 @@ class MyModelAdmin(admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Diposition'] = 'attachment; filename=mymodel.csv'
         writer = csv.writer(response, csv.excel)
-        writer.writerow([
+        writer.writerow((
             smart_str(u"Order ID"),
             smart_str(u"Company Name"),
             smart_str(u"Contact Name"),
@@ -32,7 +43,7 @@ class MyModelAdmin(admin.ModelAdmin):
             smart_str(u"Edmonton Booth Selection"),
             smart_str(u"Winnipeg Dates"),
             smart_str(u"Winnipeg Booth Selection")
-        ])
+        ))
 
         for obj in queryset:
             writer.writerow([
@@ -60,6 +71,7 @@ class MyModelAdmin(admin.ModelAdmin):
         ])
 
         return response
+
     export_csv.short_description = u"Export Data"
 
     actions = [export_csv]
