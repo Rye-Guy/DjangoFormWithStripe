@@ -42,18 +42,24 @@ class IndexPageView(TemplateView):
             select_cities_for_db = ', '.join(select_cities)
 
             toronto_dates = request.POST.getlist('toronto_dates')
+
+
             '''
-            Helper function that will take in a couple of list compare them and edit a new list with related selections. Cleans data for sales and accounting. COME BACK AND ADD IN THE OTHERS!!!!
+            Helper function that will take in a couple of list compare them and edit a new list with related selections. Cleans data for sales and accounting.
             '''
+            torontoDatesArray = ['TO APR-24-2018', 'TO SEPT-17-2019', '-', '-']
+            torontoList = ['-', '-', '-', '-']
 
-            caldatesarray = ['CAL MAR-12-2019', 'CAL JUN-26-2019', 'CAL OCT-22-2019']
-            calgaryList = ['-', '-', '-']
+            calgaryDatesArray = ['CAL MAR-12-2019', 'CAL JUN-26-2019', 'CAL OCT-22-2019', '-']
+            calgaryList = ['-', '-', '-', '-']
 
+            edmontonDatesArray = ['EDM JAN-29-2019', 'EDM MAY-28-2019', 'EDM AUG-13-2019', 'EDM NOV-19-2019']
+            edmontonList = ['-', '-', '-', '-']
 
-            def check_fair_dates(location, datesArray, dateCheckArray, listToEdit):
+            winnipegDatesArray = ['WIN JUL-10-2019', 'WIN APR-02-2019', 'WIN JUL-23-2019', '-']
+            winnipegList = ['-', '-', '-', '-']
 
-                if len(datesArray) != len(dateCheckArray):
-                    datesArray += '-'
+            def check_incoming_fair_dates(datesArray, dateCheckArray, listToEdit):
                 for date in range(0, len(datesArray)):
                     if datesArray[date] == dateCheckArray[0]:
                         listToEdit[0] = datesArray[date]
@@ -61,20 +67,22 @@ class IndexPageView(TemplateView):
                         listToEdit[1] = datesArray[date]
                     if datesArray[date] == dateCheckArray[2]:
                         listToEdit[2] = datesArray[date]
+                    if datesArray[date] == dateCheckArray[3]:
+                        listToEdit[3] = datesArray[date]
 
 
+            check_incoming_fair_dates(toronto_dates, torontoDatesArray, torontoList)
 
             toronto_booth_options = request.POST.get('toronto_booth_options', '')
             toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto April 24th, 2018', '-')
             toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto September 17th, 2019', '-')
 
             calgary_dates = request.POST.getlist('calgary_dates')
-            check_fair_dates('calgary', calgary_dates, caldatesarray, calgaryList)
+            check_incoming_fair_dates(calgary_dates, calgaryDatesArray, calgaryList)
 
 
 
             calgary_booth_options = request.POST.get('calgary_booth_options', '')
-
             calgary_options = request.POST.getlist('calgary_options')
             calgary_options_for_db = ', '.join(calgary_options)
 
@@ -86,15 +94,15 @@ class IndexPageView(TemplateView):
             calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary October 22nd, 2019', '-')
 
             calgary_venue_options = request.POST.getlist('calgary_options')
-            calgary_venue_options_for_db = ', '.join(select_cities)
+            calgary_venue_options_for_db = ', '.join(calgary_venue_options)
 
             calgary_diet_request = request.POST.get('calgary_diet_request', '-')
 
 
             edmonton_dates = request.POST.getlist('edmonton_dates')
-            edmonton_dates_for_db = ', '.join(edmonton_dates)
-
+            check_incoming_fair_dates(edmonton_dates, edmontonDatesArray, edmontonList)
             edmonton_booth_options = request.POST.get('edmonton_booth_options', '')
+
 
             edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton January 29th, 2019', '-')
             edmonton_additional_lunch_option_1 = request.POST.get('additional_lunch_option_edmonton January 29th, 2019', '-')
@@ -119,7 +127,7 @@ class IndexPageView(TemplateView):
 
 
             winnipeg_dates = request.POST.getlist('winnipeg_dates')
-            winnipeg_dates_for_db = ', '.join(winnipeg_dates)
+            check_incoming_fair_dates(winnipeg_dates, winnipegDatesArray, winnipegList)
 
             winnipeg_booth_options = request.POST.get('winnipeg_booth_options', '')
             winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg July 10th, 2019', '-')
@@ -146,13 +154,17 @@ class IndexPageView(TemplateView):
                 select_cities=select_cities_for_db,
 
                 toronto_dates=toronto_dates,
+                toronto_date_1=torontoList[0],
+                toronto_date_2=torontoList[1],
                 toronto_booth_options=toronto_booth_options,
                 toronto_additional_booth_option_1=toronto_additional_booth_option_1,
                 toronto_additional_booth_option_2=toronto_additional_booth_option_2,
-                toronto_dates_1=toronto_dates[0],
-                toronto_dates_2=toronto_dates[1],
+
 
                 calgary_dates=calgary_dates,
+                calgary_date_1=calgaryList[0],
+                calgary_date_2=calgaryList[1],
+                calgary_date_3=calgaryList[2],
                 calgary_booth_options=calgary_booth_options,
                 calgary_additional_booth_option_1=calgary_additional_booth_option_1,
                 calgary_additional_booth_option_2=calgary_additional_booth_option_2,
@@ -162,11 +174,12 @@ class IndexPageView(TemplateView):
                 calgary_additional_lunch_option_3=calgary_additional_lunch_option_3,
                 calgary_venue_options=calgary_venue_options_for_db,
                 calgary_diet_request=calgary_diet_request,
-                calgary_dates_1=calgaryList[0],
-                calgary_dates_2=calgaryList[1],
-                calgary_dates_3=calgaryList[2],
 
-                edmonton_dates=edmonton_dates_for_db,
+                edmonton_dates=edmonton_dates,
+                edmonton_date_1=edmontonList[0],
+                edmonton_date_2=edmontonList[1],
+                edmonton_date_3=edmontonList[2],
+                edmonton_date_4=edmontonList[3],
                 edmonton_booth_options=edmonton_booth_options,
                 edmonton_additional_booth_option_1=edmonton_additional_booth_option_1,
                 edmonton_additional_booth_option_2=edmonton_additional_booth_option_2,
@@ -183,7 +196,10 @@ class IndexPageView(TemplateView):
                 edmonton_venue_options=edmonton_venue_options_for_db,
                 edmonton_diet_request=edmonton_diet_request,
 
-                winnipeg_dates=winnipeg_dates_for_db,
+                winnipeg_dates=winnipeg_dates,
+                winnipeg_date_1=winnipegList[0],
+                winnipeg_date_2=winnipegList[1],
+                winnipeg_date_3=winnipegList[2],
                 winnipeg_booth_options=winnipeg_booth_options,
                 winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
                 winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,
