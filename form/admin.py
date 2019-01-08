@@ -6,7 +6,7 @@ from django.http import HttpResponse, request
 class MyModelAdmin(admin.ModelAdmin):
 
 
-    list_display = ['id', 'sales_rep','company_name', 'contact_name']
+    list_display = ['id', 'sales_rep','company_name', 'contact_email', 'office_phone_number' ,'total_spent']
 
     def get_queryset(self, request):
         qs = super(MyModelAdmin, self).get_queryset(request)
