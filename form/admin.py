@@ -14,6 +14,48 @@ class MyModelAdmin(admin.ModelAdmin):
             return SalesFormData.objects.all()
         return SalesFormData.objects.filter(sales_rep=request.user)
 
+    def get_fieldsets(self, request, obj=None):
+        message = 'Detail View for Form Entry'
+
+        return(
+            (None, {
+                'description': 'Contact Info',
+                'fields':   ('company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'select_cities')
+            }),
+            ('Additional Info', {
+                'description': 'Additional Info',
+                'classes': ('collapse',),
+                'fields': ('address', 'city', 'province', 'postal_code','facebook_link', 'website_link', 'twitter_link')
+            }),
+            ('Toronto Fairs', {
+                'description': 'Toronto Booking Details',
+                'classes': ('collapse',),
+                'fields': ('toronto_dates', 'toronto_date_1', 'toronto_date_2','toronto_booth_options','toronto_additional_booth_option_1', 'toronto_additional_booth_option_2')
+            }),
+            ('Calgary Fairs', {
+                'description': 'Calgary Booking Details',
+                'classes': ('collapse',),
+                'fields': ('calgary_dates', 'calgary_date_1', 'calgary_date_2', 'calgary_date_3', 'calgary_booth_options', 'calgary_additional_booth_option_1', 'calgary_additional_booth_option_2','calgary_additional_booth_option_3', 'calgary_additional_lunch_option_1', 'calgary_additional_lunch_option_2','calgary_additional_lunch_option_3','calgary_options', 'calgary_diet_request', 'calgary_venue_options')
+            }),
+            ('Edmonton Fairs', {
+                'description': 'Edmonton Booking Details',
+                'classes': ('collapse',),
+                'fields': ('edmonton_dates', 'edmonton_date_1', 'edmonton_date_2', 'edmonton_date_3','edmonton_date_4', 'edmonton_booth_options', 'edmonton_additional_booth_option_1', 'edmonton_additional_booth_option_2','edmonton_additional_booth_option_3','edmonton_additional_booth_option_4', 'edmonton_additional_lunch_option_1', 'edmonton_additional_lunch_option_2','edmonton_additional_lunch_option_3','edmonton_additional_lunch_option_4','edmonton_additional_breakfast_option_1','edmonton_additional_breakfast_option_2','edmonton_additional_breakfast_option_3','edmonton_additional_breakfast_option_4', 'edmonton_diet_request', 'edmonton_venue_options')
+            }),
+            ('Winnipeg Fairs', {
+                'description': 'Calgary Booking Details',
+                'classes': ('collapse',),
+                'fields': (
+                'winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options',
+                'winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2',
+                'winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1',
+                'winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request')
+            })
+
+
+        )
+
+
     def export_csv(modeladmin, request, queryset):
         import csv
         from django.utils.encoding import smart_str
