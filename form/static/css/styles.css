@@ -233,12 +233,14 @@ input[type='checkbox']:checked {
 }
 
 .billingInfoLabels{
-    color: red;
+    color: black;
     position: relative;
     z-index: 1;
-    padding-top: 26px;
+    padding-top: 32px;
     width: 300px;
 }
+
+
 
 .billingInfoLabels:last-child{
     padding-bottom: 48px
@@ -249,16 +251,11 @@ input[type='checkbox']:checked {
     background-color: #EAEAEA;
     border-bottom: 1px solid;
     position: fixed;
-    border-radius: 12px;
     z-index: -1;
     left: -2px;
     border: none;
     height: 36px;
     width: 380px;
-
-}
-
-.billingInfoLabels > input:active{
 
 }
 
@@ -269,8 +266,17 @@ input[type='checkbox']:checked {
 
 
 .billingInfoLabels input:focus{
-    border-bottom: 4px solid;
+    border-bottom: 2px solid;
+    border-radius: 8px;
+    background-color: #efefef;
 }
+
+input:focus + .helperText{
+    text-decoration: underline;
+    font-weight: bold;
+    transition: ease all .2s;
+}
+
 
 input:empty + span{
     top: 10px;
@@ -285,5 +291,18 @@ input:focus + span{
     top: -24px !important;
 }
 
+.select-cities-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.select-cities-row > label{
+    display: flex;
+    align-items: center;
+}
+.select-cities-row > label > input{
+    margin-left: 12px
+}
 
 

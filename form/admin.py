@@ -7,15 +7,17 @@ class MyModelAdmin(admin.ModelAdmin):
 
 
     list_display = ['id', 'sales_rep','company_name', 'contact_email', 'office_phone_number' ,'total_spent']
+    search_fields = ['company_name', 'contact_email', 'office_phone_number']
 
     def get_queryset(self, request):
         qs = super(MyModelAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return SalesFormData.objects.all()
+        if request.GET:
+            print(request.GET)
         return SalesFormData.objects.filter(sales_rep=request.user)
 
     def get_fieldsets(self, request, obj=None):
-        message = 'Detail View for Form Entry'
 
         return(
             (None, {
@@ -45,11 +47,7 @@ class MyModelAdmin(admin.ModelAdmin):
             ('Winnipeg Fairs', {
                 'description': 'Calgary Booking Details',
                 'classes': ('collapse',),
-                'fields': (
-                'winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options',
-                'winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2',
-                'winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1',
-                'winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request')
+                'fields': ('winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options','winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2','winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1','winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request')
             })
 
 

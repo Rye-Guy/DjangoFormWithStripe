@@ -3,16 +3,11 @@ console.log('Animation Hello')
 billingInfoBtn = document.getElementById('sideTrigger')
 billingInfoContainer = document.getElementById('billingInfoContainer')
 
-billingInfoContainer.className = 'hide-me'
-
-billingInfoBtn.addEventListener('click', (ev)=>{
-    //ev.preventDefault()
-    console.log('Yo yo ma')
-    billingInfoContainer.className = 'animated fadeInLeft'
-})
+billingInfoContainer.className = 'animated fadeInLeft'
 
 allInputs = document.querySelectorAll("input[type='text']")
 allUrlInputs = document.querySelectorAll("input[type='url']")
+allEmailInputs = document.querySelectorAll("input[type='email']")
 
 function helperTextCheck(input){
     input.addEventListener('blur', (ev)=>{
@@ -35,3 +30,8 @@ allInputs.forEach((input)=>{
 allUrlInputs.forEach((input)=>{
    helperTextCheck(input)
 })
+
+allEmailInputs.forEach((input)=>{
+    helperTextCheck(input)
+})
+
