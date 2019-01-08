@@ -24,8 +24,8 @@ class SalesFormData(models.Model):
 
     toronto_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     toronto_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
-    toronto_dates_1 = models.CharField(max_length=400, blank=True, default='-')
-    toronto_dates_2 = models.CharField(max_length=400, blank=True, default='-')
+    toronto_date_1 = models.CharField(max_length=400, blank=True, default='-')
+    toronto_date_2 = models.CharField(max_length=400, blank=True, default='-')
     toronto_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     toronto_additional_booth_option_2 = models.CharField(max_length=400, default='-')
 
@@ -33,9 +33,9 @@ class SalesFormData(models.Model):
     calgary_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
-    calgary_dates_1 = models.CharField(max_length=400, blank=True, default='-')
-    calgary_dates_2 = models.CharField(max_length=400, blank=True, default='-')
-    calgary_dates_3 = models.CharField(max_length=400, blank=True, default='-')
+    calgary_date_1 = models.CharField(max_length=400, blank=True, default='-')
+    calgary_date_2 = models.CharField(max_length=400, blank=True, default='-')
+    calgary_date_3 = models.CharField(max_length=400, blank=True, default='-')
 
     calgary_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     calgary_additional_booth_option_2 = models.CharField(max_length=400, default='-')
@@ -48,6 +48,10 @@ class SalesFormData(models.Model):
 
     edmonton_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     edmonton_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    edmonton_date_1 = models.CharField(max_length=400, blank=True, default='-')
+    edmonton_date_2 = models.CharField(max_length=400, blank=True, default='-')
+    edmonton_date_3 = models.CharField(max_length=400, blank=True, default='-')
+    edmonton_date_4 = models.CharField(max_length=400, blank=True, default='-')
     edmonton_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     edmonton_additional_booth_option_2 = models.CharField(max_length=400, default='-')
     edmonton_additional_booth_option_3 = models.CharField(max_length=400, default='-')
@@ -65,6 +69,9 @@ class SalesFormData(models.Model):
 
     winnipeg_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     winnipeg_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    winnipeg_date_1 = models.CharField(max_length=400, blank=True, default='-')
+    winnipeg_date_2 = models.CharField(max_length=400, blank=True, default='-')
+    winnipeg_date_3 = models.CharField(max_length=400, blank=True, default='-')
     winnipeg_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     winnipeg_additional_booth_option_2 = models.CharField(max_length=400, default='-')
     winnipeg_additional_booth_option_3 = models.CharField(max_length=400, default='-')
