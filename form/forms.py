@@ -5,7 +5,7 @@ class PaymentForm(forms.ModelForm):
 
     class Meta:
         model = SalesFormData
-        fields = ['company_name','contact_name','address','city_or_province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'calgary_diet_request', 'edmonton_diet_request', 'winnipeg_diet_request']
+        fields = ['company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'calgary_diet_request', 'edmonton_diet_request', 'winnipeg_diet_request']
 
     CITY_CHOICES = (
         ('Toronto', 'Toronto'),
@@ -14,28 +14,27 @@ class PaymentForm(forms.ModelForm):
         ('Edmonton', 'Edmonton')
     )
     TORONTO_DATES = (
-        ('TO APR-24-2018', 'April 24th, 2018'),
-        ('TO SEPT-17-2019', 'September 17th, 2019')
+        ('04-24-2019', 'April 24th, 2018'),
+        ('09-17-2019', 'September 17th, 2019')
     )
 
     CALGARY_DATES = (
-        ('CAL MAR-12-2019', 'March 12th, 2019'),
-        ('CAL JUN-26-2019', 'June 26th, 2019'),
-        ('CAL OCT-22-2019', 'October 22nd, 2019')
+        ('03-12-2019', 'March 12th, 2019'),
+        ('06-26-2019', 'June 26th, 2019'),
+        ('10-22-2019', 'October 22nd, 2019')
     )
 
     EDMONTON_DATES = (
-        ('EDM JAN-29-2019', 'January 29th, 2019'),
-        ('EDM MAY-28-2019', 'May 28th, 2019'),
-        ('EDM AUG-13-2019', 'August 13th, 2019'),
-        ('EDM NOV-19-2019', 'November 19th, 2019')
+        ('01-29-2019', 'January 29th, 2019'),
+        ('05-28-2019', 'May 28th, 2019'),
+        ('08-13-2019', 'August 13th, 2019'),
+        ('11-19-2019', 'November 19th, 2019')
     )
     WINNIPEG_DATES = (
-        ('WIN JUL-10-2019', 'July 10th, 2019'),
-        ('WIN APR-02-2019', 'April 2nd, 2019'),
-        ('WIN JUL-23-2019', 'July 23rd, 2019')
+        ('04-02-2019', 'April 2nd, 2019'),
+        ('07-10-2019', 'July 10th, 2019'),
+        ('07-23-2019', 'July 23rd, 2019')
     )
-
 
     TORONTO_BOOTH_OPTIONS = (
         ('2995', 'Platinum - $2995'),
