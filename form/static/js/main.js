@@ -3,7 +3,6 @@ optionsContainer = document.getElementById('fair_dates_and_options_container')
 
 checkboxes.forEach((elem) =>{
     fairOptionsDivs = elem.parentElement.parentElement.childNodes[13]
-
     elem.addEventListener('click', ()=>{
         checked_box_id = elem.getAttribute('id')
         clicked_box_id = document.getElementById(checked_box_id)
@@ -47,7 +46,6 @@ checkboxes.forEach((elem) =>{
                     input.checked = false
                 })
                 edmontonOptions.forEach((input)=>{
-
                     input.checked = false
                 })
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked){
@@ -61,7 +59,6 @@ checkboxes.forEach((elem) =>{
                     input.checked = false
                 })
                 winnipegOptions.forEach((input)=>{
-
                     input.checked = false
                 })
         }

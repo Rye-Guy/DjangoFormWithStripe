@@ -46,9 +46,11 @@
   <form action="/" method="POST">
     {% csrf_token %}
     <h2>Fair Locations</h2>
+    <div class="select-cities-row">
     {% for field in form.select_cities %}
             {{field}}
     {% endfor %}
+    </div>
     {% if form.errors %}
       {{form.errors.select_cities}}
     {% endif %}
@@ -97,9 +99,7 @@
           <label>Diet Request:{{form.calgary_diet_request}}</label>
         </div>
         </div>
-
       </div>
-
       <div id="EdmontonFairOptionsContainer" style="display: none;">
         <div class="div1">
         <h3>Edmonton Booth Options</h3>
@@ -115,7 +115,6 @@
           {% endif %}
         <div class="date-options">{{form.edmonton_dates}}</div>
         </div>
-
         <div class="div3">
         <h3>Venue Options</h3>
         <div class="venue-options">
@@ -164,8 +163,6 @@
     </div>
 
     <input type="hidden" id="priceInput" name="price" value="">
-
-    <button value="Billing Info" id="sideTrigger">Fill Billing Info</button>
     <input type="submit" value="Submit!">
 
   </form>
