@@ -13,13 +13,12 @@ class IndexPageView(TemplateView):
     template_name = 'base-html.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
-
-
     stripeApiKey = settings.STRIPE_SECRET_KEY
 
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)
         context.update({'form': self.formPayment})
+        print(self.formPayment.fields['select_cities'].choices[0])
         return context
 
     def post(self, request, *args, **kwargs):

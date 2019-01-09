@@ -42,14 +42,30 @@
       {{form.errors}}
     {% endif %}
 <div class="content">
+  {{form.select_cities.field.choices}}
   <h1>Purchase a Booth</h1>
   <form action="/" method="POST">
     {% csrf_token %}
     <h2>Fair Locations</h2>
     <div class="select-cities-row">
-    {% for field in form.select_cities %}
-            {{field}}
-    {% endfor %}
+      {% for text, field in form.select_cities.field.choices %}
+          {% if text == 'Toronto' %}
+            <label for="id_select_cities_0"><input type="checkbox" name="select_cities" value="Toronto" id="id_select_cities_0">Toronto</label>
+          {% endif %}
+          {% if text == 'Winnipeg' %}
+            <label for="id_select_cities_1"><input type="checkbox" name="select_cities" value="Winnipeg" id="id_select_cities_1">
+            Winnipeg</label>
+          {% endif %}
+          {% if text == 'Calgary' %}
+            <label for="id_select_cities_2"><input type="checkbox" name="select_cities" value="Calgary" id="id_select_cities_2">
+            Calgary</label>
+          {% endif %}
+          {% if text == 'Edmonton' %}
+            <label for="id_select_cities_3"><input type="checkbox" name="select_cities" value="Edmonton" id="id_select_cities_3">
+            Edmonton</label>
+          {% endif %}
+      {% endfor %}
+
     </div>
     {% if form.errors %}
       {{form.errors.select_cities}}
