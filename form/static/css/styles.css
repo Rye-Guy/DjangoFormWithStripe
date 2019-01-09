@@ -149,7 +149,6 @@ input[type='checkbox']:checked {
     width:18px;
     height:18px;
     border-radius:2px;
-    outline:0;
     cursor:pointer;
     transition:all 150ms ease-out;
   }
@@ -194,7 +193,6 @@ input[type='checkbox']:checked {
     width:18px;
     height:18px;
     border-radius:8px;
-    outline:0;
     cursor:pointer;
     transition:all 150ms ease-out;
   }
@@ -302,7 +300,7 @@ input:focus + span{
     align-items: center;
 }
 .select-cities-row > label > input{
-    margin-left: 12px
+    margin-right: 6px;
 }
 
 

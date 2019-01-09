@@ -1,11 +1,9 @@
 from django.contrib import admin
 from .models import SalesFormData
 from django.http import HttpResponse, request
-from import_export import resources
 import import_export
 
-
-class SalesDataModelResource(resources.ModelResource):
+class SalesDataModelResource(import_export.resources.ModelResource):
 
     class Meta:
         model = SalesFormData
@@ -21,15 +19,11 @@ class MyModelAdmin(admin.ModelAdmin):
         return SalesFormData.objects.filter(sales_rep=request.user)
 
     class SalesAdmin(import_export.admin.ImportExportModelAdmin):
-
         list_display = ['id', 'sales_rep', 'company_name', 'contact_email', 'office_phone_number', 'total_spent']
-
         search_fields = ['company_name', 'contact_email', 'office_phone_number']
-
         resource_class = SalesDataModelResource
 
         def get_fieldsets(self, request, obj=None):
-
             return(
                 (None, {
                     'description': 'Contact Info',
