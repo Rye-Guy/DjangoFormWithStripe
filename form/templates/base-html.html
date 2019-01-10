@@ -42,7 +42,6 @@
       {{form.errors}}
     {% endif %}
 <div class="content">
-  {{form.select_cities.field.choices}}
   <h1>Purchase a Booth</h1>
   <form action="/" method="POST">
     {% csrf_token %}
@@ -50,117 +49,117 @@
     <div class="select-cities-row">
       {% for text, field in form.select_cities.field.choices %}
           {% if text == 'Toronto' %}
+          <div class="toronto-container">
             <label for="id_select_cities_0"><input type="checkbox" name="select_cities" value="Toronto" id="id_select_cities_0">Toronto</label>
+            <div class="fair-options-container" id="TorontoFairOptionsContainer" style="display: none;">
+              <div class="row">
+                  <h3>Toronto Booth Options</h3>
+                    {% if form.errors.toronto_booth_options %}
+                        {{form.errors.toronto_booth_options}}
+                    {% endif %}
+                  <div class="booth-options">
+                    {{form.toronto_booth_options}}
+                  </div>
+                </div>
+                <div class="row">
+                  <h3>Toronto Fair Dates & Options</h3>
+                    {% if form.errors.toronto_dates %}
+                      {{form.errors.toronto_dates}}
+                    {% endif %}
+                  <div class="date-options">{{form.toronto_dates}}</div>
+                </div>
+            </div>
+          </div>
           {% endif %}
           {% if text == 'Winnipeg' %}
-            <label for="id_select_cities_1"><input type="checkbox" name="select_cities" value="Winnipeg" id="id_select_cities_1">
-            Winnipeg</label>
+          <div class="winnipeg-container">
+            <label for="id_select_cities_1"><input type="checkbox" name="select_cities" value="Winnipeg" id="id_select_cities_1">Winnipeg</label>
+            <div class="fair-options-container" id="WinnipegFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Winnipeg Booth Options</h3>
+                <div class="booth-options">{{form.winnipeg_booth_options}}</div>
+              </div>
+              <div class="row">
+                <h3>Winnipeg Fair Dates</h3>
+                  {% if form.errors.winnipeg_dates %}
+                    {{form.errors.winnipeg_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.winnipeg_dates}}</div>
+                  {% if form.errors.winnipeg_booth_options %}
+                    {{form.errors.winnipeg_booth_options}}
+                  {% endif %}
+                <div class="row">
+                  <h3>Venue Options</h3>
+                    <div class="venue-options">
+                        <label>Diet Request:{{form.winnipeg_diet_request}}</label>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endif %}
           {% if text == 'Calgary' %}
-            <label for="id_select_cities_2"><input type="checkbox" name="select_cities" value="Calgary" id="id_select_cities_2">
-            Calgary</label>
+          <div class="calgary-container">
+            <label for="id_select_cities_2"><input type="checkbox" name="select_cities" value="Calgary" id="id_select_cities_2">Calgary</label>
+            <div class="fair-options-container" id="CalgaryFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Calgary Booth Options</h3>
+                <div class="booth-options">{{form.calgary_booth_options}}</div>
+                  {% if form.errors.calgary_booth_options %}
+                    {{form.errors.calgary_booth_options}}
+                  {% endif %}
+              </div>
+              <div class="row">
+                <h3>Calgary Fair Dates</h3>
+                  {% if form.errors.calgary_dates %}
+                    {{form.errors.calgary_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.calgary_dates}}</div>
+              </div>
+              <div class="row">
+                <h3>Venue Options</h3>
+                <div class="venue-options">
+                    {{form.calgary_options}}
+                     <label>Diet Request:{{form.calgary_diet_request}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endif %}
           {% if text == 'Edmonton' %}
-            <label for="id_select_cities_3"><input type="checkbox" name="select_cities" value="Edmonton" id="id_select_cities_3">
-            Edmonton</label>
+          <div class="edmonton-container">
+            <label for="id_select_cities_3"><input type="checkbox" name="select_cities" value="Edmonton" id="id_select_cities_3">Edmonton</label>
+            <div class="fair-options-container" id="EdmontonFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Edmonton Booth Options</h3>
+                  {% if form.errors.edmonton_booth_options %}
+                    {{form.errors.edmonton_booth_options}}
+                  {% endif %}
+                <div class="booth-options">{{form.edmonton_booth_options}}</div>
+              </div>
+              <div class="row">
+                <h3>Edmonton Fair Dates</h3>
+                  {% if form.errors.edmonton_dates %}
+                     {{form.errors.edmonton_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.edmonton_dates}}</div>
+              </div>
+              <div class="row">
+                <h3>Venue Options</h3>
+                <div class="venue-options">
+                  {{form.edmonton_options}}
+                  <label>Diet Request:{{form.edmonton_diet_request}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endif %}
       {% endfor %}
-
     </div>
     {% if form.errors %}
       {{form.errors.select_cities}}
     {% endif %}
     <div id="fair_dates_and_options_container">
-
-      <div id="TorontoFairOptionsContainer" style="display: none;">
-        <div class="div1">
-        <h3>Toronto Booth Options</h3>
-          {% if form.errors.toronto_booth_options %}
-              {{form.errors.toronto_booth_options}}
-          {% endif %}
-        <div class="booth-options">
-          <label>{{form.toronto_booth_options}}</label>
-        </div>
-      </div>
-      <div class="div2">
-        <h3>Toronto Fair Dates & Options</h3>
-          {% if form.errors.toronto_dates %}
-            {{form.errors.toronto_dates}}
-          {% endif %}
-        <div class="date-options">{{form.toronto_dates}}</div>
-      </div>
-      </div>
-
-      <div id="CalgaryFairOptionsContainer" style="display: none;">
-        <div class="div1">
-        <h3>Calgary Booth Options</h3>
-        <div class="booth-options">{{form.calgary_booth_options}}</div>
-          {% if form.errors.calgary_booth_options %}
-            {{form.errors.calgary_booth_options}}
-          {% endif %}
-        </div>
-
-        <div class="div2">
-        <h3>Calgary Fair Dates</h3>
-          {% if form.errors.calgary_dates %}
-            {{form.errors.calgary_dates}}
-          {% endif %}
-        <div class="date-options">{{form.calgary_dates}}</div>
-        </div>
-
-        <div class="div3">
-        <h3>Venue Options</h3>
-        <div class="venue-options">
-            {{form.calgary_options}}
-          <label>Diet Request:{{form.calgary_diet_request}}</label>
-        </div>
-        </div>
-      </div>
-      <div id="EdmontonFairOptionsContainer" style="display: none;">
-        <div class="div1">
-        <h3>Edmonton Booth Options</h3>
-          {% if form.errors.edmonton_booth_options %}
-            {{form.errors.edmonton_booth_options}}
-          {% endif %}
-        <div class="booth-options">{{form.edmonton_booth_options}}</div>
-        </div>
-        <div class="div2">
-        <h3>Edmonton Fair Dates</h3>
-          {% if form.errors.edmonton_dates %}
-            {{form.errors.edmonton_dates}}
-          {% endif %}
-        <div class="date-options">{{form.edmonton_dates}}</div>
-        </div>
-        <div class="div3">
-        <h3>Venue Options</h3>
-        <div class="venue-options">
-          {{form.edmonton_options}}
-          <label>Diet Request:{{form.edmonton_diet_request}}</label>
-        </div>
-      </div>
-      </div>
-      <div id="WinnipegFairOptionsContainer" style="display: none;">
-        <div class="div1">
-        <h3>Winnipeg Booth Options</h3>
-        <div class="booth-options">{{form.winnipeg_booth_options}}</div>
-        </div>
-        <div class="div2">
-        <h3>Winnipeg Fair Dates</h3>
-          {% if form.errors.winnipeg_dates %}
-            {{form.errors.winnipeg_dates}}
-          {% endif %}
-        <div class="date-options">{{form.winnipeg_dates}}</div>
-          {% if form.errors.winnipeg_booth_options %}
-            {{form.errors.winnipeg_booth_options}}
-          {% endif %}
-          <div class="div3">
-            <h3>Venue Options</h3>
-              <div class="venue-options">
-                  <label>Diet Request:{{form.winnipeg_diet_request}}</label>
-              </div>
-          </div>
-        </div>
-      </div>
       <div id="billingInfoContainer">
         <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
         <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>

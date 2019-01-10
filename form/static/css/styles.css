@@ -53,73 +53,61 @@ li{
     padding:0;
 }
 
-#TorontoFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    /*constrained width*/
-    width: 564px;
-}
-
-#CalgaryFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-#EdmontonFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-#WinnipegFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    /*constrained width*/
-    width: 484px;
-}
-
 .booth-options{
     margin-top: -20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .date-options{
-    margin-top: -20px; 
-}
-/*#CalgaryFairOptionsContainer .date-options{
-    margin-bottom: 50px;
-}
-#EdmontonFairOptionsContainer .date-options{
-    margin-bottom: 50px;
-}*/
-/*.venue-options{
-    margin-top: -20px; 
-}*/
-/*li tag styling*/
-.booth-options li{
-    margin-left: -40px;
-}
-.date-options li{
-    margin-left: -40px;
-}
-.venue-options li{
-    margin-left: -40px;
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
+#id_toronto_dates > li > label{
+    max-width: 390px
+}
+
+.row{
+    width: 100%
+}
+
+li > label > input + br + label{
+   margin-left: 12px;
+}
+
+/*li tag styling*/
+.booth-options li{
+    display: flex;
+    margin: 0 auto;
+}
+
+.date-options li{
+    display: flex;
+    margin: 0 auto;
+}
+
+ul > li > label{
+    display: flex;
+    max-width: 580px;
+    justify-content: flex-end;
+    align-items: baseline;
+    margin-right: 32px;
+}
 
 
 /*submit button styles*/
 input[type='submit']{
     background:#2196F3;
     color: #fff;
-    width: 100px;
-    height: 32px;
+    width: 132px;
+    height: 46px;
     border-color: #2196F3;
+    position: fixed;
+    right: 80px;
+    bottom: 80px;
 }
 input[type='submit']:hover{
     background:#fff;
@@ -226,7 +214,7 @@ input[type='checkbox']:checked {
 }
 
 #billingInfoContainer{
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
@@ -303,4 +291,35 @@ input:focus + span{
     margin-right: 6px;
 }
 
+.fair-options-container{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    left: 80px;
+}
 
+.booth-options-select{
+    display: flex;
+    padding: 0;
+}
+
+.shopping-cart-container{
+    display: none;
+}
+
+.dates-select{
+    display: flex;
+    padding: 0;
+}
+
+.venue-options{
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.fair-options{
+    display: flex;
+    padding: 0;
+}
