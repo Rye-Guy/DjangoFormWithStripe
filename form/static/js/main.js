@@ -4,26 +4,54 @@ optionsContainer = document.getElementById('fair_dates_and_options_container')
 fairContainers = document.querySelectorAll('.fair-options-container')
 console.log(fairContainers)
 
+function parsePositioning(elem){
+    if(elem.style.top == '' || null){
+        return 0
+    }
+    numtoParse = elem.style.top
+    num = parseInt(numtoParse.substring(0, numtoParse.indexOf('p')))
+    return num
+}
 
 checkboxes.forEach((elem) =>{
     elem.addEventListener('click', ()=>{
         targetElem = elem.parentNode.parentNode.childNodes[3]
         currentHeight = 0
-        fairContainers.forEach((elem) =>{
-            console.log(elem.offsetHeight)
-            currentHeight +=  elem.offsetHeight
-            console.log(currentHeight)
-        })
+        changedHeight = 0
+        topPositioning = 0
+        if(elem.checked == false){
+            value = targetElem.style.top
+            theTakeAway = parseInt(value.substring(0, value.indexOf('p'))) - 300
+            console.log(theTakeAway)
+                fairContainers.forEach((elem)=>{
+                    if(parsePositioning(elem) > 300){
+                        elem.style.top = parsePositioning(elem) - 260 + 'px'
+                    }
+                })
+
+        }else{
+            fairContainers.forEach((elem) =>{
+                topHeight = elem.style.top
+                if(topHeight.length > 0){
+                    value = parseInt(topHeight.substring(0, topHeight.indexOf('p')))
+                }else{
+                    value = 0
+                }
+                topPositioning += value
+                currentHeight +=  elem.offsetHeight
+            })
+        }
+        targetElem.previousSibling
         targetElem.style.top = currentHeight + 300 + 'px'
-        console.log(targetElem.style.top)
+
         checked_box_id = elem.getAttribute('id')
         clicked_box_id = document.getElementById(checked_box_id)
         checked_box_name = elem.getAttribute('value')
             if(checked_box_name === 'Toronto' && clicked_box_id.checked){
                 torontoContainer = document.getElementById('TorontoFairOptionsContainer')
-                torontoContainer.style = 'display: flex'
+                torontoContainer.style.display = 'flex'
             }else if(checked_box_name === 'Toronto' && clicked_box_id.checked == false){
-                torontoContainer.style = 'display: none'
+                torontoContainer.style.display = 'none'
                 torontoOptions = document.querySelectorAll("input[name='toronto_booth_options']")
                 torontoDates = document.querySelectorAll("input[name='toronto_dates']")
                 torontoDates.forEach((input)=>{
@@ -35,9 +63,9 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked){
                 calgaryContainer = document.getElementById('CalgaryFairOptionsContainer')
-                calgaryContainer.style = 'display: flex'
+                calgaryContainer.style.display = 'flex'
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked == false){
-                calgaryContainer.style = 'display: none'
+                calgaryContainer.style.display = 'none'
                 calgaryOptions = document.querySelectorAll("input[name='calgary_booth_options']")
                 calgaryDates = document.querySelectorAll("input[name='calgary_dates']")
                 calgaryDates.forEach((input)=>{
@@ -49,9 +77,9 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked){
                 edmontonContainer = document.getElementById('EdmontonFairOptionsContainer')
-                edmontonContainer.style = 'display: flex'
+                edmontonContainer.style.display = 'flex'
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked  == false){
-                edmontonContainer.style = 'display: none'
+                edmontonContainer.style.display = 'none'
                 edmontonOptions = document.querySelectorAll("input[name='edmonton_booth_options']")
                 edmontonDates = document.querySelectorAll("input[name='edmonton_dates']")
                 edmontonDates.forEach((input)=>{
@@ -62,9 +90,9 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked){
                 winnipegContainer = document.getElementById('WinnipegFairOptionsContainer')
-                winnipegContainer.style = 'display: flex'
+                winnipegContainer.style.display = 'flex'
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked  == false){
-                winnipegContainer.style = 'display: none'
+                winnipegContainer.style.display = 'none'
                 winnipegOptions = document.querySelectorAll("input[name='winnipeg_booth_options']")
                 winnipegDates = document.querySelectorAll("input[name='winnipeg_dates']")
                 winnipegDates.forEach((input)=>{
