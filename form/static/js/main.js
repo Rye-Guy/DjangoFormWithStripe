@@ -1,9 +1,21 @@
 checkboxes = document.querySelectorAll('input[name="select_cities"]')
 optionsContainer = document.getElementById('fair_dates_and_options_container')
 
+fairContainers = document.querySelectorAll('.fair-options-container')
+console.log(fairContainers)
+
+
 checkboxes.forEach((elem) =>{
-    fairOptionsDivs = elem.parentElement.parentElement.childNodes[13]
     elem.addEventListener('click', ()=>{
+        targetElem = elem.parentNode.parentNode.childNodes[3]
+        currentHeight = 0
+        fairContainers.forEach((elem) =>{
+            console.log(elem.offsetHeight)
+            currentHeight +=  elem.offsetHeight
+            console.log(currentHeight)
+        })
+        targetElem.style.top = currentHeight + 300 + 'px'
+        console.log(targetElem.style.top)
         checked_box_id = elem.getAttribute('id')
         clicked_box_id = document.getElementById(checked_box_id)
         checked_box_name = elem.getAttribute('value')
@@ -62,5 +74,6 @@ checkboxes.forEach((elem) =>{
                     input.checked = false
                 })
         }
+      targetElem.style.top = currentHeight + 300 + 'px'
     })
 })
