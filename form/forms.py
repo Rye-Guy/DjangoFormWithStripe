@@ -1,13 +1,11 @@
 from django import forms
-from .models import CustomerModelForm
-from contextlib import suppress
+from .models import SalesFormData
 
-class CustomerModelFormClass(forms.ModelForm):
+class PaymentForm(forms.ModelForm):
+
     class Meta:
-        model = CustomerModelForm
-        fields = '__all__'#['company_name', 'contact_name']
-
-class PaymentForm(forms.Form):
+        model = SalesFormData
+        fields = ['company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'calgary_diet_request', 'edmonton_diet_request', 'winnipeg_diet_request']
 
     CITY_CHOICES = (
         ('Toronto', 'Toronto'),
@@ -16,28 +14,27 @@ class PaymentForm(forms.Form):
         ('Edmonton', 'Edmonton')
     )
     TORONTO_DATES = (
-        ('date1', 'April 24th, 2018'),
-        ('date2', 'September 17th, 2019')
+        ('04-24-2019', 'April 24th, 2018'),
+        ('09-17-2019', 'September 17th, 2019')
     )
 
     CALGARY_DATES = (
-        ('date1', 'March 12th, 2019'),
-        ('date2', 'June 26th, 2019'),
-        ('date3', 'October 22nd, 2019')
+        ('03-12-2019', 'March 12th, 2019'),
+        ('06-26-2019', 'June 26th, 2019'),
+        ('10-22-2019', 'October 22nd, 2019')
     )
 
     EDMONTON_DATES = (
-        ('date1', 'January 29th, 2019'),
-        ('date2', 'May 28th, 2019'),
-        ('date3', 'August 13th, 2019'),
-        ('date3', 'November 19th, 2019')
+        ('01-29-2019', 'January 29th, 2019'),
+        ('05-28-2019', 'May 28th, 2019'),
+        ('08-13-2019', 'August 13th, 2019'),
+        ('11-19-2019', 'November 19th, 2019')
     )
     WINNIPEG_DATES = (
-        ('date1', 'July 10th, 2019'),
-        ('date2', 'April 2nd, 2019'),
-        ('date3', 'July 23rd, 2019')
+        ('04-02-2019', 'April 2nd, 2019'),
+        ('07-10-2019', 'July 10th, 2019'),
+        ('07-23-2019', 'July 23rd, 2019')
     )
-
 
     TORONTO_BOOTH_OPTIONS = (
         ('2995', 'Platinum - $2995'),
@@ -66,13 +63,13 @@ class PaymentForm(forms.Form):
     )
 
     CALGARY_FAIR_OPTIONS = (
-        ('option1', 'Access to Electricity'),
-        ('option2', 'Internet Access')
+        ('Electricity', 'Access to Electricity'),
+        ('Internet', 'Internet Access')
     )
 
     EDMONTON_FAIR_OPTIONS = (
-        ('option1', 'Access to Electricity'),
-        ('option2s', 'Internet Access')
+        ('Electricity', 'Access to Electricity'),
+        ('Internet', 'Internet Access')
     )
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
@@ -117,6 +114,5 @@ class PaymentForm(forms.Form):
             clean_city(self, 'calgary')
         if 'Edmonton' in cities:
             clean_city(self, 'edmonton')
-
 
 

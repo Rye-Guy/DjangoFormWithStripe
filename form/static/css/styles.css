@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/icon?family=Roboto");
 
+*{
+    transition: ease all .5s;
+    font-family: 'Roboto', sans-serif;
+}
+
 .content{
     max-width: 800px;
     margin: 0 auto;
@@ -34,7 +39,6 @@ h1{
 }
 
 h1, h2, h3, h4, p, li{
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;    
 }
 h2{
@@ -49,73 +53,61 @@ li{
     padding:0;
 }
 
-#TorontoFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    /*constrained width*/
-    width: 564px;
-}
-
-#CalgaryFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-#EdmontonFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-#WinnipegFairOptionsContainer{
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    /*constrained width*/
-    width: 484px;
-}
-
 .booth-options{
     margin-top: -20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .date-options{
-    margin-top: -20px; 
-}
-/*#CalgaryFairOptionsContainer .date-options{
-    margin-bottom: 50px;
-}
-#EdmontonFairOptionsContainer .date-options{
-    margin-bottom: 50px;
-}*/
-/*.venue-options{
-    margin-top: -20px; 
-}*/
-/*li tag styling*/
-.booth-options li{
-    margin-left: -40px;
-}
-.date-options li{
-    margin-left: -40px;
-}
-.venue-options li{
-    margin-left: -40px;
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
+#id_toronto_dates > li > label{
+    max-width: 390px
+}
+
+.row{
+    width: 100%
+}
+
+li > label > input + br + label{
+   margin-left: 12px;
+}
+
+/*li tag styling*/
+.booth-options li{
+    display: flex;
+    margin: 0 auto;
+}
+
+.date-options li{
+    display: flex;
+    margin: 0 auto;
+}
+
+ul > li > label{
+    display: flex;
+    max-width: 580px;
+    justify-content: flex-end;
+    align-items: baseline;
+    margin-right: 32px;
+}
 
 
 /*submit button styles*/
 input[type='submit']{
     background:#2196F3;
     color: #fff;
-    width: 100px;
-    height: 32px;
+    width: 132px;
+    height: 46px;
     border-color: #2196F3;
+    position: fixed;
+    right: 80px;
+    bottom: 80px;
 }
 input[type='submit']:hover{
     background:#fff;
@@ -145,7 +137,6 @@ input[type='checkbox']:checked {
     width:18px;
     height:18px;
     border-radius:2px;
-    outline:0;
     cursor:pointer;
     transition:all 150ms ease-out;
   }
@@ -190,7 +181,6 @@ input[type='checkbox']:checked {
     width:18px;
     height:18px;
     border-radius:8px;
-    outline:0;
     cursor:pointer;
     transition:all 150ms ease-out;
   }
@@ -217,3 +207,144 @@ input[type='checkbox']:checked {
     margin-top:-9px;
     margin-left:-9px;
   }
+
+.hide-me{
+    display: none;
+    opacity: 0
+}
+
+#billingInfoContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 417px;
+    /* left: 0; */
+    position: absolute;
+    left: -86px;
+    top: 201px;
+}
+}
+
+.billingInfoLabels{
+    color: black;
+    position: relative;
+    z-index: 1;
+    padding-top: 32px;
+    width: 300px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+
+
+.billingInfoLabels:last-child{
+    padding-bottom: 48px
+}
+
+
+.billingInfoLabels input{
+    background-color: #EAEAEA;
+    border-bottom: 1px solid;
+    position: fixed;
+    z-index: -1;
+    left: -2px;
+    border: none;
+    height: 36px;
+    width: 380px;
+    padding-left: 38px;
+}
+
+.helperText{
+    position: relative;
+    top: 0px
+}
+
+
+.billingInfoLabels input:focus{
+    border-bottom: 2px solid;
+    border-radius: 8px;
+    background-color: #efefef;
+}
+
+input:focus + .helperText{
+    text-decoration: underline;
+    font-weight: bold;
+    transition: ease all .2s;
+}
+
+
+input:empty + span{
+    top: 10px;
+}
+
+input:focus + span{
+    top: -24px
+}
+
+.helperTextRemain{
+    position: relative;
+    top: -24px !important;
+}
+
+.select-cities-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.select-cities-row > label{
+    display: flex;
+    align-items: center;
+}
+.select-cities-row > label > input{
+    margin-right: 6px;
+}
+
+.fair-options-container{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    left: 80px;
+    height: 300px;
+    align-items: center;
+}
+
+.booth-options-select{
+    display: flex;
+    padding: 0;
+}
+
+.shopping-cart-container{
+    display: none;
+}
+
+.dates-select{
+    display: flex;
+    padding: 0;
+}
+
+.venue-options{
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.fair-options{
+    display: flex;
+    padding: 0;
+}
+
+#billingInfoTrigger{
+    left: 80px;
+}
+
+
+.billingInfoLabels{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+.billingInfoLabels:first-child{
+    margin-top: 32px;
+}
