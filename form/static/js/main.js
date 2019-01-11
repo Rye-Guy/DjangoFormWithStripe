@@ -13,22 +13,59 @@ function parsePositioning(elem){
     return num
 }
 
+
 checkboxes.forEach((elem) =>{
+    console.log(elem.checked)
     elem.addEventListener('click', ()=>{
         targetElem = elem.parentNode.parentNode.childNodes[3]
         currentHeight = 0
         changedHeight = 0
         topPositioning = 0
+        numOfCheckedBoxes = 0
+        checkboxes.forEach((checkbox)=>{
+            if(checkbox.checked){
+               numOfCheckedBoxes++
+            }
+         })
         if(elem.checked == false){
+
+                console.log(numOfCheckedBoxes)
+                if(numOfCheckedBoxes == 1){
+                    console.log('hello')
+                    fairContainers.forEach((elem)=>{
+                        if(parsePositioning(elem) > 300){
+                            elem.style.top = 300 + 'px'
+                    }
+                })
+                }else if(numOfCheckedBoxes == 2){
+                    fairContainers.forEach((elem)=>{
+                        theNum = parsePositioning(elem)
+                        if(theNum == 600){
+                            elem.style.top = 300 + 'px'
+                        }else if(theNum == 900){
+                            elem.style.top = 600 + 'px'
+                        }else if(theNum == 1200){
+                            elem.style.top = 600 + 'px'
+                        }
+                    })
+                }else if(numOfCheckedBoxes >= 3){
+                   fairContainers.forEach((elem)=>{
+                        theNum = parsePositioning(elem)
+                        console.log(theNum)
+                        if(theNum == 300){
+                            return
+                        }else if(theNum == 600){
+                            elem.style.top = 300 + 'px'
+                        }else if(theNum == 900){
+                            elem.style.top = 600 + 'px'
+                        }else if(theNum == 1200){
+                            elem.style.top = 900 + 'px'
+                        }
+                })
+                }
             value = targetElem.style.top
             theTakeAway = parseInt(value.substring(0, value.indexOf('p'))) - 300
             console.log(theTakeAway)
-                fairContainers.forEach((elem)=>{
-                    if(parsePositioning(elem) > 300){
-                        elem.style.top = parsePositioning(elem) - 260 + 'px'
-                    }
-                })
-
         }else{
             fairContainers.forEach((elem) =>{
                 topHeight = elem.style.top
@@ -41,9 +78,7 @@ checkboxes.forEach((elem) =>{
                 currentHeight +=  elem.offsetHeight
             })
         }
-        targetElem.previousSibling
         targetElem.style.top = currentHeight + 300 + 'px'
-
         checked_box_id = elem.getAttribute('id')
         clicked_box_id = document.getElementById(checked_box_id)
         checked_box_name = elem.getAttribute('value')
