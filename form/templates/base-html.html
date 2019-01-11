@@ -159,8 +159,7 @@
     {% if form.errors %}
       {{form.errors.select_cities}}
     {% endif %}
-    <div id="fair_dates_and_options_container">
-      <div id="billingInfoContainer">
+    <div id="billingInfoContainer" class="animated fadeOutLeft">
         <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
         <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
         <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
@@ -174,12 +173,10 @@
         <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
         <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
         <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
-      </div>
     </div>
-
+    <input id="billingInfoTrigger" type="submit" value="Fill Billing Info">
     <input type="hidden" id="priceInput" name="price" value="">
-    <input type="submit" value="Submit!">
-
+    <input id="formSubmit" type="submit" value="Submit!">
   </form>
   <form>
 

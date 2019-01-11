@@ -14,7 +14,6 @@ function parsePositioning(elem){
 }
 
 
-
 checkboxes.forEach((elem) =>{
     console.log(elem.checked)
     elem.addEventListener('click', ()=>{
@@ -29,6 +28,7 @@ checkboxes.forEach((elem) =>{
             }
          })
         if(elem.checked == false){
+
                 console.log(numOfCheckedBoxes)
                 if(numOfCheckedBoxes == 1){
                     console.log('hello')
@@ -37,8 +37,18 @@ checkboxes.forEach((elem) =>{
                             elem.style.top = 300 + 'px'
                     }
                 })
-                }else if(numOfCheckedBoxes >= 2){
-                   console.log('hello again')
+                }else if(numOfCheckedBoxes == 2){
+                    fairContainers.forEach((elem)=>{
+                        theNum = parsePositioning(elem)
+                        if(theNum == 600){
+                            elem.style.top = 300 + 'px'
+                        }else if(theNum == 900){
+                            elem.style.top = 600 + 'px'
+                        }else if(theNum == 1200){
+                            elem.style.top = 600 + 'px'
+                        }
+                    })
+                }else if(numOfCheckedBoxes >= 3){
                    fairContainers.forEach((elem)=>{
                         theNum = parsePositioning(elem)
                         console.log(theNum)
@@ -53,7 +63,6 @@ checkboxes.forEach((elem) =>{
                         }
                 })
                 }
-
             value = targetElem.style.top
             theTakeAway = parseInt(value.substring(0, value.indexOf('p'))) - 300
             console.log(theTakeAway)
@@ -70,7 +79,6 @@ checkboxes.forEach((elem) =>{
             })
         }
         targetElem.style.top = currentHeight + 300 + 'px'
-
         checked_box_id = elem.getAttribute('id')
         clicked_box_id = document.getElementById(checked_box_id)
         checked_box_name = elem.getAttribute('value')

@@ -214,8 +214,15 @@ input[type='checkbox']:checked {
 }
 
 #billingInfoContainer{
-    display: none;
+    display: flex;
     flex-direction: column;
+    background-color: #fff;
+    width: 417px;
+    /* left: 0; */
+    position: absolute;
+    left: -86px;
+    top: 201px;
+}
 }
 
 .billingInfoLabels{
@@ -224,6 +231,8 @@ input[type='checkbox']:checked {
     z-index: 1;
     padding-top: 32px;
     width: 300px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 
@@ -242,7 +251,7 @@ input[type='checkbox']:checked {
     border: none;
     height: 36px;
     width: 380px;
-
+    padding-left: 38px;
 }
 
 .helperText{
@@ -324,4 +333,18 @@ input:focus + span{
 .fair-options{
     display: flex;
     padding: 0;
+}
+
+#billingInfoTrigger{
+    left: 80px;
+}
+
+
+.billingInfoLabels{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+.billingInfoLabels:first-child{
+    margin-top: 32px;
 }
