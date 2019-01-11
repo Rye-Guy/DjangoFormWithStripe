@@ -296,6 +296,8 @@ input:focus + span{
     display: flex;
     flex-wrap: wrap;
     left: 80px;
+    height: 300px;
+    align-items: center;
 }
 
 .booth-options-select{
