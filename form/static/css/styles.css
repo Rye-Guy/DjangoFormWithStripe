@@ -7,13 +7,13 @@
 }
 
 .content{
-    max-width: 800px;
-    margin: 0 auto;
+    width: 60%;
+    max-width: 1200px;
+    min-width: 300px;
     justify-content: center;
-    position: relative;
     min-height: 1000px;
     z-index: 100;
-    margin-top: -112px;
+    margin: -112px auto 0 auto;
     background-color: #fff;
     padding: 90px;
 
@@ -220,8 +220,8 @@ input[type='checkbox']:checked {
     width: 417px;
     /* left: 0; */
     position: absolute;
-    left: -86px;
-    top: 201px;
+    left: 0;
+    top: 620px;
 }
 }
 
