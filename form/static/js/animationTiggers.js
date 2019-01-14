@@ -29,6 +29,7 @@ formSubmit.addEventListener('click', (ev)=>{
 
 billingInfoBtn.addEventListener('click', (ev)=>{
     ev.preventDefault()
+    console.log(ev)
     if(billingInfoContainer.className == 'animated fadeOutLeft'){
         billingInfoContainer.className = 'animated fadeInLeft'
         billingInfoBtn.value = 'Hide Billing Info'
