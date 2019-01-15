@@ -38,6 +38,7 @@ checkboxes.forEach((elem) =>{
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked){
                 calgaryContainer = document.getElementById('CalgaryFairOptionsContainer')
                 calgaryContainer.style.display = 'flex'
+                calgaryContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked == false){
                 calgaryContainer.style.display = 'none'
                 calgaryContainer.style.top = 0 + 'px'
@@ -53,6 +54,7 @@ checkboxes.forEach((elem) =>{
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked){
                 edmontonContainer = document.getElementById('EdmontonFairOptionsContainer')
                 edmontonContainer.style.display = 'flex'
+                edmontonContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked  == false){
                 edmontonContainer.style.display = 'none'
                 edmontonContainer.style.top = 0 + 'px'
@@ -67,6 +69,7 @@ checkboxes.forEach((elem) =>{
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked){
                 winnipegContainer = document.getElementById('WinnipegFairOptionsContainer')
                 winnipegContainer.style.display = 'flex'
+                winnipegContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked  == false){
                 winnipegContainer.style.display = 'none'
                 winnipegContainer.style.top = 0 + 'px'
@@ -94,11 +97,13 @@ checkboxes.forEach((elem) =>{
         })
         fairContainers.forEach((elem)=>{
           theNum = parsePositioning(elem)
+          console.log(elem.style.height)
+          console.log(theNum)
              if(theNum === 300){
                 firstSpotTaken = true
-             }else if(theNum === 600){
+             }else if(theNum === 650){
                 secondSpotTaken = true
-            }else if(theNum === 900){
+            }else if(theNum === 950){
                 thirdSpotTaken = true
             }
          })
@@ -116,10 +121,10 @@ checkboxes.forEach((elem) =>{
                    theNum = parsePositioning(elem)
                    if(firstSpotTaken == true && secondSpotTaken == true){
                       return
-                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 600){
+                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 650){
                         elem.style.top = 300 + 'px'
                    }else if(firstSpotTaken == true && secondSpotTaken == false && theNum != 300){
-                        elem.style.top = 600 + 'px'
+                        elem.style.top = 650 + 'px'
                    }
                 })
             }
@@ -129,15 +134,15 @@ checkboxes.forEach((elem) =>{
                         if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == true){
                             return
                         }else if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == false){
-                            if(theNum == 1200){
-                                elem.style.top = 900 + 'px'
+                            if(theNum == 1250){
+                                elem.style.top = 950 + 'px'
                             }
                         }else if(firstSpotTaken == true && secondSpotTaken == false && thirdSpotTaken == true){
-                            if(theNum == 1200){
-                                elem.style.top = 600 + 'px'
+                            if(theNum == 1250){
+                                elem.style.top = 650 + 'px'
                             }
                         }else if(firstSpotTaken == false && secondSpotTaken == true && thirdSpotTaken == true){
-                            if(theNum == 1200){
+                            if(theNum == 1250){
                                 elem.style.top = 300 + 'px'
                             }
                         }
@@ -145,11 +150,10 @@ checkboxes.forEach((elem) =>{
             }
             value = targetElem.style.top
             theTakeAway = parseInt(value.substring(0, value.indexOf('p'))) - 300
-            console.log(theTakeAway)
         }else{
             fairContainers.forEach((elem) =>{
+                console.log(elem.style.height)
                 topHeight = elem.style.top
-                console.log(topHeight)
                 if(topHeight.length > 0){
                     value = parseInt(topHeight.substring(0, topHeight.indexOf('p')))
                 }else{
@@ -157,9 +161,11 @@ checkboxes.forEach((elem) =>{
                 }
                 topPositioning += value
                 currentHeight +=  elem.offsetHeight
-                console.log(topPositioning)
-                console.log(currentHeight)
-                })
+        })
+        console.log(currentHeight)
+           if(currentHeight > 350){
+                currentHeight += 50
+           }
             targetElem.style.top = currentHeight + 'px'
         }
     })

@@ -64,6 +64,7 @@ li{
     margin-top: -20px;
     display: flex;
     justify-content: space-evenly;
+
 }
 
 #id_toronto_dates > li > label{
@@ -86,13 +87,10 @@ li > label > input + br + label{
 
 .date-options li{
     display: flex;
-    margin: 0 auto;
 }
 
 ul > li > label{
     display: flex;
-    max-width: 580px;
-    justify-content: flex-end;
     align-items: baseline;
     margin-right: 32px;
 }
@@ -321,6 +319,7 @@ input:focus + span{
 .dates-select{
     display: flex;
     padding: 0;
+    flex-wrap: wrap;
 }
 
 .venue-options{
