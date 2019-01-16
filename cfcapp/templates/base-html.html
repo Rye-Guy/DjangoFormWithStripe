@@ -1,0 +1,193 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Hello World</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
+  <link type="text/css" href='{% static "css/animate-min.css" %}' rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+ </head>
+
+<body>
+<div class="header-img"><img src='{% static "images/CF_Banner_May.jpg" %}'></div>
+<!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+   {% if form.errors %}
+      {{form.errors}}
+    {% endif %}
+<div class="content">
+  <h1>Purchase a Booth</h1>
+  <form action="/" method="POST">
+    {% csrf_token %}
+    <h2>Fair Locations</h2>
+    <div class="select-cities-row">
+      {% for text, field in form.select_cities.field.choices %}
+          {% if text == 'Toronto' %}
+          <div class="toronto-container">
+            <label for="id_select_cities_0"><input type="checkbox" name="select_cities" value="Toronto" id="id_select_cities_0">Toronto</label>
+            <div class="fair-options-container" id="TorontoFairOptionsContainer" style="display: none;">
+              <div class="row">
+                  <h3>Toronto Booth Options</h3>
+                    {% if form.errors.toronto_booth_options %}
+                        {{form.errors.toronto_booth_options}}
+                    {% endif %}
+                  <div class="booth-options">
+                    {{form.toronto_booth_options}}
+                  </div>
+                </div>
+                <div class="row">
+                  <h3>Toronto Fair Dates & Options</h3>
+                    {% if form.errors.toronto_dates %}
+                      {{form.errors.toronto_dates}}
+                    {% endif %}
+                  <div class="date-options">{{form.toronto_dates}}</div>
+                </div>
+            </div>
+          </div>
+          {% endif %}
+          {% if text == 'Winnipeg' %}
+          <div class="winnipeg-container">
+            <label for="id_select_cities_1"><input type="checkbox" name="select_cities" value="Winnipeg" id="id_select_cities_1">Winnipeg</label>
+            <div class="fair-options-container" id="WinnipegFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Winnipeg Booth Options</h3>
+                <div class="booth-options">{{form.winnipeg_booth_options}}</div>
+              </div>
+              <div class="row">
+                <h3>Winnipeg Fair Dates</h3>
+                  {% if form.errors.winnipeg_dates %}
+                    {{form.errors.winnipeg_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.winnipeg_dates}}</div>
+                  {% if form.errors.winnipeg_booth_options %}
+                    {{form.errors.winnipeg_booth_options}}
+                  {% endif %}
+                <div class="row">
+                  <h3>Venue Options</h3>
+                    <div class="venue-options">
+                        <label>Diet Request:{{form.winnipeg_diet_request}}</label>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% if text == 'Calgary' %}
+          <div class="calgary-container">
+            <label for="id_select_cities_2"><input type="checkbox" name="select_cities" value="Calgary" id="id_select_cities_2">Calgary</label>
+            <div class="fair-options-container" id="CalgaryFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Calgary Booth Options</h3>
+                <div class="booth-options">{{form.calgary_booth_options}}</div>
+                  {% if form.errors.calgary_booth_options %}
+                    {{form.errors.calgary_booth_options}}
+                  {% endif %}
+              </div>
+              <div class="row">
+                <h3>Calgary Fair Dates</h3>
+                  {% if form.errors.calgary_dates %}
+                    {{form.errors.calgary_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.calgary_dates}}</div>
+              </div>
+              <div class="row">
+                <h3>Venue Options</h3>
+                <div class="venue-options">
+                    {{form.calgary_options}}
+                     <label>Diet Request:{{form.calgary_diet_request}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% if text == 'Edmonton' %}
+          <div class="edmonton-container">
+            <label for="id_select_cities_3"><input type="checkbox" name="select_cities" value="Edmonton" id="id_select_cities_3">Edmonton</label>
+            <div class="fair-options-container" id="EdmontonFairOptionsContainer" style="display: none;">
+              <div class="row">
+                <h3>Edmonton Booth Options</h3>
+                  {% if form.errors.edmonton_booth_options %}
+                    {{form.errors.edmonton_booth_options}}
+                  {% endif %}
+                <div class="booth-options">{{form.edmonton_booth_options}}</div>
+              </div>
+              <div class="row">
+                <h3>Edmonton Fair Dates</h3>
+                  {% if form.errors.edmonton_dates %}
+                     {{form.errors.edmonton_dates}}
+                  {% endif %}
+                <div class="date-options">{{form.edmonton_dates}}</div>
+              </div>
+              <div class="row">
+                <h3>Venue Options</h3>
+                <div class="venue-options">
+                  {{form.edmonton_options}}
+                  <label>Diet Request:{{form.edmonton_diet_request}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+      {% endfor %}
+    </div>
+    {% if form.errors %}
+      {{form.errors.select_cities}}
+    {% endif %}
+    <div id="billingInfoContainer" class="animated fadeOutLeft">
+        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.secondary_address}}<span class="helperText">Secondary Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.city}}<span class="helperText">City:</span></label><br>
+        <label class="billingInfoLabels">{{form.province}}<span class="helperText">Province:</span></label><br>
+        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
+        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
+        <label class="billingInfoLabels">{{form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
+    </div>
+    <input id="billingInfoTrigger" type="submit" value="Fill Billing Info">
+    <input type="hidden" id="priceInput" name="price" value="">
+    <input id="formSubmit" type="submit" value="Submit!">
+  </form>
+</div>
+<!-- Features and options not to be included in production -->
+  <!--<div class="shopping-cart-container">-->
+    <!--<h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>-->
+      <!--<ul id="shoppingCart">-->
+        <!--&lt;!&ndash;<li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li>&ndash;&gt;-->
+      <!--</ul>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<form action="/payment/" method="POST">-->
+  <!--{% csrf_token %}-->
+ <!--<script-->
+    <!--src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
+    <!--data-key="###"-->
+    <!--data-amount="overallTotalWithTax"-->
+    <!--data-name="Stripe.com"-->
+    <!--data-description="Widget"-->
+    <!--data-image="https://stripe.com/img/documentation/checkout/marketplace.png"-->
+    <!--data-locale="auto"-->
+    <!--data-zip-code="true">-->
+  <!--</script>-->
+<!--</form>-->
+
+</body>
+<script src='{% static "js/main.js" %}'></script>
+<script src='{% static "js/shoppingCart.js" %}'></script>
+<script src='{% static "js/animationTiggers.js" %}'></script>
+</html>
