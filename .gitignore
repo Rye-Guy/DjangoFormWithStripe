@@ -1,3 +1,5 @@
 venv/
 form/
 .idea/
+core/__pycache__/
+core/__init__.py
