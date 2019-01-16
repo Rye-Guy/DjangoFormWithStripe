@@ -1,5 +1,6 @@
 venv/
-form/
 .idea/
-core/__pycache__/
+core/
 core/__init__.py
+cfcapp/__pycache__/
+cfcapp/migrations/

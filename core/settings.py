@@ -11,21 +11,19 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+from .__init__ import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm#=^9pi0f-lm_v_zbki)$62$%ht1w^b#*fq%bzk$gq1+e17jz+'
+    ###Guess where I am?###
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['10.100.100.82']
 
 
 # Application definition
@@ -38,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'import_export',
-    'form'
+    'cfcapp'
 ]
 
 MIDDLEWARE = [
@@ -117,9 +115,3 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_URL = '/static/'
-
-
-STRIPE_SECRET_KEY = 'sk_test_bYfxBI6vsLYZOKOSfJj8wtr1'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_a7U192xASjxwJjzWoBEJtXEg'

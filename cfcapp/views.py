@@ -5,15 +5,13 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 
-from form.forms import PaymentForm
-from form.models import SalesFormData
-import stripe
+from cfcapp.forms import PaymentForm
+from cfcapp.models import SalesFormData
 
 class IndexPageView(TemplateView):
     template_name = 'base-html.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
-    stripeApiKey = settings.STRIPE_SECRET_KEY
 
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)
@@ -183,13 +181,7 @@ class IndexPageView(TemplateView):
                 )
             m.save()
 
-            # stripe.Charge.create(
-            #     amount=price,
-            #     currency='cad',
-            #     description='Django stripe charge',
-            #     source=request.POST['stripeToken']
-            # )
             return HttpResponseRedirect('/')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'cfcapp': form})
 
