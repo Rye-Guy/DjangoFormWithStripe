@@ -65,13 +65,6 @@ li{
     flex-wrap: wrap;
 }
 
-.date-options{
-    margin-top: -20px;
-    display: flex;
-    justify-content: space-evenly;
-
-}
-
 #id_toronto_dates > li > label{
     max-width: 390px
 }
@@ -310,6 +303,7 @@ input:focus + span{
     left: 80px;
     height: 300px;
     align-items: center;
+    width: 100%;
 }
 
 .booth-options-select{
@@ -321,11 +315,6 @@ input:focus + span{
     display: none;
 }
 
-.dates-select{
-    display: flex;
-    padding: 0;
-    flex-wrap: wrap;
-}
 
 .venue-options{
     margin-top: -20px;

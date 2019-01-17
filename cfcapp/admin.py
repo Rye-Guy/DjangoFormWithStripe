@@ -42,17 +42,17 @@ class MyModelAdmin(admin.ModelAdmin):
                 ('Calgary Fairs', {
                     'description': 'Calgary Booking Details',
                     'classes': ('collapse',),
-                    'fields': ('calgary_dates', 'calgary_date_1', 'calgary_date_2', 'calgary_date_3', 'calgary_booth_options', 'calgary_additional_booth_option_1', 'calgary_additional_booth_option_2','calgary_additional_booth_option_3', 'calgary_additional_lunch_option_1', 'calgary_additional_lunch_option_2','calgary_additional_lunch_option_3','calgary_options', 'calgary_diet_request', 'calgary_venue_options')
+                    'fields': ('calgary_dates', 'calgary_date_1', 'calgary_date_2', 'calgary_date_3', 'calgary_booth_options', 'calgary_additional_booth_option_1', 'calgary_additional_booth_option_2','calgary_additional_booth_option_3', 'calgary_additional_lunch_option_1', 'calgary_additional_lunch_option_2','calgary_additional_lunch_option_3','calgary_options', 'calgary_diet_request_1', 'calgary_diet_request_2', 'calgary_diet_request_3', 'calgary_venue_options')
                 }),
                 ('Edmonton Fairs', {
                     'description': 'Edmonton Booking Details',
                     'classes': ('collapse',),
-                    'fields': ('edmonton_dates', 'edmonton_date_1', 'edmonton_date_2', 'edmonton_date_3','edmonton_date_4', 'edmonton_booth_options', 'edmonton_additional_booth_option_1', 'edmonton_additional_booth_option_2','edmonton_additional_booth_option_3','edmonton_additional_booth_option_4', 'edmonton_additional_lunch_option_1', 'edmonton_additional_lunch_option_2','edmonton_additional_lunch_option_3','edmonton_additional_lunch_option_4','edmonton_additional_breakfast_option_1','edmonton_additional_breakfast_option_2','edmonton_additional_breakfast_option_3','edmonton_additional_breakfast_option_4', 'edmonton_diet_request', 'edmonton_venue_options')
+                    'fields': ('edmonton_dates', 'edmonton_date_1', 'edmonton_date_2', 'edmonton_date_3','edmonton_date_4', 'edmonton_booth_options', 'edmonton_additional_booth_option_1', 'edmonton_additional_booth_option_2','edmonton_additional_booth_option_3','edmonton_additional_booth_option_4', 'edmonton_additional_lunch_option_1', 'edmonton_additional_lunch_option_2','edmonton_additional_lunch_option_3','edmonton_additional_lunch_option_4','edmonton_additional_breakfast_option_1','edmonton_additional_breakfast_option_2','edmonton_additional_breakfast_option_3','edmonton_additional_breakfast_option_4', 'edmonton_diet_request_1', 'edmonton_diet_request_2','edmonton_diet_request_3','edmonton_diet_request_4','edmonton_venue_options')
                 }),
                 ('Winnipeg Fairs', {
                     'description': 'Calgary Booking Details',
                     'classes': ('collapse',),
-                    'fields': ('winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options','winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2','winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1','winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request')
+                    'fields': ('winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options','winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2','winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1','winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request_1', 'winnipeg_diet_request_2', 'winnipeg_diet_request_3')
                 })
 
 

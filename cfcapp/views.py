@@ -27,6 +27,9 @@ class IndexPageView(TemplateView):
             contact_name = request.POST.get('contact_name', '')
             address = request.POST.get('address', '')
             total_spent = request.POST.get('price', '')
+            if total_spent == '':
+                total_spent = 0
+            
             secondary_address = request.POST.get('secondary_address', '')
             city = request.POST.get('city', '')
             province = request.POST.get('province', '')
@@ -67,50 +70,60 @@ class IndexPageView(TemplateView):
 
             check_incoming_fair_dates(toronto_dates, torontoDatesArray, torontoList)
             toronto_booth_options = request.POST.get('toronto_booth_options', '')
-            toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto April 24th, 2018', '-')
-            toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto September 17th, 2019', '-')
+            toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto_April 24th, 2018', '-')
+            toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto_September 17th, 2019', '-')
             calgary_dates = request.POST.getlist('calgary_dates')
             check_incoming_fair_dates(calgary_dates, calgaryDatesArray, calgaryList)
             calgary_booth_options = request.POST.get('calgary_booth_options', '')
             calgary_options = request.POST.getlist('calgary_options')
             calgary_options_for_db = ', '.join(calgary_options)
-            calgary_additional_booth_option_1 = request.POST.get('additional_booth_option_calgary March 12th, 2019', '-')
-            calgary_additional_lunch_option_1 = request.POST.get('additional_lunch_option_calgary March 12th, 2019', '-')
-            calgary_additional_booth_option_2 = request.POST.get('additional_booth_option_calgary June 26th, 2019', '-')
-            calgary_additional_lunch_option_2 = request.POST.get('additional_booth_option_calgary June 26th, 2019', '-')
-            calgary_additional_booth_option_3 = request.POST.get('additional_booth_option_calgary October 22nd, 2019', '-')
-            calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary October 22nd, 2019', '-')
+            calgary_additional_booth_option_1 = request.POST.get('additional_booth_option_calgary_March 12th, 2019', '-')
+            calgary_additional_lunch_option_1 = request.POST.get('additional_lunch_option_calgary_March 12th, 2019', '-')
+            calgary_diet_request_1 = request.POST.get('diet_request_for_calgary_March 12th, 2019', '')
+            calgary_additional_booth_option_2 = request.POST.get('additional_booth_option_calgary_June 26th, 2019', '-')
+            calgary_additional_lunch_option_2 = request.POST.get('additional_booth_option_calgary_June 26th, 2019', '-')
+            calgary_diet_request_2 = request.POST.get('diet_request_for_calgary_June 26th, 2019', '')
+            calgary_additional_booth_option_3 = request.POST.get('additional_booth_option_calgary_October 22nd, 2019', '-')
+            calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary_October 22nd, 2019', '-')
+            calgary_diet_request_3 = request.POST.get('diet_request_for_calgary_October 22nd, 2019', '')
             calgary_venue_options = request.POST.getlist('calgary_options')
             calgary_venue_options_for_db = ', '.join(calgary_venue_options)
-            calgary_diet_request = request.POST.get('calgary_diet_request', '-')
             edmonton_dates = request.POST.getlist('edmonton_dates')
             check_incoming_fair_dates(edmonton_dates, edmontonDatesArray, edmontonList)
             edmonton_booth_options = request.POST.get('edmonton_booth_options', '')
-            edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton January 29th, 2019', '-')
-            edmonton_additional_lunch_option_1 = request.POST.get('additional_lunch_option_edmonton January 29th, 2019', '-')
-            edmonton_additional_breakfast_option_1 = request.POST.get('additional_breakfast_option_edmonton January 29th, 2019', '-')
-            edmonton_additional_booth_option_2 = request.POST.get('additional_booth_option_edmonton May 28th, 2019', '-')
-            edmonton_additional_lunch_option_2 = request.POST.get('additional_lunch_option_edmonton May 28th, 2019', '-')
-            edmonton_additional_breakfast_option_2 = request.POST.get('additional_breakfast_option_edmonton May 28th, 2019', '-')
-            edmonton_additional_booth_option_3 = request.POST.get('additional_booth_option_edmonton August 13th, 2019', '-')
-            edmonton_additional_lunch_option_3 = request.POST.get('additional_lunch_option_edmonton August 13th, 2019', '-')
-            edmonton_additional_breakfast_option_3 = request.POST.get('additional_breakfast_option_edmonton August 13th, 2019', '-')
-            edmonton_additional_booth_option_4 = request.POST.get('additional_booth_option_edmonton November 19th, 2019', '-')
-            edmonton_additional_lunch_option_4 = request.POST.get('additional_lunch_option_edmonton January 29th, 2019', '-')
-            edmonton_additional_breakfast_option_4 = request.POST.get('additional_breakfast_option_edmonton January 29th, 2019', '-')
+            edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton_January 29th, 2019', '-')
+            edmonton_additional_lunch_option_1 = request.POST.get('additional_lunch_option_edmonton_January 29th, 2019', '-')
+            edmonton_additional_breakfast_option_1 = request.POST.get('additional_breakfast_option_edmonton_January 29th, 2019', '-')
+            edmonton_diet_request_1 = request.POST.get('diet_request_for_edmonton_January 29th, 2019', '')
+            edmonton_additional_booth_option_2 = request.POST.get('additional_booth_option_edmonton_May 28th, 2019', '-')
+            edmonton_additional_lunch_option_2 = request.POST.get('additional_lunch_option_edmonton_May 28th, 2019', '-')
+            edmonton_additional_breakfast_option_2 = request.POST.get('diet_request_for_edmonton_May 28th, 2019', '-')
+            edmonton_diet_request_2 = request.POST.get('diet_request_for_edmonton_January 29th, 2019', '')
+            edmonton_additional_booth_option_3 = request.POST.get('additional_booth_option_edmonton_August 13th, 2019', '-')
+            edmonton_additional_lunch_option_3 = request.POST.get('additional_lunch_option_edmonton_August 13th, 2019', '-')
+            edmonton_additional_breakfast_option_3 = request.POST.get('additional_breakfast_option_edmonton_August 13th, 2019', '-')
+            edmonton_diet_request_3 = request.POST.get('diet_request_for_edmonton_August 13th, 2019', '')
+            edmonton_additional_booth_option_4 = request.POST.get('additional_booth_option_edmonton_November 19th, 2019', '-')
+            edmonton_additional_lunch_option_4 = request.POST.get('additional_lunch_option_edmonton_January 29th, 2019', '-')
+            edmonton_additional_breakfast_option_4 = request.POST.get('additional_breakfast_option_edmonton_January 29th, 2019', '-')
+            edmonton_diet_request_4 = request.POST.get('diet_request_for_edmonton_November 19th, 2019', '')
             edmonton_venue_options = request.POST.getlist('edmonton_options')
             edmonton_venue_options_for_db = ', '.join(edmonton_venue_options)
-            edmonton_diet_request = request.POST.get('edmonton_diet_request', '-')
+            
             winnipeg_dates = request.POST.getlist('winnipeg_dates')
             check_incoming_fair_dates(winnipeg_dates, winnipegDatesArray, winnipegList)
+            
             winnipeg_booth_options = request.POST.get('winnipeg_booth_options', '')
-            winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg July 10th, 2019', '-')
-            winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg July 10th, 2019', '-')
-            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg April 2nd, 2019', '-')
-            winnipeg_additional_lunch_option_2 = request.POST.get('additional_lunch_option_winnipeg April 2nd, 2019', '-')
-            winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg July 23rd, 2019', '-')
-            winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg July 23rd, 2019', '-')
-            winnipeg_diet_request = request.POST.get('winnipeg_diet_request', '-')
+            
+            winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg_April 2nd, 2019', '-')
+            winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg_April 2nd, 2019', '-')
+            winnipeg_diet_request_1 = request.POST.get('diet_request_for_winnipeg_April 2nd, 2019', '')
+            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg_July 10th, 2019', '-')
+            winnipeg_additional_lunch_option_2 = request.POST.get('additional_lunch_option_winnipeg_July 10th, 2019', '-')
+            winnipeg_diet_request_2 = request.POST.get('diet_request_for_winnipeg_July 10th, 2019', '')
+            winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg_July 23rd, 2019', '-')
+            winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg_July 23rd, 2019', '-')
+            winnipeg_diet_request_3 = request.POST.get('diet_request_for_winnipeg_July 23rd, 2019', '-')
             m = SalesFormData(
                 company_name=company_name,
                 contact_name=contact_name,
@@ -144,8 +157,10 @@ class IndexPageView(TemplateView):
                 calgary_additional_lunch_option_1=calgary_additional_lunch_option_1,
                 calgary_additional_lunch_option_2=calgary_additional_lunch_option_2,
                 calgary_additional_lunch_option_3=calgary_additional_lunch_option_3,
+                calgary_diet_request_1=calgary_diet_request_1,
+                calgary_diet_request_2=calgary_diet_request_2,
+                calgary_diet_request_3=calgary_diet_request_3,
                 calgary_venue_options=calgary_venue_options_for_db,
-                calgary_diet_request=calgary_diet_request,
                 edmonton_dates=edmonton_dates,
                 edmonton_date_1=edmontonList[0],
                 edmonton_date_2=edmontonList[1],
@@ -165,7 +180,10 @@ class IndexPageView(TemplateView):
                 edmonton_additional_breakfast_option_3=edmonton_additional_breakfast_option_3,
                 edmonton_additional_breakfast_option_4=edmonton_additional_breakfast_option_4,
                 edmonton_venue_options=edmonton_venue_options_for_db,
-                edmonton_diet_request=edmonton_diet_request,
+                edmonton_diet_request_1=edmonton_diet_request_1,
+                edmonton_diet_request_2=edmonton_diet_request_2,
+                edmonton_diet_request_3=edmonton_diet_request_3,
+                edmonton_diet_request_4=edmonton_diet_request_4,
                 winnipeg_dates=winnipeg_dates,
                 winnipeg_date_1=winnipegList[0],
                 winnipeg_date_2=winnipegList[1],
@@ -176,8 +194,9 @@ class IndexPageView(TemplateView):
                 winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3,
                 winnipeg_additional_lunch_option_1=winnipeg_additional_lunch_option_1,
                 winnipeg_additional_lunch_option_2=winnipeg_additional_lunch_option_2,
-                winnipeg_additional_lunch_option_3=winnipeg_additional_lunch_option_3,
-                winnipeg_diet_request=winnipeg_diet_request
+                winnipeg_additional_lunch_option_3=winnipeg_additional_lunch_option_3,winnipeg_diet_request_1=winnipeg_diet_request_1,
+                winnipeg_diet_request_2=winnipeg_diet_request_2,
+                winnipeg_diet_request_3=winnipeg_diet_request_3
                 )
             m.save()
 

@@ -1,4 +1,4 @@
-shoppingCart = document.getElementById('shoppingCart')
+//shoppingCart = document.getElementById('shoppingCart')
 
 //first value is dates selected, next is booth option value, next is number of booths, finally is additional options total if their is additonal options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
 torontoCart = [0, 0, 0, 0]
@@ -37,7 +37,10 @@ function dateCheck(input){
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
-
+             dietRequest = document.createElement('input')
+             dietRequest.setAttribute('type', 'text')
+             dietRequestLabel = document.createElement('label')
+             dietRequestLabel.innerText = 'Diet Request: '
              breakfastLabel = document.createElement('label')
              breakfastLabel.innerText = ' Extra Breakfast: '
              lunchLabel = document.createElement('label')
@@ -46,49 +49,54 @@ function dateCheck(input){
              selectLabel.innerText = ' Extra Booth: '
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto'+cartText)
+                additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_toronto_' + cartText
                 createOptions(additionalBoothOption)
                 selectLabel.append(additionalBoothOption)
                 input.parentElement.append(document.createElement('br'), selectLabel)
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_calgary'+cartText)
+                additionalBoothOption.setAttribute('name', 'additional_booth_option_calgary_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_calgary_' + cartText
                 createOptions(additionalBoothOption)
-                additionalLunchOption.setAttribute('name', 'additional_lunch_option_calgary'+cartText)
+                additionalLunchOption.setAttribute('name', 'additional_lunch_option_calgary_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_calgary_'+cartText
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
+                dietRequestLabel.append(dietRequest)
+                dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton'+cartText)
+                additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_edmonton_' + cartText
                 createOptions(additionalBoothOption)
-                additionalLunchOption.setAttribute('name', 'additional_lunch_option_edmonton'+cartText)
+                additionalLunchOption.setAttribute('name', 'additional_lunch_option_edmonton_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_edmonton_'+cartText
                 createOptions(additionalLunchOption)
-                additionalBreakfastOption.setAttribute('name', 'additional_breakfast_option_edmonton'+cartText)
+                additionalBreakfastOption.setAttribute('name', 'additional_breakfast_option_edmonton_'+cartText)
                 additionalBreakfastOption.id ='additional_breakfast_option_edmonton_'+cartText
                 createOptions(additionalBreakfastOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
                 breakfastLabel.append(additionalBreakfastOption)
-
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'))
+                dietRequestLabel.append(dietRequest)
+                dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
                 edmontonCart[0]++
              }else if(parentUl ==  'id_winnipeg_dates'){
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg'+cartText)
+                additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_winnipeg_' + cartText
                 createOptions(additionalBoothOption)
-                additionalLunchOption.setAttribute('name', 'additional_lunch_option_winnipeg'+cartText)
+                additionalLunchOption.setAttribute('name', 'additional_lunch_option_winnipeg_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_winnipeg_'+cartText
                 createOptions(additionalLunchOption)
                 selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
+                dietRequestLabel.append(dietRequest)
+                dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
+                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
@@ -124,11 +132,11 @@ allDatesCheckboxes.forEach((input)=>{
              }
         }
     })
-//    for(i = document.getElementById('shoppingCart').childNodes.length; i >= 9; i--){
-//        if(document.getElementById('shoppingCart').childNodes.length > 9){
-//            document.getElementById('shoppingCart').childNodes[i].remove()
-//        }
-//    }
+   for(i = document.getElementById('shoppingCart').childNodes.length; i >= 9; i--){
+       if(document.getElementById('shoppingCart').childNodes.length > 9){
+           document.getElementById('shoppingCart').childNodes[i].remove()
+       }
+   }
     dateCheck(input)
 })
 function boothOptionCheck(input){
