@@ -1,6 +1,11 @@
+*.sqlite3
+*.pyc
+*.log
+*.log.*
+
 venv/
 .idea/
-core/
 core/__init__.py
+core/__pycache__/
 cfcapp/__pycache__/
 cfcapp/migrations/
