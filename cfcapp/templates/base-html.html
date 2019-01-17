@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Hello World</title>
+  <title>Career Fair Canada | Register</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <link rel="icon" href='{% static "favicon/favicon.ico" %}'type="image/x-icon"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
   <link type="text/css" href='{% static "css/animate-min.css" %}' rel="stylesheet">
@@ -70,12 +71,6 @@
                   {% if form.errors.winnipeg_booth_options %}
                     {{form.errors.winnipeg_booth_options}}
                   {% endif %}
-                <div class="row">
-                  <h3>Venue Options</h3>
-                    <div class="venue-options">
-                        <label>Diet Request:{{form.winnipeg_diet_request}}</label>
-                    </div>
-                </div>
               </div>
             </div>
           </div>
@@ -102,7 +97,6 @@
                 <h3>Venue Options</h3>
                 <div class="venue-options">
                     {{form.calgary_options}}
-                     <label>Diet Request:{{form.calgary_diet_request}}</label>
                 </div>
               </div>
             </div>
@@ -130,7 +124,6 @@
                 <h3>Venue Options</h3>
                 <div class="venue-options">
                   {{form.edmonton_options}}
-                  <label>Diet Request:{{form.edmonton_diet_request}}</label>
                 </div>
               </div>
             </div>
@@ -164,12 +157,12 @@
 <!-- Features and options not to be included in production -->
   <!--<div class="shopping-cart-container">-->
     <!--<h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>-->
-      <!--<ul id="shoppingCart">-->
+      <ul id="shoppingCart" style='display: none;'>
         <!--&lt;!&ndash;<li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>&ndash;&gt;-->
         <!--&lt;!&ndash;<li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>&ndash;&gt;-->
         <!--&lt;!&ndash;<li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>&ndash;&gt;-->
         <!--&lt;!&ndash;<li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li>&ndash;&gt;-->
-      <!--</ul>-->
+      </ul>
   <!--</div>-->
 <!--</div>-->
 <!--<form action="/payment/" method="POST">-->

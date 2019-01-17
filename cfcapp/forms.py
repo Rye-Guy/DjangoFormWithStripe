@@ -5,8 +5,7 @@ class PaymentForm(forms.ModelForm):
 
     class Meta:
         model = SalesFormData
-        fields = ['company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'calgary_diet_request', 'edmonton_diet_request', 'winnipeg_diet_request']
-        help_texts = {'calgary_diet_request': "Allergy or Sensitivity", 'edmonton_diet_request': 'Allergy or Sensitivity', 'winnipeg_diet_request': 'Allergy or Sensitivity'}
+        fields = ['company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link']
 
     CITY_CHOICES = (
         ('Toronto', 'Toronto'),
