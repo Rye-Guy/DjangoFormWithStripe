@@ -1,6 +1,6 @@
 //shoppingCart = document.getElementById('shoppingCart')
 
-//first value is dates selected, next is booth option value, next is number of booths, finally is additional options total if their is additonal options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
+//first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additonal options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
 torontoCart = [0, 0, 0, 0]
 
 winnipegCart = [0, 0, 0, 0]
@@ -216,6 +216,7 @@ allAdditionalOptions.forEach((input)=>{
 })
 
 function additionalCartItems(cityName, fairDate, cart){
+
     //check for the existence of additional booths. If they do calculate the value and add it to our cart.
     if(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`)){
         additionalBooths = parseInt(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value) * 995
@@ -243,26 +244,32 @@ function calculateGrandTotal(){
        winnipegCart[3] = 0
        edmontonCart[3] = 0
        calgaryCart[3] = 0
-       additionalCartItems('toronto', ' April 24th, 2018', torontoCart)
-       additionalCartItems('toronto', ' September 17th, 2019', torontoCart)
-       additionalCartItems('winnipeg', ' July 10th, 2019', winnipegCart)
-       additionalCartItems('winnipeg', ' April 2nd, 2019', winnipegCart)
-       additionalCartItems('winnipeg', ' July 23rd, 2019', winnipegCart)
-       additionalCartItems('calgary', ' March 12th, 2019', calgaryCart)
-       additionalCartItems('calgary', ' June 26th, 2019', calgaryCart)
-       additionalCartItems('calgary', ' October 22nd, 2019', calgaryCart)
-       additionalCartItems('edmonton', ' January 29th, 2019', edmontonCart)
-       additionalCartItems('edmonton', ' May 28th, 2019', edmontonCart)
-       additionalCartItems('edmonton', ' August 13th, 2019', edmontonCart)
-       additionalCartItems('edmonton', ' November 19th, 2019', edmontonCart)
+       additionalCartItems('toronto', 'April 24th, 2018', torontoCart)
+       additionalCartItems('toronto', 'September 17th, 2019', torontoCart)
+       additionalCartItems('winnipeg', 'July 10th, 2019', winnipegCart)
+       additionalCartItems('winnipeg', 'April 2nd, 2019', winnipegCart)
+       additionalCartItems('winnipeg', 'July 23rd, 2019', winnipegCart)
+       additionalCartItems('calgary', 'March 12th, 2019', calgaryCart)
+       additionalCartItems('calgary', 'June 26th, 2019', calgaryCart)
+       additionalCartItems('calgary', 'October 22nd, 2019', calgaryCart)
+       additionalCartItems('edmonton', 'January 29th, 2019', edmontonCart)
+       additionalCartItems('edmonton', 'May 28th, 2019', edmontonCart)
+       additionalCartItems('edmonton', 'August 13th, 2019', edmontonCart)
+       additionalCartItems('edmonton', 'November 19th, 2019', edmontonCart)
        value1 = calculateTotal(torontoCart)
        value2 = calculateTotal(winnipegCart)
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
        grandTotal = value1 + value2 + value3 + value4
-       roughTaxCal = grandTotal * .13
-       overallTotalWithTax = grandTotal + roughTaxCal
-       document.getElementById('cart-total').innerText = overallTotalWithTax
+       typeOfTax = document.getElementById('id_province').value
+       console.log(typeOfTax)
+       parseInt(typeOfTax)
+       console.log(typeOfTax)
+       taxToCharge = grandTotal * typeOfTax
+       console.log(grandTotal)
+       console.log(taxToCharge)
+       overallTotalWithTax = grandTotal + taxToCharge
+    // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = overallTotalWithTax
        return overallTotalWithTax
 }

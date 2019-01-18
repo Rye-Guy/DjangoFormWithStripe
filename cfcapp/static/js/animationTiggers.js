@@ -25,6 +25,8 @@ formSubmit.addEventListener('click', (ev)=>{
         ev.preventDefault()
         billingInfoContainer.className = 'animated fadeInLeft'
     }
+    calculateGrandTotal()
+    console.log(calculateGrandTotal())
 })
 
 // billingInfoBtn.addEventListener('click', (ev)=>{
