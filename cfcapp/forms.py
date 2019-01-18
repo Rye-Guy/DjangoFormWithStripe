@@ -1,12 +1,32 @@
 from django import forms
+from django.forms import ChoiceField
 from .models import SalesFormData
 
 class PaymentForm(forms.ModelForm):
 
-    class Meta:
-        model = SalesFormData
-        fields = ['company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link']
+    CITY_CHOICES = (
+        ('Toronto', 'Toronto'),
+        ('Winnipeg', 'Winnipeg'),
+        ('Calgary', 'Calgary'),
+        ('Edmonton', 'Edmonton')
+    )
+    TORONTO_DATES = (
+        ('04-24-2019', 'April 24th, 2018'),
+        ('09-17-2019', 'September 17th, 2019')
+    )
 
+    CALGARY_DATES = (
+        ('03-12-2019', 'March 12th, 2019'),
+        ('06-26-2019', 'June 26th, 2019'),
+        ('10-22-2019', 'October 22nd, 2019')
+    )
+
+    EDMONTON_DATES = (
+        ('01-29-2019', 'January 29th, 2019'),
+        ('05-28-2019', 'May 28th, 2019'),
+        ('08-13-2019', 'August 13th, 2019'),
+        ('11-19-2019', 'November 19th, 2019')
+    )
     CITY_CHOICES = (
         ('Toronto', 'Toronto'),
         ('Winnipeg', 'Winnipeg'),
@@ -71,6 +91,31 @@ class PaymentForm(forms.ModelForm):
         ('Electricity', 'Access to Electricity'),
         ('Internet', 'Internet Access')
     )
+
+    class Meta:
+        PROVINCE_CHOICES = (
+            ('-', '-'),
+            (.05, 'Alberta'),
+            (.05, 'British Columbia'),
+            (.05, 'Manitoba'),
+            (.15, 'New Brunswick'),
+            (.15, 'Newfoundland and Labrador'),
+            (.15, 'Nova Scotia'),
+            (.13, 'Ontario'),
+            (.15, 'Prince Edward Island'),
+            (.05, 'Quebec'),
+            (.05, 'Saskatchewan'),
+            (.05, 'Saskatchewan'),
+            (.05, 'Saskatchewan'),
+        )
+        model = SalesFormData
+        
+        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link']
+        widgets = {
+            'province' : forms.Select(choices=PROVINCE_CHOICES)
+        }
+    
+
 
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
 

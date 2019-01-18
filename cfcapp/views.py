@@ -2,6 +2,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -14,8 +15,9 @@ class IndexPageView(TemplateView):
     form_class = PaymentForm
 
     def get_context_data(self, **kwargs):
-        context = super(IndexPageView, self).get_context_data(**kwargs)
-        context.update({'form': self.formPayment})
+    
+        context = super(IndexPageView, self).get_context_data(**kwargs)    
+        context.update({'form': self.formPayment, 'users': User.objects.all()})
         print(self.formPayment.fields['select_cities'].choices[0])
         return context
 
@@ -23,6 +25,12 @@ class IndexPageView(TemplateView):
         form = self.form_class(request.POST)
         print(request.POST)
         if form.is_valid():
+            sales_rep = request.POST.get('sales_rep', '')
+            if sales_rep == '':
+                sales_rep = User.objects.get(pk=1)
+            else: 
+                sales_rep = User.objects.get(pk=sales_rep)
+                
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
             address = request.POST.get('address', '')
@@ -32,7 +40,9 @@ class IndexPageView(TemplateView):
             
             secondary_address = request.POST.get('secondary_address', '')
             city = request.POST.get('city', '')
+
             province = request.POST.get('province', '')
+
             postal_code = request.POST.get('postal_code', '')
             contact_email = request.POST.get('contact_email', '')
             office_phone_number = request.POST.get('office_phone_number', '')
@@ -125,6 +135,7 @@ class IndexPageView(TemplateView):
             winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg_July 23rd, 2019', '-')
             winnipeg_diet_request_3 = request.POST.get('diet_request_for_winnipeg_July 23rd, 2019', '-')
             m = SalesFormData(
+                sales_rep=sales_rep,
                 company_name=company_name,
                 contact_name=contact_name,
                 total_spent=total_spent,
@@ -199,8 +210,5 @@ class IndexPageView(TemplateView):
                 winnipeg_diet_request_3=winnipeg_diet_request_3
                 )
             m.save()
-
             return HttpResponseRedirect('/')
-
-        return render(request, self.template_name, {'cfcapp': form})
-
+        return render(request, self.template_name, {'form': form})

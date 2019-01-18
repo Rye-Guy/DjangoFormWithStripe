@@ -21,14 +21,31 @@
 <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
-   {% if form.errors %}
-      {{form.errors}}
-    {% endif %}
 <div class="content">
   <h1>Purchase a Booth</h1>
   <form action="/" method="POST">
+    {% if request.user.is_superuser %}
+    <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
+    {% endif %}
     {% csrf_token %}
+    <h2>Billing Information</h2>
+    <div id="billingInfoContainer" class="">
+        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.secondary_address}}<span class="helperText">Secondary Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.city}}<span class="helperText">City:</span></label><br>
+        <label class="billingInfoLabels"><span class="helperText">Province: </span>{{form.province}}</label><br>
+        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
+        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
+        <label class="billingInfoLabels">{{form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
+        <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
+        <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
+    </div>
     <h2>Fair Locations</h2>
+  <div id='allFairsContainer'>
     <div class="select-cities-row">
       {% for text, field in form.select_cities.field.choices %}
           {% if text == 'Toronto' %}
@@ -131,10 +148,11 @@
           {% endif %}
       {% endfor %}
     </div>
+  </div>
     {% if form.errors %}
-      {{form.errors.select_cities}}
+      {{form.errors}}
     {% endif %}
-    <div id="billingInfoContainer" class="animated fadeOutLeft">
+    {% comment %} <div id="billingInfoContainer" class="animated fadeOutLeft">
         <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
         <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
         <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
@@ -148,15 +166,15 @@
         <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
         <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
         <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
-    </div>
-    <input id="billingInfoTrigger" type="submit" value="Fill Billing Info">
+    </div> {% endcomment %}
+    {% comment %} <input id="billingInfoTrigger" type="submit" value="Fill Billing Info"> {% endcomment %}
     <input type="hidden" id="priceInput" name="price" value="">
     <input id="formSubmit" type="submit" value="Submit!">
   </form>
 </div>
 <!-- Features and options not to be included in production -->
   <!--<div class="shopping-cart-container">-->
-    <!--<h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>-->
+    {% comment %} <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3> {% endcomment %}
       <ul id="shoppingCart" style='display: none;'>
         <!--&lt;!&ndash;<li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>&ndash;&gt;-->
         <!--&lt;!&ndash;<li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>&ndash;&gt;-->

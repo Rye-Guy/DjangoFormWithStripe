@@ -10,15 +10,17 @@ class SalesDataModelResource(import_export.resources.ModelResource):
 
 class MyModelAdmin(admin.ModelAdmin):
 
-    def get_queryset(self, request):
-        qs = super(MyModelAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return SalesFormData.objects.all()
-        if request.GET:
-            print(request.GET)
-        return SalesFormData.objects.filter(sales_rep=request.user)
-
     class SalesAdmin(import_export.admin.ImportExportModelAdmin):
+        
+        def get_queryset(self, request):
+            qs = super(MyModelAdmin.SalesAdmin, self).get_queryset(request)
+            print(request.user)
+            if request.user.is_superuser:
+                return SalesFormData.objects.all()
+            else:
+                return SalesFormData.objects.filter(sales_rep=request.user) 
+
+
         list_display = ['id', 'sales_rep', 'company_name', 'contact_email', 'office_phone_number', 'total_spent']
         search_fields = ['company_name', 'contact_email', 'office_phone_number']
         resource_class = SalesDataModelResource
@@ -27,7 +29,7 @@ class MyModelAdmin(admin.ModelAdmin):
             return(
                 (None, {
                     'description': 'Contact Info',
-                    'fields':   ('company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'select_cities')
+                    'fields':   ('sales_rep','company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'select_cities')
                 }),
                 ('Additional Info', {
                     'description': 'Additional Info',
@@ -54,8 +56,6 @@ class MyModelAdmin(admin.ModelAdmin):
                     'classes': ('collapse',),
                     'fields': ('winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options','winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2','winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1','winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request_1', 'winnipeg_diet_request_2', 'winnipeg_diet_request_3')
                 })
-
-
             )
 
         def export_csv(modeladmin, request, queryset):

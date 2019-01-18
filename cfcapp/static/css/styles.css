@@ -211,24 +211,19 @@ input[type='checkbox']:checked {
 
 #billingInfoContainer{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #fff;
-    width: 417px;
-    /* left: 0; */
-    position: absolute;
-    left: 0;
-    top: 620px;
-}
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
+
 .billingInfoLabels{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 24px;
     color: black;
-    position: relative;
-    z-index: 1;
-    padding-top: 32px;
     width: 300px;
-    margin-top: 32px;
-    margin-bottom: 32px;
 }
 
 
@@ -240,14 +235,9 @@ input[type='checkbox']:checked {
 
 .billingInfoLabels input{
     background-color: #EAEAEA;
-    border-bottom: 1px solid;
-    position: fixed;
-    z-index: -1;
-    left: -2px;
     border: none;
     height: 36px;
-    width: 380px;
-    padding-left: 38px;
+    width: 300px;
 }
 
 .helperText{
@@ -270,16 +260,17 @@ input:focus + .helperText{
 
 
 input:empty + span{
-    top: 10px;
+    top: -28px;
+    padding-left: 12px;
 }
 
 input:focus + span{
-    top: -24px
+    top: -64px
 }
 
 .helperTextRemain{
     position: relative;
-    top: -24px !important;
+    top:  -64px !important;
 }
 
 .select-cities-row{
@@ -338,6 +329,13 @@ input:focus + span{
     margin-bottom: 16px;
     padding-left: 24px;
 }
-.billingInfoLabels:first-child{
-    margin-top: 32px;
+
+
+#accountOwner{
+    position: absolute;
+    top: 0;
+}
+
+#allFairsContainer{
+    position: relative;
 }

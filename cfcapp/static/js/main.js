@@ -12,6 +12,7 @@ function parsePositioning(elem){
     num = parseInt(numtoParse.substring(0, numtoParse.indexOf('p')))
     return num
 }
+
 checkboxes.forEach((elem) =>{
     console.log(elem.checked)
     elem.addEventListener('click', ()=>{
@@ -99,11 +100,11 @@ checkboxes.forEach((elem) =>{
           theNum = parsePositioning(elem)
           console.log(elem.style.height)
           console.log(theNum)
-             if(theNum === 300){
+             if(theNum === 50){
                 firstSpotTaken = true
-             }else if(theNum === 650){
+             }else if(theNum === 425){
                 secondSpotTaken = true
-            }else if(theNum === 950){
+            }else if(theNum === 725){
                 thirdSpotTaken = true
             }
          })
@@ -111,39 +112,41 @@ checkboxes.forEach((elem) =>{
         if(elem.checked == false){
             if(numOfCheckedBoxes == 1){
                  fairContainers.forEach((elem)=>{
-                    if(parsePositioning(elem) > 300){
-                       elem.style.top = 300 + 'px'
+                    if(parsePositioning(elem) > 50){
+                       elem.style.top = 50 + 'px'
                     }
                 })
             }
             else if(numOfCheckedBoxes == 2){
                 fairContainers.forEach((elem) =>{
                    theNum = parsePositioning(elem)
+                   console.log(theNum)
                    if(firstSpotTaken == true && secondSpotTaken == true){
                       return
-                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 650){
-                        elem.style.top = 300 + 'px'
-                   }else if(firstSpotTaken == true && secondSpotTaken == false && theNum != 300){
-                        elem.style.top = 650 + 'px'
+                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 425 && theNum != 0){
+                        elem.style.top = 50 + 'px'
+                   }else if(firstSpotTaken == true && secondSpotTaken == false && theNum != 50 && theNum != 0){
+                        elem.style.top = 425 + 'px'
                    }
                 })
             }
             else if(numOfCheckedBoxes >= 3){
                    fairContainers.forEach((elem)=>{
                         theNum = parsePositioning(elem)
+                        console.log(theNum)
                         if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == true){
                             return
                         }else if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == false){
-                            if(theNum == 1250){
-                                elem.style.top = 950 + 'px'
+                            if(theNum == 1075){
+                                elem.style.top = 725 + 'px'
                             }
                         }else if(firstSpotTaken == true && secondSpotTaken == false && thirdSpotTaken == true){
-                            if(theNum == 1250){
-                                elem.style.top = 650 + 'px'
+                            if(theNum == 1075){
+                                elem.style.top = 425 + 'px'
                             }
                         }else if(firstSpotTaken == false && secondSpotTaken == true && thirdSpotTaken == true){
-                            if(theNum == 1250){
-                                elem.style.top = 300 + 'px'
+                            if(theNum == 1075){
+                                elem.style.top = 50 + 'px'
                             }
                         }
                 })
@@ -163,8 +166,14 @@ checkboxes.forEach((elem) =>{
                 currentHeight +=  elem.offsetHeight
         })
         console.log(currentHeight)
-           if(currentHeight > 350){
-                currentHeight += 50
+           if(currentHeight == 300){
+                currentHeight = 50
+           }else if(currentHeight == 600){
+               currentHeight = 425
+           }else if(currentHeight == 900){
+                currentHeight = 725
+           }else if(currentHeight == 1200){
+                currentHeight = 1075
            }
             targetElem.style.top = currentHeight + 'px'
         }
