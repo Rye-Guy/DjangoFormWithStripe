@@ -9,7 +9,7 @@ class SalesFormData(models.Model):
     sales_rep = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     company_name = models.CharField(max_length=255, blank=False)
     contact_name = models.CharField(max_length=255, blank=False)
-    total_spent = models.IntegerField(blank=False)
+    total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False)
     address = models.CharField(max_length=255, blank=False)
     secondary_address = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=False)

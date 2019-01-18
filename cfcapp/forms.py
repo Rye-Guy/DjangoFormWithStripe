@@ -105,8 +105,9 @@ class PaymentForm(forms.ModelForm):
             (.15, 'Prince Edward Island'),
             (.05, 'Quebec'),
             (.05, 'Saskatchewan'),
-            (.05, 'Saskatchewan'),
-            (.05, 'Saskatchewan'),
+            (.05, 'Yukon'),
+            (.05, 'Northwest Territories'),
+            (.05, 'Nunavut')
         )
         model = SalesFormData
         

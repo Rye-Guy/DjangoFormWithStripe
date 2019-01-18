@@ -37,7 +37,7 @@ class IndexPageView(TemplateView):
             total_spent = request.POST.get('price', '')
             if total_spent == '':
                 total_spent = 0
-            
+            float(total_spent)
             secondary_address = request.POST.get('secondary_address', '')
             city = request.POST.get('city', '')
 
