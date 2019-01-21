@@ -102,9 +102,9 @@ checkboxes.forEach((elem) =>{
           console.log(theNum)
              if(theNum === 50){
                 firstSpotTaken = true
-             }else if(theNum === 425){
+             }else if(theNum === 475){
                 secondSpotTaken = true
-            }else if(theNum === 725){
+            }else if(theNum === 830){
                 thirdSpotTaken = true
             }
          })
@@ -123,10 +123,10 @@ checkboxes.forEach((elem) =>{
                    console.log(theNum)
                    if(firstSpotTaken == true && secondSpotTaken == true){
                       return
-                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 425 && theNum != 0){
+                   }else if(firstSpotTaken == false && secondSpotTaken == true && theNum != 475 && theNum != 0){
                         elem.style.top = 50 + 'px'
                    }else if(firstSpotTaken == true && secondSpotTaken == false && theNum != 50 && theNum != 0){
-                        elem.style.top = 425 + 'px'
+                        elem.style.top = 475 + 'px'
                    }
                 })
             }
@@ -137,15 +137,15 @@ checkboxes.forEach((elem) =>{
                         if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == true){
                             return
                         }else if(firstSpotTaken == true && secondSpotTaken == true && thirdSpotTaken == false){
-                            if(theNum == 1075){
-                                elem.style.top = 725 + 'px'
+                            if(theNum == 1250){
+                                elem.style.top = 830 + 'px'
                             }
                         }else if(firstSpotTaken == true && secondSpotTaken == false && thirdSpotTaken == true){
-                            if(theNum == 1075){
-                                elem.style.top = 425 + 'px'
+                            if(theNum == 1250){
+                                elem.style.top = 475 + 'px'
                             }
                         }else if(firstSpotTaken == false && secondSpotTaken == true && thirdSpotTaken == true){
-                            if(theNum == 1075){
+                            if(theNum == 1250){
                                 elem.style.top = 50 + 'px'
                             }
                         }
@@ -166,14 +166,14 @@ checkboxes.forEach((elem) =>{
                 currentHeight +=  elem.offsetHeight
         })
         console.log(currentHeight)
-           if(currentHeight == 300){
+           if(currentHeight == 340){
                 currentHeight = 50
-           }else if(currentHeight == 600){
-               currentHeight = 425
-           }else if(currentHeight == 900){
-                currentHeight = 725
-           }else if(currentHeight == 1200){
-                currentHeight = 1075
+           }else if(currentHeight == 680){
+               currentHeight = 475
+           }else if(currentHeight == 1020){
+                currentHeight = 830
+           }else if(currentHeight == 1360){
+                currentHeight = 1250
            }
             targetElem.style.top = currentHeight + 'px'
         }

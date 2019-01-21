@@ -85,6 +85,8 @@ li > label > input + br + label{
 
 .date-options li{
     display: flex;
+    height: 42px;
+    align-items: center;
 }
 
 ul > li > label{
@@ -95,26 +97,32 @@ ul > li > label{
 
 
 /*submit button styles*/
-input[type='submit']{
+.btn{
     background:#2196F3;
     color: #fff;
     width: 132px;
     height: 46px;
     border-color: #2196F3;
     position: fixed;
+}
+/* div .btn{
+    left: 80px;
+    bottom: 80px;
+} */
+div .btn{
     right: 80px;
     bottom: 80px;
 }
-input[type='submit']:hover{
+
+#viewCartBtn{
+    left: 80px;
+    bottom: 80px;
+}
+
+.btn:hover{
     background:#fff;
     color: #2196F3;
     transition:all 150ms ease-out;
-}
-input[type='submit']:focus{
-    outline:0;
-}
-button:focus {
-    outline:0;
 }
 /*checkbox styling*/
 input[type='checkbox']:checked {
@@ -135,6 +143,7 @@ input[type='checkbox']:checked {
     border-radius:2px;
     cursor:pointer;
     transition:all 150ms ease-out;
+    margin-right: 8px;
   }
   
   input[type='checkbox']:checked {
@@ -292,7 +301,7 @@ input:focus + span{
     display: flex;
     flex-wrap: wrap;
     left: 80px;
-    height: 300px;
+    height: 340px;
     align-items: center;
     width: 100%;
 }
@@ -338,4 +347,24 @@ input:focus + span{
 
 #allFairsContainer{
     position: relative;
+}
+
+label select{
+    margin-right: 12px
+}
+
+label input{
+    margin-right: 12px
+}
+
+#priceBreakdown{
+    display: none;
+    width: 300px;
+    height: 100%;
+    padding: 50px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background:gainsboro;
+    z-index: 1000;
 }
