@@ -24,6 +24,14 @@ function createOptions(elem){
     }
 }
 
+function findAndDeleteDate(relatedElement, elemToDelete){
+    if(relatedElement.checked === false){
+        if(elemToDelete){
+            elemToDelete.remove()
+        }
+    }
+}
+
 function dateCheck(input){
   //parent elements will contain our ID for making sure we are editing the appropriate Cart.
   parentUl = input.parentElement.parentElement.parentElement.id
@@ -54,6 +62,8 @@ function dateCheck(input){
                 createOptions(additionalBoothOption)
                 selectLabel.append(additionalBoothOption)
                 input.parentElement.append(document.createElement('br'), selectLabel)
+                cartItem.innerHTML += '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
+                cartItem.innerHTML += `<h5>Toronto Career Fair <br>${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_calgary_'+cartText)
@@ -67,6 +77,8 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                cartItem.innerHTML += `<h5>Calgary Career Fair <br>${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton_'+cartText)
@@ -84,8 +96,10 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
+                cartItem.innerHTML += `<h5>Edmonton Career Fair <br>${cartText}</h5>`
                 edmontonCart[0]++
-             }else if(parentUl ==  'id_winnipeg_dates'){
+            }else if(parentUl ==  'id_winnipeg_dates'){
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_winnipeg_' + cartText
                 createOptions(additionalBoothOption)
@@ -97,18 +111,35 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                cartItem.innerHTML += `<h5>Winnipeg Career Fair <br>${cartText}</h5>`
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
+        }else if(!input.checked){
+            findAndDeleteDate(document.getElementById('id_toronto_dates_0'), document.getElementById('April 24th, 2018'))
+            findAndDeleteDate(document.getElementById('id_toronto_dates_1'), document.getElementById('September 17th, 2019'))
+            findAndDeleteDate(document.getElementById('id_winnipeg_dates_0'), document.getElementById('April 2nd, 2019'))
+            findAndDeleteDate(document.getElementById('id_winnipeg_dates_1'), document.getElementById('July 10th, 2019'))
+            findAndDeleteDate(document.getElementById('id_winnipeg_dates_2'), document.getElementById('July 23rd, 2019'))
+            findAndDeleteDate(document.getElementById('id_calgary_dates_0'), document.getElementById('March 12th, 2019'))
+            findAndDeleteDate(document.getElementById('id_calgary_dates_1'), document.getElementById('June 26th, 2019'))
+            findAndDeleteDate(document.getElementById('id_calgary_dates_2'), document.getElementById('October 22nd, 2019'))
+            findAndDeleteDate(document.getElementById('id_edmonton_dates_0'), document.getElementById('January 29th, 2019'))
+            findAndDeleteDate(document.getElementById('id_edmonton_dates_1'), document.getElementById('May 28th, 2019'))
+            findAndDeleteDate(document.getElementById('id_edmonton_dates_2'), document.getElementById('August 13th, 2019'))
+            findAndDeleteDate(document.getElementById('id_edmonton_dates_3'), document.getElementById('November 19th, 2019'))
+          
         }
-
 }
+
 
 //Keeps track of selected dates and add event listeners for click events and run our conditionals to make sure the proper card receives the relevant selection.
 allDatesCheckboxes.forEach((input)=>{
     input.addEventListener('click', ()=>{
         dateCheck(input)
         if(!input.checked){
+            console.log(input)
             if(!input.checked && input.nextElementSibling){
                 while(input.nextElementSibling){
                     input.nextElementSibling.remove()
@@ -155,7 +186,6 @@ function boothOptionCheck(input){
               shoppingCart.append(cartItem)
               torontoCart[1] = boothValue
               amountSpent = calculateTotal(torontoCart)
-              calculateGrandTotal()
            }
            if(parentUl == 'id_calgary_booth_options'){
               if(document.getElementById('calgarySingleCartItem')){
@@ -165,7 +195,6 @@ function boothOptionCheck(input){
               shoppingCart.append(cartItem)
               calgaryCart[1] = boothValue
               amountSpent = calculateTotal(calgaryCart)
-              calculateGrandTotal()
            }
            if(parentUl == 'id_edmonton_booth_options'){
               if(document.getElementById('edmontonSingleCartItem')){
@@ -175,7 +204,6 @@ function boothOptionCheck(input){
               shoppingCart.append(cartItem)
               edmontonCart[1] = boothValue
               amountSpent = calculateTotal(edmontonCart)
-              calculateGrandTotal()
            }
            if(parentUl == 'id_winnipeg_booth_options'){
               if(document.getElementById('winnipegSingleCartItem')){
@@ -185,7 +213,6 @@ function boothOptionCheck(input){
               shoppingCart.append(cartItem)
               winnipegCart[1] = boothValue
               amountSpent = calculateTotal(winnipegCart)
-              calculateGrandTotal()
            }
     }
 }
@@ -216,19 +243,27 @@ allAdditionalOptions.forEach((input)=>{
 })
 
 function additionalCartItems(cityName, fairDate, cart){
-
     //check for the existence of additional booths. If they do calculate the value and add it to our cart.
     if(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`extraBoothValue_${fairDate}`)){
+            document.getElementById(`extraBoothValue_${fairDate}`).innerText = document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value
+        }
         additionalBooths = parseInt(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value) * 995
         cart[3] += additionalBooths
     }
     //check for additional lunches
     if(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`extraLunchValue_${fairDate}`)){
+            document.getElementById(`extraLunchValue_${fairDate}`).innerText = document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`).value
+        }
         additionalLunchOption = parseInt(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`).value) * 25
         cart[3] += additionalLunchOption
     }
     //check for additional breakfast
     if(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`extraBreakfastValue_${fairDate}`)){
+            document.getElementById(`extraBreakfastValue_${fairDate}`).innerText = document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value
+        }
         additionalBreakfastOption = parseInt(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value) * 23
         cart[3] += additionalBreakfastOption
     }
@@ -262,17 +297,16 @@ function calculateGrandTotal(){
        value4 = calculateTotal(edmontonCart)
        grandTotal = value1 + value2 + value3 + value4
        typeOfTax = document.getElementById('id_province').value
-       console.log(typeOfTax)
        parseInt(typeOfTax)
-       console.log(typeOfTax)
        taxToCharge = grandTotal * typeOfTax
-       console.log(grandTotal)
-       console.log(taxToCharge)
+       document.getElementById('priceValue').innerText = grandTotal
+       document.getElementById('taxValue').innerText = taxToCharge
        overallTotalWithTax = grandTotal + taxToCharge
+       document.getElementById('totalValue').innerText = overallTotalWithTax
     // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = overallTotalWithTax
        return overallTotalWithTax
 }
 
 cartTotal = document.getElementById('cart-total')
-
+setInterval(calculateGrandTotal, 100)

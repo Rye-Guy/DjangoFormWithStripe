@@ -1,4 +1,6 @@
 formSubmit = document.getElementById('formSubmit')
+viewCartBtn = document.getElementById('viewCartBtn')
+priceBreakdown = document.getElementById('priceBreakdown')
 
 billingInfoBtn = document.getElementById('billingInfoTrigger')
 billingInfoContainer = document.getElementById('billingInfoContainer')
@@ -19,14 +21,27 @@ function helperTextCheck(input){
         }
     })
 }
-formSubmit.addEventListener('click', (ev)=>{
 
+viewCartBtn.addEventListener('click', (ev)=>{
+    ev.preventDefault()
+    if(priceBreakdown.className == 'animated fadeInRight'){
+        priceBreakdown.className = 'animated fadeOutRight';
+    }else{
+        priceBreakdown.className = 'animated fadeInRight';
+        priceBreakdown.style.display = 'block'
+    }
+    
+})
+
+formSubmit.addEventListener('click', (ev)=>{
+    
     if(billingInfoContainer.className == 'animated fadeOutLeft'){
         ev.preventDefault()
+        document.getElementById('priceBreakdown').style.display = 'block'
         billingInfoContainer.className = 'animated fadeInLeft'
     }
-    calculateGrandTotal()
-    console.log(calculateGrandTotal())
+    ev.preventDefault()
+    
 })
 
 // billingInfoBtn.addEventListener('click', (ev)=>{

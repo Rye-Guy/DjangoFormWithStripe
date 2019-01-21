@@ -169,19 +169,38 @@
     </div> {% endcomment %}
     {% comment %} <input id="billingInfoTrigger" type="submit" value="Fill Billing Info"> {% endcomment %}
     <input type="hidden" id="priceInput" name="price" value="">
-    <input id="formSubmit" type="submit" value="Submit!">
+    <input class='btn'id="viewCartBtn" type="submit" value="View Cart">
   </form>
 </div>
+<div id="priceBreakdown">
+       <div>
+          <ul id="shoppingCart">
+              
+          </ul>
+       </div>
+      <h3>Subtotal: <span id='priceValue' value=''></h3>
+      <h3>Tax: <span id='taxValue'></h3>
+      <h3>Grand Total: <span id='totalValue'></h3>  
+      <input class='btn'id="formSubmit" type="submit" value="Submit!">
+</div>
+        {% comment %} <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
+        <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>
+        <li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>
+        <li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li> {% endcomment %}
+      
 <!-- Features and options not to be included in production -->
-  <!--<div class="shopping-cart-container">-->
-    {% comment %} <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3> {% endcomment %}
-      <ul id="shoppingCart" style='display: none;'>
-        <!--&lt;!&ndash;<li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>&ndash;&gt;-->
-        <!--&lt;!&ndash;<li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>&ndash;&gt;-->
-        <!--&lt;!&ndash;<li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>&ndash;&gt;-->
-        <!--&lt;!&ndash;<li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li>&ndash;&gt;-->
+  <!--<div class="shopping-cart-container">
+     <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
+    <div>
+      <h3>Subtotal = $ <span>0.00</span></h3>
+      <ul id="shoppingCart">
+        <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
+        <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>
+        <li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>
+        <li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li>
       </ul>
-  <!--</div>-->
+    <div>
+ </div>-->
 <!--</div>-->
 <!--<form action="/payment/" method="POST">-->
  <!--<script-->
