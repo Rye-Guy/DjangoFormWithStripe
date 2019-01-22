@@ -1,6 +1,6 @@
 //shoppingCart = document.getElementById('shoppingCart')
 
-//first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additonal options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
+//first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additional options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
 torontoCart = [0, 0, 0, 0]
 
 winnipegCart = [0, 0, 0, 0]
@@ -274,6 +274,21 @@ function calculateTotal(cartName){
     return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2]) + cartName[3]
 }
 
+function applyDiscount(grandTotal, typeOfDiscount){
+    discountAmount = document.getElementById('id_discount').value
+    parseInt(discountAmount)
+    if(typeOfDiscount.checked){
+        document.getElementById('discountType').innerText = '%'
+        decimalNum = '.' + discountAmount
+        parseFloat(decimalNum)
+        takeAway = grandTotal * decimalNum
+    }else{
+        document.getElementById('discountType').innerText = '$'
+        takeAway = discountAmount
+    }
+    return takeAway
+}
+
 function calculateGrandTotal(){
        torontoCart[3] = 0
        winnipegCart[3] = 0
@@ -296,17 +311,23 @@ function calculateGrandTotal(){
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
        grandTotal = value1 + value2 + value3 + value4
+       typeOfDiscount = document.getElementById('discountCheckbox')
+       amountToDiscount = applyDiscount(grandTotal, typeOfDiscount)
+       totalAfterDiscount = amountToDiscount - grandTotal
+       console.log(grandTotal, amountToDiscount, totalAfterDiscount)
        typeOfTax = document.getElementById('id_province').value
-       parseInt(typeOfTax)
-       taxToCharge = grandTotal * typeOfTax
+       parseInt(typeOfTax, totalAfterDiscount)
+       taxToCharge = typeOfTax * (grandTotal - totalAfterDiscount)
+       console.log(taxToCharge)
        document.getElementById('priceValue').innerText = grandTotal
-       document.getElementById('taxValue').innerText = taxToCharge
-       overallTotalWithTax = grandTotal + taxToCharge
-       document.getElementById('totalValue').innerText = overallTotalWithTax
+       document.getElementById('discountValue').innerText = amountToDiscount
+       document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2) 
+       overallTotalWithTax = (grandTotal - totalAfterDiscount) + taxToCharge
+       document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
     // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = overallTotalWithTax
        return overallTotalWithTax
 }
 
 cartTotal = document.getElementById('cart-total')
-setInterval(calculateGrandTotal, 100)
+setInterval(calculateGrandTotal, 1000)

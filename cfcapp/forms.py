@@ -111,7 +111,7 @@ class PaymentForm(forms.ModelForm):
         )
         model = SalesFormData
         
-        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link']
+        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'discount']
         widgets = {
             'province' : forms.Select(choices=PROVINCE_CHOICES)
         }

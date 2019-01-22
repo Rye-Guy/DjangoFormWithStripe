@@ -339,12 +339,6 @@ input:focus + span{
     padding-left: 24px;
 }
 
-
-#accountOwner{
-    position: absolute;
-    top: 0;
-}
-
 #allFairsContainer{
     position: relative;
 }
@@ -367,4 +361,15 @@ label input{
     right: 0;
     background:gainsboro;
     z-index: 1000;
+}
+
+.staffPermissionsSection{
+    position: absolute;
+    top: 0;
+}
+
+#cartContainer{
+    overflow: hidden;
+    height: 650px;
+    overflow-y: scroll;
 }
