@@ -110,8 +110,8 @@ ul > li > label{
     bottom: 80px;
 } */
 div .btn{
-    right: 80px;
-    bottom: 80px;
+    right: 48px;
+    bottom: 124px;
 }
 
 #viewCartBtn{
@@ -284,7 +284,7 @@ input:focus + span{
 
 .select-cities-row{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-evenly;
 }
 
@@ -339,12 +339,6 @@ input:focus + span{
     padding-left: 24px;
 }
 
-
-#accountOwner{
-    position: absolute;
-    top: 0;
-}
-
 #allFairsContainer{
     position: relative;
 }
@@ -367,4 +361,15 @@ label input{
     right: 0;
     background:gainsboro;
     z-index: 1000;
+}
+
+.staffPermissionsSection{
+    position: absolute;
+    top: 0;
+}
+
+#cartContainer{
+    overflow: hidden;
+    height: 550px;
+    overflow-y: scroll;
 }

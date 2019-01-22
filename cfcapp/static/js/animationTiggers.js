@@ -39,22 +39,8 @@ formSubmit.addEventListener('click', (ev)=>{
         ev.preventDefault()
         document.getElementById('priceBreakdown').style.display = 'block'
         billingInfoContainer.className = 'animated fadeInLeft'
-    }
-    ev.preventDefault()
-    
+    }    
 })
-
-// billingInfoBtn.addEventListener('click', (ev)=>{
-//     ev.preventDefault()
-//     if(billingInfoContainer.className == 'animated fadeOutLeft'){
-//         billingInfoContainer.className = 'animated fadeInLeft'
-//         billingInfoBtn.value = 'Hide Billing Info'
-//     }else{
-//         billingInfoContainer.className = 'animated fadeOutLeft'
-//         billingInfoBtn.value = 'Fill Billing Info'
-//     }
-// })
-
 
 allInputs.forEach((input)=>{
    helperTextCheck(input)

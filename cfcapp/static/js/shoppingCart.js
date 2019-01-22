@@ -1,6 +1,6 @@
 //shoppingCart = document.getElementById('shoppingCart')
 
-//first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additonal options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
+//first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additional options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
 torontoCart = [0, 0, 0, 0]
 
 winnipegCart = [0, 0, 0, 0]
@@ -14,7 +14,9 @@ edmontonCart = [0, 0, 0, 0]
 allDatesCheckboxes = document.querySelectorAll('input.dates-select')
 allBoothOptionsRadios = document.querySelectorAll('input.booth-options-select')
 allAdditionalOptions = document.querySelectorAll('input.fair-options')
-
+if(document.getElementById('discountCheckbox')){
+    document.getElementById('discountCheckbox').checked = true
+}
 function createOptions(elem){
     for(i = 0; i <= 5; i++){
         createOption = document.createElement('option')
@@ -129,7 +131,6 @@ function dateCheck(input){
             findAndDeleteDate(document.getElementById('id_edmonton_dates_1'), document.getElementById('May 28th, 2019'))
             findAndDeleteDate(document.getElementById('id_edmonton_dates_2'), document.getElementById('August 13th, 2019'))
             findAndDeleteDate(document.getElementById('id_edmonton_dates_3'), document.getElementById('November 19th, 2019'))
-          
         }
 }
 
@@ -218,6 +219,7 @@ function boothOptionCheck(input){
 }
 
 //forEach loop that adds the functionality for booth options. Similar logic as the dates with the main difference is we are capturing the inputs 'value' attribute and assigning the value of that to our booth value. Then we find the right cart and update it. Also I had to add a check that will remove other booths form the cart Ul that the users sees unlike our dates where you can select multiple, they can only have one booth option.
+
 allBoothOptionsRadios.forEach((input) =>{
     input.addEventListener('click', ()=>{
         boothOptionCheck(input)
@@ -274,6 +276,23 @@ function calculateTotal(cartName){
     return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2]) + cartName[3]
 }
 
+function applyDiscount(grandTotal, typeOfDiscount){
+    discountAmount = document.getElementById('id_discount_amount').value
+    parseInt(discountAmount)
+    if(typeOfDiscount.checked){
+        document.getElementById('discountType').innerText = '%'
+        document.getElementById('discountPercentHiddenInput').value = `%${discountAmount}`
+        decimalNum = '.' + discountAmount
+        parseFloat(decimalNum)
+        takeAway = grandTotal * decimalNum
+    }else{
+        document.getElementById('discountType').innerText = '$'
+        document.getElementById('discountHiddenInput').value = '$'
+        takeAway = discountAmount
+    }
+    return takeAway
+}
+
 function calculateGrandTotal(){
        torontoCart[3] = 0
        winnipegCart[3] = 0
@@ -296,13 +315,65 @@ function calculateGrandTotal(){
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
        grandTotal = value1 + value2 + value3 + value4
+       typeOfDiscount = document.getElementById('discountCheckbox')
+       amountToDiscount = applyDiscount(grandTotal, typeOfDiscount)
+       totalAfterDiscount = grandTotal - amountToDiscount
+       console.log(grandTotal, amountToDiscount, totalAfterDiscount)
        typeOfTax = document.getElementById('id_province').value
-       parseInt(typeOfTax)
-       taxToCharge = grandTotal * typeOfTax
+       switch(typeOfTax) {
+            case '-':
+                typeOfTax = 0;
+                break;
+            case 'Ontario':
+                typeOfTax = 0.13
+                break;  
+            case 'New Brunswick': 
+                typeOfTax = 0.15
+                break;
+            case 'Newfoundland and Labrador':
+                typeOfTax = 0.15
+                break;
+            case 'Nova Scotia':
+                typeOfTax = 0.15
+                break;
+            case 'Prince Edward Island':
+                typeOfTax = 0.15
+                break;
+            case 'Alberta':
+                typeOfTax = 0.05;
+                break;    
+            case 'British Columbia':
+                typeOfTax = 0.05;
+                break;
+            case 'Manitoba':
+                typeOfTax = 0.05;
+                break;
+            case 'Quebec':
+                typeOfTax = 0.05;
+                break;
+            case 'Saskatchewan':
+                typeOfTax = 0.05;
+                break;
+            case 'Northwest Territories':
+                typeOfTax = 0.05;
+                break;
+            case 'Nunavut':
+                typeOfTax = 0.05;
+                break;
+            case 'Yukon':
+                typeOfTax = 0.05;
+                break;
+       }
+       console.log(typeOfTax)
+       parseInt(typeOfTax, totalAfterDiscount)
+       taxToCharge = typeOfTax * totalAfterDiscount
+       console.log(taxToCharge)
        document.getElementById('priceValue').innerText = grandTotal
-       document.getElementById('taxValue').innerText = taxToCharge
-       overallTotalWithTax = grandTotal + taxToCharge
-       document.getElementById('totalValue').innerText = overallTotalWithTax
+       document.getElementById('discountValue').innerText = amountToDiscount
+       document.getElementById('discountHiddenInput').value = `$${amountToDiscount}`
+       document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2) 
+       overallTotalWithTax = totalAfterDiscount + taxToCharge
+       document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
     // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = overallTotalWithTax
        return overallTotalWithTax

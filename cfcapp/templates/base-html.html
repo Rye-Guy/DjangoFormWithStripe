@@ -24,8 +24,11 @@
 <div class="content">
   <h1>Purchase a Booth</h1>
   <form action="/" method="POST">
-    {% if request.user.is_superuser %}
-    <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
+    {% if request.user.is_staff %}
+    <div class='staffPermissionsSection'>
+      <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
+      <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
+    </div>
     {% endif %}
     {% csrf_token %}
     <h2>Billing Information</h2>
@@ -152,56 +155,26 @@
     {% if form.errors %}
       {{form.errors}}
     {% endif %}
-    {% comment %} <div id="billingInfoContainer" class="animated fadeOutLeft">
-        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
-        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
-        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
-        <label class="billingInfoLabels">{{form.secondary_address}}<span class="helperText">Secondary Address:</span></label><br>
-        <label class="billingInfoLabels">{{form.city}}<span class="helperText">City:</span></label><br>
-        <label class="billingInfoLabels">{{form.province}}<span class="helperText">Province:</span></label><br>
-        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
-        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
-        <label class="billingInfoLabels">{{form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
-        <label class="billingInfoLabels">{{form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
-        <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
-        <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
-        <label class="billingInfoLabels">{{form.twitter_link}}<span class="helperText">Twitter Link:</span></label>
-    </div> {% endcomment %}
-    {% comment %} <input id="billingInfoTrigger" type="submit" value="Fill Billing Info"> {% endcomment %}
     <input type="hidden" id="priceInput" name="price" value="">
+    <input type="hidden" id="discountPercentHiddenInput" name='discountPercent' value="">
+    <input type="hidden" id="discountHiddenInput" name='discountAmount' value="">
     <input class='btn'id="viewCartBtn" type="submit" value="View Cart">
-  </form>
-</div>
-<div id="priceBreakdown">
-       <div>
+    <div id="priceBreakdown">
+       <div id='cartContainer'>
           <ul id="shoppingCart">
               
           </ul>
        </div>
       <h3>Subtotal: <span id='priceValue' value=''></h3>
+    {% if request.user.is_staff %}
+      <h3>Discount: <span id='discountValue' value=''></h3>
+    {% endif %}
       <h3>Tax: <span id='taxValue'></h3>
       <h3>Grand Total: <span id='totalValue'></h3>  
       <input class='btn'id="formSubmit" type="submit" value="Submit!">
+  </div>
+  </form>
 </div>
-        {% comment %} <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
-        <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>
-        <li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>
-        <li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li> {% endcomment %}
-      
-<!-- Features and options not to be included in production -->
-  <!--<div class="shopping-cart-container">
-     <h3>Your Cart Total: <span name='price' id="cart-total" value=""></span></h3>
-    <div>
-      <h3>Subtotal = $ <span>0.00</span></h3>
-      <ul id="shoppingCart">
-        <li id="torontoCartTotal">Toronto Cart: $<span id="torontoCartNumber">0</span></li>
-        <li id="winnipegCartTotal">Winnipeg Cart: $<span id="winnipegCartNumber">0</span></li>
-        <li id="calgaryCartTotal">Calgary Cart: $<span id="calgaryCartNumber">0</span></li>
-        <li id="edmontonCartTotal">Edmonton Cart: $<span id="edmontonCartNumber">0</span></li>
-      </ul>
-    <div>
- </div>-->
-<!--</div>-->
 <!--<form action="/payment/" method="POST">-->
  <!--<script-->
     <!--src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
@@ -214,7 +187,6 @@
     <!--data-zip-code="true">-->
   <!--</script>-->
 <!--</form>-->
-
 </body>
 <script src='{% static "js/main.js" %}'></script>
 <script src='{% static "js/shoppingCart.js" %}'></script>

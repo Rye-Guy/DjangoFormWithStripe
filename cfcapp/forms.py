@@ -95,23 +95,23 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         PROVINCE_CHOICES = (
             ('-', '-'),
-            (.05, 'Alberta'),
-            (.05, 'British Columbia'),
-            (.05, 'Manitoba'),
-            (.15, 'New Brunswick'),
-            (.15, 'Newfoundland and Labrador'),
-            (.15, 'Nova Scotia'),
-            (.13, 'Ontario'),
-            (.15, 'Prince Edward Island'),
-            (.05, 'Quebec'),
-            (.05, 'Saskatchewan'),
-            (.05, 'Yukon'),
-            (.05, 'Northwest Territories'),
-            (.05, 'Nunavut')
+            ('Alberta', 'Alberta'),
+            ('British Columbia', 'British Columbia'),
+            ('Manitoba', 'Manitoba'),
+            ('New Brunswick', 'New Brunswick'),
+            ('Newfoundland and Labrador', 'Newfoundland and Labrador'),
+            ('Nova Scotia', 'Nova Scotia'),
+            ('Ontario', 'Ontario'),
+            ('Prince Edward Island', 'Prince Edward Island'),
+            ('Quebec', 'Quebec'),
+            ('Saskatchewan', 'Saskatchewan'),
+            ('Yukon', 'Yukon'),
+            ('Northwest Territories', 'Northwest Territories'),
+            ('Nunavut', 'Nunavut')
         )
         model = SalesFormData
         
-        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link']
+        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'discount_amount']
         widgets = {
             'province' : forms.Select(choices=PROVINCE_CHOICES)
         }
@@ -129,8 +129,7 @@ class PaymentForm(forms.ModelForm):
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES, required=False)
     edmonton_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS, required=False)
-    edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),
-                                                 choices=EDMONTON_FAIR_OPTIONS, required=False)
+    edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),choices=EDMONTON_FAIR_OPTIONS, required=False)
 
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES, required=False)
     winnipeg_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS, required=False)
