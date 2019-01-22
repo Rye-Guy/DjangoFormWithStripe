@@ -21,7 +21,7 @@ class MyModelAdmin(admin.ModelAdmin):
                 return SalesFormData.objects.filter(sales_rep=request.user) 
 
 
-        list_display = ['id', 'sales_rep', 'company_name', 'contact_email', 'office_phone_number', 'total_spent']
+        list_display = ['id', 'sales_rep', 'company_name', 'contact_email', 'office_phone_number', 'total_spent', 'discount_amount', 'discount_percentage']
         search_fields = ['company_name', 'contact_email', 'office_phone_number']
         resource_class = SalesDataModelResource
 
@@ -29,7 +29,7 @@ class MyModelAdmin(admin.ModelAdmin):
             return(
                 (None, {
                     'description': 'Contact Info',
-                    'fields':   ('sales_rep','company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'select_cities')
+                    'fields':   ('sales_rep','company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'discount_amount', 'discount_percentage', 'select_cities')
                 }),
                 ('Additional Info', {
                     'description': 'Additional Info',

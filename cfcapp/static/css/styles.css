@@ -110,8 +110,8 @@ ul > li > label{
     bottom: 80px;
 } */
 div .btn{
-    right: 80px;
-    bottom: 80px;
+    right: 48px;
+    bottom: 124px;
 }
 
 #viewCartBtn{
@@ -284,7 +284,7 @@ input:focus + span{
 
 .select-cities-row{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-evenly;
 }
 
@@ -370,6 +370,6 @@ label input{
 
 #cartContainer{
     overflow: hidden;
-    height: 650px;
+    height: 550px;
     overflow-y: scroll;
 }
