@@ -94,65 +94,107 @@ function dateCheck(input){
              selectLabel.innerText = ' Extra Booth: '
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
+                //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_toronto_'+cartText)
                 boothOptionSelect.id = 'booth_option_toronto_'+cartText
+                //create options and append select w/ options to label
+                createAdditionalBoothOptions(boothOptionSelect)
+                boothOptionLabel.append(boothOptionSelect)
+                //additional booth option select
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_toronto_' + cartText
-                createAdditionalBoothOptions(boothOptionSelect)
+                //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
-                boothOptionLabel.append(boothOptionSelect)
                 selectLabel.append(additionalBoothOption)
                 input.parentElement.append(document.createElement('br'), selectLabel, boothOptionLabel)
-                cartItem.innerHTML += boothOptionSelect.innerText + '<br>' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
+                cartItem.innerHTML += boothOptionSelect.innerText + '<br>'+ 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
                 cartItem.innerHTML += `<h5>Toronto Career Fair <br>${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
+                //Booth type select
+                boothOptionSelect.setAttribute('name', 'booth_option_calgary_'+cartText)
+                boothOptionSelect.id = 'booth_option_calgary_'+cartText
+                //create options and append select w/ options to label
+                createAdditionalBoothOptions(boothOptionSelect)
+                boothOptionLabel.append(boothOptionSelect)
+                //additional booth option select
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_calgary_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_calgary_' + cartText
+                //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
+                selectLabel.append(additionalBoothOption)
+                //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_calgary_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_calgary_'+cartText
+                //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
-                selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
-                dietRequestLabel.append(dietRequest)
+                //set attributes for diet request for view and append the label
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                dietRequestLabel.append(dietRequest)
+                //now create the rest of our cart item to display to the user
+                input.parentElement.append( boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML += boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Calgary Career Fair <br>${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
+                //Booth type select
+                boothOptionSelect.setAttribute('name', 'booth_option_edmonton_'+cartText)
+                boothOptionSelect.id = 'booth_option_edmonton_'+cartText
+                //create options and append select w/ options to label
+                createAdditionalBoothOptions(boothOptionSelect)
+                boothOptionLabel.append(boothOptionSelect)
+                //additional booth option select
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_edmonton_' + cartText
+                //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
+                selectLabel.append(additionalBoothOption)
+                //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_edmonton_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_edmonton_'+cartText
+                //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
+                lunchLabel.append(additionalLunchOption)
+                //create breakfast options select
                 additionalBreakfastOption.setAttribute('name', 'additional_breakfast_option_edmonton_'+cartText)
                 additionalBreakfastOption.id ='additional_breakfast_option_edmonton_'+cartText
+                //create options and append select w/ options to label
                 createOptions(additionalBreakfastOption)
-                selectLabel.append(additionalBoothOption)
-                lunchLabel.append(additionalLunchOption)
                 breakfastLabel.append(additionalBreakfastOption)
+                //create Diet Request and set up attributes for caputring data out of form.
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
+                //now create the rest of our cart item to display to the user and populated the date selection ul
+                input.parentElement.append(boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
                 cartItem.innerHTML += `<h5>Edmonton Career Fair <br>${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
+                //Booth type select
+                boothOptionSelect.setAttribute('name', 'booth_option_winnipeg_'+cartText)
+                boothOptionSelect.id = 'booth_option_winnipeg_'+cartText
+                //create options and append select w/ options to label
+                createAdditionalBoothOptions(boothOptionSelect)
+                boothOptionLabel.append(boothOptionSelect)
+                //additional booth option select
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_winnipeg_' + cartText
+                //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
+                selectLabel.append(additionalBoothOption)
+                //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_winnipeg_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_winnipeg_'+cartText
+                //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
-                selectLabel.append(additionalBoothOption)
                 lunchLabel.append(additionalLunchOption)
+                //create Diet Request and set up attributes for capturing data out of form.
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
-                input.parentElement.append(document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML += `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                //now create the rest of our cart item to display to the user and populated the date selection ul
+                input.parentElement.append(boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Winnipeg Career Fair <br>${cartText}</h5>`
                 winnipegCart[0]++
              }
@@ -341,6 +383,9 @@ function applyDiscount(grandTotal, typeOfDiscount){
 
 function calculateGrandTotal(){
        torontoCart[1] = 0
+       calgaryCart[1] = 0
+       edmontonCart[1] = 0
+       winnipegCart[1] = 0
        torontoCart[3] = 0
        winnipegCart[3] = 0
        edmontonCart[3] = 0

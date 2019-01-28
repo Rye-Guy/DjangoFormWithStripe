@@ -55,15 +55,13 @@
           <div class="toronto-container">
             <label for="id_select_cities_0"><input type="checkbox" name="select_cities" value="Toronto" id="id_select_cities_0">Toronto</label>
             <div class="fair-options-container" id="TorontoFairOptionsContainer" style="display: none;">
-              <div class="row">
-                  <h3>Toronto Booth Options</h3>
-                    {% if form.errors.toronto_booth_options %}
+
+                {% if form.errors.toronto_booth_options %}
+                    <div class="row">
+                        <h3>Toronto Errors</h3>
                         {{form.errors.toronto_booth_options}}
-                    {% endif %}
-                  <div class="booth-options">
-                    {{form.toronto_booth_options}}
-                  </div>
-                </div>
+                    </div>
+                {% endif %}
                 <div class="row">
                   <h3>Toronto Fair Dates & Options</h3>
                     {% if form.errors.toronto_dates %}
@@ -71,10 +69,6 @@
                     {% endif %}
                   <div class="date-options">
                       {{form.toronto_dates}}
-                        {% for date in form.toronto_dates %}
-                            {{form.toronto_booth_options}}
-                        {% endfor %}
-
                   </div>
 
                 </div>
@@ -85,10 +79,7 @@
           <div class="winnipeg-container">
             <label for="id_select_cities_1"><input type="checkbox" name="select_cities" value="Winnipeg" id="id_select_cities_1">Winnipeg</label>
             <div class="fair-options-container" id="WinnipegFairOptionsContainer" style="display: none;">
-              <div class="row">
-                <h3>Winnipeg Booth Options</h3>
-                <div class="booth-options">{{form.winnipeg_booth_options}}</div>
-              </div>
+
               <div class="row">
                 <h3>Winnipeg Fair Dates</h3>
                   {% if form.errors.winnipeg_dates %}
@@ -107,9 +98,8 @@
             <label for="id_select_cities_2"><input type="checkbox" name="select_cities" value="Calgary" id="id_select_cities_2">Calgary</label>
             <div class="fair-options-container" id="CalgaryFairOptionsContainer" style="display: none;">
               <div class="row">
-                <h3>Calgary Booth Options</h3>
-                <div class="booth-options">{{form.calgary_booth_options}}</div>
                   {% if form.errors.calgary_booth_options %}
+                  <h3>Calgary Booth Options</h3>
                     {{form.errors.calgary_booth_options}}
                   {% endif %}
               </div>
@@ -134,11 +124,9 @@
             <label for="id_select_cities_3"><input type="checkbox" name="select_cities" value="Edmonton" id="id_select_cities_3">Edmonton</label>
             <div class="fair-options-container" id="EdmontonFairOptionsContainer" style="display: none;">
               <div class="row">
-                <h3>Edmonton Booth Options</h3>
                   {% if form.errors.edmonton_booth_options %}
                     {{form.errors.edmonton_booth_options}}
                   {% endif %}
-                <div class="booth-options">{{form.edmonton_booth_options}}</div>
               </div>
               <div class="row">
                 <h3>Edmonton Fair Dates</h3>

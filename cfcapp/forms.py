@@ -121,7 +121,7 @@ class PaymentForm(forms.ModelForm):
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
 
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES, required=False)
-    toronto_booth_options = forms.ChoiceField(widget=forms.Select(attrs={'class': 'booth-options-select'}), choices=BOOTH_OPTIONS, required=False)
+    # toronto_booth_options = forms.ChoiceField(widget=forms.Select(attrs={'class': 'booth-options-select'}), choices=BOOTH_OPTIONS, required=False)
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES, required=False)
     calgary_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)
@@ -140,14 +140,14 @@ class PaymentForm(forms.ModelForm):
 
         def clean_city(self, city_name):
             city_dates = cleaned_data.get(city_name+'_dates')
-            city_options = cleaned_data.get(city_name+'_booth_options')
-            if not city_dates and city_options:
+            # city_options = cleaned_data.get(city_name+'_booth_options')
+            if not city_dates:
                 self.add_error(city_name+'_dates', 'You have selected a booth option but not a date option!')
-            if city_dates and not city_options:
-                self.add_error(city_name+'_booth_options', 'You have selected a date but not a booth option!')
-            if not city_dates and not city_options:
-                self.add_error(city_name+'_dates', 'You not selected a date option!')
-                self.add_error(city_name+'_booth_options', 'You have not selected a date option!')
+            # if city_dates and not city_options:
+            #     self.add_error(city_name+'_booth_options', 'You have selected a date but not a booth option!')
+            # if not city_dates and not city_options:
+            #     self.add_error(city_name+'_dates', 'You not selected a date option!')
+            #     self.add_error(city_name+'_booth_options', 'You have not selected a date option!')
 
         if cities == []:
             self.add_error('select_cities', 'You have not selected any fair locations!')
