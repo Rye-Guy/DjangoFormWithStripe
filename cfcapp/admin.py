@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import SalesFormData
+from fairs.models import TorontoFair, CalgaryFair, EdmontonFair, WinnipegFair
 from django.http import HttpResponse, request
 import import_export
 
@@ -14,49 +15,53 @@ class MyModelAdmin(admin.ModelAdmin):
         
         def get_queryset(self, request):
             qs = super(MyModelAdmin.SalesAdmin, self).get_queryset(request)
-            print(request.user)
             if request.user.is_superuser:
-                return SalesFormData.objects.all()
+                return SalesFormData.objects.select_related()
             else:
                 return SalesFormData.objects.filter(sales_rep=request.user) 
 
 
-        list_display = ['id', 'sales_rep', 'company_name', 'contact_email', 'office_phone_number', 'total_spent', 'discount_amount', 'discount_percentage']
-        search_fields = ['company_name', 'contact_email', 'office_phone_number']
+        list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'total_spent', 'select_cities']
+        search_fields = ['company_name', 'contact_email', 'office_phone_number', 'toronto_booking_id']
         resource_class = SalesDataModelResource
+        list_display += ('toronto_booking_id', 'get_related_bookings_toronto')
+        list_display += ('calgary_booking_id', 'get_related_bookings_calgary')
+        list_display += ('edmonton_booking_id', 'get_related_bookings_edmonton')
+        list_display += ('winnipeg_booking_id', 'get_related_bookings_winnipeg')
 
-        def get_fieldsets(self, request, obj=None):
-            return(
-                (None, {
-                    'description': 'Contact Info',
-                    'fields':   ('sales_rep','company_name', 'contact_name', 'contact_email', 'office_phone_number', 'direct_phone_number', 'total_spent', 'discount_amount', 'discount_percentage', 'select_cities')
-                }),
-                ('Additional Info', {
-                    'description': 'Additional Info',
-                    'classes': ('collapse',),
-                    'fields': ('address', 'city', 'province', 'postal_code','facebook_link', 'website_link', 'twitter_link')
-                }),
-                ('Toronto Fairs', {
-                    'description': 'Toronto Booking Details',
-                    'classes': ('collapse',),
-                    'fields': ('toronto_dates', 'toronto_date_1', 'toronto_date_2','toronto_booth_options','toronto_additional_booth_option_1', 'toronto_additional_booth_option_2')
-                }),
-                ('Calgary Fairs', {
-                    'description': 'Calgary Booking Details',
-                    'classes': ('collapse',),
-                    'fields': ('calgary_dates', 'calgary_date_1', 'calgary_date_2', 'calgary_date_3', 'calgary_booth_options', 'calgary_additional_booth_option_1', 'calgary_additional_booth_option_2','calgary_additional_booth_option_3', 'calgary_additional_lunch_option_1', 'calgary_additional_lunch_option_2','calgary_additional_lunch_option_3','calgary_options', 'calgary_diet_request_1', 'calgary_diet_request_2', 'calgary_diet_request_3', 'calgary_venue_options')
-                }),
-                ('Edmonton Fairs', {
-                    'description': 'Edmonton Booking Details',
-                    'classes': ('collapse',),
-                    'fields': ('edmonton_dates', 'edmonton_date_1', 'edmonton_date_2', 'edmonton_date_3','edmonton_date_4', 'edmonton_booth_options', 'edmonton_additional_booth_option_1', 'edmonton_additional_booth_option_2','edmonton_additional_booth_option_3','edmonton_additional_booth_option_4', 'edmonton_additional_lunch_option_1', 'edmonton_additional_lunch_option_2','edmonton_additional_lunch_option_3','edmonton_additional_lunch_option_4','edmonton_additional_breakfast_option_1','edmonton_additional_breakfast_option_2','edmonton_additional_breakfast_option_3','edmonton_additional_breakfast_option_4', 'edmonton_diet_request_1', 'edmonton_diet_request_2','edmonton_diet_request_3','edmonton_diet_request_4','edmonton_venue_options')
-                }),
-                ('Winnipeg Fairs', {
-                    'description': 'Calgary Booking Details',
-                    'classes': ('collapse',),
-                    'fields': ('winnipeg_dates', 'winnipeg_date_1', 'winnipeg_date_2', 'winnipeg_date_3', 'winnipeg_booth_options','winnipeg_additional_booth_option_1', 'winnipeg_additional_booth_option_2','winnipeg_additional_booth_option_3', 'winnipeg_additional_lunch_option_1','winnipeg_additional_lunch_option_2', 'winnipeg_additional_lunch_option_3', 'winnipeg_diet_request_1', 'winnipeg_diet_request_2', 'winnipeg_diet_request_3')
-                })
-            )
+
+        def get_related_bookings_toronto(self, obj):
+            try:
+                return obj.toronto_booking.toronto_dates, obj.toronto_booking.toronto_booth_options
+
+            except AttributeError:
+                return obj.toronto_booking
+        get_related_bookings_toronto.short_description = 'Toronto Details'
+
+        def get_related_bookings_calgary(self, obj):
+            try:
+                return obj.calgary_booking.calgary_dates, obj.calgary_booking.calgary_booth_options
+
+            except AttributeError:
+                return obj.calgary_booking
+        get_related_bookings_calgary.short_description = 'Calgary Details'
+
+        def get_related_bookings_edmonton(self, obj):
+            try:
+                return obj.edmonton_booking.edmonton_dates, obj.edmonton_booking.edmonton_booth_options
+
+            except AttributeError:
+                return obj.edmonton_booking
+        get_related_bookings_edmonton.short_description = 'edmonton Details'
+
+        def get_related_bookings_winnipeg(self, obj):
+            try:
+                return obj.winnipeg_booking.winnipeg_dates, obj.winnipeg_booking.winnipeg_booth_options
+
+            except AttributeError:
+                return obj.winnipeg_booking
+
+        get_related_bookings_winnipeg.short_description = 'winnipeg Details'
 
         def export_csv(modeladmin, request, queryset):
             import csv
@@ -120,5 +125,26 @@ class MyModelAdmin(admin.ModelAdmin):
         actions = [export_csv]
 
 
+class FairModelResource(import_export.resources.ModelResource):
+
+    class Meta:
+        model = TorontoFair
+
+
+class FairAdmin(import_export.admin.ImportExportModelAdmin):
+    list_display = ['id', 'related_sale', 'related_sale_id']
+    list_select_related = ['related_sale']
+    #list_display += ('toronto_booking_id', 'get_related_bookings_toronto')
+    search_fields = ['related_sale__id']
+    resource_class = FairModelResource
+
+
+
+
+
 # Register your models here.
 admin.site.register(SalesFormData, MyModelAdmin.SalesAdmin)
+admin.site.register(TorontoFair, FairAdmin)
+admin.site.register(CalgaryFair, FairAdmin)
+admin.site.register(EdmontonFair, FairAdmin)
+admin.site.register(WinnipegFair, FairAdmin)

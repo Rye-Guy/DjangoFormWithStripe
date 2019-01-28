@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 from cfcapp.forms import PaymentForm
 from cfcapp.models import SalesFormData
+from fairs.models import TorontoFair, CalgaryFair, EdmontonFair,  WinnipegFair
 
 class IndexPageView(TemplateView):
     template_name = 'base-html.html'
@@ -138,6 +139,7 @@ class IndexPageView(TemplateView):
             winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg_July 23rd, 2019', '-')
             winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg_July 23rd, 2019', '-')
             winnipeg_diet_request_3 = request.POST.get('diet_request_for_winnipeg_July 23rd, 2019', '-')
+
             m = SalesFormData(
                 sales_rep=sales_rep,
                 company_name=company_name,
@@ -157,64 +159,101 @@ class IndexPageView(TemplateView):
                 website_link=website_link,
                 twitter_link=twitter_link,
                 select_cities=select_cities_for_db,
-                toronto_dates=toronto_dates,
-                toronto_date_1=torontoList[0],
-                toronto_date_2=torontoList[1],
-                toronto_booth_options=toronto_booth_options,
-                toronto_additional_booth_option_1=toronto_additional_booth_option_1,
-                toronto_additional_booth_option_2=toronto_additional_booth_option_2,
-                calgary_dates=calgary_dates,
-                calgary_date_1=calgaryList[0],
-                calgary_date_2=calgaryList[1],
-                calgary_date_3=calgaryList[2],
-                calgary_booth_options=calgary_booth_options,
-                calgary_additional_booth_option_1=calgary_additional_booth_option_1,
-                calgary_additional_booth_option_2=calgary_additional_booth_option_2,
-                calgary_additional_booth_option_3=calgary_additional_booth_option_3,
-                calgary_additional_lunch_option_1=calgary_additional_lunch_option_1,
-                calgary_additional_lunch_option_2=calgary_additional_lunch_option_2,
-                calgary_additional_lunch_option_3=calgary_additional_lunch_option_3,
-                calgary_diet_request_1=calgary_diet_request_1,
-                calgary_diet_request_2=calgary_diet_request_2,
-                calgary_diet_request_3=calgary_diet_request_3,
-                calgary_venue_options=calgary_venue_options_for_db,
-                edmonton_dates=edmonton_dates,
-                edmonton_date_1=edmontonList[0],
-                edmonton_date_2=edmontonList[1],
-                edmonton_date_3=edmontonList[2],
-                edmonton_date_4=edmontonList[3],
-                edmonton_booth_options=edmonton_booth_options,
-                edmonton_additional_booth_option_1=edmonton_additional_booth_option_1,
-                edmonton_additional_booth_option_2=edmonton_additional_booth_option_2,
-                edmonton_additional_booth_option_3=edmonton_additional_booth_option_3,
-                edmonton_additional_booth_option_4=edmonton_additional_booth_option_4,
-                edmonton_additional_lunch_option_1=edmonton_additional_lunch_option_1,
-                edmonton_additional_lunch_option_2=edmonton_additional_lunch_option_2,
-                edmonton_additional_lunch_option_3=edmonton_additional_lunch_option_3,
-                edmonton_additional_lunch_option_4=edmonton_additional_lunch_option_4,
-                edmonton_additional_breakfast_option_1=edmonton_additional_breakfast_option_1,
-                edmonton_additional_breakfast_option_2=edmonton_additional_breakfast_option_2,
-                edmonton_additional_breakfast_option_3=edmonton_additional_breakfast_option_3,
-                edmonton_additional_breakfast_option_4=edmonton_additional_breakfast_option_4,
-                edmonton_venue_options=edmonton_venue_options_for_db,
-                edmonton_diet_request_1=edmonton_diet_request_1,
-                edmonton_diet_request_2=edmonton_diet_request_2,
-                edmonton_diet_request_3=edmonton_diet_request_3,
-                edmonton_diet_request_4=edmonton_diet_request_4,
-                winnipeg_dates=winnipeg_dates,
-                winnipeg_date_1=winnipegList[0],
-                winnipeg_date_2=winnipegList[1],
-                winnipeg_date_3=winnipegList[2],
-                winnipeg_booth_options=winnipeg_booth_options,
-                winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
-                winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,
-                winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3,
-                winnipeg_additional_lunch_option_1=winnipeg_additional_lunch_option_1,
-                winnipeg_additional_lunch_option_2=winnipeg_additional_lunch_option_2,
-                winnipeg_additional_lunch_option_3=winnipeg_additional_lunch_option_3,winnipeg_diet_request_1=winnipeg_diet_request_1,
-                winnipeg_diet_request_2=winnipeg_diet_request_2,
-                winnipeg_diet_request_3=winnipeg_diet_request_3
                 )
             m.save()
+            print(m.id)
+
+            if 'Toronto' in select_cities:
+                t_qs = TorontoFair(
+                    related_sale=m,
+                    toronto_dates=toronto_dates,
+                    toronto_date_1=torontoList[0],
+                    toronto_date_2=torontoList[1],
+                    toronto_booth_options=toronto_booth_options,
+                    toronto_additional_booth_option_1=toronto_additional_booth_option_1,
+                    toronto_additional_booth_option_2=toronto_additional_booth_option_2
+                )
+                t_qs.save()
+                m.toronto_booking = t_qs
+                m.save()
+
+
+            if 'Calgary' in select_cities:
+                c_qs = CalgaryFair(
+                    related_sale=m,
+                    calgary_dates=calgary_dates,
+                    calgary_date_1=calgaryList[0],
+                    calgary_date_2=calgaryList[1],
+                    calgary_date_3=calgaryList[2],
+                    calgary_booth_options=calgary_booth_options,
+                    calgary_additional_booth_option_2=calgary_additional_booth_option_2,
+                    calgary_additional_booth_option_1=calgary_additional_booth_option_1,
+                    calgary_additional_booth_option_3=calgary_additional_booth_option_3,
+                    calgary_additional_lunch_option_1=calgary_additional_lunch_option_1,
+                    calgary_additional_lunch_option_2=calgary_additional_lunch_option_2,
+                    calgary_additional_lunch_option_3=calgary_additional_lunch_option_3,
+                    calgary_diet_request_1=calgary_diet_request_1,
+                    calgary_diet_request_2=calgary_diet_request_2,
+                    calgary_diet_request_3=calgary_diet_request_3,
+                    calgary_venue_options=calgary_venue_options_for_db
+                )
+                c_qs.save()
+                m.calgary_booking = c_qs
+                m.save()
+
+            if 'Edmonton' in select_cities:
+                e_qs = EdmontonFair(
+                    related_sale=m,
+                    edmonton_dates=edmonton_dates,
+                    edmonton_date_1=edmontonList[0],
+                    edmonton_date_2=edmontonList[1],
+                    edmonton_date_3=edmontonList[2],
+                    edmonton_date_4=edmontonList[3],
+                    edmonton_booth_options=edmonton_booth_options,
+                    edmonton_additional_booth_option_1=edmonton_additional_booth_option_1,
+                    edmonton_additional_booth_option_2=edmonton_additional_booth_option_2,
+                    edmonton_additional_booth_option_3=edmonton_additional_booth_option_3,
+                    edmonton_additional_booth_option_4=edmonton_additional_booth_option_4,
+                    edmonton_additional_lunch_option_1=edmonton_additional_lunch_option_1,
+                    edmonton_additional_lunch_option_2=edmonton_additional_lunch_option_2,
+                    edmonton_additional_lunch_option_3=edmonton_additional_lunch_option_3,
+                    edmonton_additional_lunch_option_4=edmonton_additional_lunch_option_4,
+                    edmonton_additional_breakfast_option_1=edmonton_additional_breakfast_option_1,
+                    edmonton_additional_breakfast_option_2=edmonton_additional_breakfast_option_2,
+                    edmonton_additional_breakfast_option_3=edmonton_additional_breakfast_option_3,
+                    edmonton_additional_breakfast_option_4=edmonton_additional_breakfast_option_4,
+                    edmonton_venue_options=edmonton_venue_options_for_db,
+                    edmonton_diet_request_1=edmonton_diet_request_1,
+                    edmonton_diet_request_2=edmonton_diet_request_2,
+                    edmonton_diet_request_3=edmonton_diet_request_3,
+                    edmonton_diet_request_4=edmonton_diet_request_4
+                    )
+                e_qs.save()
+                m.edmonton_booking = e_qs
+                m.save()
+
+            if 'Winnipeg' in select_cities:
+                w_qs = WinnipegFair(
+                    related_sale=m,
+                    winnipeg_dates=winnipeg_dates,
+                    winnipeg_date_1=winnipegList[0],
+                    winnipeg_date_2=winnipegList[1],
+                    winnipeg_date_3=winnipegList[2],
+                    winnipeg_booth_options=winnipeg_booth_options,
+                    winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
+                    winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,
+                    winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3,
+                    winnipeg_additional_lunch_option_1=winnipeg_additional_lunch_option_1,
+                    winnipeg_additional_lunch_option_2=winnipeg_additional_lunch_option_2,
+                    winnipeg_additional_lunch_option_3=winnipeg_additional_lunch_option_3,
+                    winnipeg_diet_request_1=winnipeg_diet_request_1,
+                    winnipeg_diet_request_2=winnipeg_diet_request_2,
+                    winnipeg_diet_request_3=winnipeg_diet_request_3
+                )
+                w_qs.save()
+                m.winnipeg_booking = w_qs
+
+            m.save()
+
             return HttpResponseRedirect('/')
         return render(request, self.template_name, {'form': form})
