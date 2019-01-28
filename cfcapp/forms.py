@@ -56,7 +56,7 @@ class PaymentForm(forms.ModelForm):
         ('07-23-2019', 'July 23rd, 2019')
     )
 
-    TORONTO_BOOTH_OPTIONS = (
+    BOOTH_OPTIONS = (
         ('2995', 'Platinum - $2995'),
         ('2495', 'Gold - $2495'),
         ('1995', 'Silver  - $1995'),
@@ -121,7 +121,7 @@ class PaymentForm(forms.ModelForm):
     select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
 
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES, required=False)
-    toronto_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=TORONTO_BOOTH_OPTIONS, required=False)
+    toronto_booth_options = forms.ChoiceField(widget=forms.Select(attrs={'class': 'booth-options-select'}), choices=BOOTH_OPTIONS, required=False)
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES, required=False)
     calgary_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)

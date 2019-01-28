@@ -69,7 +69,14 @@
                     {% if form.errors.toronto_dates %}
                       {{form.errors.toronto_dates}}
                     {% endif %}
-                  <div class="date-options">{{form.toronto_dates}}</div>
+                  <div class="date-options">
+                      {{form.toronto_dates}}
+                        {% for date in form.toronto_dates %}
+                            {{form.toronto_booth_options}}
+                        {% endfor %}
+
+                  </div>
+
                 </div>
             </div>
           </div>

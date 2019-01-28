@@ -161,7 +161,6 @@ class IndexPageView(TemplateView):
                 select_cities=select_cities_for_db,
                 )
             m.save()
-            print(m.id)
 
             if 'Toronto' in select_cities:
                 t_qs = TorontoFair(

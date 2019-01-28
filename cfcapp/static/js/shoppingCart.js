@@ -12,7 +12,7 @@ edmontonCart = [0, 0, 0, 0]
 
 //query selectors that create arrays of relevent input elements for each section of the form. These are used later in the code with forEach loops to add custom behaviour depending on which form is being filled.
 allDatesCheckboxes = document.querySelectorAll('input.dates-select')
-allBoothOptionsRadios = document.querySelectorAll('input.booth-options-select')
+allBoothOptionsRadios = document.querySelectorAll('.booth-options-select')
 allAdditionalOptions = document.querySelectorAll('input.fair-options')
 if(document.getElementById('discountCheckbox')){
     document.getElementById('discountCheckbox').checked = true
@@ -23,6 +23,38 @@ function createOptions(elem){
         createOption.innerText = i
         createOption.value = i
         elem.append(createOption)
+    }
+}
+
+function createAdditionalBoothOptions(elem){
+    for(i = 0; i<= 4; i++){
+        switch(i){
+            case 0:
+                createOption = document.createElement('option')
+                createOption.innerText = 'Bronze'
+                createOption.value = 1495
+                    elem.append(createOption)
+                break
+            case 1:
+                createOption = document.createElement('option')
+                createOption.innerText = 'Silver'
+                createOption.value = 1995
+                       elem.append(createOption)
+                break
+            case 2:
+                createOption = document.createElement('option')
+                createOption.innerText = 'Gold'
+                createOption.value = 2495
+                 elem.append(createOption)
+                break
+           case 3:
+                createOption = document.createElement('option')
+                createOption.innerText = 'Platinum'
+                createOption.value = 2995
+                 elem.append(createOption)
+                break
+
+         }
     }
 }
 
@@ -44,6 +76,9 @@ function dateCheck(input){
              cartItem.id = cartText
              cartItem.innerText = cartText
              shoppingCart.append(cartItem)
+             boothOptionSelect = document.createElement('select')
+             boothOptionLabel = document.createElement('label')
+             boothOptionLabel.innerText = 'Booth Options:'
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
@@ -59,12 +94,16 @@ function dateCheck(input){
              selectLabel.innerText = ' Extra Booth: '
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
+                boothOptionSelect.setAttribute('name', 'booth_option_toronto_'+cartText)
+                boothOptionSelect.id = 'booth_option_toronto_'+cartText
                 additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto_'+cartText)
                 additionalBoothOption.id = 'additional_booth_option_toronto_' + cartText
+                createAdditionalBoothOptions(boothOptionSelect)
                 createOptions(additionalBoothOption)
+                boothOptionLabel.append(boothOptionSelect)
                 selectLabel.append(additionalBoothOption)
-                input.parentElement.append(document.createElement('br'), selectLabel)
-                cartItem.innerHTML += '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
+                input.parentElement.append(document.createElement('br'), selectLabel, boothOptionLabel)
+                cartItem.innerHTML += boothOptionSelect.innerText + '<br>' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
                 cartItem.innerHTML += `<h5>Toronto Career Fair <br>${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
@@ -172,20 +211,21 @@ allDatesCheckboxes.forEach((input)=>{
     dateCheck(input)
 })
 function boothOptionCheck(input){
-        parentUl = input.parentElement.parentElement.parentElement.id
+        parentUl = input.id
         cartItem = document.createElement('li')
         cartItemText = input.parentElement.innerText
         cartItem.innerText = cartItemText
         boothValue = parseInt(input.getAttribute('value'))
+        console.log(input)
+        console.log(parentUl)
         //double up if statements for every input check to what booth option was click and if the cartItem exists in the cart go remove it so we can add a new one and show to the user that their selection change is reflected in the cart.
-        if(input.checked){
+        if(input){
            if(parentUl == 'id_toronto_booth_options'){
               if(document.getElementById('torontoSingleCartItem')){
                  document.getElementById('torontoSingleCartItem').remove()
               }
               cartItem.id = 'torontoSingleCartItem'
               shoppingCart.append(cartItem)
-              torontoCart[1] = boothValue
               amountSpent = calculateTotal(torontoCart)
            }
            if(parentUl == 'id_calgary_booth_options'){
@@ -194,7 +234,6 @@ function boothOptionCheck(input){
               }
               cartItem.id = 'calgarySingleCartItem'
               shoppingCart.append(cartItem)
-              calgaryCart[1] = boothValue
               amountSpent = calculateTotal(calgaryCart)
            }
            if(parentUl == 'id_edmonton_booth_options'){
@@ -203,7 +242,6 @@ function boothOptionCheck(input){
               }
               cartItem.id = 'edmontonSingleCartItem'
               shoppingCart.append(cartItem)
-              edmontonCart[1] = boothValue
               amountSpent = calculateTotal(edmontonCart)
            }
            if(parentUl == 'id_winnipeg_booth_options'){
@@ -212,7 +250,6 @@ function boothOptionCheck(input){
               }
               cartItem.id = 'winnipegSingleCartItem'
               shoppingCart.append(cartItem)
-              winnipegCart[1] = boothValue
               amountSpent = calculateTotal(winnipegCart)
            }
     }
@@ -245,6 +282,15 @@ allAdditionalOptions.forEach((input)=>{
 })
 
 function additionalCartItems(cityName, fairDate, cart){
+    if(document.getElementById(`booth_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`boothOption_${fairDate}`)){
+              document.getElementById(`boothOption_${fairDate}`).innerText = document.getElementById(`booth_option_${cityName}_${fairDate}`).value
+        }
+        console.log(document.getElementById(`booth_option_${cityName}_${fairDate}`).value)
+        boothOption = parseInt(document.getElementById(`booth_option_${cityName}_${fairDate}`).value)
+        console.log(boothOption)
+        cart[1] += boothOption
+    }
     //check for the existence of additional booths. If they do calculate the value and add it to our cart.
     if(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`extraBoothValue_${fairDate}`)){
@@ -273,7 +319,7 @@ function additionalCartItems(cityName, fairDate, cart){
 }
 
 function calculateTotal(cartName){
-    return parseInt(cartName[0] * cartName[1]) + (cartName[0] * cartName[2]) + cartName[3]
+    return parseInt(cartName[0] + cartName[1] + (cartName[0] * cartName[2]) + cartName[3])
 }
 
 function applyDiscount(grandTotal, typeOfDiscount){
@@ -294,6 +340,7 @@ function applyDiscount(grandTotal, typeOfDiscount){
 }
 
 function calculateGrandTotal(){
+       torontoCart[1] = 0
        torontoCart[3] = 0
        winnipegCart[3] = 0
        edmontonCart[3] = 0
@@ -318,7 +365,7 @@ function calculateGrandTotal(){
        typeOfDiscount = document.getElementById('discountCheckbox')
        amountToDiscount = applyDiscount(grandTotal, typeOfDiscount)
        totalAfterDiscount = grandTotal - amountToDiscount
-       console.log(grandTotal, amountToDiscount, totalAfterDiscount)
+//       console.log(grandTotal, amountToDiscount, totalAfterDiscount)
        typeOfTax = document.getElementById('id_province').value
        switch(typeOfTax) {
             case '-':
@@ -364,10 +411,10 @@ function calculateGrandTotal(){
                 typeOfTax = 0.05;
                 break;
        }
-       console.log(typeOfTax)
+//       console.log(typeOfTax)
        parseInt(typeOfTax, totalAfterDiscount)
        taxToCharge = typeOfTax * totalAfterDiscount
-       console.log(taxToCharge)
+//       console.log(taxToCharge)
        document.getElementById('priceValue').innerText = grandTotal
        document.getElementById('discountValue').innerText = amountToDiscount
        document.getElementById('discountHiddenInput').value = `$${amountToDiscount}`
