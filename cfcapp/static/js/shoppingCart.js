@@ -195,7 +195,7 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br><div style="height: 12px">' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Winnipeg Career Fair <br>${cartText}</h5>`
                 winnipegCart[0]++
              }

@@ -12,7 +12,11 @@ class SalesDataModelResource(import_export.resources.ModelResource):
 class MyModelAdmin(admin.ModelAdmin):
 
     class SalesAdmin(import_export.admin.ImportExportModelAdmin):
-        
+
+        admin.AdminSite.site_header = 'Career Fair Canada Admin'
+        admin.AdminSite.site_title = 'Career Fair | Admin'
+        admin.AdminSite.index_title = 'Career Fair Canada Admin'
+
         def get_queryset(self, request):
             qs = super(MyModelAdmin.SalesAdmin, self).get_queryset(request)
             if request.user.is_superuser:
@@ -132,11 +136,18 @@ class FairModelResource(import_export.resources.ModelResource):
 
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
-    list_display = ['id', 'related_sale', 'related_sale_id']
-    list_select_related = ['related_sale']
+    list_display = ['id', 'get_related_data','related_sale']
     #list_display += ('toronto_booking_id', 'get_related_bookings_toronto')
     search_fields = ['related_sale__id']
     resource_class = FairModelResource
+
+    def get_related_data(self, obj):
+        try:
+            return obj.related_sale.company_name
+
+        except AttributeError:
+            return obj.related_sale
+    get_related_data.short_description = 'Company Name'
 
 
 

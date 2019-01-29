@@ -28,7 +28,7 @@
     {% if request.user.is_staff %}
     <div class='staffPermissionsSection'>
       <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
-      <div id='discountInput'><h3>Enter Discount:</h3> {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></div>
+      <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
     </div>
     {% endif %}
     {% csrf_token %}
