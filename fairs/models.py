@@ -4,16 +4,22 @@ from django.db import models
 class TorontoFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
     toronto_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
-    toronto_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     toronto_date_1 = models.CharField(max_length=400, blank=True, default='-')
     toronto_date_2 = models.CharField(max_length=400, blank=True, default='-')
+    toronto_booth_option_1 = models.CharField(max_length=100, default='-')
+    toronto_booth_option_2 = models.CharField(max_length=100, default='-')
     toronto_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     toronto_additional_booth_option_2 = models.CharField(max_length=400, default='-')
 
 class CalgaryFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
     calgary_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
-    calgary_booth_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    calgary_booth_option_1 = models.CharField(max_length=100, default='-')
+
+    calgary_booth_option_2 = models.CharField(max_length=100, default='-')
+
+    calgary_booth_option_3 = models.CharField(max_length=100, default='-')
+
     calgary_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_date_1 = models.CharField(max_length=400, blank=True, default='-')
     calgary_date_2 = models.CharField(max_length=400, blank=True, default='-')
@@ -37,6 +43,10 @@ class EdmontonFair(models.Model):
     edmonton_date_2 = models.CharField(max_length=400, blank=True, default='-')
     edmonton_date_3 = models.CharField(max_length=400, blank=True, default='-')
     edmonton_date_4 = models.CharField(max_length=400, blank=True, default='-')
+    edmonton_booth_option_1 = models.CharField(max_length=100, default='-')
+    edmonton_booth_option_2 = models.CharField(max_length=100, default='-')
+    edmonton_booth_option_3 = models.CharField(max_length=100, default='-')
+    edmonton_booth_option_4 = models.CharField(max_length=100, default='-')
     edmonton_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     edmonton_additional_booth_option_2 = models.CharField(max_length=400, default='-')
     edmonton_additional_booth_option_3 = models.CharField(max_length=400, default='-')
@@ -62,6 +72,9 @@ class WinnipegFair(models.Model):
     winnipeg_date_1 = models.CharField(max_length=400, blank=True, default='-')
     winnipeg_date_2 = models.CharField(max_length=400, blank=True, default='-')
     winnipeg_date_3 = models.CharField(max_length=400, blank=True, default='-')
+    winnipeg_booth_option_1 = models.CharField(max_length=100, default='-')
+    winnipeg_booth_option_2 = models.CharField(max_length=100, default='-')
+    winnipeg_booth_option_3 = models.CharField(max_length=100, default='-')
     winnipeg_additional_booth_option_1 = models.CharField(max_length=400, default='-')
     winnipeg_additional_booth_option_2 = models.CharField(max_length=400, default='-')
     winnipeg_additional_booth_option_3 = models.CharField(max_length=400, default='-')

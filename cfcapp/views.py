@@ -84,7 +84,8 @@ class IndexPageView(TemplateView):
                         listToEdit[3] = datesArray[date]
 
             check_incoming_fair_dates(toronto_dates, torontoDatesArray, torontoList)
-            toronto_booth_options = request.POST.get('toronto_booth_options', '')
+            toronto_booth_option_1 = request.POST.get('booth_option_toronto_April 24th, 2018', '')
+            toronto_booth_option_2 = request.POST.get('booth_option_toronto_September 17th, 2019', '')
             toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto_April 24th, 2018', '-')
             toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto_September 17th, 2019', '-')
             calgary_dates = request.POST.getlist('calgary_dates')
@@ -92,6 +93,9 @@ class IndexPageView(TemplateView):
             calgary_booth_options = request.POST.get('calgary_booth_options', '')
             calgary_options = request.POST.getlist('calgary_options')
             calgary_options_for_db = ', '.join(calgary_options)
+            calgary_booth_option_1 = request.POST.get('booth_option_calgary_March 12th, 2019', '')
+            calgary_booth_option_2 = request.POST.get('booth_option_calgary_June 26th, 2019', '')
+            calgary_booth_option_3 = request.POST.get('booth_option_calgary_October 22nd, 2019', '')
             calgary_additional_booth_option_1 = request.POST.get('additional_booth_option_calgary_March 12th, 2019', '-')
             calgary_additional_lunch_option_1 = request.POST.get('additional_lunch_option_calgary_March 12th, 2019', '-')
             calgary_diet_request_1 = request.POST.get('diet_request_for_calgary_March 12th, 2019', '')
@@ -105,7 +109,10 @@ class IndexPageView(TemplateView):
             calgary_venue_options_for_db = ', '.join(calgary_venue_options)
             edmonton_dates = request.POST.getlist('edmonton_dates')
             check_incoming_fair_dates(edmonton_dates, edmontonDatesArray, edmontonList)
-            edmonton_booth_options = request.POST.get('edmonton_booth_options', '')
+            edmonton_booth_option_1 = request.POST.get('booth_option_edmonton_January 29th, 2019', '')
+            edmonton_booth_option_2 = request.POST.get('booth_option_edmonton_May 28th, 2019', '')
+            edmonton_booth_option_3 = request.POST.get('booth_option_edmonton_August 13th, 2019', '')
+            edmonton_booth_option_4 = request.POST.get('booth_option_edmonton_November 19th, 2019', '')
             edmonton_additional_booth_option_1 = request.POST.get('additional_booth_option_edmonton_January 29th, 2019', '-')
             edmonton_additional_lunch_option_1 = request.POST.get('additional_lunch_option_edmonton_January 29th, 2019', '-')
             edmonton_additional_breakfast_option_1 = request.POST.get('additional_breakfast_option_edmonton_January 29th, 2019', '-')
@@ -128,8 +135,10 @@ class IndexPageView(TemplateView):
             winnipeg_dates = request.POST.getlist('winnipeg_dates')
             check_incoming_fair_dates(winnipeg_dates, winnipegDatesArray, winnipegList)
             
-            winnipeg_booth_options = request.POST.get('winnipeg_booth_options', '')
-            
+            winnipeg_booth_option_1 = request.POST.get('booth_option_winnipeg_April 2nd, 2019', '')
+            winnipeg_booth_option_2 = request.POST.get('booth_option_winnipeg_July 10th, 2019', '')
+            winnipeg_booth_option_3 = request.POST.get('booth_option_winnipeg_July 23rd, 2019', '')
+
             winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg_April 2nd, 2019', '-')
             winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg_April 2nd, 2019', '-')
             winnipeg_diet_request_1 = request.POST.get('diet_request_for_winnipeg_April 2nd, 2019', '')
@@ -168,7 +177,8 @@ class IndexPageView(TemplateView):
                     toronto_dates=toronto_dates,
                     toronto_date_1=torontoList[0],
                     toronto_date_2=torontoList[1],
-                    toronto_booth_options=toronto_booth_options,
+                    toronto_booth_option_1=toronto_booth_option_1,
+                    toronto_booth_option_2=toronto_booth_option_2,
                     toronto_additional_booth_option_1=toronto_additional_booth_option_1,
                     toronto_additional_booth_option_2=toronto_additional_booth_option_2
                 )
@@ -184,7 +194,9 @@ class IndexPageView(TemplateView):
                     calgary_date_1=calgaryList[0],
                     calgary_date_2=calgaryList[1],
                     calgary_date_3=calgaryList[2],
-                    calgary_booth_options=calgary_booth_options,
+                    calgary_booth_option_1=calgary_booth_option_1,
+                    calgary_booth_option_2=calgary_booth_option_2,
+                    calgary_booth_option_3=calgary_booth_option_3,
                     calgary_additional_booth_option_2=calgary_additional_booth_option_2,
                     calgary_additional_booth_option_1=calgary_additional_booth_option_1,
                     calgary_additional_booth_option_3=calgary_additional_booth_option_3,
@@ -208,7 +220,10 @@ class IndexPageView(TemplateView):
                     edmonton_date_2=edmontonList[1],
                     edmonton_date_3=edmontonList[2],
                     edmonton_date_4=edmontonList[3],
-                    edmonton_booth_options=edmonton_booth_options,
+                    edmonton_booth_option_1=edmonton_booth_option_1,
+                    edmonton_booth_option_2=edmonton_booth_option_2,
+                    edmonton_booth_option_3=edmonton_booth_option_3,
+                    edmonton_booth_option_4=edmonton_booth_option_4,
                     edmonton_additional_booth_option_1=edmonton_additional_booth_option_1,
                     edmonton_additional_booth_option_2=edmonton_additional_booth_option_2,
                     edmonton_additional_booth_option_3=edmonton_additional_booth_option_3,
@@ -238,7 +253,9 @@ class IndexPageView(TemplateView):
                     winnipeg_date_1=winnipegList[0],
                     winnipeg_date_2=winnipegList[1],
                     winnipeg_date_3=winnipegList[2],
-                    winnipeg_booth_options=winnipeg_booth_options,
+                    winnipeg_booth_option_1=winnipeg_booth_option_1,
+                    winnipeg_booth_option_2=winnipeg_booth_option_2,
+                    winnipeg_booth_option_3=winnipeg_booth_option_3,
                     winnipeg_additional_booth_option_1=winnipeg_additional_booth_option_1,
                     winnipeg_additional_booth_option_2=winnipeg_additional_booth_option_2,
                     winnipeg_additional_booth_option_3=winnipeg_additional_booth_option_3,

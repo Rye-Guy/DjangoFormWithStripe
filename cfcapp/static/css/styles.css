@@ -65,10 +65,6 @@ li{
     flex-wrap: wrap;
 }
 
-#id_toronto_dates > li > label{
-    max-width: 390px
-}
-
 .row{
     width: 100%
 }
@@ -85,13 +81,11 @@ li > label > input + br + label{
 
 .date-options li{
     display: flex;
-    height: 42px;
     align-items: center;
+    margin-right: 36px;
 }
 
 ul > li > label{
-    display: flex;
-    align-items: baseline;
     margin-right: 32px;
 }
 
@@ -103,70 +97,77 @@ ul > li > label{
     width: 132px;
     height: 46px;
     border-color: #2196F3;
-    position: fixed;
-}
-/* div .btn{
-    left: 80px;
-    bottom: 80px;
-} */
-div .btn{
-    right: 48px;
-    bottom: 124px;
 }
 
 #viewCartBtn{
     left: 80px;
     bottom: 80px;
+    background: #2196F3;
+    color: #fff;
+    width: 132px;
+    height: 46px;
+    border-color: #2196F3;
+    position: fixed;
+}
+#viewCartBtn:hover {
+   background:#fff;
+    color: #2196F3;
+    transition:all 150ms ease-out;
 }
 
-.btn:hover{
+.btn:hover {
     background:#fff;
     color: #2196F3;
     transition:all 150ms ease-out;
 }
 /*checkbox styling*/
+/*
 input[type='checkbox']:checked {
-    border-color:#2196F3;
+    border-color:#2196F3 !important;
   }
 
   input[type='checkbox']::after {
-    background:#2196F3;
+    background:#2196F3 !important;
   }
 
   input[type='checkbox'] {
-    appearance:none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-    border:2px solid #9e9e9e;
-    width:18px;
-    height:18px;
-    border-radius:2px;
-    cursor:pointer;
-    transition:all 150ms ease-out;
-    margin-right: 8px;
+    content:"\E5CA" !important;
+    font-family:"material icons";
+    appearance:none !important;
+    -moz-appearance:none !important;
+    -webkit-appearance:none !important;
+    border:2px solid #9e9e9e !important;
+    width:18px !important;
+    height:18px !important;
+    border-radius:2px !important;
+    cursor:pointer !important;
+    transition:all 150ms ease-out !important;
+    margin-right: 8px !important;
   }
-  
+
   input[type='checkbox']:checked {
      border-width:9px;
+     content:"\E5CA" !important;
+    font-family:"material icons" !important;
   }
-  
+
   input[type='checkbox']::before {
-    content:"\E5CA";
-    position:absolute;
-    font-family:"material icons";
-    font-size:18px;
-    margin-top:0px;
-    margin-left:-2px;
-    transform:scale(0);
-    transition:all 150ms ease-out;
-    color:#fff;
+    content:"\E5CA" !important;
+    font-family:"material icons" !important;
+    font-size:18px !important;
+    margin-top:0px !important;
+    margin-left:-2px !important;
+    transform:scale(0) !important;
+    transition:all 150ms ease-out !important;
+    color:#fff !important;
+
   }
-  
+
   input[type='checkbox']:checked::before {
-    transform:scale(1);
-    margin-top:-9px;
-    margin-left:-9px;
-  }
+    transform:scale(1) !important;
+    margin-top:-9px !important;
+    margin-left:-9px !important;
+  }  */
 
   /*radio styling*/
   
@@ -274,7 +275,7 @@ input:empty + span{
 }
 
 input:focus + span{
-    top: -64px
+    top: -72px
 }
 
 .helperTextRemain{
@@ -296,15 +297,6 @@ input:focus + span{
     margin-right: 6px;
 }
 
-.fair-options-container{
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    left: 80px;
-    height: 340px;
-    align-items: center;
-    width: 100%;
-}
 
 .booth-options-select{
     display: flex;
@@ -319,14 +311,8 @@ input:focus + span{
 .venue-options{
     margin-top: -20px;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
 }
 
-.fair-options{
-    display: flex;
-    padding: 0;
-}
 
 #billingInfoTrigger{
     left: 80px;
@@ -337,10 +323,6 @@ input:focus + span{
     margin-top: 16px;
     margin-bottom: 16px;
     padding-left: 24px;
-}
-
-#allFairsContainer{
-    position: relative;
 }
 
 label select{
@@ -366,10 +348,122 @@ label input{
 .staffPermissionsSection{
     position: absolute;
     top: 0;
+    display: flex;
 }
 
 #cartContainer{
     overflow: hidden;
     height: 550px;
     overflow-y: scroll;
+}
+
+select{
+    display: block;
+}
+
+
+label{
+    font-size: 16px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    width: 350px;
+}
+
+h3{
+    font-size: 16px;
+}
+
+#accountOwner{
+    width: 240px;
+    margin-right: 52px;
+}
+
+[type="checkbox"]+span:not(.lever){
+    position: relative;
+    top: -30px;
+    pointer-events: all;
+    right: -355px;
+}
+
+#discountCheckbox{
+    top: 70px;
+    right: -48px;
+    pointer-events: all;
+    z-index: 1000000000;
+}
+
+.dates-select{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1200px;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked{
+    opacity: 0;
+    position: relative;
+    display: none;
+}
+
+
+
+
+label[for='id_select_cities_0'], label[for='id_select_cities_1'], label[for='id_select_cities_2'], label[for='id_select_cities_3']{
+    border:1px solid #ccc;
+ padding:10px;
+ margin:0 0 10px;
+ display:block;
+ text-align: center
+
+}
+
+label[for='id_select_cities_0']:hover, label[for='id_select_cities_1']:hover, label[for='id_select_cities_2']:hover, label[for='id_select_cities_3']:hover{
+ background:#eee;
+ cursor:pointer;
+}
+
+div > ul > li > label {
+border:1px solid #ccc;
+ padding:10px;
+ margin:0 0 10px;
+ display:block;
+ text-align: center
+}
+
+div > ul > li > label:hover {
+ background:#eee;
+ cursor:pointer;
+}
+
+#allFairsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.toronto-container, .winnipeg-container, .calgary-container, .edmonton-container{
+    border-bottom: black solid 1px;
+    margin-bottom: 46px;
+}
+
+@media (max-width: 1199px) {
+    .dates-select{
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+    }
+}
+
+@media (max-width: 799px) {
+    .dates-select{
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    }
+    .staffPermissionsSection{
+        flex-direction: column
+    }
+
+    div > h1{
+        margin-top: 170px;
+    }
 }

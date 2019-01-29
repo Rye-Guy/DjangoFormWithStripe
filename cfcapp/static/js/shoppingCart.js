@@ -17,6 +17,7 @@ allAdditionalOptions = document.querySelectorAll('input.fair-options')
 if(document.getElementById('discountCheckbox')){
     document.getElementById('discountCheckbox').checked = true
 }
+
 function createOptions(elem){
     for(i = 0; i <= 5; i++){
         createOption = document.createElement('option')
@@ -33,25 +34,25 @@ function createAdditionalBoothOptions(elem){
                 createOption = document.createElement('option')
                 createOption.innerText = 'Bronze'
                 createOption.value = 1495
-                    elem.append(createOption)
+                elem.append(createOption)
                 break
             case 1:
                 createOption = document.createElement('option')
                 createOption.innerText = 'Silver'
                 createOption.value = 1995
-                       elem.append(createOption)
+                elem.append(createOption)
                 break
             case 2:
                 createOption = document.createElement('option')
                 createOption.innerText = 'Gold'
                 createOption.value = 2495
-                 elem.append(createOption)
+                elem.append(createOption)
                 break
            case 3:
                 createOption = document.createElement('option')
                 createOption.innerText = 'Platinum'
                 createOption.value = 2995
-                 elem.append(createOption)
+                elem.append(createOption)
                 break
 
          }
@@ -133,7 +134,7 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 dietRequestLabel.append(dietRequest)
                 //now create the rest of our cart item to display to the user
-                input.parentElement.append( boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
                 cartItem.innerHTML += boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Calgary Career Fair <br>${cartText}</h5>`
                 calgaryCart[0]++
@@ -166,7 +167,7 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
                 cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
                 cartItem.innerHTML += `<h5>Edmonton Career Fair <br>${cartText}</h5>`
                 edmontonCart[0]++
@@ -193,8 +194,8 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br><div style="height: 12px">' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Winnipeg Career Fair <br>${cartText}</h5>`
                 winnipegCart[0]++
              }

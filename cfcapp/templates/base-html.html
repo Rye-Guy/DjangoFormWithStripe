@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
   <link rel="icon" href='{% static "favicon/favicon.ico" %}'type="image/x-icon"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
   <link type="text/css" href='{% static "css/animate-min.css" %}' rel="stylesheet">
@@ -27,7 +28,7 @@
     {% if request.user.is_staff %}
     <div class='staffPermissionsSection'>
       <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
-      <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
+      <div id='discountInput'><h3>Enter Discount:</h3> {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></div>
     </div>
     {% endif %}
     {% csrf_token %}
@@ -49,7 +50,6 @@
     </div>
     <h2>Fair Locations</h2>
   <div id='allFairsContainer'>
-    <div class="select-cities-row">
       {% for text, field in form.select_cities.field.choices %}
           {% if text == 'Toronto' %}
           <div class="toronto-container">
@@ -146,14 +146,14 @@
           {% endif %}
       {% endfor %}
     </div>
-  </div>
+
     {% if form.errors %}
       {{form.errors}}
     {% endif %}
     <input type="hidden" id="priceInput" name="price" value="">
     <input type="hidden" id="discountPercentHiddenInput" name='discountPercent' value="">
     <input type="hidden" id="discountHiddenInput" name='discountAmount' value="">
-    <input class='btn'id="viewCartBtn" type="submit" value="View Cart">
+    <input class='btn' id="viewCartBtn" type="submit" value="View Cart">
     <div id="priceBreakdown">
        <div id='cartContainer'>
           <ul id="shoppingCart">

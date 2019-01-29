@@ -63,25 +63,6 @@ class PaymentForm(forms.ModelForm):
         ('1495', 'Bronze - $1495')
     )
 
-    CALGARY_BOOTH_OPTIONS = (
-        ('2995', 'Platinum - $2995'),
-        ('2495', 'Gold - $2495'),
-        ('1995', 'Silver - $1995'),
-        ('1495', 'Bronze - $1495')
-    )
-    EDMONTON_BOOTH_OPTIONS = (
-        ('2995', 'Platinum - $2995'),
-        ('2495', 'Gold - $2495'),
-        ('1995', 'Silver - $1995'),
-        ('1495', 'Bronze - $1495')
-    )
-    WINNIPEG_BOOTH_OPTIONS = (
-        ('2995', 'Platinum - $2995'),
-        ('2495', 'Gold - $2495'),
-        ('1995', 'Silver - $1995'),
-        ('1495', 'Bronze - $1495')
-    )
-
     CALGARY_FAIR_OPTIONS = (
         ('Electricity', 'Access to Electricity'),
         ('Internet', 'Internet Access')
@@ -118,21 +99,18 @@ class PaymentForm(forms.ModelForm):
     
 
 
-    select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CITY_CHOICES, required=False)
+    select_cities = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'btn'}), choices=CITY_CHOICES, required=False)
 
     toronto_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=TORONTO_DATES, required=False)
     # toronto_booth_options = forms.ChoiceField(widget=forms.Select(attrs={'class': 'booth-options-select'}), choices=BOOTH_OPTIONS, required=False)
 
     calgary_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=CALGARY_DATES, required=False)
-    calgary_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=CALGARY_BOOTH_OPTIONS, required=False)
     calgary_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}), choices=CALGARY_FAIR_OPTIONS, required=False)
 
     edmonton_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=EDMONTON_DATES, required=False)
-    edmonton_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=EDMONTON_BOOTH_OPTIONS, required=False)
     edmonton_options = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'fair-options'}),choices=EDMONTON_FAIR_OPTIONS, required=False)
 
     winnipeg_dates = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': 'dates-select'}), choices=WINNIPEG_DATES, required=False)
-    winnipeg_booth_options = forms.ChoiceField(widget=forms.RadioSelect(attrs={'class': 'booth-options-select'}), choices=WINNIPEG_BOOTH_OPTIONS, required=False)
 
     def clean(self):
         cleaned_data = super().clean()

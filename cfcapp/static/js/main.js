@@ -38,7 +38,7 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked){
                 calgaryContainer = document.getElementById('CalgaryFairOptionsContainer')
-                calgaryContainer.style.display = 'flex'
+                calgaryContainer.style.display = 'block'
                 calgaryContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Calgary' && clicked_box_id.checked == false){
                 calgaryContainer.style.display = 'none'
@@ -54,7 +54,7 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked){
                 edmontonContainer = document.getElementById('EdmontonFairOptionsContainer')
-                edmontonContainer.style.display = 'flex'
+                edmontonContainer.style.display = 'block'
                 edmontonContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Edmonton' && clicked_box_id.checked  == false){
                 edmontonContainer.style.display = 'none'
@@ -69,7 +69,7 @@ checkboxes.forEach((elem) =>{
                 })
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked){
                 winnipegContainer = document.getElementById('WinnipegFairOptionsContainer')
-                winnipegContainer.style.display = 'flex'
+                winnipegContainer.style.display = 'block'
                 winnipegContainer.style.top = 0 + 'px'
             }else if(checked_box_name === 'Winnipeg' && clicked_box_id.checked  == false){
                 winnipegContainer.style.display = 'none'
