@@ -103,11 +103,6 @@ class MyModelAdmin(admin.ModelAdmin):
                             return ['-', '-', '-','-','-','-','-','-','-','-','-','-','-','-','-','-','-']
                 except AttributeError:
                     return None
-
-
-
-
-
             writer.writerow((
                 smart_str(u"Order ID"),
                 smart_str(u"Company Name"),
