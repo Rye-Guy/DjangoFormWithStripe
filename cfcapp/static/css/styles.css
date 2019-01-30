@@ -451,10 +451,11 @@ h5{
 
 
 @media (max-width: 1199px) {
+
     .dates-select{
-    display: flex;
-    flex-wrap: wrap;
-    width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 800px;
     }
 }
 

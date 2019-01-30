@@ -15,11 +15,8 @@ class CalgaryFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
     calgary_dates = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_booth_option_1 = models.CharField(max_length=100, default='-')
-
     calgary_booth_option_2 = models.CharField(max_length=100, default='-')
-
     calgary_booth_option_3 = models.CharField(max_length=100, default='-')
-
     calgary_options = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_date_1 = models.CharField(max_length=400, blank=True, default='-')
     calgary_date_2 = models.CharField(max_length=400, blank=True, default='-')
