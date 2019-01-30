@@ -86,17 +86,25 @@ class MyModelAdmin(admin.ModelAdmin):
                     elif key == 'calgary':
                         try:
                             obj = obj.calgary_booking
-                            return obj, obj.calgary_dates, obj.calgary_booth_option_1, obj.calgary_booth_option_2, obj.calgary_booth_option_3, obj.calgary_options, obj.calgary_date_1, obj.calgary_date_2, obj.calgary_date_3, obj.calgary_additional_booth_option_1, obj.calgary_additional_booth_option_2, obj.calgary_additional_booth_option_3, obj.calgary_additional_lunch_option_1, obj.calgary_additional_lunch_option_2, obj.calgary_additional_lunch_option_3, obj.calgary_diet_request_1, obj.calgary_diet_request_2, obj.calgary_diet_request_3, obj.calgary_venue_options
+                            return obj, obj.calgary_dates, obj.calgary_booth_option_1, obj.calgary_booth_option_2, obj.calgary_booth_option_3,  obj.calgary_date_1, obj.calgary_date_2, obj.calgary_date_3, obj.calgary_additional_booth_option_1, obj.calgary_additional_booth_option_2, obj.calgary_additional_booth_option_3, obj.calgary_additional_lunch_option_1, obj.calgary_additional_lunch_option_2, obj.calgary_additional_lunch_option_3, obj.calgary_diet_request_1, obj.calgary_diet_request_2, obj.calgary_diet_request_3, obj.calgary_venue_options
                         except AttributeError:
-                            return ['-', '-', '-', '-', '-', '-', '-','-', '-', '-', '-', '-', '-', '-','-', '-', '-', '-']
+                            return ['-', '-', '-', '-', '-', '-', '-','-', '-', '-', '-', '-', '-', '-','-', '-', '-', '-', '-']
                     elif key == 'edmonton':
                         try:
-                            pass
+                            obj = obj.edmonton_booking
+                            return obj, obj.edmonton_dates, obj.edmonton_date_1, obj.edmonton_date_2, obj.edmonton_date_3, obj.edmonton_date_4, obj.edmonton_booth_option_1, obj.edmonton_booth_option_2, obj.edmonton_booth_option_3, obj.edmonton_booth_option_4, obj.edmonton_additional_booth_option_1, obj.edmonton_additional_booth_option_2, obj.edmonton_additional_booth_option_3, obj.edmonton_additional_booth_option_4, obj.edmonton_additional_lunch_option_1, obj.edmonton_additional_lunch_option_2, obj.edmonton_additional_lunch_option_3, obj.edmonton_additional_lunch_option_4, obj.edmonton_additional_breakfast_option_1, obj.edmonton_additional_breakfast_option_2,  obj.edmonton_additional_breakfast_option_3, obj. edmonton_additional_breakfast_option_4, obj.edmonton_diet_request_1, obj.edmonton_diet_request_2, obj.edmonton_diet_request_3, obj.edmonton_diet_request_4, obj.edmonton_venue_options
                         except AttributeError:
-                            return ['']
-
+                            return ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+                    elif key == 'winnipeg':
+                        try:
+                            obj = obj.winnipeg_booking
+                            return obj, obj.winnipeg_dates, obj.winnipeg_date_1, obj.winnipeg_date_2, obj.winnipeg_date_3, obj.winnipeg_booth_option_1, obj.winnipeg_booth_option_2, obj.winnipeg_booth_option_3, obj.winnipeg_additional_booth_option_1, obj.winnipeg_additional_booth_option_2, obj.winnipeg_additional_booth_option_3, obj.winnipeg_additional_lunch_option_1, obj.winnipeg_additional_lunch_option_2, obj.winnipeg_additional_lunch_option_3, obj.winnipeg_diet_request_1, obj.winnipeg_diet_request_2, obj.winnipeg_diet_request_3
+                        except AttributeError:
+                            return ['-', '-', '-','-','-','-','-','-','-','-','-','-','-','-','-','-','-']
                 except AttributeError:
                     return None
+
+
 
 
 
@@ -117,7 +125,6 @@ class MyModelAdmin(admin.ModelAdmin):
                 smart_str(u"CAL Booth Option 1"),
                 smart_str(u"CAL Booth Option 2"),
                 smart_str(u"CAL Booth Option 3"),
-                smart_str(u"CAL Options"),
                 smart_str(u"CAL Date 1"),
                 smart_str(u"CAL Date 2"),
                 smart_str(u"CAL Date 3"),
@@ -132,18 +139,56 @@ class MyModelAdmin(admin.ModelAdmin):
                 smart_str(u"CAL Diet Request 3"),
                 smart_str(u"CAL Venue Options"),
                 smart_str(u"Edmonton Fair"),
-                smart_str(u"Winnipeg Fair")
-
+                smart_str(u"EDM Fair Dates"),
+                smart_str(u"EDM Fair Date 1"),
+                smart_str(u"EDM Fair Date 2"),
+                smart_str(u"EDM Fair Date 3"),
+                smart_str(u"EDM Fair Date 4"),
+                smart_str(u"EDM Booth Option 1"),
+                smart_str(u"EDM Booth Option 2"),
+                smart_str(u"EDM Booth Option 3"),
+                smart_str(u"EDM Booth Option 4"),
+                smart_str(u"EDM Additional Booth 1"),
+                smart_str(u"EDM Additional Booth 2"),
+                smart_str(u"EDM Additional Booth 3"),
+                smart_str(u"EDM Additional Booth 4"),
+                smart_str(u"EDM Additional Lunch 1"),
+                smart_str(u"EDM Additional Lunch 2"),
+                smart_str(u"EDM Additional Lunch 3"),
+                smart_str(u"EDM Additional Lunch 4"),
+                smart_str(u"EDM Additional Breakfast 1"),
+                smart_str(u"EDM Additional Breakfast 2"),
+                smart_str(u"EDM Additional Breakfast 3"),
+                smart_str(u"EDM Additional Breakfast 4"),
+                smart_str(u"EDM Diet Request 1"),
+                smart_str(u"EDM Diet Request 2"),
+                smart_str(u"EDM Diet Request 3"),
+                smart_str(u"EDM Diet Request 4"),
+                smart_str(u"EDM Venue Options"),
+                smart_str(u"Winnipeg Fair"),
+                smart_str(u"WPG Dates"),
+                smart_str(u"WPG Date 1"),
+                smart_str(u"WPG Date 2"),
+                smart_str(u"WPG Date 3"),
+                smart_str(u"WPG Booth Option 1"),
+                smart_str(u"WPG Booth Option 2"),
+                smart_str(u"WPG Booth Option 3"),
+                smart_str(u"WPG Additional Booth 1"),
+                smart_str(u"WPG Additional Booth 2"),
+                smart_str(u"WPG Additional Booth 3"),
+                smart_str(u"WPG Additional Lunch 1"),
+                smart_str(u"WPG Additional Lunch 2"),
+                smart_str(u"WPG Additional Lunch 3"),
+                smart_str(u"WPG Diet Request 1"),
+                smart_str(u"WPG Diet Request 2"),
+                smart_str(u"WPG Diet Request 3")
             ))
-
-
 
             for obj in queryset:
                 torontoAttrs = get_attributes_of_forgien_key_obj(obj, 'toronto')
                 calgaryAttrs = get_attributes_of_forgien_key_obj(obj, 'calgary')
-                for index in range(0, len(calgaryAttrs)):
-                    print(index, calgaryAttrs[index])
-
+                edmontonAttrs = get_attributes_of_forgien_key_obj(obj, 'edmonton')
+                winnipegAttrs = get_attributes_of_forgien_key_obj(obj, 'winnipeg')
                 writer.writerow([
                     smart_str(obj.pk),
                     smart_str(obj.company_name),
@@ -174,13 +219,51 @@ class MyModelAdmin(admin.ModelAdmin):
                     smart_str(calgaryAttrs[15]),
                     smart_str(calgaryAttrs[16]),
                     smart_str(calgaryAttrs[17]),
-                    smart_str(calgaryAttrs[18]),
-
-                    smart_str(obj.edmonton_booking),
-                    smart_str(obj.winnipeg_booking),
-
-
-            ])
+                    smart_str(edmontonAttrs[0]),
+                    smart_str(edmontonAttrs[1]),
+                    smart_str(edmontonAttrs[2]),
+                    smart_str(edmontonAttrs[3]),
+                    smart_str(edmontonAttrs[4]),
+                    smart_str(edmontonAttrs[5]),
+                    smart_str(edmontonAttrs[6]),
+                    smart_str(edmontonAttrs[7]),
+                    smart_str(edmontonAttrs[8]),
+                    smart_str(edmontonAttrs[9]),
+                    smart_str(edmontonAttrs[10]),
+                    smart_str(edmontonAttrs[11]),
+                    smart_str(edmontonAttrs[12]),
+                    smart_str(edmontonAttrs[13]),
+                    smart_str(edmontonAttrs[14]),
+                    smart_str(edmontonAttrs[15]),
+                    smart_str(edmontonAttrs[16]),
+                    smart_str(edmontonAttrs[17]),
+                    smart_str(edmontonAttrs[18]),
+                    smart_str(edmontonAttrs[19]),
+                    smart_str(edmontonAttrs[20]),
+                    smart_str(edmontonAttrs[21]),
+                    smart_str(edmontonAttrs[22]),
+                    smart_str(edmontonAttrs[23]),
+                    smart_str(edmontonAttrs[24]),
+                    smart_str(edmontonAttrs[25]),
+                    smart_str(edmontonAttrs[26]),
+                    smart_str(winnipegAttrs[0]),
+                    smart_str(winnipegAttrs[1]),
+                    smart_str(winnipegAttrs[2]),
+                    smart_str(winnipegAttrs[3]),
+                    smart_str(winnipegAttrs[4]),
+                    smart_str(winnipegAttrs[5]),
+                    smart_str(winnipegAttrs[6]),
+                    smart_str(winnipegAttrs[7]),
+                    smart_str(winnipegAttrs[8]),
+                    smart_str(winnipegAttrs[9]),
+                    smart_str(winnipegAttrs[10]),
+                    smart_str(winnipegAttrs[11]),
+                    smart_str(winnipegAttrs[12]),
+                    smart_str(winnipegAttrs[13]),
+                    smart_str(winnipegAttrs[14]),
+                    smart_str(winnipegAttrs[15]),
+                    smart_str(winnipegAttrs[16])
+                ])
 
             return response
 
