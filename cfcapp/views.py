@@ -181,7 +181,7 @@ class IndexPageView(TemplateView):
                     elif torontoList[index] != '-':
                         t_qs = TorontoFair(
                             related_sale=m,
-                            toronto_date_selection=torontoList[index],
+                            date_selection=torontoList[index],
                         )
                         if index == 0:
                             t_qs.toronto_booth_option = toronto_booth_option_1
@@ -206,7 +206,7 @@ class IndexPageView(TemplateView):
 
                         c_qs = CalgaryFair(
                             related_sale=m,
-                            calgary_date_selection=calgaryList[index],
+                            date_selection=calgaryList[index],
                             calgary_venue_options=calgary_options
                         )
                         if index == 0:
@@ -242,7 +242,7 @@ class IndexPageView(TemplateView):
 
                         e_qs = EdmontonFair(
                             related_sale=m,
-                            edmonton_date_selection=edmontonList[index],
+                            date_selection=edmontonList[index],
                             edmonton_venue_options=edmonton_options
                         )
                         if index == 0:
@@ -289,7 +289,7 @@ class IndexPageView(TemplateView):
 
                         w_qs = WinnipegFair(
                             related_sale=m,
-                            winnipeg_date_selection=winnipegList[index]
+                            date_selection=winnipegList[index]
                         )
 
                         if index == 0:

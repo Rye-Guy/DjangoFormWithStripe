@@ -6,7 +6,7 @@ class TorontoFair(models.Model):
 
 
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
-    toronto_date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     toronto_booth_option = models.CharField(max_length=100, default='-')
     toronto_additional_booth_option = models.CharField(max_length=400, default='-')
 
@@ -18,7 +18,7 @@ class TorontoFair(models.Model):
 
 class CalgaryFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
-    calgary_date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     calgary_booth_option = models.CharField(max_length=100, default='-')
     calgary_additional_booth_option = models.CharField(max_length=400, default='-')
     calgary_additional_lunch_option = models.CharField(max_length=400, default='-')
@@ -32,7 +32,7 @@ class CalgaryFair(models.Model):
 
 class EdmontonFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
-    edmonton_date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     edmonton_booth_option = models.CharField(max_length=100, default='-')
     edmonton_additional_booth_option = models.CharField(max_length=400, default='-')
     edmonton_additional_lunch_option = models.CharField(max_length=400, default='-')
@@ -48,7 +48,7 @@ class EdmontonFair(models.Model):
 
 class WinnipegFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
-    winnipeg_date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
+    date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     winnipeg_booth_option = models.CharField(max_length=100, default='-')
     winnipeg_additional_booth_option = models.CharField(max_length=400, default='-')
     winnipeg_additional_lunch_option = models.CharField(max_length=400, default='-')
