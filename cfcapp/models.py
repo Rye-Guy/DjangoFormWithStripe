@@ -1,9 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 class SalesFormData(models.Model):
 
     class Meta:
         verbose_name = 'Career Fair Form'
+
+    def __str__(self):
+        part1 = self.company_name
+        part2 = self.id
+        reable_str = part1 + ' id:' + str(part2)
+        return reable_str
 
     def __unicode__(self):
         return self.id
@@ -27,7 +34,7 @@ class SalesFormData(models.Model):
     website_link = models.URLField(max_length=255, blank=True)
     twitter_link = models.URLField(max_length=255, blank=True)
     select_cities = models.CharField(max_length=255, blank=False, default='You will never see me')
-    toronto_booking = models.ForeignKey('fairs.TorontoFair', on_delete=models.SET_NULL, null=True, blank=True)
-    edmonton_booking = models.ForeignKey('fairs.EdmontonFair', on_delete=models.SET_NULL, null=True, blank=True)
-    calgary_booking = models.ForeignKey('fairs.CalgaryFair', on_delete=models.SET_NULL, null=True, blank=True)
-    winnipeg_booking = models.ForeignKey('fairs.WinnipegFair', on_delete=models.SET_NULL, null=True, blank=True)
+    toronto_booking = models.ManyToManyField('fairs.TorontoFair')
+    edmonton_booking = models.ManyToManyField('fairs.EdmontonFair')
+    calgary_booking = models.ManyToManyField('fairs.CalgaryFair')
+    winnipeg_booking = models.ManyToManyField('fairs.WinnipegFair')
