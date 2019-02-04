@@ -23,9 +23,9 @@ class MyModelAdmin(admin.ModelAdmin):
             if request.user.is_superuser:
                 return SalesFormData.objects.select_related()
             else:
-                return SalesFormData.objects.filter(sales_rep=request.user) 
+                return SalesFormData.objects.filter(sales_rep=request.user)
 
-
+        filter_horizontal = ['toronto_booking', 'winnipeg_booking', 'edmonton_booking', 'calgary_booking']
         list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'total_spent', 'select_cities']
         search_fields = ['company_name', 'contact_email', 'office_phone_number']
         resource_class = SalesDataModelResource

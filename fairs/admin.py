@@ -11,6 +11,7 @@ class FairModelResource(import_export.resources.ModelResource):
 
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
+
     list_display = ['id']
     #list_display += ('toronto_booking_id', 'get_related_bookings_toronto')
     resource_class = FairModelResource
