@@ -11,7 +11,7 @@ class TorontoFair(models.Model):
     toronto_additional_booth_option = models.CharField(max_length=400, default='-')
 
     def __str__(self):
-        date_string = self.toronto_date_selection
+        date_string = self.date_selection
         related_company = self.related_sale.company_name
         return related_company + " For: " + date_string + " TOR"
 
@@ -26,7 +26,7 @@ class CalgaryFair(models.Model):
     calgary_venue_options = models.CharField(max_length=255, blank=False, default='-')
 
     def __str__(self):
-        date_string = self.calgary_date_selection
+        date_string = self.date_selection
         related_company = self.related_sale.company_name
         return str(related_company) + " For: " + date_string + " CAL"
 
@@ -41,7 +41,7 @@ class EdmontonFair(models.Model):
     edmonton_venue_options = models.CharField(max_length=255, blank=False, default='-')
 
     def __str__(self):
-        date_string = self.edmonton_date_selection
+        date_string = self.date_selection
         related_company = self.related_sale.company_name
         return str(related_company) + " For: " + date_string + " EDM"
 
@@ -55,6 +55,6 @@ class WinnipegFair(models.Model):
     winnipeg_diet_request = models.CharField(max_length=400, blank=True, default='')
 
     def __str__(self):
-        date_string = self.winnipeg_date_selection
+        date_string = self.date_selection
         related_company = self.related_sale.company_name
         return str(related_company) + " For: " + date_string + " WPG"

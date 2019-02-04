@@ -12,8 +12,6 @@ class SalesFormData(models.Model):
         reable_str = part1 + ' id:' + str(part2)
         return reable_str
 
-    def __unicode__(self):
-        return self.id
 
     sales_rep = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     company_name = models.CharField(max_length=255, blank=False)

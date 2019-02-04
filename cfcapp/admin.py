@@ -29,18 +29,14 @@ class MyModelAdmin(admin.ModelAdmin):
         list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'total_spent', 'select_cities']
         search_fields = ['company_name', 'contact_email', 'office_phone_number']
         resource_class = SalesDataModelResource
-        #list_display += ('calgary_booking_id', 'get_related_bookings_calgary')
-        #list_display += ('edmonton_booking_id', 'get_related_bookings_edmonton')
-        #list_display += ('winnipeg_booking_id', 'get_related_bookings_winnipeg')
 
 
-        def get_related_bookings_toronto(self, obj):
-            try:
-                return obj.toronto_booking.toronto_dates, obj.toronto_booking.toronto_booth_options
-
-            except AttributeError:
-                return obj.toronto_booking
-        get_related_bookings_toronto.short_description = 'Toronto Details'
+#        def get_related_bookings_toronto(self, obj):
+#            try:
+#                TorontoFair.Zzz
+#            except AttributeError:
+#                return obj.toronto_booking
+#        get_related_bookings_toronto.short_description = 'Toronto Details'
 
         def get_related_bookings_calgary(self, obj):
             try:
