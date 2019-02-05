@@ -353,7 +353,7 @@ label input{
 
 #cartContainer{
     overflow: hidden;
-    height: 550px;
+    height: 50%;
     overflow-y: scroll;
 }
 
@@ -386,10 +386,11 @@ h3{
 }
 
 #discountCheckbox{
-    top: 70px;
-    right: -48px;
+    top: -32px;
+    right: -370px;
     pointer-events: all;
     z-index: 1000000000;
+    display: initial;
 }
 
 .dates-select{

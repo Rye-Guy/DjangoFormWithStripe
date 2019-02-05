@@ -31,13 +31,6 @@ class MyModelAdmin(admin.ModelAdmin):
         resource_class = SalesDataModelResource
 
 
-#        def get_related_bookings_toronto(self, obj):
-#            try:
-#                TorontoFair.Zzz
-#            except AttributeError:
-#                return obj.toronto_booking
-#        get_related_bookings_toronto.short_description = 'Toronto Details'
-
         def get_related_bookings_calgary(self, obj):
             try:
                 return obj.calgary_booking.calgary_dates, obj.calgary_booking.calgary_booth_options
