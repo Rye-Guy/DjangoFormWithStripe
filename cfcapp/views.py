@@ -27,10 +27,10 @@ class IndexPageView(TemplateView):
         print(request.POST)
         if form.is_valid():
             sales_rep = request.POST.get('sales_rep', '')
- #           if sales_rep == '':
-  #              sales_rep = User.objects.get(pk=0)
-   #         else:
-            sales_rep = User.objects.get(pk=sales_rep)
+            if sales_rep == '':
+                sales_rep = User.objects.get(username='admin')
+            else:
+               sales_rep = User.objects.get(pk=sales_rep)
 
             print(form.instance.province)    
             company_name = request.POST.get('company_name', '')
