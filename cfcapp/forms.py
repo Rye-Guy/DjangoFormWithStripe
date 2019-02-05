@@ -120,12 +120,8 @@ class PaymentForm(forms.ModelForm):
             city_dates = cleaned_data.get(city_name+'_dates')
             # city_options = cleaned_data.get(city_name+'_booth_options')
             if not city_dates:
-                self.add_error(city_name+'_dates', 'You have selected a booth option but not a date option!')
-            # if city_dates and not city_options:
-            #     self.add_error(city_name+'_booth_options', 'You have selected a date but not a booth option!')
-            # if not city_dates and not city_options:
-            #     self.add_error(city_name+'_dates', 'You not selected a date option!')
-            #     self.add_error(city_name+'_booth_options', 'You have not selected a date option!')
+                self.add_error(city_name+'_dates', 'You have selected a fair date.')
+
 
         if cities == []:
             self.add_error('select_cities', 'You have not selected any fair locations!')

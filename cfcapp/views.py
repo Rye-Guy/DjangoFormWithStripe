@@ -27,11 +27,11 @@ class IndexPageView(TemplateView):
         print(request.POST)
         if form.is_valid():
             sales_rep = request.POST.get('sales_rep', '')
-            if sales_rep == '':
-                sales_rep = User.objects.get(pk=1)
-            else: 
-                sales_rep = User.objects.get(pk=sales_rep)
-            
+ #           if sales_rep == '':
+  #              sales_rep = User.objects.get(pk=0)
+   #         else:
+            sales_rep = User.objects.get(pk=sales_rep)
+
             print(form.instance.province)    
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
@@ -39,7 +39,12 @@ class IndexPageView(TemplateView):
             total_spent = request.POST.get('price', '')
             if total_spent == '':
                 total_spent = 0
+            elif '$' in total_spent:
+                total_spent = total_spent.replace('$', '')
             float(total_spent)
+
+            subtotal = request.POST.get('subtotalInput', 0.00)
+            float(subtotal)
             discount_amount = request.POST.get('discountAmount', '')
             discount_percentage = request.POST.get('discountPercent', '')
 
@@ -155,6 +160,7 @@ class IndexPageView(TemplateView):
                 company_name=company_name,
                 contact_name=contact_name,
                 total_spent=total_spent,
+                subtotal=subtotal,
                 discount_amount=discount_amount,
                 discount_percentage=discount_percentage,
                 address=address,

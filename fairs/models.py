@@ -3,8 +3,6 @@ from django.db import models
 
 class TorontoFair(models.Model):
 
-
-
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     toronto_booth_option = models.CharField(max_length=100, default='-')

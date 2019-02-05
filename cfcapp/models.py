@@ -19,7 +19,7 @@ class SalesFormData(models.Model):
     total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False)
     discount_amount = models.CharField(max_length=50, blank=True, default=0) 
     discount_percentage = models.CharField(max_length=10, blank=True, default='Not Provided')
-    grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0)
+    subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
     address = models.CharField(max_length=255, blank=False)
     secondary_address = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=False)

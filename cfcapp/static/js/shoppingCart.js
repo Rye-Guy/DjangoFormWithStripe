@@ -70,7 +70,7 @@ function findAndDeleteDate(relatedElement, elemToDelete){
 function dateCheck(input){
   //parent elements will contain our ID for making sure we are editing the appropriate Cart.
   parentUl = input.parentElement.parentElement.parentElement.id
-  console.log('yes')
+
   if(input.checked){
              cartText = input.parentElement.innerText
              cartItem = document.createElement('li')
@@ -222,7 +222,6 @@ allDatesCheckboxes.forEach((input)=>{
     input.addEventListener('click', ()=>{
         dateCheck(input)
         if(!input.checked){
-            console.log(input)
             if(!input.checked && input.nextElementSibling){
                 while(input.nextElementSibling){
                     input.nextElementSibling.remove()
@@ -259,8 +258,6 @@ function boothOptionCheck(input){
         cartItemText = input.parentElement.innerText
         cartItem.innerText = cartItemText
         boothValue = parseInt(input.getAttribute('value'))
-        console.log(input)
-        console.log(parentUl)
         //double up if statements for every input check to what booth option was click and if the cartItem exists in the cart go remove it so we can add a new one and show to the user that their selection change is reflected in the cart.
         if(input){
            if(parentUl == 'id_toronto_booth_options'){
@@ -329,9 +326,7 @@ function additionalCartItems(cityName, fairDate, cart){
         if(document.getElementById(`boothOption_${fairDate}`)){
               document.getElementById(`boothOption_${fairDate}`).innerText = document.getElementById(`booth_option_${cityName}_${fairDate}`).value
         }
-        console.log(document.getElementById(`booth_option_${cityName}_${fairDate}`).value)
         boothOption = parseInt(document.getElementById(`booth_option_${cityName}_${fairDate}`).value)
-        console.log(boothOption)
         cart[1] += boothOption
     }
     //check for the existence of additional booths. If they do calculate the value and add it to our cart.
@@ -376,8 +371,15 @@ function applyDiscount(grandTotal, typeOfDiscount){
         takeAway = grandTotal * decimalNum
     }else{
         document.getElementById('discountType').innerText = '$'
-        document.getElementById('discountHiddenInput').value = '$'
-        takeAway = discountAmount
+        discountType = document.getElementById('discountHiddenInput').value = `${discountAmount}`
+        currentCartTotal = parseInt(document.getElementById('priceValue').innerText)
+        console.log(currentCartTotal, discountAmount)
+        percentageOff = (currentCartTotal - discountAmount) / currentCartTotal
+        percentageOff - 1
+        theTakeAwayPercent = percentageOff
+        theTakeAwayPercentRep = parseFloat(Math.abs((theTakeAwayPercent - 1))).toFixed(2)
+        document.getElementById('discountPercentHiddenInput').value = "%" + String(theTakeAwayPercentRep.slice(2, 4))
+        takeAway = discountType
     }
     return takeAway
 }
@@ -407,11 +409,10 @@ function calculateGrandTotal(){
        value2 = calculateTotal(winnipegCart)
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
-       grandTotal = value1 + value2 + value3 + value4
+       subtotal = value1 + value2 + value3 + value4
        typeOfDiscount = document.getElementById('discountCheckbox')
-       amountToDiscount = applyDiscount(grandTotal, typeOfDiscount)
-       totalAfterDiscount = grandTotal - amountToDiscount
-//       console.log(grandTotal, amountToDiscount, totalAfterDiscount)
+       amountToDiscount = applyDiscount(subtotal, typeOfDiscount)
+       totalAfterDiscount = subtotal - amountToDiscount
        typeOfTax = document.getElementById('id_province').value
        switch(typeOfTax) {
             case '-':
@@ -457,18 +458,17 @@ function calculateGrandTotal(){
                 typeOfTax = 0.05;
                 break;
        }
-//       console.log(typeOfTax)
        parseInt(typeOfTax, totalAfterDiscount)
        taxToCharge = typeOfTax * totalAfterDiscount
-//       console.log(taxToCharge)
-       document.getElementById('priceValue').innerText = grandTotal
-       document.getElementById('discountValue').innerText = amountToDiscount
+       document.getElementById('priceValue').innerText = subtotal
+       document.getElementById('discountValue').innerText = parseFloat(amountToDiscount).toFixed(2)
        document.getElementById('discountHiddenInput').value = `$${amountToDiscount}`
        document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2) 
        overallTotalWithTax = totalAfterDiscount + taxToCharge
        document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
     // document.getElementById('cart-total').innerText = overallTotalWithTax
-       document.getElementById('priceInput').value = overallTotalWithTax
+       document.getElementById('priceInput').value = '$'+overallTotalWithTax
+       document.getElementById('subtotalHiddenInput').value = subtotal
        return overallTotalWithTax
 }
 
