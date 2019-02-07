@@ -2,11 +2,8 @@
 
 //first value is dates selected, next is booth option value, next is number of extra booths, finally is additional options total if their is additional options at the venue. Extra booths are under this on the front but for the cost calculation they serve a different purpose.
 torontoCart = [0, 0, 0, 0]
-
 winnipegCart = [0, 0, 0, 0]
-
 calgaryCart = [0, 0, 0, 0]
-
 edmontonCart = [0, 0, 0, 0]
 
 
@@ -413,7 +410,7 @@ function calculateGrandTotal(){
        typeOfDiscount = document.getElementById('discountCheckbox')
        amountToDiscount = applyDiscount(subtotal, typeOfDiscount)
        totalAfterDiscount = subtotal - amountToDiscount
-       typeOfTax = document.getElementById('id_province').value
+       let typeOfTax = document.getElementById('id_province').value
        switch(typeOfTax) {
             case '-':
                 typeOfTax = 0;
@@ -459,12 +456,12 @@ function calculateGrandTotal(){
                 break;
        }
        parseInt(typeOfTax, totalAfterDiscount)
-       taxToCharge = typeOfTax * totalAfterDiscount
+       let taxToCharge = typeOfTax * totalAfterDiscount
        document.getElementById('priceValue').innerText = subtotal
        document.getElementById('discountValue').innerText = parseFloat(amountToDiscount).toFixed(2)
        document.getElementById('discountHiddenInput').value = `$${amountToDiscount}`
        document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2) 
-       overallTotalWithTax = totalAfterDiscount + taxToCharge
+       let overallTotalWithTax = totalAfterDiscount + taxToCharge
        document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
     // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = '$'+overallTotalWithTax

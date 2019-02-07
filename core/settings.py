@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'import_export',
     'fairs',
     'cfcapp'
-
 ]
 
 MIDDLEWARE = [

@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 
 # Create your views here.
-
 from cfcapp.forms import PaymentForm
 from cfcapp.models import SalesFormData
 from fairs.models import TorontoFair, CalgaryFair, EdmontonFair,  WinnipegFair

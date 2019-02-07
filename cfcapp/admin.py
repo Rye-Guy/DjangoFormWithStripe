@@ -42,7 +42,7 @@ class MyModelAdmin(admin.ModelAdmin):
 
 
 
-            def get_attributes_of_forgien_key_obj(obj, key):
+            def get_attributes_of_related_many_to_many(obj, key):
                 #try:
                     if key == 'toronto':
                         try:
@@ -84,15 +84,40 @@ class MyModelAdmin(admin.ModelAdmin):
                 smart_str(u"Order ID"),
                 smart_str(u"Company Name"),
                 smart_str(u"Contact Name"),
+                smart_str(u"Toronto Booking"),
+                smart_str(u"Date Selection"),
+                smart_str(u"Booth Option"),
+                smart_str(u"Additional Booth"),
+                smart_str(u"Toronto Booking"),
+                smart_str(u"Date Selection"),
+                smart_str(u"Booth Option"),
+                smart_str(u"Additional Booth"),
+                smart_str(u"Toronto Booking"),
+                smart_str(u"Date Selection"),
+                smart_str(u"Booth Option"),
+                smart_str(u"Additional Booth")
             ))
 
             for obj in queryset:
-                print(get_attributes_of_forgien_key_obj(obj, 'toronto'))
+                toronto_list_values = get_attributes_of_related_many_to_many(obj, 'toronto')
 
                 writer.writerow([
                     smart_str(obj.pk),
                     smart_str(obj.company_name),
-                    smart_str(obj.contact_name)
+                    smart_str(obj.contact_name),
+                    smart_str(toronto_list_values[0]),
+                    smart_str(toronto_list_values[1]),
+                    smart_str(toronto_list_values[2]),
+                    smart_str(toronto_list_values[3]),
+                    smart_str(toronto_list_values[4]),
+                    smart_str(toronto_list_values[5]),
+                    smart_str(toronto_list_values[6]),
+                    smart_str(toronto_list_values[7]),
+                    smart_str(toronto_list_values[8]),
+                    smart_str(toronto_list_values[9]),
+                    smart_str(toronto_list_values[10]),
+                    smart_str(toronto_list_values[11])
+
                 ])
 
             return response

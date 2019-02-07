@@ -13,6 +13,8 @@ function parsePositioning(elem){
     return num
 }
 
+
+
 checkboxes.forEach((elem) =>{
     console.log(elem.checked)
     elem.addEventListener('click', ()=>{
