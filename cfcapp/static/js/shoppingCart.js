@@ -359,6 +359,17 @@ function additionalCartItems(cityName, fairDate, cart){
         additionalBreakfastOption = parseInt(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value) * 23
         cart[3] += additionalBreakfastOption
     }
+    if(document.getElementById(`electricity_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`electricity_option_${cityName}_${fairDate}`).checked){
+            cart[3] += 129
+        }
+    }
+    if(document.getElementById(`wifi_option_${cityName}_${fairDate}`)){
+        if(document.getElementById(`wifi_option_${cityName}_${fairDate}`).checked){
+            cart[3] += 50
+        }
+    }
+
 
 }
 
