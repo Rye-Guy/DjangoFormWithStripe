@@ -12,7 +12,7 @@ class FairModelResource(import_export.resources.ModelResource):
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
 
-    list_display = ['id',  'get_related_company', 'date_selection', 'get_contact_name', 'get_office_phone' , 'get_contact_phone' ,'get_contact_email', 'get_total_spent', 'related_sale']
+    list_display = ['id',  'get_related_company', 'date_selection', 'get_contact_name', 'get_office_phone' , 'get_contact_phone' ,'get_contact_email', 'fair_total_spent', 'related_sale']
 
     resource_class = FairModelResource
 

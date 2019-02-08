@@ -328,7 +328,6 @@ allAdditionalOptions.forEach((input)=>{
 })
 
 function additionalCartItems(cityName, fairDate, cart){
-    console.log(cart)
     singleFairCostObj = {
         city: cityName,
         fair_date: fairDate,
@@ -393,15 +392,13 @@ function additionalCartItems(cityName, fairDate, cart){
             cart[3] += 50
         }
     }
-    calculateIndividualFair(singleFairCostObj, cityName)
+    calculateIndividualFair(singleFairCostObj)
     return singleFairCostObj
 }
 
 function calculateIndividualFair(fairObj) {
     currentTotal = 0
-
     if(Object.keys(fairObj).length > 2) {
-        console.log(fairObj)
         baseBoothCost = fairObj.booth_option
         costOfAdditionalBooths = fairObj.additional_booths.cost_of_booths
         currentTotal = baseBoothCost + costOfAdditionalBooths
@@ -424,7 +421,14 @@ function calculateIndividualFair(fairObj) {
         }
     }
     if(currentTotal > 0) {
-        console.log(currentTotal)
+        targetDiv = document.getElementById('inputsForIndividualFairCost')
+        if(document.getElementById(`total_cost_for_${fairObj.city}_${fairObj.fair_date}`)){
+            document.getElementById(`total_cost_for_${fairObj.city}_${fairObj.fair_date}`).value = currentTotal
+        }
+        else{
+            targetDiv.innerHTML += `<input type='hidden' name='total_cost_for_${fairObj.city}_${fairObj.fair_date}' id='total_cost_for_${fairObj.city}_${fairObj.fair_date}'  value="$${currentTotal}">`
+        }
+
     }
     return currentTotal
 }

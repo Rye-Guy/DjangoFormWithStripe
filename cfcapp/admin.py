@@ -40,8 +40,6 @@ class MyModelAdmin(admin.ModelAdmin):
             writer = csv.writer(response, csv.excel)
 
 
-
-
             def get_attributes_of_related_many_to_many(obj, key):
                 #try:
                     if key == 'toronto':
