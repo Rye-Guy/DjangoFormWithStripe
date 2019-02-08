@@ -328,53 +328,108 @@ allAdditionalOptions.forEach((input)=>{
 })
 
 function additionalCartItems(cityName, fairDate, cart){
+    console.log(cart)
+    singleFairCostObj = {
+        city: cityName,
+        fair_date: fairDate,
+    }
     if(document.getElementById(`booth_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`boothOption_${fairDate}`)){
               document.getElementById(`boothOption_${fairDate}`).innerText = document.getElementById(`booth_option_${cityName}_${fairDate}`).value
         }
         boothOption = parseInt(document.getElementById(`booth_option_${cityName}_${fairDate}`).value)
+        singleFairCostObj.booth_option = boothOption
         cart[1] += boothOption
+
     }
     //check for the existence of additional booths. If they do calculate the value and add it to our cart.
     if(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`extraBoothValue_${fairDate}`)){
             document.getElementById(`extraBoothValue_${fairDate}`).innerText = document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value
         }
-        additionalBooths = parseInt(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value) * 995
-        cart[3] += additionalBooths
+        additionalBoothsAmount = parseInt(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value)
+        additionalCost = additionalBoothsAmount * 995
+        singleFairCostObj.additional_booths = {
+            number_of_booths: additionalBoothsAmount,
+            cost_of_booths: additionalCost
+        }
+        cart[3] += additionalCost
     }
     //check for additional lunches
     if(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`extraLunchValue_${fairDate}`)){
             document.getElementById(`extraLunchValue_${fairDate}`).innerText = document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`).value
         }
-        additionalLunchOption = parseInt(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`).value) * 25
-        cart[3] += additionalLunchOption
+        numOfadditionalLunchOption = parseInt(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`).value)
+        costOfadditionalLunchOption = numOfadditionalLunchOption * 25
+        singleFairCostObj.additional_lunch = {
+            number_of_lunches: numOfadditionalLunchOption,
+            cost_of_lunch: costOfadditionalLunchOption
+        }
+        cart[3] += costOfadditionalLunchOption
     }
     //check for additional breakfast
     if(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`extraBreakfastValue_${fairDate}`)){
             document.getElementById(`extraBreakfastValue_${fairDate}`).innerText = document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value
         }
-        additionalBreakfastOption = parseInt(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value) * 23
-        cart[3] += additionalBreakfastOption
+        numOfadditionalBreakfastOption = parseInt(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value)
+        costOfadditionalBreakfastOption = numOfadditionalBreakfastOption * 23
+        singleFairCostObj.additional_breakfast = {
+            number_of_breakfasts: numOfadditionalBreakfastOption,
+            cost_of_breakfast: costOfadditionalBreakfastOption
+        }
+        cart[3] += costOfadditionalBreakfastOption
     }
     if(document.getElementById(`electricity_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`electricity_option_${cityName}_${fairDate}`).checked){
+            singleFairCostObj.electricity = true
             cart[3] += 129
         }
     }
     if(document.getElementById(`wifi_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`wifi_option_${cityName}_${fairDate}`).checked){
+            singleFairCostObj.wifi = true
             cart[3] += 50
         }
     }
+    calculateIndividualFair(singleFairCostObj, cityName)
+    return singleFairCostObj
+}
 
+function calculateIndividualFair(fairObj) {
+    currentTotal = 0
 
+    if(Object.keys(fairObj).length > 2) {
+        console.log(fairObj)
+        baseBoothCost = fairObj.booth_option
+        costOfAdditionalBooths = fairObj.additional_booths.cost_of_booths
+        currentTotal = baseBoothCost + costOfAdditionalBooths
+        if(fairObj.city != 'toronto'){
+            costOfAdditionalLunches = fairObj.additional_lunch.cost_of_lunch
+            currentTotal += costOfAdditionalLunches
+            if(fairObj.city == 'calgary' || 'edmonton'){
+                if(fairObj.wifi){
+                    currentTotal += 50
+                }
+                if(fairObj.electricity){
+                    currentTotal += 129
+                }
+                if(fairObj.city == 'edmonton'){
+                    costOfadditionalBreakfast = fairObj.additional_breakfast.cost_of_breakfast
+                    currentTotal += costOfadditionalBreakfast
+                }
+            }
+
+        }
+    }
+    if(currentTotal > 0) {
+        console.log(currentTotal)
+    }
+    return currentTotal
 }
 
 function calculateTotal(cartName){
-    console.log(cartName)
     return parseInt(cartName[1] + (cartName[0] * cartName[2]) + cartName[3])
 }
 
@@ -428,7 +483,6 @@ function calculateGrandTotal(){
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
        subtotal = value1 + value2 + value3 + value4
-        console.log(subtotal)
        typeOfDiscount = document.getElementById('discountCheckbox')
        amountToDiscount = applyDiscount(subtotal, typeOfDiscount)
        totalAfterDiscount = subtotal - amountToDiscount
@@ -492,4 +546,4 @@ function calculateGrandTotal(){
 }
 
 cartTotal = document.getElementById('cart-total')
-setInterval(calculateGrandTotal, 100)
+setInterval(calculateGrandTotal, 1000)
