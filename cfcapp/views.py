@@ -18,7 +18,7 @@ class IndexPageView(TemplateView):
     
         context = super(IndexPageView, self).get_context_data(**kwargs)    
         context.update({'form': self.formPayment, 'users': User.objects.all()})
-        print(self.formPayment.fields['select_cities'].choices[0])
+        print(self.formPayment.fields['select_cities'].choices)
         return context
 
     def post(self, request, *args, **kwargs):

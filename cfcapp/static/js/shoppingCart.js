@@ -83,7 +83,7 @@ function dateCheck(input){
              dietRequest = document.createElement('input')
              dietRequest.setAttribute('type', 'text')
              dietRequestLabel = document.createElement('label')
-             dietRequestLabel.innerText = 'Diet Request: '
+             dietRequestLabel.innerText = 'Special Request: '
              breakfastLabel = document.createElement('label')
              breakfastLabel.innerText = ' Extra Breakfast: '
              lunchLabel = document.createElement('label')
@@ -109,6 +109,11 @@ function dateCheck(input){
                 cartItem.innerHTML += `<h5>Toronto Career Fair <br>${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
+                //create electricity option and maybe a better way to insert html instead of my usual modus operandi.
+                 let venueOpts = document.createElement('div')
+                 venueOpts.id = 'venueOptions'
+                 venueOpts.innerHTML += `<p><label><input name='electricity_option_calgary_${cartText}' id='electricity_option_calgary_${cartText}' type=checkbox /><span>Electricity</span></label></p><p><label><input name='wifi_option_calgary_${cartText}' id='wifi_option_calgary_${cartText}' type=checkbox /><span>Internet</span></label></p>`
+
                 //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_calgary_'+cartText)
                 boothOptionSelect.id = 'booth_option_calgary_'+cartText
@@ -131,11 +136,15 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 dietRequestLabel.append(dietRequest)
                 //now create the rest of our cart item to display to the user
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts)
                 cartItem.innerHTML += boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
                 cartItem.innerHTML += `<h5>Calgary Career Fair <br>${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
+                 //Create Venue Options
+                 let venueOpts = document.createElement('div')
+                 venueOpts.id = 'venueOptions'
+                 venueOpts.innerHTML += `<p><label><input name='electricity_option_edmonton_${cartText}' id='electricity_option_edmonton_${cartText}' type=checkbox /><span>Electricity</span></label></p><p><label><input name='wifi_option_edmonton_${cartText}' id='wifi_option_edmonton_${cartText}' type=checkbox /><span>Internet</span></label></p>`
                 //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_edmonton_'+cartText)
                 boothOptionSelect.id = 'booth_option_edmonton_'+cartText
@@ -164,7 +173,7 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel, venueOpts)
                 cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
                 cartItem.innerHTML += `<h5>Edmonton Career Fair <br>${cartText}</h5>`
                 edmontonCart[0]++
@@ -354,7 +363,8 @@ function additionalCartItems(cityName, fairDate, cart){
 }
 
 function calculateTotal(cartName){
-    return parseInt(cartName[0] + cartName[1] + (cartName[0] * cartName[2]) + cartName[3])
+    console.log(cartName)
+    return parseInt(cartName[1] + (cartName[0] * cartName[2]) + cartName[3])
 }
 
 function applyDiscount(grandTotal, typeOfDiscount){
@@ -374,7 +384,7 @@ function applyDiscount(grandTotal, typeOfDiscount){
         percentageOff = (currentCartTotal - discountAmount) / currentCartTotal
         percentageOff - 1
         theTakeAwayPercent = percentageOff
-        theTakeAwayPercentRep = parseFloat(Math.abs((theTakeAwayPercent - 1))).toFixed(2)
+        theTakeAwayPercentRep = parseFloat(Math.abs((theTakeAwayPercent))).toFixed(2)
         document.getElementById('discountPercentHiddenInput').value = "%" + String(theTakeAwayPercentRep.slice(2, 4))
         takeAway = discountType
     }
@@ -407,6 +417,7 @@ function calculateGrandTotal(){
        value3 = calculateTotal(calgaryCart)
        value4 = calculateTotal(edmontonCart)
        subtotal = value1 + value2 + value3 + value4
+        console.log(subtotal)
        typeOfDiscount = document.getElementById('discountCheckbox')
        amountToDiscount = applyDiscount(subtotal, typeOfDiscount)
        totalAfterDiscount = subtotal - amountToDiscount
@@ -417,8 +428,8 @@ function calculateGrandTotal(){
                 break;
             case 'Ontario':
                 typeOfTax = 0.13
-                break;  
-            case 'New Brunswick': 
+                break;
+            case 'New Brunswick':
                 typeOfTax = 0.15
                 break;
             case 'Newfoundland and Labrador':
@@ -432,7 +443,7 @@ function calculateGrandTotal(){
                 break;
             case 'Alberta':
                 typeOfTax = 0.05;
-                break;    
+                break;
             case 'British Columbia':
                 typeOfTax = 0.05;
                 break;
@@ -460,7 +471,7 @@ function calculateGrandTotal(){
        document.getElementById('priceValue').innerText = subtotal
        document.getElementById('discountValue').innerText = parseFloat(amountToDiscount).toFixed(2)
        document.getElementById('discountHiddenInput').value = `$${amountToDiscount}`
-       document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2) 
+       document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2)
        let overallTotalWithTax = totalAfterDiscount + taxToCharge
        document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
     // document.getElementById('cart-total').innerText = overallTotalWithTax

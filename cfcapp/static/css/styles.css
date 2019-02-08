@@ -269,10 +269,10 @@ input:focus + .helperText{
 }
 
 
-input:empty + span{
-    top: -28px;
-    padding-left: 12px;
-}
+/*input:empty + span{*/
+    /*top: -28px;*/
+    /*padding-left: 12px;*/
+/*}*/
 
 input:focus + span{
     top: -72px
@@ -378,7 +378,7 @@ h3{
     margin-right: 52px;
 }
 
-[type="checkbox"]+span:not(.lever){
+#discountCheckbox[type="checkbox"]+span:not(.lever){
     position: relative;
     top: -30px;
     pointer-events: all;
@@ -386,6 +386,7 @@ h3{
 }
 
 #discountCheckbox{
+
     top: -32px;
     right: -370px;
     pointer-events: all;
@@ -450,6 +451,11 @@ h5{
    font-size: 16px;
 }
 
+#venueOptions{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
 @media (max-width: 1199px) {
 
