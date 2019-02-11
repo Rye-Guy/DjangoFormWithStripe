@@ -203,14 +203,13 @@ function dateCheck(input){
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
         }else if(!input.checked){
-            findAndDeleteDate(document.getElementById('id_toronto_dates_0'), document.getElementById('April 24th, 2018'))
+            findAndDeleteDate(document.getElementById('id_toronto_dates_0'), document.getElementById('April 24th, 2019'))
             findAndDeleteDate(document.getElementById('id_toronto_dates_1'), document.getElementById('September 17th, 2019'))
             findAndDeleteDate(document.getElementById('id_winnipeg_dates_0'), document.getElementById('April 2nd, 2019'))
-            findAndDeleteDate(document.getElementById('id_winnipeg_dates_1'), document.getElementById('July 10th, 2019'))
-            findAndDeleteDate(document.getElementById('id_winnipeg_dates_2'), document.getElementById('July 23rd, 2019'))
+            findAndDeleteDate(document.getElementById('id_winnipeg_dates_1'), document.getElementById('July 23rd, 2019'))
             findAndDeleteDate(document.getElementById('id_calgary_dates_0'), document.getElementById('March 12th, 2019'))
-            findAndDeleteDate(document.getElementById('id_calgary_dates_1'), document.getElementById('June 26th, 2019'))
-            findAndDeleteDate(document.getElementById('id_calgary_dates_2'), document.getElementById('October 22nd, 2019'))
+            findAndDeleteDate(document.getElementById('id_calgary_dates_1'), document.getElementById('June 25th, 2019'))
+            findAndDeleteDate(document.getElementById('id_calgary_dates_2'), document.getElementById('October 23nd, 2019'))
             findAndDeleteDate(document.getElementById('id_edmonton_dates_0'), document.getElementById('January 29th, 2019'))
             findAndDeleteDate(document.getElementById('id_edmonton_dates_1'), document.getElementById('May 28th, 2019'))
             findAndDeleteDate(document.getElementById('id_edmonton_dates_2'), document.getElementById('August 13th, 2019'))
@@ -424,14 +423,13 @@ function calculateGrandTotal(){
        winnipegCart[3] = 0
        edmontonCart[3] = 0
        calgaryCart[3] = 0
-       additionalCartItems('toronto', 'April 24th, 2018', torontoCart)
+       additionalCartItems('toronto', 'April 24th, 2019', torontoCart)
        additionalCartItems('toronto', 'September 17th, 2019', torontoCart)
-       additionalCartItems('winnipeg', 'July 10th, 2019', winnipegCart)
        additionalCartItems('winnipeg', 'April 2nd, 2019', winnipegCart)
        additionalCartItems('winnipeg', 'July 23rd, 2019', winnipegCart)
        additionalCartItems('calgary', 'March 12th, 2019', calgaryCart)
-       additionalCartItems('calgary', 'June 26th, 2019', calgaryCart)
-       additionalCartItems('calgary', 'October 22nd, 2019', calgaryCart)
+       additionalCartItems('calgary', 'June 25th, 2019', calgaryCart)
+       additionalCartItems('calgary', 'October 23rd, 2019', calgaryCart)
        additionalCartItems('edmonton', 'January 29th, 2019', edmontonCart)
        additionalCartItems('edmonton', 'May 28th, 2019', edmontonCart)
        additionalCartItems('edmonton', 'August 13th, 2019', edmontonCart)

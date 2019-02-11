@@ -71,11 +71,11 @@ class IndexPageView(TemplateView):
 
             torontoDatesArray = ['04-24-2019', '09-17-2019', '-', '-']
             torontoList = ['-', '-', '-', '-']
-            calgaryDatesArray = ['03-12-2019', '06-26-2019', '10-22-2019', '-']
+            calgaryDatesArray = ['03-12-2019', '06-25-2019', '10-23-2019', '-']
             calgaryList = ['-', '-', '-', '-']
             edmontonDatesArray = ['01-29-2019', '05-28-2019', '08-13-2019', '11-19-2019']
             edmontonList = ['-', '-', '-', '-']
-            winnipegDatesArray = ['04-02-2019', '07-10-2019', '07-23-2019', '-']
+            winnipegDatesArray = ['04-02-2019', '07-23-2019', '-', '-']
             winnipegList = ['-', '-', '-', '-']
 
             def check_incoming_fair_dates(datesArray, dateCheckArray, listToEdit):
@@ -90,9 +90,9 @@ class IndexPageView(TemplateView):
                         listToEdit[3] = datesArray[date]
 
             check_incoming_fair_dates(toronto_dates, torontoDatesArray, torontoList)
-            toronto_booth_option_1 = request.POST.get('booth_option_toronto_April 24th, 2018', '')
+            toronto_booth_option_1 = request.POST.get('booth_option_toronto_April 24th, 2019', '')
             toronto_booth_option_2 = request.POST.get('booth_option_toronto_September 17th, 2019', '')
-            toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto_April 24th, 2018', '-')
+            toronto_additional_booth_option_1 = request.POST.get('additional_booth_option_toronto_April 24th, 2019', '-')
             toronto_additional_booth_option_2 = request.POST.get('additional_booth_option_toronto_September 17th, 2019', '-')
             calgary_dates = request.POST.getlist('calgary_dates')
             check_incoming_fair_dates(calgary_dates, calgaryDatesArray, calgaryList)
@@ -100,17 +100,17 @@ class IndexPageView(TemplateView):
             calgary_options = request.POST.getlist('calgary_options')
             calgary_options_for_db = ', '.join(calgary_options)
             calgary_booth_option_1 = request.POST.get('booth_option_calgary_March 12th, 2019', '')
-            calgary_booth_option_2 = request.POST.get('booth_option_calgary_June 26th, 2019', '')
-            calgary_booth_option_3 = request.POST.get('booth_option_calgary_October 22nd, 2019', '')
+            calgary_booth_option_2 = request.POST.get('booth_option_calgary_June 25th, 2019', '')
+            calgary_booth_option_3 = request.POST.get('booth_option_calgary_October 23rd, 2019', '')
             calgary_additional_booth_option_1 = request.POST.get('additional_booth_option_calgary_March 12th, 2019', '-')
             calgary_additional_lunch_option_1 = request.POST.get('additional_lunch_option_calgary_March 12th, 2019', '-')
             calgary_diet_request_1 = request.POST.get('diet_request_for_calgary_March 12th, 2019', '')
-            calgary_additional_booth_option_2 = request.POST.get('additional_booth_option_calgary_June 26th, 2019', '-')
-            calgary_additional_lunch_option_2 = request.POST.get('additional_booth_option_calgary_June 26th, 2019', '-')
-            calgary_diet_request_2 = request.POST.get('diet_request_for_calgary_June 26th, 2019', '')
-            calgary_additional_booth_option_3 = request.POST.get('additional_booth_option_calgary_October 22nd, 2019', '-')
-            calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary_October 22nd, 2019', '-')
-            calgary_diet_request_3 = request.POST.get('diet_request_for_calgary_October 22nd, 2019', '')
+            calgary_additional_booth_option_2 = request.POST.get('additional_booth_option_calgary_June 25th, 2019', '-')
+            calgary_additional_lunch_option_2 = request.POST.get('additional_booth_option_calgary_June 25th, 2019', '-')
+            calgary_diet_request_2 = request.POST.get('diet_request_for_calgary_June 25th, 2019', '')
+            calgary_additional_booth_option_3 = request.POST.get('additional_booth_option_calgary_October 23rd, 2019', '-')
+            calgary_additional_lunch_option_3 = request.POST.get('additional_booth_option_calgary_October 23rd, 2019', '-')
+            calgary_diet_request_3 = request.POST.get('diet_request_for_calgary_October 23rd, 2019', '')
             calgary_venue_options = request.POST.getlist('calgary_options')
             calgary_venue_options_for_db = ', '.join(calgary_venue_options)
             edmonton_dates = request.POST.getlist('edmonton_dates')
@@ -141,30 +141,25 @@ class IndexPageView(TemplateView):
             check_incoming_fair_dates(winnipeg_dates, winnipegDatesArray, winnipegList)
             
             winnipeg_booth_option_1 = request.POST.get('booth_option_winnipeg_April 2nd, 2019', '')
-            winnipeg_booth_option_2 = request.POST.get('booth_option_winnipeg_July 10th, 2019', '')
-            winnipeg_booth_option_3 = request.POST.get('booth_option_winnipeg_July 23rd, 2019', '')
+            winnipeg_booth_option_2 = request.POST.get('booth_option_winnipeg_July 23rd, 2019', '')
 
             winnipeg_additional_booth_option_1 = request.POST.get('additional_booth_option_winnipeg_April 2nd, 2019', '-')
             winnipeg_additional_lunch_option_1 = request.POST.get('additional_lunch_option_winnipeg_April 2nd, 2019', '-')
             winnipeg_diet_request_1 = request.POST.get('diet_request_for_winnipeg_April 2nd, 2019', '')
-            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg_July 10th, 2019', '-')
-            winnipeg_additional_lunch_option_2 = request.POST.get('additional_lunch_option_winnipeg_July 10th, 2019', '-')
-            winnipeg_diet_request_2 = request.POST.get('diet_request_for_winnipeg_July 10th, 2019', '')
-            winnipeg_additional_booth_option_3 = request.POST.get('additional_booth_option_winnipeg_July 23rd, 2019', '-')
-            winnipeg_additional_lunch_option_3 = request.POST.get('additional_lunch_option_winnipeg_July 23rd, 2019', '-')
-            winnipeg_diet_request_3 = request.POST.get('diet_request_for_winnipeg_July 23rd, 2019', '-')
+            winnipeg_additional_booth_option_2 = request.POST.get('additional_booth_option_winnipeg_July 23rd, 2019', '-')
+            winnipeg_additional_lunch_option_2 = request.POST.get('additional_lunch_option_winnipeg_July 23rd, 2019', '-')
+            winnipeg_diet_request_2 = request.POST.get('diet_request_for_winnipeg_July 23rd, 2019', '-')
 
 
-            total_toronto_fair_cost_1 = request.POST.get('total_cost_for_toronto_April 24th, 2018', '')
+            total_toronto_fair_cost_1 = request.POST.get('total_cost_for_toronto_April 24th, 2019', '')
             total_toronto_fair_cost_2 = request.POST.get('total_cost_for_toronto_September 17th, 2019', '')
 
             total_winnipeg_fair_cost_1 = request.POST.get('total_cost_for_winnipeg_April 2nd, 2019', '')
-            total_winnipeg_fair_cost_2 = request.POST.get('total_cost_for_winnipeg_July 10th, 2019', '')
-            total_winnipeg_fair_cost_3 = request.POST.get('total_cost_for_winnipeg_July 23rd, 2019', '')
+            total_winnipeg_fair_cost_2 = request.POST.get('total_cost_for_winnipeg_July 23rd, 2019', '')
 
             total_calgary_fair_cost_1 = request.POST.get('total_cost_for_calgary_March 12th, 2019', '')
-            total_calgary_fair_cost_2 = request.POST.get('total_cost_for_calgary_June 26th, 2019', '')
-            total_calgary_fair_cost_3 = request.POST.get('total_cost_for_calgary_October 22nd, 2019', '')
+            total_calgary_fair_cost_2 = request.POST.get('total_cost_for_calgary_June 25th, 2019', '')
+            total_calgary_fair_cost_3 = request.POST.get('total_cost_for_calgary_October 23rd, 2019', '')
 
             total_edmonton_fair_cost_1 = request.POST.get('total_cost_for_edmonton_January 29th, 2019', '')
             total_edmonton_fair_cost_2 = request.POST.get('total_cost_for_edmonton_May 28th, 2019', '')
@@ -316,41 +311,34 @@ class IndexPageView(TemplateView):
 
             if 'Winnipeg' in select_cities:
                 for index in range(0, len(winnipegList)):
+                    print(winnipegList)
                     if winnipegList[index] == '-':
                         print('Date Selection is "-" so fair is not in use')
                     elif winnipegList[index] != '-':
 
                         w_qs = WinnipegFair(
                             related_sale=m,
-                            date_selection=winnipegList[index]
+                            date_selection=winnipegList[index],
                         )
 
                         if index == 0:
-                            w_qs.winnipeg_booth_option=winnipeg_booth_option_1
-                            w_qs.winnipeg_additional_booth_option=winnipeg_booth_option_1
-                            w_qs.winnipeg_additional_lunch_option=winnipeg_additional_lunch_option_1
+                            w_qs.winnipeg_booth_option = winnipeg_booth_option_1
+                            w_qs.winnipeg_additional_booth_option = winnipeg_additional_booth_option_1
+                            w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_1
                             w_qs.winnipeg_diet_request = winnipeg_diet_request_1
-                            w_qs.fair_total_cost = total_winnipeg_fair_cost_1
+                            w_qs.fair_total_spent = total_winnipeg_fair_cost_1
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
 
                         if index == 1:
-                            w_qs.winnipeg_booth_option=winnipeg_booth_option_2
-                            w_qs.winnipeg_additional_booth_option=winnipeg_booth_option_2
-                            w_qs.winnipeg_additional_lunch_option=winnipeg_additional_lunch_option_2
-                            w_qs.winnipeg_diet_request=winnipeg_diet_request_2
-                            w_qs.fair_total_cost = total_winnipeg_fair_cost_2
+                            w_qs.winnipeg_booth_option = winnipeg_booth_option_2
+                            w_qs.winnipeg_additional_booth_option = winnipeg_additional_booth_option_2
+                            w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_2
+                            w_qs.winnipeg_diet_request = winnipeg_diet_request_2
+                            w_qs.fair_total_spent = total_winnipeg_fair_cost_2
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
-
-                        if index == 2:
-                            w_qs.winnipeg_booth_option=winnipeg_booth_option_3
-                            w_qs.winnipeg_additional_booth_option=winnipeg_booth_option_3
-                            w_qs.winnipeg_additional_lunch_option=winnipeg_additional_lunch_option_3
-                            w_qs.winnipeg_diet_request=winnipeg_diet_request_3
-                            w_qs.fair_total_cost = total_winnipeg_fair_cost_3
-                            w_qs.save()
-                            m.winnipeg_booking.add(w_qs)
+                        print(w_qs.fair_total_spent)
 
 
 
