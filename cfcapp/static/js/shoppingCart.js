@@ -72,8 +72,7 @@ function dateCheck(input){
              cartText = input.parentElement.innerText
              cartItem = document.createElement('li')
              cartItem.id = cartText
-             cartItem.innerText = cartText
-             shoppingCart.append(cartItem)
+            shoppingCart.append(cartItem)
              boothOptionSelect = document.createElement('select')
              boothOptionLabel = document.createElement('label')
              boothOptionLabel.innerText = 'Booth Options:'
@@ -104,9 +103,9 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
                 selectLabel.append(additionalBoothOption)
+                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
                 input.parentElement.append(document.createElement('br'), selectLabel, boothOptionLabel)
-                cartItem.innerHTML += boothOptionSelect.innerText + '<br>'+ 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + selectLabel.innerText + ' ' + `<span id='extraBoothValue_${cartText}'>` + additionalBoothOption.value + '</span>'
-                cartItem.innerHTML += `<h5>Toronto Career Fair <br>${cartText}</h5>`
+                cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
                 //create electricity option and maybe a better way to insert html instead of my usual modus operandi.
@@ -135,10 +134,9 @@ function dateCheck(input){
                 //set attributes for diet request for view and append the label
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 dietRequestLabel.append(dietRequest)
-                //now create the rest of our cart item to display to the user
+                //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts)
-                cartItem.innerHTML += boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + '<br>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
-                cartItem.innerHTML += `<h5>Calgary Career Fair <br>${cartText}</h5>`
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Calgary Fair Breakdown for ${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
                  //Create Venue Options
@@ -174,8 +172,7 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel, venueOpts)
-                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>${breakfastLabel.innerText}<span id='extraBreakfastValue_${cartText}'>${additionalBreakfastOption.value}</span>`
-                cartItem.innerHTML += `<h5>Edmonton Career Fair <br>${cartText}</h5>`
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><br>Extra Breakfast: <span id="extraBreakfastValue_${cartText}">${additionalBreakfastOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
                 //Booth type select
@@ -200,9 +197,8 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
-                cartItem.innerHTML +=  boothOptionSelect.innerText + '<br>' + 'Booth Option: ' +`<span id='boothOption_${cartText}'>` + boothOptionSelect.value + '</span>' + `<br>${selectLabel.innerText} <span id='extraBoothValue_${cartText}'>${additionalBoothOption.value}</span><br>${lunchLabel.innerText}<span id='extraLunchValue_${cartText}'>${additionalLunchOption.value}</span><br>`
-                cartItem.innerHTML += `<h5>Winnipeg Career Fair <br>${cartText}</h5>`
+                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Winnipeg Fair Breakdown for ${cartText}</h5>`
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
@@ -258,48 +254,6 @@ allDatesCheckboxes.forEach((input)=>{
    }
     dateCheck(input)
 })
-function boothOptionCheck(input){
-        parentUl = input.id
-        cartItem = document.createElement('li')
-        cartItemText = input.parentElement.innerText
-        cartItem.innerText = cartItemText
-        boothValue = parseInt(input.getAttribute('value'))
-        //double up if statements for every input check to what booth option was click and if the cartItem exists in the cart go remove it so we can add a new one and show to the user that their selection change is reflected in the cart.
-        if(input){
-           if(parentUl == 'id_toronto_booth_options'){
-              if(document.getElementById('torontoSingleCartItem')){
-                 document.getElementById('torontoSingleCartItem').remove()
-              }
-              cartItem.id = 'torontoSingleCartItem'
-              shoppingCart.append(cartItem)
-              amountSpent = calculateTotal(torontoCart)
-           }
-           if(parentUl == 'id_calgary_booth_options'){
-              if(document.getElementById('calgarySingleCartItem')){
-                 document.getElementById('calgarySingleCartItem').remove()
-              }
-              cartItem.id = 'calgarySingleCartItem'
-              shoppingCart.append(cartItem)
-              amountSpent = calculateTotal(calgaryCart)
-           }
-           if(parentUl == 'id_edmonton_booth_options'){
-              if(document.getElementById('edmontonSingleCartItem')){
-                 document.getElementById('edmontonSingleCartItem').remove()
-              }
-              cartItem.id = 'edmontonSingleCartItem'
-              shoppingCart.append(cartItem)
-              amountSpent = calculateTotal(edmontonCart)
-           }
-           if(parentUl == 'id_winnipeg_booth_options'){
-              if(document.getElementById('winnipegSingleCartItem')){
-                 document.getElementById('winnipegSingleCartItem').remove()
-              }
-              cartItem.id = 'winnipegSingleCartItem'
-              shoppingCart.append(cartItem)
-              amountSpent = calculateTotal(winnipegCart)
-           }
-    }
-}
 
 //forEach loop that adds the functionality for booth options. Similar logic as the dates with the main difference is we are capturing the inputs 'value' attribute and assigning the value of that to our booth value. Then we find the right cart and update it. Also I had to add a check that will remove other booths form the cart Ul that the users sees unlike our dates where you can select multiple, they can only have one booth option.
 
@@ -550,4 +504,4 @@ function calculateGrandTotal(){
 }
 
 cartTotal = document.getElementById('cart-total')
-setInterval(calculateGrandTotal, 1000)
+setInterval(calculateGrandTotal, 100)
