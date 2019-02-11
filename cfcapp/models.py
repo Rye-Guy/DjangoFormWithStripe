@@ -24,6 +24,7 @@ class SalesFormData(models.Model):
     secondary_address = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255, blank=False)
     province = models.CharField(max_length=255, blank=False)
+    industry = models.CharField(max_length=255, blank=False, default='Not Selected')
     postal_code = models.CharField(max_length=255, blank=False)
     contact_email = models.EmailField(blank=False)
     office_phone_number = models.CharField(max_length=88, blank=True)

@@ -51,6 +51,7 @@ class IndexPageView(TemplateView):
             city = request.POST.get('city', '')
            
             province = request.POST.get('province', '')
+            industry = request.POST.get('industry', '')
 
             postal_code = request.POST.get('postal_code', '')
             contact_email = request.POST.get('contact_email', '')
@@ -194,6 +195,7 @@ class IndexPageView(TemplateView):
                 secondary_address=secondary_address,
                 city=city,
                 province=province,
+                industry=industry,
                 postal_code=postal_code,
                 contact_email=contact_email,
                 office_phone_number=office_phone_number,
