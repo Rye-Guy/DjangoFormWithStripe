@@ -29,6 +29,18 @@
     <div class='staffPermissionsSection'>
       <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
       <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
+      <script>
+          function createTextArea(fairDate, fairLocation){
+              const container = document.createElement('div')
+              let textInput = document.createElement('textarea')
+              textInput.id = `extra_notes_for_${fairLocation}_${fairDate}`
+              textInput.setAttribute('name', textInput.id)
+              textInput.setAttribute('class', 'materialize-textarea')
+              container.append(textInput)
+              container.innerHTML += `<label for="${textInput.id}">Extra Notes</label>`
+              return container
+          }
+      </script>
     </div>
     {% endif %}
     {% csrf_token %}

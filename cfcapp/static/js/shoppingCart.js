@@ -105,6 +105,9 @@ function dateCheck(input){
                 selectLabel.append(additionalBoothOption)
                  //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
                 input.parentElement.append(document.createElement('br'), selectLabel, boothOptionLabel)
+                 if(window.createTextArea){
+                     input.parentElement.append(createTextArea(cartText, 'toronto'))
+                 }
                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
@@ -136,6 +139,9 @@ function dateCheck(input){
                 dietRequestLabel.append(dietRequest)
                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts)
+                 if(window.createTextArea){
+                     input.parentElement.append(createTextArea(cartText, 'calgary'))
+                 }
                  cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Calgary Fair Breakdown for ${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
@@ -172,6 +178,9 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel, venueOpts)
+                 if(window.createTextArea){
+                     input.parentElement.append(createTextArea(cartText, 'edmonton'))
+                 }
                  cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><br>Extra Breakfast: <span id="extraBreakfastValue_${cartText}">${additionalBreakfastOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
@@ -198,6 +207,9 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
                  input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                 if(window.createTextArea){
+                     input.parentElement.append(createTextArea(cartText, 'winnipeg'))
+                 }
                  cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Winnipeg Fair Breakdown for ${cartText}</h5>`
                 winnipegCart[0]++
              }

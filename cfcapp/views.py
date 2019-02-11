@@ -153,18 +153,32 @@ class IndexPageView(TemplateView):
 
             total_toronto_fair_cost_1 = request.POST.get('total_cost_for_toronto_April 24th, 2019', '')
             total_toronto_fair_cost_2 = request.POST.get('total_cost_for_toronto_September 17th, 2019', '')
+            extra_notes_toronto_fair_1 = request.POST.get('extra_notes_for_toronto_April 24th, 2019', '')
+            extra_notes_toronto_fair_2 = request.POST.get('extra_notes_for_toronto_September 17th, 2019', '')
 
             total_winnipeg_fair_cost_1 = request.POST.get('total_cost_for_winnipeg_April 2nd, 2019', '')
             total_winnipeg_fair_cost_2 = request.POST.get('total_cost_for_winnipeg_July 23rd, 2019', '')
+            extra_notes_winnipeg_fair_1 = request.POST.get('extra_notes_for_winnipeg_April 2nd, 2019', '')
+            extra_notes_winnipeg_fair_2 = request.POST.get('extra_notes_for_winnipeg_July 23rd, 2019', '')
+
 
             total_calgary_fair_cost_1 = request.POST.get('total_cost_for_calgary_March 12th, 2019', '')
             total_calgary_fair_cost_2 = request.POST.get('total_cost_for_calgary_June 25th, 2019', '')
             total_calgary_fair_cost_3 = request.POST.get('total_cost_for_calgary_October 23rd, 2019', '')
+            extra_notes_calgary_fair_1 = request.POST.get('extra_notes_for_calgary_March 12th, 2019', '')
+            extra_notes_calgary_fair_2 = request.POST.get('extra_notes_for_calgary_June 25th, 2019', '')
+            extra_notes_calgary_fair_3 = request.POST.get('extra_notes_for_calgary_October 23rd, 2019', '')
+
+
 
             total_edmonton_fair_cost_1 = request.POST.get('total_cost_for_edmonton_January 29th, 2019', '')
             total_edmonton_fair_cost_2 = request.POST.get('total_cost_for_edmonton_May 28th, 2019', '')
             total_edmonton_fair_cost_3 = request.POST.get('total_cost_for_edmonton_August 13th, 2019', '')
             total_edmonton_fair_cost_4 = request.POST.get('total_cost_for_edmonton_November 19th, 2019', '')
+            extra_notes_edmonton_fair_1 = request.POST.get('extra_notes_for_edmonton_January 29th, 2019', '')
+            extra_notes_edmonton_fair_2 = request.POST.get('extra_notes_for_edmonton_May 28th, 2019', '')
+            extra_notes_edmonton_fair_3 = request.POST.get('extra_notes_for_edmonton_August 13th, 2019', '')
+            extra_notes_edmonton_fair_4 = request.POST.get('extra_notes_for_edmonton_November 19th, 2019', '')
 
 
 
@@ -206,6 +220,7 @@ class IndexPageView(TemplateView):
                             t_qs.toronto_booth_option = toronto_booth_option_1
                             t_qs.toronto_additional_booth_option = toronto_additional_booth_option_1
                             t_qs.fair_total_spent = total_toronto_fair_cost_1
+                            t_qs.special_request = extra_notes_toronto_fair_1
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
 
@@ -213,6 +228,7 @@ class IndexPageView(TemplateView):
                             t_qs.toronto_booth_option = toronto_booth_option_2
                             t_qs.toronto_additional_booth_option = toronto_additional_booth_option_2
                             t_qs.fair_total_spent = total_toronto_fair_cost_2
+                            t_qs.special_request = extra_notes_toronto_fair_2
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
 
@@ -236,6 +252,7 @@ class IndexPageView(TemplateView):
                             c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_1
                             c_qs.calgary_diet_request = calgary_diet_request_1
                             c_qs.fair_total_spent = total_calgary_fair_cost_1
+                            c_qs.special_request = extra_notes_calgary_fair_1
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -245,6 +262,7 @@ class IndexPageView(TemplateView):
                             c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_2
                             c_qs.calgary_diet_request = calgary_diet_request_2
                             c_qs.fair_total_spent = total_calgary_fair_cost_2
+                            c_qs.special_request = extra_notes_calgary_fair_2
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -254,6 +272,7 @@ class IndexPageView(TemplateView):
                             c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_3
                             c_qs.calgary_diet_request = calgary_diet_request_3
                             c_qs.fair_total_spent = total_calgary_fair_cost_3
+                            c_qs.special_request = extra_notes_calgary_fair_3
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -276,6 +295,7 @@ class IndexPageView(TemplateView):
                             e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_1
                             e_qs.edmonton_diet_request = edmonton_diet_request_1
                             e_qs.fair_total_spent = total_edmonton_fair_cost_1
+                            e_qs.special_request = extra_notes_edmonton_fair_1
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -286,6 +306,7 @@ class IndexPageView(TemplateView):
                             e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_2
                             e_qs.edmonton_diet_request = edmonton_diet_request_2
                             e_qs.fair_total_spent = total_edmonton_fair_cost_2
+                            e_qs.special_request = extra_notes_edmonton_fair_2
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -296,6 +317,7 @@ class IndexPageView(TemplateView):
                             e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_3
                             e_qs.edmonton_diet_request = edmonton_diet_request_3
                             e_qs.fair_total_spent = total_edmonton_fair_cost_3
+                            e_qs.special_request = extra_notes_edmonton_fair_3
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -306,6 +328,7 @@ class IndexPageView(TemplateView):
                             e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_4
                             e_qs.edmonton_diet_request = edmonton_diet_request_4
                             e_qs.fair_total_spent = total_edmonton_fair_cost_4
+                            e_qs.special_request = extra_notes_edmonton_fair_4
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -327,6 +350,7 @@ class IndexPageView(TemplateView):
                             w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_1
                             w_qs.winnipeg_diet_request = winnipeg_diet_request_1
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_1
+                            w_qs.special_request = extra_notes_winnipeg_fair_1
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
 
@@ -336,6 +360,7 @@ class IndexPageView(TemplateView):
                             w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_2
                             w_qs.winnipeg_diet_request = winnipeg_diet_request_2
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_2
+                            w_qs.special_request = extra_notes_winnipeg_fair_2
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
                         print(w_qs.fair_total_spent)
