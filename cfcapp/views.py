@@ -65,6 +65,14 @@ class IndexPageView(TemplateView):
             toronto_dates = request.POST.getlist('toronto_dates')
 
             '''
+            worked in booleans to be sent to database as True or False if the checkbox is 'on'
+            '''
+            def check_boolean(data):
+                if data == 'on':
+                    return True
+                return False
+
+            '''
             Helper function that will take in a few lists, compare them and edit a related list with selections.
             Creates proper order regardless on how the list is generated on the frontend. 
             Cleans data for sales and accounting. Displays dates for reps properly
@@ -169,6 +177,12 @@ class IndexPageView(TemplateView):
             extra_notes_calgary_fair_1 = request.POST.get('extra_notes_for_calgary_March 12th, 2019', '')
             extra_notes_calgary_fair_2 = request.POST.get('extra_notes_for_calgary_June 25th, 2019', '')
             extra_notes_calgary_fair_3 = request.POST.get('extra_notes_for_calgary_October 23rd, 2019', '')
+            electricty_option_calgary_1 = request.POST.get('electricity_option_calgary_March 12th, 2019', False)
+            electricty_option_calgary_2 = request.POST.get('electricity_option_calgary_June 25th, 2019', False)
+            electricty_option_calgary_3 = request.POST.get('electricity_option_calgary_October 23rd, 2019', False)
+            wifi_option_calgary_1 = request.POST.get('wifi_option_calgary_March 12th, 2019', False)
+            wifi_option_calgary_2 = request.POST.get('wifi_option_calgary_June 25th, 2019', False)
+            wifi_option_calgary_3 = request.POST.get('wifi_option_calgary_October 23rd, 2019', False)
 
 
 
@@ -219,16 +233,16 @@ class IndexPageView(TemplateView):
                             date_selection=torontoList[index],
                         )
                         if index == 0:
-                            t_qs.toronto_booth_option = toronto_booth_option_1
-                            t_qs.toronto_additional_booth_option = toronto_additional_booth_option_1
+                            t_qs.booth_option = toronto_booth_option_1
+                            t_qs.additional_booth_option = toronto_additional_booth_option_1
                             t_qs.fair_total_spent = total_toronto_fair_cost_1
                             t_qs.special_request = extra_notes_toronto_fair_1
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
 
                         elif index == 1:
-                            t_qs.toronto_booth_option = toronto_booth_option_2
-                            t_qs.toronto_additional_booth_option = toronto_additional_booth_option_2
+                            t_qs.booth_option = toronto_booth_option_2
+                            t_qs.additional_booth_option = toronto_additional_booth_option_2
                             t_qs.fair_total_spent = total_toronto_fair_cost_2
                             t_qs.special_request = extra_notes_toronto_fair_2
                             t_qs.save()
@@ -246,35 +260,40 @@ class IndexPageView(TemplateView):
                         c_qs = CalgaryFair(
                             related_sale=m,
                             date_selection=calgaryList[index],
-                            calgary_venue_options=calgary_options
                         )
                         if index == 0:
-                            c_qs.calgary_booth_option = calgary_booth_option_1
-                            c_qs.calgary_additional_booth_option = calgary_additional_booth_option_1
-                            c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_1
-                            c_qs.calgary_diet_request = calgary_diet_request_1
+                            c_qs.booth_option = calgary_booth_option_1
+                            c_qs.additional_booth_option = calgary_additional_booth_option_1
+                            c_qs.additional_lunch_option= calgary_additional_lunch_option_1
+                            c_qs.diet_request = calgary_diet_request_1
                             c_qs.fair_total_spent = total_calgary_fair_cost_1
                             c_qs.special_request = extra_notes_calgary_fair_1
+                            c_qs.electricity = check_boolean(electricty_option_calgary_1)
+                            c_qs.wifi = check_boolean(wifi_option_calgary_1)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
                         elif index == 1:
-                            c_qs.calgary_booth_option = calgary_booth_option_2
-                            c_qs.calgary_additional_booth_option = calgary_additional_booth_option_2
-                            c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_2
-                            c_qs.calgary_diet_request = calgary_diet_request_2
+                            c_qs.booth_option = calgary_booth_option_2
+                            c_qs.additional_booth_option = calgary_additional_booth_option_2
+                            c_qs.additional_lunch_option= calgary_additional_lunch_option_2
+                            c_qs.diet_request = calgary_diet_request_2
                             c_qs.fair_total_spent = total_calgary_fair_cost_2
                             c_qs.special_request = extra_notes_calgary_fair_2
+                            c_qs.electricity = check_boolean(electricty_option_calgary_2)
+                            c_qs.wifi = check_boolean(wifi_option_calgary_2)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
                         elif index == 2:
-                            c_qs.calgary_booth_option = calgary_booth_option_3
-                            c_qs.calgary_additional_booth_option = calgary_additional_booth_option_3
-                            c_qs.calgary_additional_lunch_option= calgary_additional_lunch_option_3
-                            c_qs.calgary_diet_request = calgary_diet_request_3
+                            c_qs.booth_option = calgary_booth_option_3
+                            c_qs.additional_booth_option = calgary_additional_booth_option_3
+                            c_qs.additional_lunch_option= calgary_additional_lunch_option_3
+                            c_qs.diet_request = calgary_diet_request_3
                             c_qs.fair_total_spent = total_calgary_fair_cost_3
                             c_qs.special_request = extra_notes_calgary_fair_3
+                            c_qs.electricity = check_boolean(electricty_option_calgary_3)
+                            c_qs.wifi = check_boolean(wifi_option_calgary_3)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -288,47 +307,46 @@ class IndexPageView(TemplateView):
                         e_qs = EdmontonFair(
                             related_sale=m,
                             date_selection=edmontonList[index],
-                            edmonton_venue_options=edmonton_options
                         )
                         if index == 0:
-                            e_qs.edmonton_booth_option = edmonton_booth_option_1
-                            e_qs.edmonton_additional_booth_option = edmonton_additional_booth_option_1
-                            e_qs.edmonton_additional_lunch_option = edmonton_additional_lunch_option_1
-                            e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_1
-                            e_qs.edmonton_diet_request = edmonton_diet_request_1
+                            e_qs.booth_option = edmonton_booth_option_1
+                            e_qs.additional_booth_option = edmonton_additional_booth_option_1
+                            e_qs.additional_lunch_option = edmonton_additional_lunch_option_1
+                            e_qs.additional_breakfast_option = edmonton_additional_breakfast_option_1
+                            e_qs.diet_request = edmonton_diet_request_1
                             e_qs.fair_total_spent = total_edmonton_fair_cost_1
                             e_qs.special_request = extra_notes_edmonton_fair_1
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
                         elif index == 1:
-                            e_qs.edmonton_booth_option = edmonton_booth_option_2
-                            e_qs.edmonton_additional_booth_option = edmonton_additional_booth_option_2
-                            e_qs.edmonton_additional_lunch_option = edmonton_additional_lunch_option_2
-                            e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_2
-                            e_qs.edmonton_diet_request = edmonton_diet_request_2
+                            e_qs.booth_option = edmonton_booth_option_2
+                            e_qs.additional_booth_option = edmonton_additional_booth_option_2
+                            e_qs.additional_lunch_option = edmonton_additional_lunch_option_2
+                            e_qs.additional_breakfast_option = edmonton_additional_breakfast_option_2
+                            e_qs.diet_request = edmonton_diet_request_2
                             e_qs.fair_total_spent = total_edmonton_fair_cost_2
                             e_qs.special_request = extra_notes_edmonton_fair_2
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
                         elif index == 2:
-                            e_qs.edmonton_booth_option = edmonton_booth_option_3
-                            e_qs.edmonton_additional_booth_option = edmonton_additional_booth_option_3
-                            e_qs.edmonton_additional_lunch_option = edmonton_additional_lunch_option_3
-                            e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_3
-                            e_qs.edmonton_diet_request = edmonton_diet_request_3
+                            e_qs.booth_option = edmonton_booth_option_3
+                            e_qs.additional_booth_option = edmonton_additional_booth_option_3
+                            e_qs.additional_lunch_option = edmonton_additional_lunch_option_3
+                            e_qs.additional_breakfast_option = edmonton_additional_breakfast_option_3
+                            e_qs.diet_request = edmonton_diet_request_3
                             e_qs.fair_total_spent = total_edmonton_fair_cost_3
                             e_qs.special_request = extra_notes_edmonton_fair_3
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
                         elif index == 3:
-                            e_qs.edmonton_booth_option = edmonton_booth_option_4
-                            e_qs.edmonton_additional_booth_option = edmonton_additional_booth_option_4
-                            e_qs.edmonton_additional_lunch_option = edmonton_additional_lunch_option_4
-                            e_qs.edmonton_additional_breakfast_option = edmonton_additional_breakfast_option_4
-                            e_qs.edmonton_diet_request = edmonton_diet_request_4
+                            e_qs.booth_option = edmonton_booth_option_4
+                            e_qs.additional_booth_option = edmonton_additional_booth_option_4
+                            e_qs.additional_lunch_option = edmonton_additional_lunch_option_4
+                            e_qs.additional_breakfast_option = edmonton_additional_breakfast_option_4
+                            e_qs.diet_request = edmonton_diet_request_4
                             e_qs.fair_total_spent = total_edmonton_fair_cost_4
                             e_qs.special_request = extra_notes_edmonton_fair_4
                             e_qs.save()
@@ -347,20 +365,20 @@ class IndexPageView(TemplateView):
                         )
 
                         if index == 0:
-                            w_qs.winnipeg_booth_option = winnipeg_booth_option_1
-                            w_qs.winnipeg_additional_booth_option = winnipeg_additional_booth_option_1
-                            w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_1
-                            w_qs.winnipeg_diet_request = winnipeg_diet_request_1
+                            w_qs.booth_option = winnipeg_booth_option_1
+                            w_qs.additional_booth_option = winnipeg_additional_booth_option_1
+                            w_qs.additional_lunch_option = winnipeg_additional_lunch_option_1
+                            w_qs.diet_request = winnipeg_diet_request_1
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_1
                             w_qs.special_request = extra_notes_winnipeg_fair_1
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
 
                         if index == 1:
-                            w_qs.winnipeg_booth_option = winnipeg_booth_option_2
-                            w_qs.winnipeg_additional_booth_option = winnipeg_additional_booth_option_2
-                            w_qs.winnipeg_additional_lunch_option = winnipeg_additional_lunch_option_2
-                            w_qs.winnipeg_diet_request = winnipeg_diet_request_2
+                            w_qs.booth_option = winnipeg_booth_option_2
+                            w_qs.additional_booth_option = winnipeg_additional_booth_option_2
+                            w_qs.additional_lunch_option = winnipeg_additional_lunch_option_2
+                            w_qs.diet_request = winnipeg_diet_request_2
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_2
                             w_qs.special_request = extra_notes_winnipeg_fair_2
                             w_qs.save()
