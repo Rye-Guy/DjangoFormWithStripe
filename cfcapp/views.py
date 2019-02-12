@@ -64,6 +64,19 @@ class IndexPageView(TemplateView):
             select_cities_for_db = ', '.join(select_cities)
             toronto_dates = request.POST.getlist('toronto_dates')
 
+            """
+            Something that takes the current booth option value and returns a package title
+            """
+            def select_booth_package(booth_option):
+                if booth_option == '1495':
+                    return "Bronze"
+                elif booth_option == '1995':
+                    return  "Silver"
+                elif booth_option == '2495':
+                    return "Gold"
+                elif booth_option == '2995':
+                    return "Platinum"
+
             '''
             worked in booleans to be sent to database as True or False if the checkbox is 'on'
             '''
@@ -237,6 +250,7 @@ class IndexPageView(TemplateView):
                             t_qs.additional_booth_option = toronto_additional_booth_option_1
                             t_qs.fair_total_spent = total_toronto_fair_cost_1
                             t_qs.special_request = extra_notes_toronto_fair_1
+                            t_qs.package_type = select_booth_package(toronto_booth_option_1)
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
 
@@ -245,8 +259,11 @@ class IndexPageView(TemplateView):
                             t_qs.additional_booth_option = toronto_additional_booth_option_2
                             t_qs.fair_total_spent = total_toronto_fair_cost_2
                             t_qs.special_request = extra_notes_toronto_fair_2
+                            t_qs.package_type = select_booth_package(toronto_booth_option_2)
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
+
+                        t_qs.booth_cost_cal()
 
 
 
@@ -270,6 +287,7 @@ class IndexPageView(TemplateView):
                             c_qs.special_request = extra_notes_calgary_fair_1
                             c_qs.electricity = check_boolean(electricty_option_calgary_1)
                             c_qs.wifi = check_boolean(wifi_option_calgary_1)
+                            c_qs.package_type = select_booth_package(calgary_booth_option_1)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -282,6 +300,7 @@ class IndexPageView(TemplateView):
                             c_qs.special_request = extra_notes_calgary_fair_2
                             c_qs.electricity = check_boolean(electricty_option_calgary_2)
                             c_qs.wifi = check_boolean(wifi_option_calgary_2)
+                            c_qs.package_type = select_booth_package(calgary_booth_option_2)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
@@ -294,8 +313,11 @@ class IndexPageView(TemplateView):
                             c_qs.special_request = extra_notes_calgary_fair_3
                             c_qs.electricity = check_boolean(electricty_option_calgary_3)
                             c_qs.wifi = check_boolean(wifi_option_calgary_3)
+                            c_qs.package_type = select_booth_package(calgary_booth_option_3)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
+
+                        c_qs.booth_cost_cal()
 
 
             if 'Edmonton' in select_cities:
@@ -316,6 +338,7 @@ class IndexPageView(TemplateView):
                             e_qs.diet_request = edmonton_diet_request_1
                             e_qs.fair_total_spent = total_edmonton_fair_cost_1
                             e_qs.special_request = extra_notes_edmonton_fair_1
+                            e_qs.package_type = select_booth_package(edmonton_booth_option_1)
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -327,6 +350,7 @@ class IndexPageView(TemplateView):
                             e_qs.diet_request = edmonton_diet_request_2
                             e_qs.fair_total_spent = total_edmonton_fair_cost_2
                             e_qs.special_request = extra_notes_edmonton_fair_2
+                            e_qs.package_type = select_booth_package(edmonton_booth_option_2)
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -338,6 +362,7 @@ class IndexPageView(TemplateView):
                             e_qs.diet_request = edmonton_diet_request_3
                             e_qs.fair_total_spent = total_edmonton_fair_cost_3
                             e_qs.special_request = extra_notes_edmonton_fair_3
+                            e_qs.package_type = select_booth_package(edmonton_booth_option_3)
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
@@ -349,8 +374,11 @@ class IndexPageView(TemplateView):
                             e_qs.diet_request = edmonton_diet_request_4
                             e_qs.fair_total_spent = total_edmonton_fair_cost_4
                             e_qs.special_request = extra_notes_edmonton_fair_4
+                            e_qs.package_type = select_booth_package(edmonton_booth_option_4)
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
+
+                        e_qs.booth_cost_cal()
 
             if 'Winnipeg' in select_cities:
                 for index in range(0, len(winnipegList)):
@@ -371,6 +399,7 @@ class IndexPageView(TemplateView):
                             w_qs.diet_request = winnipeg_diet_request_1
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_1
                             w_qs.special_request = extra_notes_winnipeg_fair_1
+                            w_qs.package_type = select_booth_package(winnipeg_booth_option_1)
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
 
@@ -381,11 +410,11 @@ class IndexPageView(TemplateView):
                             w_qs.diet_request = winnipeg_diet_request_2
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_2
                             w_qs.special_request = extra_notes_winnipeg_fair_2
+                            w_qs.package_type = select_booth_package(winnipeg_booth_option_2)
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
-                        print(w_qs.fair_total_spent)
 
-
+                        w_qs.booth_cost_cal()
 
 
             return HttpResponseRedirect('/')
