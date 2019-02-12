@@ -7,6 +7,9 @@ class OnSiteContacts(models.Model):
     phone_number = models.CharField(max_length=300)
     email = models.CharField(max_length=300)
 
+    def __str__(self):
+        return self.name + " " + self.email
+
 
 
 class TorontoFair(models.Model):
@@ -21,7 +24,7 @@ class TorontoFair(models.Model):
     additional_booth_option = models.CharField(max_length=400, default='-')
     fair_total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
     special_request = models.TextField(max_length=2000, blank=True)
-    contact = models.ForeignKey(OnSiteContacts, on_delete=models.SET_NULL, blank=True, null=True)
+    contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
 
     def __str__(self):
@@ -57,7 +60,7 @@ class CalgaryFair(models.Model):
     account_number = models.CharField(max_length=10, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
     booth_cost = models.CharField(max_length=100, blank=True)
-    contact = models.ForeignKey(OnSiteContacts, on_delete=models.SET_NULL, blank=True, null=True)
+    contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
 
     def __str__(self):
@@ -94,7 +97,7 @@ class EdmontonFair(models.Model):
     account_number = models.CharField(max_length=10, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
     booth_cost = models.CharField(max_length=100, blank=True)
-    contact = models.ForeignKey(OnSiteContacts, on_delete=models.SET_NULL, blank=True, null=True)
+    contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
 
 
@@ -130,7 +133,8 @@ class WinnipegFair(models.Model):
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)
     booth_cost = models.CharField(max_length=100, blank=True)
-    contact = models.ForeignKey(OnSiteContacts, on_delete=models.SET_NULL, blank=True, null=True)
+    contact = models.ManyToManyField(OnSiteContacts, blank=True)
+
 
 
     def __str__(self):

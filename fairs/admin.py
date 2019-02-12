@@ -15,7 +15,7 @@ class FairModelResource(import_export.resources.ModelResource):
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
 
-    list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'booth_option', 'get_related_sales_rep', 'special_request']
+    list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'package_type',  'get_discount_percentage', 'booth_cost','get_related_sales_rep', 'special_request']
 
     resource_class = FairModelResource
 
@@ -70,6 +70,12 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
 
     get_office_phone.short_description = 'Office Line'
 
+    def get_discount_percentage(self, obj):
+        try:
+            return obj.related_sale.discount_percentage
+        except AttributeError:
+            return 'No Attribute Found'
+    get_discount_percentage.short_description = 'Discounted'
 
     def export_genral_csv(modeladmin, request, queryset):
 
