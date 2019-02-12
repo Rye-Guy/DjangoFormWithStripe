@@ -31,6 +31,7 @@ class SalesFormData(models.Model):
     direct_phone_number = models.CharField(max_length=88, blank=True)
     facebook_link = models.URLField(max_length=255, blank=True)
     website_link = models.URLField(max_length=255, blank=True)
+    instagram_link = models.URLField(max_length=255, blank=True)
     twitter_link = models.URLField(max_length=255, blank=True)
     select_cities = models.CharField(max_length=255, blank=False, default='You will never see me')
     toronto_booking = models.ManyToManyField('fairs.TorontoFair', blank=True)

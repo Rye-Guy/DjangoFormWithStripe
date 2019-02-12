@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TorontoFair, CalgaryFair, EdmontonFair, WinnipegFair
+from .models import TorontoFair, CalgaryFair, EdmontonFair, WinnipegFair, OnSiteContacts
 from django.http import HttpResponse, request
 
 # Register your models here.
@@ -109,8 +109,8 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
             smart_str(u"Electricity"),
             smart_str(u"Special Notes")
         ))
-
         for obj in queryset:
+
             writer.writerow([
                 smart_str(obj.pk),
                 smart_str(obj.related_sale.company_name),
@@ -130,3 +130,4 @@ admin.site.register(TorontoFair, FairAdmin)
 admin.site.register(CalgaryFair, FairAdmin)
 admin.site.register(EdmontonFair, FairAdmin)
 admin.site.register(WinnipegFair, FairAdmin)
+admin.site.register(OnSiteContacts)
