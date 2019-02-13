@@ -16,8 +16,10 @@ function helperTextCheck(input){
             console.log('leave helper text')
         }
         else{
-            input.nextSibling.className = 'helperTextRemain'
-            console.log('remove initial helper text style')
+            if(input.parentNode.className == 'billingInfoLabels'){
+                 input.nextSibling.className = 'helperTextRemain'
+                 console.log('remove initial helper text style')
+                }
         }
     })
 }

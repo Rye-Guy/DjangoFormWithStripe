@@ -415,12 +415,13 @@ function applyDiscount(grandTotal, typeOfDiscount){
         document.getElementById('discountType').innerText = '$'
         discountType = document.getElementById('discountHiddenInput').value = `${discountAmount}`
         currentCartTotal = parseInt(document.getElementById('priceValue').innerText)
-        console.log(currentCartTotal, discountAmount)
         percentageOff = (currentCartTotal - discountAmount) / currentCartTotal
         percentageOff - 1
-        theTakeAwayPercent = percentageOff
+        theTakeAwayPercent = (percentageOff / 1) - 1
+        theTakeAwayPercent.toString()
         theTakeAwayPercentRep = parseFloat(Math.abs((theTakeAwayPercent))).toFixed(2)
-        document.getElementById('discountPercentHiddenInput').value = "%" + String(theTakeAwayPercentRep.slice(2, 4))
+        console.log(theTakeAwayPercentRep)
+        document.getElementById('discountPercentHiddenInput').value = "%" +  String(theTakeAwayPercentRep.slice(2, 4))
         takeAway = discountType
     }
     return takeAway
@@ -512,6 +513,19 @@ function calculateGrandTotal(){
        document.getElementById('subtotalHiddenInput').value = subtotal
        return overallTotalWithTax
 }
+
+document.getElementById('applyNewBoothCost').addEventListener('click', function ApplyCustomBoothCost(ev){
+    applyBtn = document.getElementById('applyNewBoothCost')
+    ev.preventDefault()
+    customBoothCost = document.getElementById('manuelBoothCost').value
+    parseInt(customBoothCost)
+    discountedCost = boothOption - parseInt(customBoothCost)
+    somePercentOff = discountedCost / boothOption
+    percentToApply = somePercentOff.toString().slice(2, somePercentOff.length)
+    document.getElementById('id_discount_amount').value = percentToApply
+    console.log('clicked', applyBtn, numArr)
+})
+
 
 cartTotal = document.getElementById('cart-total')
 setInterval(calculateGrandTotal, 100)

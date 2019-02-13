@@ -23,12 +23,14 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 <div class="content">
+
   <h1>Purchase a Booth</h1>
-  <form action="/" method="POST">
     {% if request.user.is_staff %}
     <div class='staffPermissionsSection'>
       <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
       <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
+      <div style="margin-left: 100px" id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
+        <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
       <script>
           function createTextArea(fairDate, fairLocation){
               const container = document.createElement('div')
@@ -43,6 +45,8 @@
       </script>
     </div>
     {% endif %}
+  <form action="/" method="POST">
+
     {% csrf_token %}
     <h2>Billing Information</h2>
     <div id="billingInfoContainer" class="">
