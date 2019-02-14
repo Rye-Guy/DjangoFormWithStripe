@@ -11,7 +11,6 @@ class OnSiteContacts(models.Model):
         return self.name + " " + self.email
 
 
-
 class TorontoFair(models.Model):
 
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
@@ -62,7 +61,6 @@ class CalgaryFair(models.Model):
     booth_cost = models.CharField(max_length=100, blank=True)
     contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
-
     def __str__(self):
         date_string = self.date_selection
         related_company = self.related_sale.company_name
@@ -99,12 +97,10 @@ class EdmontonFair(models.Model):
     booth_cost = models.CharField(max_length=100, blank=True)
     contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
-
-
     def __str__(self):
         date_string = self.date_selection
         related_company = self.related_sale.company_name
-        return str(related_company) + " For: " + date_string + " EDM"
+        return str(related_company) + "For: " + date_string + " EDM"
 
     def booth_cost_cal(self):
         discount = self.related_sale.discount_percentage
@@ -135,11 +131,9 @@ class WinnipegFair(models.Model):
     booth_cost = models.CharField(max_length=100, blank=True)
     contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
-
-
     def __str__(self):
         date_string = self.date_selection
-        related_company = rself.related_sale.company_name
+        related_company = self.related_sale.company_name
         return str(related_company) + " For: " + date_string + " WPG"
 
     def booth_cost_cal(self):
@@ -150,3 +144,6 @@ class WinnipegFair(models.Model):
         self.booth_cost = booth_cost
         self.save()
         return booth_cost
+
+    def related_class(self):
+        return 'winnipeg'

@@ -77,25 +77,143 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
             return 'No Attribute Found'
     get_discount_percentage.short_description = 'Discounted'
 
+
+
     def export_genral_csv(modeladmin, request, queryset):
+
+        def get_related_contact_info(obj):
+            try:
+                contact = obj.contact.all()
+                return [contact[0].name, contact[0].phone_number, contact[0].email]
+            except IndexError:
+                return [obj.related_sale.contact_name, obj.related_sale.office_phone_number, obj.related_sale.contact_email]
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Diposition'] = 'attachment; filename=mymodel.csv'
         writer = csv.writer(response, csv.excel)
 
+        exporting_city = queryset[0].related_class()
 
-        writer.writerow((
+        if exporting_city == 'toronto':
+            writer.writerow((
+                smart_str(u"Booth ID"),
+                smart_str(u"Company Name"),
+                smart_str(u"Contact Name"),
+                smart_str(u"Telephone"),
+                smart_str(u"Email"),
+                smart_str(u"Owner"),
+                smart_str(u"Sponsorship Level"),
+                smart_str(u"Notes")
+            ))
 
-        ))
+        if exporting_city == 'edmonton':
+            writer.writerow((
+                smart_str(u"Booth ID"),
+                smart_str(u"Company Name"),
+                smart_str(u"Contact Name"),
+                smart_str(u"Telephone"),
+                smart_str(u"Email"),
+                smart_str(u"Owner"),
+                smart_str(u"Sponsorship Level"),
+                smart_str(u"Extra Lunch"),
+                smart_str(u"Extra Breakfast"),
+                smart_str(u"Wifi"),
+                smart_str(u"Electricity"),
+                smart_str(u"Notes")
+            ))
+
+        if exporting_city == 'calgary':
+            writer.writerow((
+                smart_str(u"Booth ID"),
+                smart_str(u"Company Name"),
+                smart_str(u"Contact Name"),
+                smart_str(u"Telephone"),
+                smart_str(u"Email"),
+                smart_str(u"Owner"),
+                smart_str(u"Sponsorship Level"),
+                smart_str(u"Extra Lunch"),
+                smart_str(u"Wifi"),
+                smart_str(u"Electricity"),
+                smart_str(u"Notes")
+            ))
+
+        if exporting_city == 'winnipeg':
+            writer.writerow((
+                smart_str(u"Booth ID"),
+                smart_str(u"Company Name"),
+                smart_str(u"Contact Name"),
+                smart_str(u"Telephone"),
+                smart_str(u"Email"),
+                smart_str(u"Owner"),
+                smart_str(u"Sponsorship Level"),
+                smart_str(u"Extra Lunch"),
+                smart_str(u"Notes")
+            ))
+
 
         for obj in queryset:
+            theContact = get_related_contact_info(obj)
 
-            writer.writerow([
+            if exporting_city == 'toronto':
+                writer.writerow([
+                    smart_str(obj.booth_id),
+                    smart_str(obj.related_sale.company_name),
+                    smart_str(theContact[0]),
+                    smart_str(theContact[1]),
+                    smart_str(theContact[2]),
+                    smart_str(obj.related_sale.sales_rep),
+                    smart_str(obj.package_type),
+                    smart_str(obj.special_request)
+                ])
 
-            ])
+            if exporting_city == 'edmonton':
+                writer.writerow([
+                    smart_str(obj.booth_id),
+                    smart_str(obj.related_sale.company_name),
+                    smart_str(theContact[0]),
+                    smart_str(theContact[1]),
+                    smart_str(theContact[2]),
+                    smart_str(obj.related_sale.sales_rep),
+                    smart_str(obj.package_type),
+                    smart_str(obj.additional_lunch_option),
+                    smart_str(obj.additional_breakfast_option),
+                    smart_str(obj.wifi),
+                    smart_str(obj.electricity),
+                    smart_str(obj.special_request)
 
-            return response
-        export_csv.short_description = u"Export All Data"
+                ])
+
+            if exporting_city == 'calgary':
+                writer.writerow([
+                    smart_str(obj.booth_id),
+                    smart_str(obj.related_sale.company_name),
+                    smart_str(theContact[0]),
+                    smart_str(theContact[1]),
+                    smart_str(theContact[2]),
+                    smart_str(obj.related_sale.sales_rep),
+                    smart_str(obj.package_type),
+                    smart_str(obj.additional_lunch_option),
+                    smart_str(obj.wifi),
+                    smart_str(obj.electricity),
+                    smart_str(obj.special_request)
+                ])
+
+            if exporting_city == 'winnipeg':
+                writer.writerow([
+                    smart_str(obj.booth_id),
+                    smart_str(obj.related_sale.company_name),
+                    smart_str(theContact[0]),
+                    smart_str(theContact[1]),
+                    smart_str(theContact[2]),
+                    smart_str(obj.related_sale.sales_rep),
+                    smart_str(obj.package_type),
+                    smart_str(obj.additional_lunch_option),
+                    smart_str(obj.special_request)
+                ])
+
+        return response
+
+    export_genral_csv.short_description = u"Export All Fair Data"
 
 
     def fair_specific_csv(modeladmin, request, queryset):
@@ -105,7 +223,6 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
         writer = csv.writer(response, csv.excel)
 
 
-        print(queryset)
 
         writer.writerow((
             smart_str(u"Order ID"),
@@ -132,8 +249,15 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
 
     actions = [export_genral_csv, fair_specific_csv]
 
+class ContactAdmin(import_export.admin.ImportExportModelAdmin):
+
+    class Meta:
+        model = OnSiteContacts
+
+    exclude = ['toronto_fairs', 'edmonton_fairs', 'calgary_fairs', 'winnipeg_fairs']
+
 admin.site.register(TorontoFair, FairAdmin)
 admin.site.register(CalgaryFair, FairAdmin)
 admin.site.register(EdmontonFair, FairAdmin)
 admin.site.register(WinnipegFair, FairAdmin)
-admin.site.register(OnSiteContacts)
+admin.site.register(OnSiteContacts, ContactAdmin)
