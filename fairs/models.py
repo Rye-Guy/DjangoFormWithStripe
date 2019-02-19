@@ -43,6 +43,11 @@ class TorontoFair(models.Model):
     def related_class(self):
         return 'toronto'
 
+    def save(self, *args, **kwargs):
+        print('Toronto SAVED')
+        super(TorontoFair, self).save(*args, **kwargs)
+
+
 class CalgaryFair(models.Model):
 
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)

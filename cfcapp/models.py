@@ -12,6 +12,34 @@ class SalesFormData(models.Model):
         reable_str = part1 + ' id:' + str(part2)
         return reable_str
 
+    def save(self, *args, **kwargs):
+        discount_amount = self.discount_amount
+        discount_percentage = self.discount_percentage
+        total_spent = self.total_spent
+        toronto_booking = self.toronto_booking
+        print('|------------------------------------------------------------------|')
+        print('toronto bookings:')
+        print(self.toronto_booking.all())
+        toronto_qs = self.toronto_booking.all()
+        toronto_cost = 0
+        for obj in toronto_qs:
+            toronto_cost += obj.fair_total_spent
+            obj.save()
+        print('|------------------------------------------------------------------|')
+        print('calgary bookings:')
+        print(self.calgary_booking.all())
+        print('|------------------------------------------------------------------|')
+        print('edmonton bookings:')
+        print(self.edmonton_booking.all())
+        print('|------------------------------------------------------------------|')
+        print('winnipeg bookings:')
+        print(self.winnipeg_booking.all())
+        print('|------------------------------------------------------------------|')
+        print('Working Numbers:')
+        print(discount_amount, discount_percentage, total_spent)
+        print('|------------------------------------------------------------------|')
+        super(SalesFormData, self).save(*args, **kwargs)
+
 
     sales_rep = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     company_name = models.CharField(max_length=255, blank=False)

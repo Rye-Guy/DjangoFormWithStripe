@@ -59,6 +59,7 @@ class IndexPageView(TemplateView):
             direct_phone_number = request.POST.get('direct_phone_number', '')
             facebook_link = request.POST.get('facebook_link', '')
             website_link = request.POST.get('website_link', '')
+            instagram_link = request.POST.get('twitter_link', '')
             twitter_link = request.POST.get('twitter_link', '')
             select_cities = request.POST.getlist('select_cities')
             select_cities_for_db = ', '.join(select_cities)
@@ -229,6 +230,7 @@ class IndexPageView(TemplateView):
                 direct_phone_number=direct_phone_number,
                 facebook_link=facebook_link,
                 website_link=website_link,
+                instagram_link=instagram_link,
                 twitter_link=twitter_link,
                 select_cities=select_cities_for_db,
                 )
