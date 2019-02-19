@@ -23,6 +23,8 @@ class SalesFormData(models.Model):
             boothCost = int(obj.booth_option) - mydiff
             obj.booth_cost = boothCost
             newFairTotal = boothCost + float(obj.fair_total_spent) - obj.booth_cost
+            print(obj.additional_booth_option)
+            print(obj.related_class())
             obj.save()
             return newFairTotal
 
@@ -42,8 +44,10 @@ class SalesFormData(models.Model):
         toronto_cost = 0
         for obj in toronto_qs:
 
+
             print(calculate_individual_fair_cost(obj, percentage_dec))
             toronto_cost += calculate_individual_fair_cost(obj, percentage_dec)
+
 
         print('|------------------------------------------------------------------|')
         print('calgary bookings:')
@@ -86,6 +90,10 @@ class SalesFormData(models.Model):
         print('Working Numbers:')
         print(discount_amount, discount_percentage, total_spent, self.subtotal)
         print(toronto_cost, calgary_cost, edmonton_cost, winnipeg_cost)
+        self.subtotal = toronto_cost + calgary_cost + edmonton_cost + winnipeg_cost
+        updated_subtotal = self.subtotal
+        self.discount_amount = updated_subtotal * percentage_dec
+
         print('|------------------------------------------------------------------|')
         super(SalesFormData, self).save(*args, **kwargs)
 
