@@ -38,3 +38,5 @@ class SalesFormData(models.Model):
     edmonton_booking = models.ManyToManyField('fairs.EdmontonFair', blank=True)
     calgary_booking = models.ManyToManyField('fairs.CalgaryFair', blank=True)
     winnipeg_booking = models.ManyToManyField('fairs.WinnipegFair', blank=True)
+
+

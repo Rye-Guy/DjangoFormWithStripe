@@ -14,7 +14,7 @@ class FairModelResource(import_export.resources.ModelResource):
 
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
-
+    search_fields = ['date_selection']
     list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'package_type',  'get_discount_percentage', 'booth_cost','get_related_sales_rep', 'special_request']
 
     resource_class = FairModelResource
@@ -225,27 +225,28 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
 
 
         writer.writerow((
-            smart_str(u"Order ID"),
+            smart_str(u"ID"),
             smart_str(u"Company Name"),
-            smart_str(u"Additional Lunches"),
-            smart_str(u"Power"),
-            smart_str(u"Electricity"),
-            smart_str(u"Special Notes")
+            smart_str(u"Contact Name"),
+            smart_str(u"Phone Numbers"),
+            smart_str(u"Email"),
         ))
         for obj in queryset:
+            all_contacts = obj.contact.all()
+            for contact in all_contacts:
+                writer.writerow([
+                    smart_str(contact.id),
+                    smart_str(obj.related_sale.company_name),
+                    smart_str(contact.name),
+                    smart_str(contact.phone_number),
+                    smart_str(contact.email),
 
-            writer.writerow([
-                smart_str(obj.pk),
-                smart_str(obj.related_sale.company_name),
-                smart_str(obj.additional_lunch_option),
-                smart_str(obj.wifi),
-                smart_str(obj.electricity),
-                smart_str(obj.special_request)
-            ])
+                ])
 
         return response
 
-        export_csv.short_description = u"Export Related Data"
+
+    fair_specific_csv.short_description = u"All Fair Contacts"
 
     actions = [export_genral_csv, fair_specific_csv]
 
