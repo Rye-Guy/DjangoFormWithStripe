@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from decimal import *
+
 class SalesFormData(models.Model):
 
     class Meta:
@@ -12,9 +14,25 @@ class SalesFormData(models.Model):
         reable_str = part1 + ' id:' + str(part2)
         return reable_str
 
+
+
     def save(self, *args, **kwargs):
+
+        def calculate_individual_fair_cost(obj, percentage_dec):
+            mydiff = int(obj.booth_option) * percentage_dec
+            boothCost = int(obj.booth_option) - mydiff
+            obj.booth_cost = boothCost
+            newFairTotal = boothCost + float(obj.fair_total_spent) - obj.booth_cost
+            obj.save()
+            return newFairTotal
+
         discount_amount = self.discount_amount
         discount_percentage = self.discount_percentage
+        percent_to_remove = (discount_percentage.split('%'))
+        percentage_int = int(float(percent_to_remove[1]))
+        percentage_dec = float('.' + str(percentage_int))
+
+
         total_spent = self.total_spent
         toronto_booking = self.toronto_booking
         print('|------------------------------------------------------------------|')
@@ -23,20 +41,51 @@ class SalesFormData(models.Model):
         toronto_qs = self.toronto_booking.all()
         toronto_cost = 0
         for obj in toronto_qs:
-            toronto_cost += obj.fair_total_spent
-            obj.save()
+
+            print(calculate_individual_fair_cost(obj, percentage_dec))
+            toronto_cost += calculate_individual_fair_cost(obj, percentage_dec)
+
         print('|------------------------------------------------------------------|')
         print('calgary bookings:')
-        print(self.calgary_booking.all())
+
+        calgary_qs = self.calgary_booking.all()
+        calgary_cost = 0
+
+        for obj in calgary_qs:
+
+            print(calculate_individual_fair_cost(obj, percentage_dec))
+            calgary_cost += calculate_individual_fair_cost(obj, percentage_dec)
+
         print('|------------------------------------------------------------------|')
+
         print('edmonton bookings:')
-        print(self.edmonton_booking.all())
+
+        edmonton_qs = self.edmonton_booking.all()
+        edmonton_cost = 0
+
+        for obj in edmonton_qs:
+
+
+            print(calculate_individual_fair_cost(obj, percentage_dec))
+            edmonton_cost += calculate_individual_fair_cost(obj, percentage_dec)
+
+
         print('|------------------------------------------------------------------|')
         print('winnipeg bookings:')
-        print(self.winnipeg_booking.all())
+
+        winnipeg_qs = self.winnipeg_booking.all()
+        winnipeg_cost = 0
+
+        for obj in winnipeg_qs:
+
+            print(calculate_individual_fair_cost(obj, percentage_dec))
+            winnipeg_cost += calculate_individual_fair_cost(obj, percentage_dec)
+
         print('|------------------------------------------------------------------|')
+
         print('Working Numbers:')
-        print(discount_amount, discount_percentage, total_spent)
+        print(discount_amount, discount_percentage, total_spent, self.subtotal)
+        print(toronto_cost, calgary_cost, edmonton_cost, winnipeg_cost)
         print('|------------------------------------------------------------------|')
         super(SalesFormData, self).save(*args, **kwargs)
 
