@@ -20,9 +20,13 @@ class TorontoFair(models.Model):
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
     package_type = models.CharField(max_length=100, blank=True)
-    booth_cost = models.CharField(max_length=100, blank=True)
     additional_booth_option = models.CharField(max_length=400, default='-')
-    fair_total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+
+    subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+    discount_cost = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+
     special_request = models.TextField(max_length=2000, blank=True)
     contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
@@ -39,6 +43,7 @@ class TorontoFair(models.Model):
         calculate_fair_total(self)
         print('Toronto SAVED')
         super(TorontoFair, self).save(*args, **kwargs)
+
 
 
 class CalgaryFair(models.Model):
@@ -66,6 +71,7 @@ class CalgaryFair(models.Model):
 
     def related_class(self):
         return 'calgary'
+
 
 class EdmontonFair(models.Model):
 

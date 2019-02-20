@@ -15,7 +15,7 @@ class FairModelResource(import_export.resources.ModelResource):
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
     search_fields = ['date_selection']
-    list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'package_type',  'get_discount_percentage', 'booth_cost','get_related_sales_rep', 'special_request']
+    list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'package_type',  'get_discount_percentage', 'get_related_sales_rep', 'special_request']
 
     resource_class = FairModelResource
 

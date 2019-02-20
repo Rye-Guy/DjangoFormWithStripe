@@ -27,7 +27,7 @@ class MyModelAdmin(admin.ModelAdmin):
                 return SalesFormData.objects.filter(sales_rep=request.user)
 
         filter_horizontal = ['toronto_booking', 'winnipeg_booking', 'edmonton_booking', 'calgary_booking']
-        list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'subtotal', 'discount_amount', 'discount_percentage', 'total_spent',  'select_cities']
+        list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'subtotal', 'discount_amount', 'discount_percentage', 'total_spent', 'select_cities']
         search_fields = ['company_name', 'contact_email', 'office_phone_number', 'sales_rep']
         resource_class = SalesDataModelResource
 

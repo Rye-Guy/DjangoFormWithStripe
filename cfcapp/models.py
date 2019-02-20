@@ -52,8 +52,6 @@ class SalesFormData(models.Model):
             percent_to_remove = (discount_percentage.split('%'))
             percentage_int = int(float(percent_to_remove[1]))
             percentage_dec = float('.' + str(percentage_int))
-
-
             total_spent = self.total_spent
 
             print('|------------------------------------------------------------------|')
@@ -62,9 +60,8 @@ class SalesFormData(models.Model):
             toronto_qs = self.toronto_booking.all()
             toronto_cost = 0
             for obj in toronto_qs:
-
                 obj.save()
-
+                toronto_cost += obj.subtotal
             print('|------------------------------------------------------------------|')
             print('calgary bookings:')
 
@@ -105,7 +102,12 @@ class SalesFormData(models.Model):
 
             self.discount_amount = updated_subtotal * percentage_dec
 
-            print('|------------------------------------------------------------------|')
+            print('|-///////---///////---///////---///////---///////---///////--|')
+            print('|-[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]--|')
+            print('|-|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|--|')
+            print('|-|\---/|---|\---/|---|\---/|---|\---/|---|\---/|---|\---/|--|')
+            print('|----V---------*---------V---------*---------V---------*-----|')
+
         except ObjectDoesNotExist:
             pass
 
