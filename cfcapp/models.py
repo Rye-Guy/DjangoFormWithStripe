@@ -47,18 +47,6 @@ class SalesFormData(models.Model):
 
             SalesFormData.objects.get(id=self.id)
 
-            def calculate_individual_fair_cost(obj, percentage_dec):
-                mydiff = int(obj.booth_option) * percentage_dec
-                boothCost = int(obj.booth_option) - mydiff
-                obj.booth_cost = boothCost
-                costOfAdditionalBooths = int(obj.additional_booth_option) * 995
-                newFairTotal = (boothCost + float(obj.fair_total_spent) - costOfAdditionalBooths) - obj.booth_cost
-                working_subtotal = newFairTotal + costOfAdditionalBooths
-                obj.additional_booth_option
-                obj.fair_total_spent = working_subtotal
-                obj.save()
-                return working_subtotal
-
             discount_amount = self.discount_amount
             discount_percentage = self.discount_percentage
             percent_to_remove = (discount_percentage.split('%'))
@@ -70,12 +58,12 @@ class SalesFormData(models.Model):
 
             print('|------------------------------------------------------------------|')
             print('toronto bookings:')
+
             toronto_qs = self.toronto_booking.all()
             toronto_cost = 0
             for obj in toronto_qs:
 
-                print(calculate_individual_fair_cost(obj, percentage_dec))
-                toronto_cost += calculate_individual_fair_cost(obj, percentage_dec)
+                obj.save()
 
             print('|------------------------------------------------------------------|')
             print('calgary bookings:')
@@ -84,9 +72,7 @@ class SalesFormData(models.Model):
             calgary_cost = 0
 
             for obj in calgary_qs:
-
-                print(calculate_individual_fair_cost(obj, percentage_dec))
-                calgary_cost += calculate_individual_fair_cost(obj, percentage_dec)
+                obj.save()
 
             print('|------------------------------------------------------------------|')
 
@@ -96,12 +82,7 @@ class SalesFormData(models.Model):
             edmonton_cost = 0
 
             for obj in edmonton_qs:
-
-
-                print(calculate_individual_fair_cost(obj, percentage_dec))
-                edmonton_cost += calculate_individual_fair_cost(obj, percentage_dec)
-
-
+                obj.save()
             print('|------------------------------------------------------------------|')
             print('winnipeg bookings:')
 
@@ -109,10 +90,7 @@ class SalesFormData(models.Model):
             winnipeg_cost = 0
 
             for obj in winnipeg_qs:
-
-                print(calculate_individual_fair_cost(obj, percentage_dec))
-                winnipeg_cost += calculate_individual_fair_cost(obj, percentage_dec)
-
+                obj.save()
             print('|------------------------------------------------------------------|')
 
             print('Working Numbers:')

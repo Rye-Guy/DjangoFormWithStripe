@@ -1,5 +1,6 @@
 from cfcapp.models import SalesFormData
 from django.db import models
+from fairs.utils import calculate_fair_total
 
 class OnSiteContacts(models.Model):
 
@@ -31,29 +32,11 @@ class TorontoFair(models.Model):
         related_company = self.related_sale
         return str(related_company)
 
-    def booth_cost_cal(self):
-        discount = self.related_sale.discount_percentage
-        discount_dec = discount.replace('%', '.')
-        boothDiscount = int(self.booth_option) * float(discount_dec)
-        booth_cost = int(self.booth_option) - boothDiscount
-        self.booth_cost = booth_cost
-        self.save()
-        return booth_cost
-
-    def calculate_fair_total(self):
-        booth_option = self.booth_option
-        additional_booth_option = int(self.additional_booth_option) * 990
-        tax_cal = self.related_sale.province
-        discount = self.related_sale.discount_percentage
-        discount_dec = discount.replace('%', '.')
-        print(booth_option, additional_booth_option, tax_cal, discount_dec)
-
-
     def related_class(self):
         return 'toronto'
 
     def save(self, *args, **kwargs):
-        self.calculate_fair_total()
+        calculate_fair_total(self)
         print('Toronto SAVED')
         super(TorontoFair, self).save(*args, **kwargs)
 
@@ -80,15 +63,6 @@ class CalgaryFair(models.Model):
         date_string = self.date_selection
         related_company = self.related_sale
         return str(related_company) + " For: " + date_string + " CAL"
-
-    def booth_cost_cal(self):
-        discount = self.related_sale.discount_percentage
-        discount_dec = discount.replace('%', '.')
-        boothDiscount = int(self.booth_option) * float(discount_dec)
-        booth_cost = int(self.booth_option) - boothDiscount
-        self.booth_cost = booth_cost
-        self.save()
-        return booth_cost
 
     def related_class(self):
         return 'calgary'
@@ -117,15 +91,6 @@ class EdmontonFair(models.Model):
         related_company = self.related_sale
         return str(related_company) + "For: " + date_string + " EDM"
 
-    def booth_cost_cal(self):
-        discount = self.related_sale.discount_percentage
-        discount_dec = discount.replace('%', '.')
-        boothDiscount = int(self.booth_option) * float(discount_dec)
-        booth_cost = int(self.booth_option) - boothDiscount
-        self.booth_cost = booth_cost
-        self.save()
-        return booth_cost
-
     def related_class(self):
         return 'edmonton'
 
@@ -150,15 +115,6 @@ class WinnipegFair(models.Model):
         date_string = self.date_selection
         related_company = self.related_sale
         return str(related_company) + " For: " + date_string + " WPG"
-
-    def booth_cost_cal(self):
-        discount = self.related_sale.discount_percentage
-        discount_dec = discount.replace('%', '.')
-        boothDiscount = int(self.booth_option) * float(discount_dec)
-        booth_cost = int(self.booth_option) - boothDiscount
-        self.booth_cost = booth_cost
-        self.save()
-        return booth_cost
 
     def related_class(self):
         return 'winnipeg'

@@ -265,7 +265,6 @@ class IndexPageView(TemplateView):
                             t_qs.save()
                             m.toronto_booking.add(t_qs)
 
-                        t_qs.booth_cost_cal()
 
 
 
@@ -319,7 +318,6 @@ class IndexPageView(TemplateView):
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
 
-                        c_qs.booth_cost_cal()
 
 
             if 'Edmonton' in select_cities:
@@ -380,7 +378,6 @@ class IndexPageView(TemplateView):
                             e_qs.save()
                             m.edmonton_booking.add(e_qs)
 
-                        e_qs.booth_cost_cal()
 
             if 'Winnipeg' in select_cities:
                 for index in range(0, len(winnipegList)):
@@ -415,8 +412,6 @@ class IndexPageView(TemplateView):
                             w_qs.package_type = select_booth_package(winnipeg_booth_option_2)
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
-
-                        w_qs.booth_cost_cal()
 
 
             return HttpResponseRedirect('/')
