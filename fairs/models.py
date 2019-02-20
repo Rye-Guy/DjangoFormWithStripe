@@ -28,8 +28,8 @@ class TorontoFair(models.Model):
 
     def __str__(self):
         date_string = self.date_selection
-        related_company = self.related_sale.company_name
-        return related_company + " For: " + date_string + " TOR"
+        related_company = self.related_sale
+        return str(related_company)
 
     def booth_cost_cal(self):
         discount = self.related_sale.discount_percentage
@@ -40,10 +40,20 @@ class TorontoFair(models.Model):
         self.save()
         return booth_cost
 
+    def calculate_fair_total(self):
+        booth_option = self.booth_option
+        additional_booth_option = int(self.additional_booth_option) * 990
+        tax_cal = self.related_sale.province
+        discount = self.related_sale.discount_percentage
+        discount_dec = discount.replace('%', '.')
+        print(booth_option, additional_booth_option, tax_cal, discount_dec)
+
+
     def related_class(self):
         return 'toronto'
 
     def save(self, *args, **kwargs):
+        self.calculate_fair_total()
         print('Toronto SAVED')
         super(TorontoFair, self).save(*args, **kwargs)
 
@@ -68,7 +78,7 @@ class CalgaryFair(models.Model):
 
     def __str__(self):
         date_string = self.date_selection
-        related_company = self.related_sale.company_name
+        related_company = self.related_sale
         return str(related_company) + " For: " + date_string + " CAL"
 
     def booth_cost_cal(self):
@@ -104,7 +114,7 @@ class EdmontonFair(models.Model):
 
     def __str__(self):
         date_string = self.date_selection
-        related_company = self.related_sale.company_name
+        related_company = self.related_sale
         return str(related_company) + "For: " + date_string + " EDM"
 
     def booth_cost_cal(self):
@@ -138,7 +148,7 @@ class WinnipegFair(models.Model):
 
     def __str__(self):
         date_string = self.date_selection
-        related_company = self.related_sale.company_name
+        related_company = self.related_sale
         return str(related_company) + " For: " + date_string + " WPG"
 
     def booth_cost_cal(self):
