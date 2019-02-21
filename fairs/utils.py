@@ -9,16 +9,30 @@ def calculate_fair_total(obj):
     # .15 tax bracket #
     high_tax_provinces = ['New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Prince Edward Island']
 
+    someTotal = 0
+
+    if obj.related_class() == 'calgary' or 'edmonton' or 'winnipeg' :
+        lunch_cost = int(obj.additional_lunch_option) * 28
+        someTotal += lunch_cost
+        if obj.related_class() == 'calgary' or 'edmonton':
+            if obj.wifi == True:
+                someTotal += 50
+            if obj.electricity == True:
+                someTotal += 129
+        if obj.related_class == 'edmonton':
+            breakfast_cost = int(obj.additional_breakfast_option) * 25
+            someTotal += breakfast_cost
+
     province = obj.related_sale.province
     booth_option = obj.booth_option
     additional_booth_option = int(obj.additional_booth_option) * 995
     tax_cal = obj.related_sale.province
     discount = obj.related_sale.discount_percentage
-
     discount_dec = discount.replace('%', '.')
-    someTotal = int(booth_option) + additional_booth_option
+    someTotal += int(booth_option) + additional_booth_option
     purchase_discount = int(someTotal) * float(discount_dec)
     my_cost_bf_tax = someTotal - purchase_discount
+
 
     if province in low_tax_provinces:
         tax_to_charge = 0.05
@@ -45,7 +59,10 @@ def calculate_fair_total(obj):
     if obj.related_class() == 'toronto':
         TorontoFair.objects.all().filter(id=obj.id).update(subtotal=someTotal, discount_cost=purchase_discount, tax_to_charge=tax_to_charge, grand_total=my_cost_af_tax)
     elif obj.related_class() == 'calgary':
-
-        CalgaryFair.objects.all().filter(id=obj.id).update()
+        CalgaryFair.objects.all().filter(id=obj.id).update(subtotal=someTotal, discount_cost=purchase_discount, tax_to_charge=tax_to_charge, grand_total=my_cost_af_tax)
+    elif obj.related_class() == 'edmonton':
+        EdmontonFair.objects.all().filter(id=obj.id).update(subtotal=someTotal, discount_cost=purchase_discount, tax_to_charge=tax_to_charge, grand_total=my_cost_af_tax)
+    elif obj.related_class() == 'winnipeg':
+        WinnipegFair.objects.all().filter(id=obj.id).update(subtotal=someTotal, discount_cost=purchase_discount, tax_to_charge=tax_to_charge, grand_total=my_cost_af_tax)
 
 

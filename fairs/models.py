@@ -89,6 +89,17 @@ class CalgaryFair(models.Model):
     def related_class(self):
         return 'calgary'
 
+    @receiver(post_save, sender=SalesFormData)
+    def update_fair_child(sender, instance, **kwargs):
+        my_objs = instance.calgary_booking.all()
+        for obj in my_objs:
+            calculate_fair_total(obj)
+        print(sender, instance)
+
+    def save(self):
+        calculate_fair_total(self)
+        print('Calgary SAVED!')
+        super(CalgaryFair, self).save()
 
 class EdmontonFair(models.Model):
 
