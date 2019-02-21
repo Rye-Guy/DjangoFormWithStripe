@@ -1,5 +1,5 @@
 def calculate_fair_total(obj):
-
+    from .models import TorontoFair, EdmontonFair, CalgaryFair, WinnipegFair
     # .5 tax bracket #
     low_tax_provinces = ['Alberta', 'British Columbia', 'Manitoba', 'Quebec', 'Saskatchewan', 'Northwest Territories',
                          'Nunavut', 'Yukon']
@@ -38,4 +38,14 @@ def calculate_fair_total(obj):
     obj.grand_total = my_cost_af_tax
     obj.tax_to_charge = tax_to_charge
 
+
+
     print(someTotal, tax_cal, discount_dec, my_cost_bf_tax, tax_to_charge, my_cost_af_tax)
+
+    if obj.related_class() == 'toronto':
+        TorontoFair.objects.all().filter(id=obj.id).update(subtotal=someTotal, discount_cost=purchase_discount, tax_to_charge=tax_to_charge, grand_total=my_cost_af_tax)
+    elif obj.related_class() == 'calgary':
+
+        CalgaryFair.objects.all().filter(id=obj.id).update()
+
+

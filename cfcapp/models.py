@@ -2,7 +2,8 @@ from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
-from decimal import *
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class SalesFormData(models.Model):
 
@@ -41,10 +42,20 @@ class SalesFormData(models.Model):
     calgary_booking = models.ManyToManyField('fairs.CalgaryFair', blank=True)
     winnipeg_booking = models.ManyToManyField('fairs.WinnipegFair', blank=True)
 
+
+
+    @receiver(post_save, sender='fairs.TorontoFair')
+    def update_fair_parent(sender, instance, **kwargs):
+        instance.related_sale.save()
+        print(sender, instance)
+
+    post_save.connect(update_fair_parent, sender='fairs.EdmontonFair')
+    post_save.connect(update_fair_parent, sender='fairs.CalgaryFair')
+    post_save.connect(update_fair_parent, sender='fairs.WinnipegFair')
+
+
     def save(self, *args, **kwargs):
-
         try:
-
             SalesFormData.objects.get(id=self.id)
 
             discount_amount = self.discount_amount
@@ -56,11 +67,10 @@ class SalesFormData(models.Model):
 
             print('|------------------------------------------------------------------|')
             print('toronto bookings:')
-
             toronto_qs = self.toronto_booking.all()
             toronto_cost = 0
             for obj in toronto_qs:
-                obj.save()
+
                 toronto_cost += obj.subtotal
             print('|------------------------------------------------------------------|')
             print('calgary bookings:')
@@ -69,8 +79,7 @@ class SalesFormData(models.Model):
             calgary_cost = 0
 
             for obj in calgary_qs:
-                obj.save()
-
+                calgary_cost += obj.subtotal
             print('|------------------------------------------------------------------|')
 
             print('edmonton bookings:')
@@ -79,7 +88,7 @@ class SalesFormData(models.Model):
             edmonton_cost = 0
 
             for obj in edmonton_qs:
-                obj.save()
+                edmonton_cost += obj.subtotal
             print('|------------------------------------------------------------------|')
             print('winnipeg bookings:')
 
@@ -87,7 +96,8 @@ class SalesFormData(models.Model):
             winnipeg_cost = 0
 
             for obj in winnipeg_qs:
-                obj.save()
+                winnipeg_cost += obj.subtotal
+
             print('|------------------------------------------------------------------|')
 
             print('Working Numbers:')
@@ -100,16 +110,19 @@ class SalesFormData(models.Model):
 
             updated_subtotal = self.subtotal
 
-            self.discount_amount = updated_subtotal * percentage_dec
+            self.discount_amount = float(updated_subtotal) * percentage_dec
 
             print('|-///////---///////---///////---///////---///////---///////--|')
             print('|-[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]--|')
             print('|-|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|--|')
-            print('|-|\---/|---|\---/|---|\---/|---|\---/|---|\---/|---|\---/|--|')
+            print('|-|\-x-/|---|\---/|---|\---/|---|\---/|---|\---/|---|\---/|--|')
             print('|----V---------*---------V---------*---------V---------*-----|')
 
         except ObjectDoesNotExist:
             pass
+
+
+
 
         super(SalesFormData, self).save(*args, **kwargs)
 
