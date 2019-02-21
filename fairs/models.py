@@ -1,10 +1,9 @@
 from cfcapp.models import SalesFormData
 from django.db import models
-from fairs.utils import calculate_fair_total
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from .utils import calculate_fair_total
 
 class OnSiteContacts(models.Model):
 
@@ -112,7 +111,12 @@ class EdmontonFair(models.Model):
     wifi = models.BooleanField(default=False)
     electricity = models.BooleanField(default=False)
     diet_request = models.CharField(max_length=400, blank=True, default='')
-    fair_total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+
+    subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+    discount_cost = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+
     special_request = models.TextField(max_length=2000, blank=True)
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)
@@ -128,6 +132,17 @@ class EdmontonFair(models.Model):
     def related_class(self):
         return 'edmonton'
 
+    @receiver(post_save, sender=SalesFormData)
+    def update_fair_child(sender, instance, **kwargs):
+        my_objs = instance.edmonton_booking.all()
+        for obj in my_objs:
+            calculate_fair_total(obj)
+
+    def save(self):
+        calculate_fair_total(self)
+        print('Edmonton SAVED!')
+        super(EdmontonFair, self).save()
+
 
 class WinnipegFair(models.Model):
 
@@ -137,7 +152,12 @@ class WinnipegFair(models.Model):
     additional_booth_option = models.CharField(max_length=400, default='-')
     additional_lunch_option = models.CharField(max_length=400, default='-')
     diet_request = models.CharField(max_length=400, blank=True, default='')
-    fair_total_spent = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+
+    subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
+    discount_cost = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+    grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
+
     special_request = models.TextField(max_length=2000, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
     booth_id = models.IntegerField(blank=True, null=True)
@@ -152,3 +172,15 @@ class WinnipegFair(models.Model):
 
     def related_class(self):
         return 'winnipeg'
+
+
+    @receiver(post_save, sender=SalesFormData)
+    def update_fair_child(sender, instance, **kwargs):
+        my_objs = instance.winnipeg_booking.all()
+        for obj in my_objs:
+            calculate_fair_total(obj)
+
+    def save(self):
+        calculate_fair_total(self)
+        print('Winnipeg SAVED!')
+        super(WinnipegFair, self).save()
