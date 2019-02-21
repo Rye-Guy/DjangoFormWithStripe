@@ -11,7 +11,7 @@ def calculate_fair_total(obj):
 
     someTotal = 0
 
-    if obj.related_class() == 'calgary' or 'edmonton' or 'winnipeg':
+    if obj.related_class() != 'toronto':
         lunch_cost = int(obj.additional_lunch_option) * 28
         someTotal += lunch_cost
         if obj.related_class() != 'winnipeg':

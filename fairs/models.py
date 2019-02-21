@@ -17,7 +17,7 @@ class OnSiteContacts(models.Model):
 
 class TorontoFair(models.Model):
 
-    related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
+    related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
@@ -58,7 +58,7 @@ class TorontoFair(models.Model):
 
 class CalgaryFair(models.Model):
 
-    related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
+    related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
 
@@ -102,7 +102,7 @@ class CalgaryFair(models.Model):
 
 class EdmontonFair(models.Model):
 
-    related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
+    related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
     additional_booth_option = models.CharField(max_length=400, default='-')
@@ -146,7 +146,7 @@ class EdmontonFair(models.Model):
 
 class WinnipegFair(models.Model):
 
-    related_sale = models.ForeignKey(SalesFormData, on_delete=models.SET_NULL, null=True)
+    related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
     additional_booth_option = models.CharField(max_length=400, default='-')
