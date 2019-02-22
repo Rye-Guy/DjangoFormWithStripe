@@ -43,7 +43,8 @@ class IndexPageView(TemplateView):
             float(total_spent)
 
             subtotal = request.POST.get('subtotalInput', 0.00)
-            float(subtotal)
+
+
             discount_amount = request.POST.get('discountAmount', '')
             discount_percentage = request.POST.get('discountPercent', '')
 
@@ -413,6 +414,6 @@ class IndexPageView(TemplateView):
                             w_qs.save()
                             m.winnipeg_booking.add(w_qs)
 
-
-            return HttpResponseRedirect('/')
+            m.save()
+            return HttpResponseRedirect('/success')
         return render(request, self.template_name, {'form': form})

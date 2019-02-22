@@ -72,6 +72,7 @@ class SalesFormData(models.Model):
             for obj in toronto_qs:
 
                 toronto_cost += obj.subtotal
+                print(toronto_cost)
             print('|------------------------------------------------------------------|')
             print('calgary bookings:')
 
@@ -80,6 +81,8 @@ class SalesFormData(models.Model):
 
             for obj in calgary_qs:
                 calgary_cost += obj.subtotal
+                print(calgary_cost)
+
             print('|------------------------------------------------------------------|')
 
             print('edmonton bookings:')
@@ -108,21 +111,19 @@ class SalesFormData(models.Model):
 
             self.subtotal = toronto_cost + calgary_cost + edmonton_cost + winnipeg_cost
 
-            updated_subtotal = self.subtotal
+            self.subtotal = self.subtotal
 
-            self.discount_amount = float(updated_subtotal) * percentage_dec
+
+            self.discount_amount = float(self.subtotal) * percentage_dec
 
             print('|-///////---///////---///////---///////---///////---///////--|')
             print('|-[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]---[0]-[0]--|')
             print('|-|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|---|-[<]-|--|')
-            print('|-|\-x-/|---|\---/|---|\---/|---|\---/|---|\---/|---|\---/|--|')
+            print('|-|\---/|---|\---/|---|\---/|---|\---/|---|\---/|---|\---/|--|')
             print('|----V---------*---------V---------*---------V---------*-----|')
 
         except ObjectDoesNotExist:
             pass
-
-
-
 
         super(SalesFormData, self).save(*args, **kwargs)
 
