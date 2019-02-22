@@ -9,8 +9,11 @@ from cfcapp.forms import PaymentForm
 from cfcapp.models import SalesFormData
 from fairs.models import TorontoFair, CalgaryFair, EdmontonFair,  WinnipegFair
 
+class SuccessPage(TemplateView):
+    template_name = 'success.html'
+
 class IndexPageView(TemplateView):
-    template_name = 'base-html.html'
+    template_name = 'main-form.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
 
@@ -416,4 +419,5 @@ class IndexPageView(TemplateView):
 
             m.save()
             return HttpResponseRedirect('/success')
+
         return render(request, self.template_name, {'form': form})
