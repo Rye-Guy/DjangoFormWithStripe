@@ -27,9 +27,13 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
     get_related_company.short_description = 'Company Name'
 
     def get_related_sales_rep(self, obj):
+
         try:
             return obj.related_sale.sales_rep
         except AttributeError: return 'No Attribute Found'
+
+    get_related_sales_rep.short_description = 'Sales Rep'
+
 
     def get_total_spent(self, obj):
         try:

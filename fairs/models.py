@@ -107,7 +107,6 @@ class EdmontonFair(models.Model):
     booth_option = models.CharField(max_length=100, default='-')
     additional_booth_option = models.CharField(max_length=400, default='-')
     additional_lunch_option = models.CharField(max_length=400, default='-')
-    additional_breakfast_option = models.CharField(max_length=400, default='-')
     wifi = models.BooleanField(default=False)
     electricity = models.BooleanField(default=False)
     diet_request = models.CharField(max_length=400, blank=True, default='')

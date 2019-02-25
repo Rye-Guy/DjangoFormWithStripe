@@ -83,8 +83,6 @@ function dateCheck(input){
              dietRequest.setAttribute('type', 'text')
              dietRequestLabel = document.createElement('label')
              dietRequestLabel.innerText = 'Special Request: '
-             breakfastLabel = document.createElement('label')
-             breakfastLabel.innerText = ' Extra Breakfast: '
              lunchLabel = document.createElement('label')
              lunchLabel.innerText = ' Extra Lunch: '
              selectLabel = document.createElement('label')
@@ -167,21 +165,16 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
-                //create breakfast options select
-                additionalBreakfastOption.setAttribute('name', 'additional_breakfast_option_edmonton_'+cartText)
-                additionalBreakfastOption.id ='additional_breakfast_option_edmonton_'+cartText
-                //create options and append select w/ options to label
-                createOptions(additionalBreakfastOption)
-                breakfastLabel.append(additionalBreakfastOption)
+
                 //create Diet Request and set up attributes for caputring data out of form.
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), breakfastLabel, document.createElement('br'), dietRequestLabel, venueOpts)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, venueOpts)
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'edmonton'))
                  }
-                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><br>Extra Breakfast: <span id="extraBreakfastValue_${cartText}">${additionalBreakfastOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
                 //Booth type select
@@ -333,18 +326,6 @@ function additionalCartItems(cityName, fairDate, cart){
         cart[3] += costOfadditionalLunchOption
     }
     //check for additional breakfast
-    if(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`)){
-        if(document.getElementById(`extraBreakfastValue_${fairDate}`)){
-            document.getElementById(`extraBreakfastValue_${fairDate}`).innerText = document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value
-        }
-        numOfadditionalBreakfastOption = parseInt(document.getElementById(`additional_breakfast_option_${cityName}_${fairDate}`).value)
-        costOfadditionalBreakfastOption = numOfadditionalBreakfastOption * 23
-        singleFairCostObj.additional_breakfast = {
-            number_of_breakfasts: numOfadditionalBreakfastOption,
-            cost_of_breakfast: costOfadditionalBreakfastOption
-        }
-        cart[3] += costOfadditionalBreakfastOption
-    }
     if(document.getElementById(`electricity_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`electricity_option_${cityName}_${fairDate}`).checked){
             singleFairCostObj.electricity = true
@@ -377,12 +358,7 @@ function calculateIndividualFair(fairObj) {
                 if(fairObj.electricity){
                     currentTotal += 129
                 }
-                if(fairObj.city == 'edmonton'){
-                    costOfadditionalBreakfast = fairObj.additional_breakfast.cost_of_breakfast
-                    currentTotal += costOfadditionalBreakfast
-                }
             }
-
         }
     }
     if(currentTotal > 0) {
@@ -522,8 +498,9 @@ document.getElementById('applyNewBoothCost').addEventListener('click', function 
     discountedCost = boothOption - parseInt(customBoothCost)
     somePercentOff = discountedCost / boothOption
     percentToApply = somePercentOff.toString().slice(2, somePercentOff.length)
-    document.getElementById('id_discount_amount').value = percentToApply
-    console.log('clicked', applyBtn, numArr)
+    document.getElementById('id_discount_amount').value = percentToApply.slice(0, -13)
+    console.log(customBoothCost, discountedCost, somePercentOff, percentToApply)
+    console.log('clicked', applyBtn)
 })
 
 
