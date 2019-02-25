@@ -457,6 +457,17 @@ h5{
     flex-wrap: wrap;
 }
 
+#form-submit-btn{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.success-btn{
+    width: 200px;
+    height: 48px;
+    padding-top: 5px;
+}
+
 @media (max-width: 1199px) {
 
     .dates-select{
