@@ -8,27 +8,27 @@
 
   <h1>Purchase a Booth</h1>
     {% if request.user.is_staff %}
-    <div class='staffPermissionsSection'>
-      <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
-      <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
-      <div style="margin-left: 100px" id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
-        <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
-      <script>
-          function createTextArea(fairDate, fairLocation){
-              const container = document.createElement('div')
-              let textInput = document.createElement('textarea')
-              textInput.id = `extra_notes_for_${fairLocation}_${fairDate}`
-              textInput.setAttribute('name', textInput.id)
-              textInput.setAttribute('class', 'materialize-textarea')
-              container.append(textInput)
-              container.innerHTML += `<label for="${textInput.id}">Extra Notes</label>`
-              return container
-          }
-      </script>
-    </div>
+
     {% endif %}
   <form action="/" method="POST">
-
+     <div class='staffPermissionsSection'>
+          <div id='accountOwner'><h3>Account Owner: {{form.sales_rep}}</h3></div>
+          <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
+          <div style="margin-left: 100px" id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
+            <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
+          <script>
+              function createTextArea(fairDate, fairLocation){
+                  const container = document.createElement('div')
+                  let textInput = document.createElement('textarea')
+                  textInput.id = `extra_notes_for_${fairLocation}_${fairDate}`
+                  textInput.setAttribute('name', textInput.id)
+                  textInput.setAttribute('class', 'materialize-textarea')
+                  container.append(textInput)
+                  container.innerHTML += `<label for="${textInput.id}">Extra Notes</label>`
+                  return container
+              }
+          </script>
+        </div>
     {% csrf_token %}
     <h2>Billing Information</h2>
     <div id="billingInfoContainer" class="">

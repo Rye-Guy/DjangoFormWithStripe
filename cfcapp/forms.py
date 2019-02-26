@@ -76,12 +76,62 @@ class PaymentForm(forms.ModelForm):
         )
 
 
+        INDUSTRY_CHOICES = (
+            ('-', '-'),
+            ('Accounting', 'Accounting'),
+            ('Aerospace', 'Aerospace'),
+            ('Agriculture', 'Agriculture'),
+            ('Architecture', 'Architecture'),
+            ('Automotive', 'Automotive'),
+            ('Biotechnology', 'Biotechnology'),
+            ('Cannabis', 'Cannabis'),
+            ('Chemical', 'Chemical'),
+            ('Clothing', 'Clothing'),
+            ('Computer Science', 'Computer Science'),
+            ('Construction', 'Construction'),
+            ('Cosmetics', 'Cosmetics'),
+            ('Defence', 'Defence'),
+            ('Design', 'Design'),
+            ('Distribution', 'Distribution'),
+            ('Education', 'Education'),
+            ('Energy', 'Energy'),
+            ('Engineering', 'Engineering'),
+            ('Entertainment', 'Entertainment'),
+            ('Eyewear', 'Eyewear'),
+            ('Financial', 'Financial'),
+            ('Services', 'Services'),
+            ('Food and Drink', 'Food and Drink'),
+            ('Forest products', 'Forest products'),
+            ('Gambling', 'Gambling'),
+            ('Health Care', 'Health Care'),
+            ('Hotel and Leisure', 'Hotel and Leisure'),
+            ('Law', 'Law'),
+            ('Management Consulting', 'Management Consulting'),
+            ('Manufacturing', 'Manufacturing'),
+            ('Media', 'Media'),
+            ('Mining', 'Mining'),
+            ('Mortgage', 'Mortgage'),
+            ('Lender', 'Lender'),
+            ('Pharmaceutical', 'Pharmaceutical'),
+            ('Real Estate', 'Real Estate'),
+            ('Retail', 'Retail'),
+            ('Security', 'Security'),
+            ('Service', 'Service'),
+            ('Space Industry', 'Space Industry'),
+            ('Technology', 'Technology'),
+            ('Transportation', 'Transportation'),
+            ('Travel and Tourism', 'Travel and Tourism'),
+            ('Utilities', 'Utilities'),
+            ('Waste Management', 'Waste Management'),
+            ('Water', 'Water')
+        )
+
         model = SalesFormData
         
         fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'instagram_link', 'discount_amount', 'industry']
         widgets = {
             'province' : forms.Select(choices=PROVINCE_CHOICES),
-            'industry' : forms.Select(choices=PROVINCE_CHOICES)
+            'industry' : forms.Select(choices=INDUSTRY_CHOICES)
         }
     
 

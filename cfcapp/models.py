@@ -42,6 +42,28 @@ class SalesFormData(models.Model):
     calgary_booking = models.ManyToManyField('fairs.CalgaryFair', blank=True)
     winnipeg_booking = models.ManyToManyField('fairs.WinnipegFair', blank=True)
 
+    def clean_discount(self):
+        print(len(self.discount_percentage))
+        while (len(self.discount_percentage) > 3):
+            self.discount_percentage = self.discount_percentage[:-1]
+        return self.discount_percentage
+
+    def clean_discount_amount(self):
+        print(self.discount_amount)
+        if self.discount_amount == '$0':
+            return self.discount_amount
+        elif '.' not in str(self.discount_amount):
+            return self.discount_amount
+        else:
+            self.discount_amount = str(self.discount_amount)
+            my_number_split = self.discount_amount.split('.')
+            decimal_nums = my_number_split[1]
+            while (len(decimal_nums) > 2):
+                decimal_nums = decimal_nums[:-1]
+            my_number_split[1] = decimal_nums
+            self.discount_amount = '.'.join(my_number_split)
+            return self.discount_amount
+
 
 
     @receiver(post_save, sender='fairs.TorontoFair')
@@ -55,9 +77,10 @@ class SalesFormData(models.Model):
 
 
     def save(self, *args, **kwargs):
+        self.clean_discount()
+        self.clean_discount_amount()
         try:
             SalesFormData.objects.get(id=self.id)
-
             discount_amount = self.discount_amount
             discount_percentage = self.discount_percentage
             percent_to_remove = (discount_percentage.split('%'))
@@ -108,7 +131,6 @@ class SalesFormData(models.Model):
             print(discount_amount, discount_percentage, total_spent, self.subtotal)
 
             print(toronto_cost, calgary_cost, edmonton_cost, winnipeg_cost)
-
             self.subtotal = toronto_cost + calgary_cost + edmonton_cost + winnipeg_cost
 
             self.subtotal = self.subtotal
@@ -124,7 +146,6 @@ class SalesFormData(models.Model):
 
         except ObjectDoesNotExist:
             pass
-
         super(SalesFormData, self).save(*args, **kwargs)
 
 
