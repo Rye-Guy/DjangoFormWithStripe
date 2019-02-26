@@ -49,13 +49,14 @@ def calculate_fair_total(obj):
         tax_to_charge = 0.15
         tax_to_charge = my_cost_bf_tax * tax_to_charge
         my_cost_af_tax = my_cost_bf_tax + tax_to_charge
+    else:
+        tax_to_charge = 0.0
+        my_cost_af_tax = my_cost_bf_tax + tax_to_charge
 
     obj.subtotal = someTotal
     obj.discount_cost = purchase_discount
     obj.grand_total = my_cost_af_tax
     obj.tax_to_charge = tax_to_charge
-
-
 
     print(someTotal, tax_cal, discount_dec, my_cost_bf_tax, tax_to_charge, my_cost_af_tax)
 

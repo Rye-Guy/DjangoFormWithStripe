@@ -18,23 +18,23 @@ class IndexPageView(TemplateView):
     form_class = PaymentForm
 
     def get_context_data(self, **kwargs):
-    
         context = super(IndexPageView, self).get_context_data(**kwargs)    
         context.update({'form': self.formPayment, 'users': User.objects.all()})
-        print(self.formPayment.fields['select_cities'].choices)
         return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         print(request.POST)
         if form.is_valid():
+
             sales_rep = request.POST.get('sales_rep', '')
-            print(sales_rep)
+
             if sales_rep == '':
                 sales_rep = User.objects.get(username='admin')
             else:
                sales_rep = User.objects.get(pk=sales_rep)
-            print(form.instance.province)
+
+
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
             address = request.POST.get('address', '')
@@ -126,8 +126,6 @@ class IndexPageView(TemplateView):
                         listToEdit[2] = datesArray[date]
                     if datesArray[date] == dateCheckArray[3]:
                         listToEdit[3] = datesArray[date]
-
-
 
             check_incoming_fair_dates(toronto_dates, torontoDatesArray, torontoList)
             toronto_booth_option_1 = request.POST.get('booth_option_toronto_April 24th, 2019', '')
