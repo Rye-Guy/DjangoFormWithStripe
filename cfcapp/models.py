@@ -136,7 +136,4 @@ class SalesFormData(models.Model):
 
         self.clean_discount()
         self.clean_discount_amount()
-
         super(SalesFormData, self).save(*args, **kwargs)
-
-

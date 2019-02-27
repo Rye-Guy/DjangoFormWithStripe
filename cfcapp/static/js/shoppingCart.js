@@ -79,6 +79,9 @@ function dateCheck(input){
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
+
+             wifiPerDeviceOption = document.createElement('select')
+
              dietRequest = document.createElement('input')
              dietRequest.setAttribute('type', 'text')
              dietRequestLabel = document.createElement('label')
@@ -87,6 +90,9 @@ function dateCheck(input){
              lunchLabel.innerText = ' Extra Lunch: '
              selectLabel = document.createElement('label')
              selectLabel.innerText = ' Extra Booth: '
+             wifiLabel = document.createElement('label')
+             wifiLabel.innerText = ' Wifi Per Device: '
+
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
                 //Booth type select
@@ -112,7 +118,7 @@ function dateCheck(input){
                 //create electricity option and maybe a better way to insert html instead of my usual modus operandi.
                  let venueOpts = document.createElement('div')
                  venueOpts.id = 'venueOptions'
-                 venueOpts.innerHTML += `<p><label><input name='electricity_option_calgary_${cartText}' id='electricity_option_calgary_${cartText}' type=checkbox /><span>Electricity</span></label></p><p><label><input name='wifi_option_calgary_${cartText}' id='wifi_option_calgary_${cartText}' type=checkbox /><span>Internet</span></label></p>`
+                 venueOpts.innerHTML += `<p><label><input name='electricity_option_calgary_${cartText}' id='electricity_option_calgary_${cartText}' type=checkbox /><span>Electricity</span></label></p>`
 
                 //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_calgary_'+cartText)
@@ -129,6 +135,12 @@ function dateCheck(input){
                 //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_calgary_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_calgary_'+cartText
+                //Harrison has decided 3 months in WIFI is no longer boolean and now needs to be a select with a list of options... what a guy.
+                createOptions(wifiPerDeviceOption)
+                wifiLabel.append(wifiPerDeviceOption)
+                wifiPerDeviceOption.setAttribute('name', 'wifi_per_device_for_calgary_'+cartText)
+                wifiPerDeviceOption.id = 'wifi_per_device_for_calgary_'+cartText
+
                 //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
@@ -136,7 +148,7 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 dietRequestLabel.append(dietRequest)
                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts)
+                 (document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts, document.createElement('br'))
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'calgary'))
                  }
@@ -146,7 +158,7 @@ function dateCheck(input){
                  //Create Venue Options
                  let venueOpts = document.createElement('div')
                  venueOpts.id = 'venueOptions'
-                 venueOpts.innerHTML += `<p><label><input name='electricity_option_edmonton_${cartText}' id='electricity_option_edmonton_${cartText}' type=checkbox /><span>Electricity</span></label></p><p><label><input name='wifi_option_edmonton_${cartText}' id='wifi_option_edmonton_${cartText}' type=checkbox /><span>Internet</span></label></p>`
+                 venueOpts.innerHTML += `<p><label><input name='electricity_option_edmonton_${cartText}' id='electricity_option_edmonton_${cartText}' type=checkbox /><span>Electricity</span></label></p>`
                 //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_edmonton_'+cartText)
                 boothOptionSelect.id = 'booth_option_edmonton_'+cartText
@@ -165,12 +177,15 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
-
+                createOptions(wifiPerDeviceOption)
+                wifiLabel.append(wifiPerDeviceOption)
+                wifiPerDeviceOption.setAttribute('name', 'wifi_per_device_for_edmonton_'+cartText)
+                wifiPerDeviceOption.id = 'wifi_per_device_for_edmonton_'+cartText
                 //create Diet Request and set up attributes for caputring data out of form.
                 dietRequestLabel.append(dietRequest)
                 dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel, venueOpts)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, venueOpts)
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'edmonton'))
                  }
@@ -325,6 +340,15 @@ function additionalCartItems(cityName, fairDate, cart){
         }
         cart[3] += costOfadditionalLunchOption
     }
+    if(document.getElementById(`wifi_per_device_for_${cityName}_${fairDate}`)){
+        var wifi_num = document.getElementById(`wifi_per_device_for_${cityName}_${fairDate}`).value
+        costofadditional_wifi = wifi_num * 50;
+        singleFairCostObj.wifi_devices = {
+            number_of_wifi_devices: wifi_num,
+            cost_of_wifi:  costofadditional_wifi
+        }
+        cart[3] +=  costofadditional_wifi;
+    }
     //check for additional breakfast
     if(document.getElementById(`electricity_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`electricity_option_${cityName}_${fairDate}`).checked){
@@ -332,13 +356,7 @@ function additionalCartItems(cityName, fairDate, cart){
             cart[3] += 129
         }
     }
-    if(document.getElementById(`wifi_option_${cityName}_${fairDate}`)){
-        if(document.getElementById(`wifi_option_${cityName}_${fairDate}`).checked){
-            singleFairCostObj.wifi = true
-            cart[3] += 50
-        }
-    }
-    calculateIndividualFair(singleFairCostObj)
+        calculateIndividualFair(singleFairCostObj)
     return singleFairCostObj
 }
 
@@ -352,11 +370,13 @@ function calculateIndividualFair(fairObj) {
             costOfAdditionalLunches = fairObj.additional_lunch.cost_of_lunch
             currentTotal += costOfAdditionalLunches
             if(fairObj.city == 'calgary' || 'edmonton'){
-                if(fairObj.wifi){
-                    currentTotal += 50
-                }
+                console.log('here')
                 if(fairObj.electricity){
                     currentTotal += 129
+                }
+                if(fairObj.wifi_devices){
+                console.log('Here')
+                    currentTotal += fairObj.wifi_devices.cost_of_wifi;
                 }
             }
         }
@@ -372,6 +392,7 @@ function calculateIndividualFair(fairObj) {
 
     }
     return currentTotal
+
 }
 
 function calculateTotal(cartName){
