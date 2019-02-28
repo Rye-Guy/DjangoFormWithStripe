@@ -21,10 +21,11 @@ def calculate_fair_total(obj):
 
         someTotal += lunch_cost
         if obj.related_class() != 'winnipeg':
-            if obj.wifi == True:
-                someTotal += 50
             if obj.electricity == True:
                 someTotal += 129
+            someTotal += int(obj.wifi_for_device) * 50
+
+
 
     province = obj.related_sale.province
     booth_option = obj.booth_option

@@ -79,9 +79,7 @@ function dateCheck(input){
              additionalBoothOption = document.createElement('select')
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
-
              wifiPerDeviceOption = document.createElement('select')
-
              dietRequest = document.createElement('input')
              dietRequest.setAttribute('type', 'text')
              dietRequestLabel = document.createElement('label')
@@ -92,7 +90,6 @@ function dateCheck(input){
              selectLabel.innerText = ' Extra Booth: '
              wifiLabel = document.createElement('label')
              wifiLabel.innerText = ' Wifi Per Device: '
-
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
                 //Booth type select
@@ -148,7 +145,7 @@ function dateCheck(input){
                 dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
                 dietRequestLabel.append(dietRequest)
                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
-                 (document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts, document.createElement('br'))
+                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts, document.createElement('br'))
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'calgary'))
                  }

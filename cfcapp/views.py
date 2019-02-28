@@ -51,8 +51,6 @@ class IndexPageView(TemplateView):
             discount_amount = request.POST.get('discountAmount', '')
 
             discount_percentage = request.POST.get('discountPercent', '')
-
-
             secondary_address = request.POST.get('secondary_address', '')
             city = request.POST.get('city', '')
 
@@ -78,7 +76,7 @@ class IndexPageView(TemplateView):
                 if booth_option == '1495':
                     return "Bronze"
                 elif booth_option == '1995':
-                    return  "Silver"
+                    return "Silver"
                 elif booth_option == '2495':
                     return "Gold"
                 elif booth_option == '2995':
@@ -197,9 +195,7 @@ class IndexPageView(TemplateView):
             electricty_option_calgary_1 = request.POST.get('electricity_option_calgary_March 12th, 2019', False)
             electricty_option_calgary_2 = request.POST.get('electricity_option_calgary_June 25th, 2019', False)
             electricty_option_calgary_3 = request.POST.get('electricity_option_calgary_October 23rd, 2019', False)
-            wifi_option_calgary_1 = request.POST.get('wifi_option_calgary_March 12th, 2019', False)
-            wifi_option_calgary_2 = request.POST.get('wifi_option_calgary_June 25th, 2019', False)
-            wifi_option_calgary_3 = request.POST.get('wifi_option_calgary_October 23rd, 2019', False)
+
             total_edmonton_fair_cost_1 = request.POST.get('total_cost_for_edmonton_January 29th, 2019', '')
             total_edmonton_fair_cost_2 = request.POST.get('total_cost_for_edmonton_May 28th, 2019', '')
             total_edmonton_fair_cost_3 = request.POST.get('total_cost_for_edmonton_August 13th, 2019', '')
@@ -208,6 +204,15 @@ class IndexPageView(TemplateView):
             extra_notes_edmonton_fair_2 = request.POST.get('extra_notes_for_edmonton_May 28th, 2019', '')
             extra_notes_edmonton_fair_3 = request.POST.get('extra_notes_for_edmonton_August 13th, 2019', '')
             extra_notes_edmonton_fair_4 = request.POST.get('extra_notes_for_edmonton_November 19th, 2019', '')
+
+            wifi_option_calgary_fair_1 = request.POST.get('wifi_per_device_for_calgary_March 12th, 2019', '')
+            wifi_option_calgary_fair_2 = request.POST.get('wifi_per_device_for_calgary_June 25th, 2019', '')
+            wifi_option_calgary_fair_3 = request.POST.get('wifi_per_device_for_calgary_October 23rd, 2019', '')
+
+            wifi_option_edmonton_fair_1 = request.POST.get('wifi_per_device_for_edmonton_January 29th, 2019', '')
+            wifi_option_edmonton_fair_2 = request.POST.get('wifi_per_device_for_edmonton_May 28th, 2019', '')
+            wifi_option_edmonton_fair_3 = request.POST.get('wifi_per_device_for_edmonton_August 13th, 2019', '')
+            wifi_option_edmonton_fair_4 = request.POST.get('wifi_per_device_for_edmonton_November 19th, 2019', '')
 
             m = SalesFormData(
                 sales_rep=sales_rep,
@@ -240,6 +245,7 @@ class IndexPageView(TemplateView):
                     if torontoList[index] == '-':
                         print('Date Selection is "-" so fair is not in use.')
                         pass
+
                     elif torontoList[index] != '-':
                         t_qs = TorontoFair(
                             related_sale=m,
@@ -281,11 +287,11 @@ class IndexPageView(TemplateView):
                             c_qs.booth_option = calgary_booth_option_1
                             c_qs.additional_booth_option = calgary_additional_booth_option_1
                             c_qs.additional_lunch_option = fix_lunch_issue(calgary_additional_lunch_option_1)
+                            c_qs.wifi_for_device = wifi_option_calgary_fair_1
                             c_qs.diet_request = calgary_diet_request_1
                             c_qs.fair_total_spent = total_calgary_fair_cost_1
                             c_qs.special_request = extra_notes_calgary_fair_1
                             c_qs.electricity = check_boolean(electricty_option_calgary_1)
-                            c_qs.wifi = check_boolean(wifi_option_calgary_1)
                             c_qs.package_type = select_booth_package(calgary_booth_option_1)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
@@ -294,11 +300,11 @@ class IndexPageView(TemplateView):
                             c_qs.booth_option = calgary_booth_option_2
                             c_qs.additional_booth_option = calgary_additional_booth_option_2
                             c_qs.additional_lunch_option = fix_lunch_issue(calgary_additional_lunch_option_2)
+                            c_qs.wifi_for_device = wifi_option_calgary_fair_2
                             c_qs.diet_request = calgary_diet_request_2
                             c_qs.fair_total_spent = total_calgary_fair_cost_2
                             c_qs.special_request = extra_notes_calgary_fair_2
                             c_qs.electricity = check_boolean(electricty_option_calgary_2)
-                            c_qs.wifi = check_boolean(wifi_option_calgary_2)
                             c_qs.package_type = select_booth_package(calgary_booth_option_2)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
@@ -307,11 +313,11 @@ class IndexPageView(TemplateView):
                             c_qs.booth_option = calgary_booth_option_3
                             c_qs.additional_booth_option = calgary_additional_booth_option_3
                             c_qs.additional_lunch_option = fix_lunch_issue(calgary_additional_lunch_option_3)
+                            c_qs.wifi_for_device = wifi_option_calgary_fair_3
                             c_qs.diet_request = calgary_diet_request_3
                             c_qs.fair_total_spent = total_calgary_fair_cost_3
                             c_qs.special_request = extra_notes_calgary_fair_3
                             c_qs.electricity = check_boolean(electricty_option_calgary_3)
-                            c_qs.wifi = check_boolean(wifi_option_calgary_3)
                             c_qs.package_type = select_booth_package(calgary_booth_option_3)
                             c_qs.save()
                             m.calgary_booking.add(c_qs)
@@ -332,6 +338,7 @@ class IndexPageView(TemplateView):
                             e_qs.booth_option = edmonton_booth_option_1
                             e_qs.additional_booth_option = edmonton_additional_booth_option_1
                             e_qs.additional_lunch_option = fix_lunch_issue(edmonton_additional_lunch_option_1)
+                            e_qs.wifi_for_device = wifi_option_edmonton_fair_1
                             e_qs.diet_request = edmonton_diet_request_1
                             e_qs.fair_total_spent = total_edmonton_fair_cost_1
                             e_qs.special_request = extra_notes_edmonton_fair_1
@@ -343,6 +350,7 @@ class IndexPageView(TemplateView):
                             e_qs.booth_option = edmonton_booth_option_2
                             e_qs.additional_booth_option = edmonton_additional_booth_option_2
                             e_qs.additional_lunch_option = fix_lunch_issue(edmonton_additional_lunch_option_2)
+                            e_qs.wifi_for_device = wifi_option_edmonton_fair_2
                             e_qs.diet_request = edmonton_diet_request_2
                             e_qs.fair_total_spent = total_edmonton_fair_cost_2
                             e_qs.special_request = extra_notes_edmonton_fair_2
@@ -354,6 +362,7 @@ class IndexPageView(TemplateView):
                             e_qs.booth_option = edmonton_booth_option_3
                             e_qs.additional_booth_option = edmonton_additional_booth_option_3
                             e_qs.additional_lunch_option = fix_lunch_issue(edmonton_additional_lunch_option_3)
+                            e_qs.wifi_for_device = wifi_option_edmonton_fair_3
                             e_qs.diet_request = edmonton_diet_request_3
                             e_qs.fair_total_spent = total_edmonton_fair_cost_3
                             e_qs.special_request = extra_notes_edmonton_fair_3
@@ -365,6 +374,7 @@ class IndexPageView(TemplateView):
                             e_qs.booth_option = edmonton_booth_option_4
                             e_qs.additional_booth_option = edmonton_additional_booth_option_4
                             e_qs.additional_lunch_option = fix_lunch_issue(edmonton_additional_lunch_option_4)
+                            e_qs.wifi_for_device = wifi_option_edmonton_fair_4
                             e_qs.diet_request = edmonton_diet_request_4
                             e_qs.fair_total_spent = total_edmonton_fair_cost_4
                             e_qs.special_request = extra_notes_edmonton_fair_4
