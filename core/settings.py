@@ -24,7 +24,6 @@ from .__init__ import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-3
 
 # Application definition
 
@@ -35,14 +34,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gtm',
     'import_export',
     'fairs',
-    'cfcapp',
-    'corsheaders'
+    'cfcapp'
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -114,6 +112,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+GOOGLE_TAG_ID = 'UA-135455057-1'
 
 
 # Static files (CSS, JavaScript, Images)

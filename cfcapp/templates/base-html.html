@@ -15,16 +15,14 @@
   <link type="text/css" href='{% static "css/animate-min.css" %}' rel="stylesheet">
   <link rel="stylesheet" type="text/css" href='{% static "css/styles.css" %}'>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
- </head>
-
+<!-- Global site tag (gtag.js) - Google Analytics -->
+{% load gtm_tags %}
+  {% gtm_head %}
+</head>
 <body>
-
+  {% gtm_body %}
 <div class="header-img"><img src='{% static "images/CF_Banner_May.jpg" %}'></div>
 {% block content %}
-
-
 {% endblock %}
-
 </body>
-
 </html>
