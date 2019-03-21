@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ChoiceField
-from .models import SalesFormData
+from .models import SalesFormData, RelatedIndustry
+from django.contrib import admin
 
 class PaymentForm(forms.ModelForm):
 
@@ -127,11 +128,12 @@ class PaymentForm(forms.ModelForm):
         )
 
         model = SalesFormData
-        
-        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'instagram_link', 'discount_amount', 'industry']
+
+        fields = ['sales_rep','company_name','contact_name','address','secondary_address','city','province','postal_code','contact_email','office_phone_number','direct_phone_number','facebook_link','website_link','twitter_link', 'instagram_link', 'discount_amount', 'industry', 'related_industries']
         widgets = {
             'province' : forms.Select(choices=PROVINCE_CHOICES),
-            'industry' : forms.Select(choices=INDUSTRY_CHOICES)
+            'industry' : forms.Select(choices=INDUSTRY_CHOICES),
+            'related_industries': admin.widgets.FilteredSelectMultiple("related_industries", is_stacked=False)
         }
     
 

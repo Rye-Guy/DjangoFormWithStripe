@@ -115,6 +115,5 @@ USE_TZ = True
 
 GOOGLE_TAG_ID = 'UA-135455057-1'
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

@@ -16,33 +16,33 @@
           <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
           <div style="margin-left: 100px" id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
             <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
-          <script>
-              function createTextArea(fairDate, fairLocation){
-                  const container = document.createElement('div')
-                  let textInput = document.createElement('textarea')
-                  textInput.id = `extra_notes_for_${fairLocation}_${fairDate}`
-                  textInput.setAttribute('name', textInput.id)
-                  textInput.setAttribute('class', 'materialize-textarea')
-                  container.append(textInput)
-                  container.innerHTML += `<label for="${textInput.id}">Extra Notes</label>`
-                  return container
-              }
-          </script>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+     </div>
       {% endif %}
     {% csrf_token %}
     <h2>Billing Information</h2>
     <div id="billingInfoContainer" class="">
-        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span></label><br>
-        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span></label><br>
-        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span></label><br>
+        <label class="billingInfoLabels">{{form.company_name}}<span class="helperText">Company Name:</span><span class="helperText requiredText"> required*</span></label><br>
+        <label class="billingInfoLabels">{{form.contact_email}}<span class="helperText">Contact Email:</span><span class="helperText requiredText"> required*</span></label><br>
+        <label class="billingInfoLabels">{{form.contact_name}}<span class="helperText">Contact Name:</span><span class="helperText requiredText"> required*</span></label><br>
         <label class="billingInfoLabels">{{form.office_phone_number}}<span class="helperText">Office Phone:</span></label><br>
         <label class="billingInfoLabels">{{form.direct_phone_number}}<span class="helperText">Direct Phone:</span></label><br>
-        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span></label><br>
+        <label class="billingInfoLabels">{{form.address}}<span class="helperText">Address:</span><span class="helperText requiredText"> required*</span></label><br>
         <label class="billingInfoLabels">{{form.secondary_address}}<span class="helperText">Secondary Address:</span></label><br>
         <label class="billingInfoLabels"><span class="helperText">Province: </span>{{form.province}}</label><br>
-        <label class="billingInfoLabels">{{form.city}}<span class="helperText">City:</span></label><br>
-        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span></label><br>
+        <label class="billingInfoLabels">{{form.city}}<span class="helperText">City:</span><span class="helperText requiredText"> required*</span></label><br>
+        <label class="billingInfoLabels">{{form.postal_code}}<span class="helperText">Postal Code: </span><span class="helperText requiredText"> required*</span></label><br>
         <label class="billingInfoLabels"><span class="helperText">Industry: </span>{{form.industry}}</label><br>
         <label class="billingInfoLabels">{{form.facebook_link}}<span class="helperText">Facebook Link:</span></label><br>
         <label class="billingInfoLabels">{{form.website_link}}<span class="helperText">Website Link:</span></label><br>
@@ -56,7 +56,6 @@
           <div class="toronto-container">
             <label for="id_select_cities_0"><input type="checkbox" name="select_cities" value="Toronto" id="id_select_cities_0">Toronto</label>
             <div class="fair-options-container" id="TorontoFairOptionsContainer" style="display: none;">
-
                 {% if form.errors.toronto_booth_options %}
                     <div class="row">
                         <h3>Toronto Errors</h3>
@@ -176,6 +175,18 @@
     <!--data-zip-code="true">-->
   <!--</script>-->
 <!--</form>-->
+<script>
+     function createTextArea(fairDate, fairLocation){
+         const container = document.createElement('div')
+         let textInput = document.createElement('textarea')
+         textInput.id = `extra_notes_for_${fairLocation}_${fairDate}`
+         textInput.setAttribute('name', textInput.id)
+         textInput.setAttribute('class', 'materialize-textarea')
+         container.append(textInput)
+         container.innerHTML += `<label for="${textInput.id}">Notes</label>`
+         return container
+     }
+ </script>
 {% load static %}
 <script src='{% static "js/main.js" %}'></script>
 <script src='{% static "js/shoppingCart.js" %}'></script>

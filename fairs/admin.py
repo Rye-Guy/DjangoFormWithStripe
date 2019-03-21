@@ -10,12 +10,12 @@ from django.utils.encoding import smart_str
 class FairModelResource(import_export.resources.ModelResource):
 
     class Meta:
-        model = CalgaryFair
+        model = TorontoFair
 
 
 class FairAdmin(import_export.admin.ImportExportModelAdmin):
     search_fields = ['date_selection']
-    list_display = ['id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'package_type',  'get_discount_percentage', 'get_related_sales_rep', 'special_request']
+    list_display = ['id','booth_id', 'date_selection', 'get_related_company', 'get_contact_name', 'get_office_phone' , 'get_contact_email', 'get_related_sales_rep', 'package_type']
 
     resource_class = FairModelResource
 

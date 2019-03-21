@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SalesFormData
+from .models import SalesFormData, RelatedIndustry
 from fairs.models import TorontoFair, CalgaryFair, EdmontonFair, WinnipegFair
 from django.http import HttpResponse, request
 from django.db.models import Prefetch
@@ -28,9 +28,11 @@ class MyModelAdmin(admin.ModelAdmin):
 
         filter_horizontal = ['toronto_booking', 'winnipeg_booking', 'edmonton_booking', 'calgary_booking']
         list_display = ['id', 'sales_rep', 'company_name', 'office_phone_number', 'subtotal', 'discount_percentage', 'discount_amount', 'total_spent', 'select_cities']
-        search_fields = ['company_name', 'contact_email', 'office_phone_number', 'sales_rep']
+        search_fields = ['company_name', 'contact_email', 'office_phone_number']
         resource_class = SalesDataModelResource
 
 
 # Register your models here.
+admin.site.register(RelatedIndustry)
 admin.site.register(SalesFormData, MyModelAdmin.SalesAdmin)
+

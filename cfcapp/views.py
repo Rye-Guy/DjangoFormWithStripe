@@ -24,16 +24,15 @@ class IndexPageView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        print(request.POST)
+
+        ###print(request.POST)###
+
         if form.is_valid():
-
             sales_rep = request.POST.get('sales_rep', '')
-
-            if sales_rep == '':
+            try:
+                sales_rep = User.objects.get(pk=sales_rep)
+            except ValueError:
                 sales_rep = User.objects.get(username='admin')
-            else:
-               sales_rep = User.objects.get(pk=sales_rep)
-
 
             company_name = request.POST.get('company_name', '')
             contact_name = request.POST.get('contact_name', '')
@@ -375,7 +374,6 @@ class IndexPageView(TemplateView):
                             e_qs.additional_booth_option = edmonton_additional_booth_option_4
                             e_qs.additional_lunch_option = fix_lunch_issue(edmonton_additional_lunch_option_4)
                             e_qs.wifi_for_device = wifi_option_edmonton_fair_4
-                            e_qs.diet_request = edmonton_diet_request_4
                             e_qs.fair_total_spent = total_edmonton_fair_cost_4
                             e_qs.special_request = extra_notes_edmonton_fair_4
                             e_qs.package_type = select_booth_package(edmonton_booth_option_4)
@@ -399,7 +397,6 @@ class IndexPageView(TemplateView):
                             w_qs.booth_option = winnipeg_booth_option_1
                             w_qs.additional_booth_option = winnipeg_additional_booth_option_1
                             w_qs.additional_lunch_option = fix_lunch_issue(winnipeg_additional_lunch_option_1)
-                            w_qs.diet_request = winnipeg_diet_request_1
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_1
                             w_qs.special_request = extra_notes_winnipeg_fair_1
                             w_qs.package_type = select_booth_package(winnipeg_booth_option_1)
@@ -410,7 +407,6 @@ class IndexPageView(TemplateView):
                             w_qs.booth_option = winnipeg_booth_option_2
                             w_qs.additional_booth_option = winnipeg_additional_booth_option_2
                             w_qs.additional_lunch_option = fix_lunch_issue(winnipeg_additional_lunch_option_2)
-                            w_qs.diet_request = winnipeg_diet_request_2
                             w_qs.fair_total_spent = total_winnipeg_fair_cost_2
                             w_qs.special_request = extra_notes_winnipeg_fair_2
                             w_qs.package_type = select_booth_package(winnipeg_booth_option_2)
@@ -420,4 +416,4 @@ class IndexPageView(TemplateView):
 
             return HttpResponseRedirect('/success')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': PaymentForm()})

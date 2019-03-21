@@ -80,10 +80,7 @@ function dateCheck(input){
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
              wifiPerDeviceOption = document.createElement('select')
-             dietRequest = document.createElement('input')
-             dietRequest.setAttribute('type', 'text')
-             dietRequestLabel = document.createElement('label')
-             dietRequestLabel.innerText = 'Special Request: '
+
              lunchLabel = document.createElement('label')
              lunchLabel.innerText = ' Extra Lunch: '
              selectLabel = document.createElement('label')
@@ -141,11 +138,9 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
-                //set attributes for diet request for view and append the label
-                dietRequest.setAttribute('name', 'diet_request_for_calgary_'+cartText)
-                dietRequestLabel.append(dietRequest)
+
                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
-                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, document.createElement('br'),  venueOpts, document.createElement('br'))
+                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), document.createElement('br'),  venueOpts, document.createElement('br'))
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'calgary'))
                  }
@@ -156,6 +151,7 @@ function dateCheck(input){
                  let venueOpts = document.createElement('div')
                  venueOpts.id = 'venueOptions'
                  venueOpts.innerHTML += `<p><label><input name='electricity_option_edmonton_${cartText}' id='electricity_option_edmonton_${cartText}' type=checkbox /><span>Electricity</span></label></p>`
+                //Booth type select
                 //Booth type select
                 boothOptionSelect.setAttribute('name', 'booth_option_edmonton_'+cartText)
                 boothOptionSelect.id = 'booth_option_edmonton_'+cartText
@@ -178,11 +174,10 @@ function dateCheck(input){
                 wifiLabel.append(wifiPerDeviceOption)
                 wifiPerDeviceOption.setAttribute('name', 'wifi_per_device_for_edmonton_'+cartText)
                 wifiPerDeviceOption.id = 'wifi_per_device_for_edmonton_'+cartText
-                //create Diet Request and set up attributes for caputring data out of form.
-                dietRequestLabel.append(dietRequest)
-                dietRequest.setAttribute('name', 'diet_request_for_edmonton_'+cartText)
+
+
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), dietRequestLabel, venueOpts)
+                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), venueOpts)
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'edmonton'))
                  }
@@ -208,10 +203,8 @@ function dateCheck(input){
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
                 //create Diet Request and set up attributes for capturing data out of form.
-                dietRequestLabel.append(dietRequest)
-                dietRequest.setAttribute('name', 'diet_request_for_winnipeg_'+cartText)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), dietRequestLabel)
+                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'winnipeg'))
                  }
