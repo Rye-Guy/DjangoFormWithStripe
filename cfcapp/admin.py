@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SalesFormData, RelatedIndustry
+from .models import SalesFormData
 from fairs.models import TorontoFair, CalgaryFair, EdmontonFair, WinnipegFair
 from django.http import HttpResponse, request
 from django.db.models import Prefetch
@@ -33,6 +33,5 @@ class MyModelAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(RelatedIndustry)
 admin.site.register(SalesFormData, MyModelAdmin.SalesAdmin)
 

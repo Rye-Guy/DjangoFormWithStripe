@@ -30,7 +30,7 @@ class TorontoFair(models.Model):
     tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
     grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
 
-    special_request = models.TextField(max_length=2000, blank=True)
+    notes = models.TextField(max_length=2000, blank=True)
     contact = models.ManyToManyField(OnSiteContacts, blank=True)
 
 
@@ -73,7 +73,7 @@ class CalgaryFair(models.Model):
     tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
     grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
 
-    special_request = models.TextField(max_length=2000, blank=True)
+    notes = models.TextField(max_length=2000, blank=True)
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
@@ -115,7 +115,7 @@ class EdmontonFair(models.Model):
     tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
     grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
 
-    special_request = models.TextField(max_length=2000, blank=True)
+    notes = models.TextField(max_length=2000, blank=True)
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
@@ -155,7 +155,7 @@ class WinnipegFair(models.Model):
     tax_to_charge = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
     grand_total = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
 
-    special_request = models.TextField(max_length=2000, blank=True)
+    notes = models.TextField(max_length=2000, blank=True)
     package_type = models.CharField(max_length=100, blank=True)
     booth_id = models.IntegerField(blank=True, null=True)
     account_number = models.CharField(max_length=10, blank=True)

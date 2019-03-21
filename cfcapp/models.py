@@ -6,13 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class RelatedIndustry(models.Model):
-
-    industry = models.CharField(max_length=300, unique=True)
-
-    def __str__(self):
-        return self.industry
-
 class SalesFormData(models.Model):
 
     class Meta:
@@ -37,7 +30,6 @@ class SalesFormData(models.Model):
     city = models.CharField(max_length=255, blank=False)
     province = models.CharField(max_length=255, blank=False)
     industry = models.CharField(max_length=255, blank=False, default='Not Selected')
-    related_industries = models.ManyToManyField(RelatedIndustry)
     postal_code = models.CharField(max_length=255, blank=False)
     contact_email = models.EmailField(blank=False)
     office_phone_number = models.CharField(max_length=88, blank=True)
