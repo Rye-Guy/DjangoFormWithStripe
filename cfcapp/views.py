@@ -19,10 +19,11 @@ class IndexPageView(TemplateView):
     template_name = 'main-form.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
+    all_sales_data = SalesFormData.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)    
-        context.update({'form': self.formPayment, 'users': User.objects.all()})
+        context.update({'form': self.formPayment, 'users': User.objects.all(), 'companies': SalesFormData.objects.all()})
         return context
 
     def post(self, request, *args, **kwargs):
@@ -424,4 +425,12 @@ class IndexPageView(TemplateView):
 def CompanyProfiles(request):
     qs = SalesFormData.objects.all()
     qs_json = serializers.serialize('json', qs)
+
+    def post(self, request, *args, **kwargs):
+        qs = SalesFormData.objects.all()
+        qs_json = serializers.serialize('json', qs)
+        return HttpResponse(qs_json, content_type='application/json')
+
     return HttpResponse(qs_json, content_type='application/json')
+
+

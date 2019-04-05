@@ -16,6 +16,15 @@
           <div id='discountInput'><h3>Enter Discount: {{form.discount_amount}} <input type='checkbox' id='discountCheckbox'><span id='discountType'>$</span></h3></div>
           <div style="margin-left: 100px" id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
             <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
+        <div>
+             {% csrf_token %}
+             <select name="company">
+             {% for company in companies %}
+                 <option value={{company.id}}>{{company.company_name}}</option>
+             {% endfor %}
+             </select>
+             <input onclick="GetCompanyInfo(event)" type="submit" value="Populate Client Info">
+         </div>
 
 
 
