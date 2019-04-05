@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 import json
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
 from cfcapp.forms import PaymentForm
@@ -423,13 +423,15 @@ class IndexPageView(TemplateView):
         return render(request, self.template_name, {'form': PaymentForm()})
 
 def CompanyProfiles(request):
+    print(request.META)
     qs = SalesFormData.objects.all()
     qs_json = serializers.serialize('json', qs)
 
-    def post(self, request, *args, **kwargs):
-        qs = SalesFormData.objects.all()
-        qs_json = serializers.serialize('json', qs)
-        return HttpResponse(qs_json, content_type='application/json')
+    # if(request.POST):
+    #     print(request.POST, 'my cool string')
+    #     qs = SalesFormData.objects.all()
+    #     qs_json = serializers.serialize('json', qs)
+    #     return JsonResponse({'foo': 'bar'})
 
     return HttpResponse(qs_json, content_type='application/json')
 

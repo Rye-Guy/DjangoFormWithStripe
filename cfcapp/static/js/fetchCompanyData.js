@@ -23,14 +23,14 @@ function GetCompanyInfo(e) {
 // add form input from hidden input elsewhere on the page
 
     fetch("/company-profiles/", {
-       method: 'POST',
-        body: data,
-        credentials: 'same-origin',
+        method: 'GET',
+        headers: {
+          'asdas-Type': 'Vlaasfjo'
+        },
     }).then(function (response) {
-            console.log(response)
-            return response;
+            return response.json();
         }).then(function (myJson) {
-        console.log(JSON.stringify(myJson));
+        console.log(myJson);
     });
 }
 
