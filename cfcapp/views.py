@@ -22,7 +22,7 @@ class IndexPageView(TemplateView):
     all_sales_data = SalesFormData.objects.all()
 
     def get_context_data(self, **kwargs):
-        context = super(IndexPageView, self).get_context_data(**kwargs)    
+        context = super(IndexPageView, self).get_context_data(**kwargs)
         context.update({'form': self.formPayment, 'users': User.objects.all(), 'companies': SalesFormData.objects.all()})
         return context
 
@@ -422,17 +422,28 @@ class IndexPageView(TemplateView):
 
         return render(request, self.template_name, {'form': PaymentForm()})
 
-def CompanyProfiles(request):
-    print(request.META)
-    qs = SalesFormData.objects.all()
-    qs_json = serializers.serialize('json', qs)
+def CompanyProfiles(request, pk):
+    print('something', pk)
+    print(request, pk)
+    qs = SalesFormData.objects.get(pk=pk)
+    data = {
+        'company_name': qs.company_name,
+        'contact_name': qs.contact_name,
+        'contact_email': qs.contact_email,
+        'office_phone': qs.office_phone_number,
+        'direct_phone': qs.direct_phone_number,
+        'address': qs.address,
+        'secondary_address': qs.secondary_address,
+        'province': qs.province,
+        'city': qs.city,
+        'postal_code': qs.postal_code,
+        'industry': qs.industry,
+        'facebook_link': qs.facebook_link,
+        'website_link': qs.website_link,
+        'twitter_link': qs.twitter_link,
+        'instagram_link': qs.instagram_link
+    }
 
-    # if(request.POST):
-    #     print(request.POST, 'my cool string')
-    #     qs = SalesFormData.objects.all()
-    #     qs_json = serializers.serialize('json', qs)
-    #     return JsonResponse({'foo': 'bar'})
-
-    return HttpResponse(qs_json, content_type='application/json')
+    return JsonResponse(data, content_type='application/json')
 
 
