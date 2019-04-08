@@ -16,14 +16,12 @@ function getCookie(name) {
 
 
 function GetCompanyInfo(e) {
-
     e.preventDefault()
     company_qs_param = document.querySelector('select[name="company"]').value
-    console.log(company_qs_param)
+    //CSRF TOKEN GENERATED and attached to a body of data for making http requests (ONLY FOR POSTS/PUTS) GET requests do not require a csrftoken.
     csrftoken = getCookie('csrftoken')
     let data = new FormData();
     data.append('csrfmiddlewaretoken', csrftoken)
-// add form input from hidden input elsewhere on the page
 
     fetch(`/company-profiles/${company_qs_param}`, {
         method: 'GET'
@@ -32,9 +30,7 @@ function GetCompanyInfo(e) {
             //now that we got our company sale object then pre-populate some of the form data.
 
         }).then(function (myJson) {
-
             console.log(myJson)
-
             document.getElementById('id_company_name').value = myJson.company_name
             document.getElementById('id_contact_email').value = myJson.contact_email
             document.getElementById('id_contact_name').value = myJson.contact_name

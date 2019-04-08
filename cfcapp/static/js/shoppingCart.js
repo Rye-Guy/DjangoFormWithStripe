@@ -58,8 +58,20 @@ function createAdditionalBoothOptions(elem){
 
 function findAndDeleteDate(relatedElement, elemToDelete){
     if(relatedElement.checked === false){
+
         if(elemToDelete){
+
             elemToDelete.remove()
+        }
+    }
+}
+
+function fixBugWithFairsThatWontDelete(fairInput, cartItem) {
+    console.log(fairInput.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.childNodes[0])
+    if(fairInput.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.childNodes[1].childNodes[0].checked == false){
+        fairInput.remove()
+        if(cartItem){
+            cartItem.remove()
         }
     }
 }
@@ -87,6 +99,11 @@ function dateCheck(input){
              selectLabel.innerText = ' Extra Booth: '
              wifiLabel = document.createElement('label')
              wifiLabel.innerText = ' Wifi Per Device: '
+
+             //to fix bug we are going to put generate elements in a div we can easily remove instead of naviagting through the dom tree and delete specifc nodes related to a parent
+            deleteMeDiv = document.createElement('div')
+            deleteMeDiv.className = 'deleteMe'
+
              //our conditional checks to update our cart with a date selection.
              if(parentUl == 'id_toronto_dates'){
                 //Booth type select
@@ -101,10 +118,11 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalBoothOption)
                 selectLabel.append(additionalBoothOption)
+                 deleteMeDiv.append(document.createElement('br'), selectLabel, boothOptionLabel)
                  //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
-                input.parentElement.append(document.createElement('br'), selectLabel, boothOptionLabel)
+                input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
-                     input.parentElement.append(createTextArea(cartText, 'toronto'))
+                     deleteMeDiv.append(createTextArea(cartText, 'toronto'))
                  }
                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
                 torontoCart[0]++
@@ -181,7 +199,7 @@ function dateCheck(input){
                  if(window.createTextArea){
                      input.parentElement.append(createTextArea(cartText, 'edmonton'))
                  }
-                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
+                 cartItem.innerHTML += `<div><li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
                 //Booth type select
@@ -512,6 +530,31 @@ document.getElementById('applyNewBoothCost').addEventListener('click', function 
     document.getElementById('id_discount_amount').value = percentToApply.slice(0, -13)
     console.log(customBoothCost, discountedCost, somePercentOff, percentToApply)
     console.log('clicked', applyBtn)
+})
+
+
+city_inputs = document.querySelectorAll('input[name="select_cities"]')
+
+city_inputs.forEach((input)=>{
+    input.addEventListener('click', (ev)=>{
+        console.log()
+        if(!input.checked){
+            if(input.value == 'Toronto'){
+                dateCheck(input)
+                console.log('happening')
+                console.log(document.querySelector('label[for="id_toronto_dates_0"]').childNodes)
+                document.querySelector('label[for="id_toronto_dates_0"]').childNodes.forEach((node, i)=>{
+                    console.log(node, i)
+                    if(node.className == 'deleteMe')
+                        node.remove()
+                })
+                //document.querySelector('label[for="id_toronto_dates_1"]').remove()
+
+                //fixBugWithFairsThatWontDelete(document.querySelector('label[for="id_toronto_dates_0"]'), document.getElementById('April 24th, 2019'))
+                //fixBugWithFairsThatWontDelete(document.getElementById('id_toronto_dates_1'), document.getElementById('September 17th, 2019'))
+            }
+        }
+    })
 })
 
 
