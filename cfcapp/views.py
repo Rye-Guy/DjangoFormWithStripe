@@ -423,8 +423,6 @@ class IndexPageView(TemplateView):
         return render(request, self.template_name, {'form': PaymentForm()})
 
 def CompanyProfiles(request, pk):
-    print('something', pk)
-    print(request, pk)
     qs = SalesFormData.objects.get(pk=pk)
     data = {
         'company_name': qs.company_name,

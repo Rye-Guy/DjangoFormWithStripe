@@ -88,7 +88,7 @@ function dateCheck(input){
              boothOptionSelect = document.createElement('select')
              boothOptionLabel = document.createElement('label')
              boothOptionLabel.innerText = 'Booth Options:'
-             additionalBoothOption = document.createElement('select')
+
              additionalLunchOption = document.createElement('select')
              additionalBreakfastOption = document.createElement('select')
              wifiPerDeviceOption = document.createElement('select')
@@ -96,7 +96,6 @@ function dateCheck(input){
              lunchLabel = document.createElement('label')
              lunchLabel.innerText = ' Extra Lunch: '
              selectLabel = document.createElement('label')
-             selectLabel.innerText = ' Extra Booth: '
              wifiLabel = document.createElement('label')
              wifiLabel.innerText = ' Wifi Per Device: '
 
@@ -112,19 +111,13 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createAdditionalBoothOptions(boothOptionSelect)
                 boothOptionLabel.append(boothOptionSelect)
-                //additional booth option select
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_toronto_'+cartText)
-                additionalBoothOption.id = 'additional_booth_option_toronto_' + cartText
-                //create options and append select w/ options to label
-                createOptions(additionalBoothOption)
-                selectLabel.append(additionalBoothOption)
                  deleteMeDiv.append(document.createElement('br'), selectLabel, boothOptionLabel)
                  //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
                 input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
                      deleteMeDiv.append(createTextArea(cartText, 'toronto'))
                  }
-                cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
+                cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
                 //create electricity option and maybe a better way to insert html instead of my usual modus operandi.
@@ -139,12 +132,8 @@ function dateCheck(input){
                 createAdditionalBoothOptions(boothOptionSelect)
                 boothOptionLabel.append(boothOptionSelect)
                 //additional booth option select
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_calgary_'+cartText)
-                additionalBoothOption.id = 'additional_booth_option_calgary_' + cartText
-                //create options and append select w/ options to label
-                createOptions(additionalBoothOption)
-                selectLabel.append(additionalBoothOption)
-                //create lunch options select
+
+                 //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_calgary_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_calgary_'+cartText
                 //Harrison has decided 3 months in WIFI is no longer boolean and now needs to be a select with a list of options... what a guy.
@@ -156,13 +145,13 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createOptions(additionalLunchOption)
                 lunchLabel.append(additionalLunchOption)
-
+                deleteMeDiv.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), document.createElement('br'),  venueOpts, document.createElement('br'))
                 //now create the cart item to display to the user and append all inputs controlling cart options to the date input parent(<LABEL>)
-                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), document.createElement('br'),  venueOpts, document.createElement('br'))
+                 input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
-                     input.parentElement.append(createTextArea(cartText, 'calgary'))
+                     deleteMeDiv.append(createTextArea(cartText, 'calgary'))
                  }
-                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Calgary Fair Breakdown for ${cartText}</h5>`
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Calgary Fair Breakdown for ${cartText}</h5>`
                 calgaryCart[0]++
              }else if(parentUl == 'id_edmonton_dates'){
                  //Create Venue Options
@@ -176,12 +165,6 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createAdditionalBoothOptions(boothOptionSelect)
                 boothOptionLabel.append(boothOptionSelect)
-                //additional booth option select
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_edmonton_'+cartText)
-                additionalBoothOption.id = 'additional_booth_option_edmonton_' + cartText
-                //create options and append select w/ options to label
-                createOptions(additionalBoothOption)
-                selectLabel.append(additionalBoothOption)
                 //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_edmonton_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_edmonton_'+cartText
@@ -192,14 +175,13 @@ function dateCheck(input){
                 wifiLabel.append(wifiPerDeviceOption)
                 wifiPerDeviceOption.setAttribute('name', 'wifi_per_device_for_edmonton_'+cartText)
                 wifiPerDeviceOption.id = 'wifi_per_device_for_edmonton_'+cartText
-
-
+                deleteMeDiv.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), venueOpts)
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), venueOpts)
+                input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
-                     input.parentElement.append(createTextArea(cartText, 'edmonton'))
+                     deleteMeDiv.append(createTextArea(cartText, 'edmonton'))
                  }
-                 cartItem.innerHTML += `<div><li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
+                 cartItem.innerHTML += `<div><li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Edmonton Fair Breakdown for ${cartText}</h5>`
                 edmontonCart[0]++
             }else if(parentUl ==  'id_winnipeg_dates'){
                 //Booth type select
@@ -208,12 +190,6 @@ function dateCheck(input){
                 //create options and append select w/ options to label
                 createAdditionalBoothOptions(boothOptionSelect)
                 boothOptionLabel.append(boothOptionSelect)
-                //additional booth option select
-                additionalBoothOption.setAttribute('name', 'additional_booth_option_winnipeg_'+cartText)
-                additionalBoothOption.id = 'additional_booth_option_winnipeg_' + cartText
-                //create options and append select w/ options to label
-                createOptions(additionalBoothOption)
-                selectLabel.append(additionalBoothOption)
                 //create lunch options select
                 additionalLunchOption.setAttribute('name', 'additional_lunch_option_winnipeg_'+cartText)
                 additionalLunchOption.id ='additional_lunch_option_winnipeg_'+cartText
@@ -222,11 +198,12 @@ function dateCheck(input){
                 lunchLabel.append(additionalLunchOption)
                 //create Diet Request and set up attributes for capturing data out of form.
                 //now create the rest of our cart item to display to the user and populated the date selection ul
-                 input.parentElement.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
+                 deleteMeDiv.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'))
+                 input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
-                     input.parentElement.append(createTextArea(cartText, 'winnipeg'))
+                     deleteMeDiv.append(createTextArea(cartText, 'winnipeg'))
                  }
-                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Booth: <span id="extraBoothValue_${cartText}">${additionalBoothOption.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Winnipeg Fair Breakdown for ${cartText}</h5>`
+                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Winnipeg Fair Breakdown for ${cartText}</h5>`
                 winnipegCart[0]++
              }
             //The other side of our statement is to remove items from the cart as the user unchecks them if they want to edit their purchase.
@@ -322,19 +299,6 @@ function additionalCartItems(cityName, fairDate, cart){
         cart[1] += boothOption
 
     }
-    //check for the existence of additional booths. If they do calculate the value and add it to our cart.
-    if(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`)){
-        if(document.getElementById(`extraBoothValue_${fairDate}`)){
-            document.getElementById(`extraBoothValue_${fairDate}`).innerText = document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value
-        }
-        additionalBoothsAmount = parseInt(document.getElementById(`additional_booth_option_${cityName}_${fairDate}`).value)
-        additionalCost = additionalBoothsAmount * 995
-        singleFairCostObj.additional_booths = {
-            number_of_booths: additionalBoothsAmount,
-            cost_of_booths: additionalCost
-        }
-        cart[3] += additionalCost
-    }
     //check for additional lunches
     if(document.getElementById(`additional_lunch_option_${cityName}_${fairDate}`)){
         if(document.getElementById(`extraLunchValue_${fairDate}`)){
@@ -371,19 +335,15 @@ function additionalCartItems(cityName, fairDate, cart){
 function calculateIndividualFair(fairObj) {
     currentTotal = 0
     if(Object.keys(fairObj).length > 2) {
-        baseBoothCost = fairObj.booth_option
-        costOfAdditionalBooths = fairObj.additional_booths.cost_of_booths
-        currentTotal = baseBoothCost + costOfAdditionalBooths
+        currentTotal = fairObj.booth_option
         if(fairObj.city != 'toronto'){
             costOfAdditionalLunches = fairObj.additional_lunch.cost_of_lunch
             currentTotal += costOfAdditionalLunches
             if(fairObj.city == 'calgary' || 'edmonton'){
-                console.log('here')
                 if(fairObj.electricity){
                     currentTotal += 129
                 }
                 if(fairObj.wifi_devices){
-                console.log('Here')
                     currentTotal += fairObj.wifi_devices.cost_of_wifi;
                 }
             }
@@ -533,29 +493,45 @@ document.getElementById('applyNewBoothCost').addEventListener('click', function 
 })
 
 
+function deleteFairOptionsOnUnselectedCity(querySelector){
+    document.querySelector(querySelector).childNodes.forEach((node, i)=>{
+        if(node.className == 'deleteMe'){
+            node.remove()
+        }
+    })
+}
+
 city_inputs = document.querySelectorAll('input[name="select_cities"]')
 
 city_inputs.forEach((input)=>{
     input.addEventListener('click', (ev)=>{
         console.log()
         if(!input.checked){
+            dateCheck(input)
             if(input.value == 'Toronto'){
-                dateCheck(input)
-                console.log('happening')
-                console.log(document.querySelector('label[for="id_toronto_dates_0"]').childNodes)
-                document.querySelector('label[for="id_toronto_dates_0"]').childNodes.forEach((node, i)=>{
-                    console.log(node, i)
-                    if(node.className == 'deleteMe')
-                        node.remove()
-                })
-                //document.querySelector('label[for="id_toronto_dates_1"]').remove()
-
-                //fixBugWithFairsThatWontDelete(document.querySelector('label[for="id_toronto_dates_0"]'), document.getElementById('April 24th, 2019'))
-                //fixBugWithFairsThatWontDelete(document.getElementById('id_toronto_dates_1'), document.getElementById('September 17th, 2019'))
+                deleteFairOptionsOnUnselectedCity('label[for="id_toronto_dates_0"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_toronto_dates_1"]')
+                }
+            else if(input.value == 'Calgary'){
+                deleteFairOptionsOnUnselectedCity('label[for="id_calgary_dates_0"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_calgary_dates_1"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_calgary_dates_2"]')
             }
-        }
+            else if(input.value == 'Edmonton'){
+                deleteFairOptionsOnUnselectedCity('label[for="id_edmonton_dates_0"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_edmonton_dates_1"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_edmonton_dates_2"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_edmonton_dates_3"]')
+            }
+            else if(input.value == 'Winnipeg'){
+                deleteFairOptionsOnUnselectedCity('label[for="id_winnipeg_dates_0"]')
+                deleteFairOptionsOnUnselectedCity('label[for="id_winnipeg_dates_1"]')
+            }
+
+            }
+        })
     })
-})
+
 
 
 cartTotal = document.getElementById('cart-total')
