@@ -167,7 +167,7 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
                     smart_str(theContact[2]),
                     smart_str(obj.related_sale.sales_rep),
                     smart_str(obj.package_type),
-                    smart_str(obj.special_request)
+                    smart_str(obj.notes)
                 ])
 
             if exporting_city == 'edmonton':
@@ -180,10 +180,9 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
                     smart_str(obj.related_sale.sales_rep),
                     smart_str(obj.package_type),
                     smart_str(obj.additional_lunch_option),
-                    smart_str(obj.additional_breakfast_option),
-                    smart_str(obj.wifi),
+                    smart_str(obj.wifi_for_device),
                     smart_str(obj.electricity),
-                    smart_str(obj.special_request)
+                    smart_str(obj.notes)
 
                 ])
 
@@ -197,9 +196,9 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
                     smart_str(obj.related_sale.sales_rep),
                     smart_str(obj.package_type),
                     smart_str(obj.additional_lunch_option),
-                    smart_str(obj.wifi),
+                    smart_str(obj.wifi_for_device),
                     smart_str(obj.electricity),
-                    smart_str(obj.special_request)
+                    smart_str(obj.notes)
                 ])
 
             if exporting_city == 'winnipeg':
@@ -212,7 +211,7 @@ class FairAdmin(import_export.admin.ImportExportModelAdmin):
                     smart_str(obj.related_sale.sales_rep),
                     smart_str(obj.package_type),
                     smart_str(obj.additional_lunch_option),
-                    smart_str(obj.special_request)
+                    smart_str(obj.notes)
                 ])
 
         return response

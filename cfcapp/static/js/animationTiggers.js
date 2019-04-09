@@ -1,7 +1,8 @@
 formSubmit = document.getElementById('formSubmit')
 viewCartBtn = document.getElementById('viewCartBtn')
 priceBreakdown = document.getElementById('priceBreakdown')
-
+viewRepTools = document.getElementById('viewRepTools')
+repToolsContainer = document.getElementById('repTools')
 billingInfoBtn = document.getElementById('billingInfoTrigger')
 billingInfoContainer = document.getElementById('billingInfoContainer')
 
@@ -33,6 +34,20 @@ viewCartBtn.addEventListener('click', (ev)=>{
         priceBreakdown.style.display = 'block'
     }
     
+})
+
+
+viewRepTools.addEventListener('click', (ev)=>{
+    if(repTools.className == 'animated fadeInLeft'){
+        viewRepTools.value = 'View Tools'
+        repTools.className = 'animated fadeOutLeft';
+    }
+    else if(repTools.className == 'animated' || repTools.className == 'animated fadeOutLeft'){
+        viewRepTools.value = 'Hide Tools'
+        repTools.className = 'animated fadeInLeft';
+    }
+
+
 })
 
 formSubmit.addEventListener('click', (ev)=>{

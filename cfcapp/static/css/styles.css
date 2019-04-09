@@ -373,22 +373,20 @@ h3{
     font-size: 16px;
 }
 
-#accountOwner{
-    width: 240px;
-    margin-right: 52px;
-}
 
 #discountCheckbox[type="checkbox"]+span:not(.lever){
     position: relative;
     top: -30px;
     pointer-events: all;
-    right: -355px;
+    right: -192px;
+    top: 0px;
 }
 
-#discountCheckbox{
 
-    top: -32px;
-    right: -370px;
+#discountCheckbox{
+    margin: 0;
+    top: 0px;
+    right: -208px;
     pointer-events: all;
     z-index: 1000000000;
     display: initial;
@@ -473,6 +471,28 @@ h5{
     font-size: 9px;
     margin: -4px;
     color: red;
+}
+
+#repTools{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    position: fixed;
+    background-color: gainsboro;
+    padding: 24px;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    height: 100%;
+    justify-content: space-around;
+
+}
+
+#viewRepTools{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
 }
 
 @media (max-width: 1199px) {

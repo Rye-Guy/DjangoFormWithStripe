@@ -117,6 +117,7 @@ function dateCheck(input){
                  if(window.createTextArea){
                      deleteMeDiv.append(createTextArea(cartText, 'toronto'))
                  }
+                 deleteMeDiv.innerHTML += '<h5 style="padding-top: 36px" class="requiredText">*Contact us about power and Wifi availability</h5>'
                 cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br><h5>Toronto Fair Breakdown for ${cartText}</h5>`
                 torontoCart[0]++
              }else if(parentUl == 'id_calgary_dates'){
@@ -176,6 +177,7 @@ function dateCheck(input){
                 wifiPerDeviceOption.setAttribute('name', 'wifi_per_device_for_edmonton_'+cartText)
                 wifiPerDeviceOption.id = 'wifi_per_device_for_edmonton_'+cartText
                 deleteMeDiv.append(document.createElement('br'), boothOptionLabel, document.createElement('br'), selectLabel, document.createElement('br'), lunchLabel, document.createElement('br'), wifiLabel, document.createElement('br'), venueOpts)
+
                 //now create the rest of our cart item to display to the user and populated the date selection ul
                 input.parentElement.append(deleteMeDiv)
                  if(window.createTextArea){
@@ -203,6 +205,7 @@ function dateCheck(input){
                  if(window.createTextArea){
                      deleteMeDiv.append(createTextArea(cartText, 'winnipeg'))
                  }
+                deleteMeDiv.innerHTML += '<h5 style="padding-top: 36px" class="requiredText">*Contact us about power and Wifi availability</h5>'
                  cartItem.innerHTML += `<li class="cartItemHeading">${cartText}</li>Booth Option: <span id="boothOption_${cartText}">${boothOptionSelect.value}</span><br>Extra Lunch: <span id="extraLunchValue_${cartText}">${additionalLunchOption.value}</span><h5>Winnipeg Fair Breakdown for ${cartText}</h5>`
                 winnipegCart[0]++
              }
