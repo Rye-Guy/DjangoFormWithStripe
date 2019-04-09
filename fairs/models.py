@@ -23,7 +23,6 @@ class TorontoFair(models.Model):
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
     package_type = models.CharField(max_length=100, blank=True)
-    additional_booth_option = models.CharField(max_length=400, default='-')
 
     subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)
     discount_cost = models.DecimalField(max_digits=7, decimal_places=2, blank=True, default=0.00)
@@ -62,7 +61,6 @@ class CalgaryFair(models.Model):
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
 
-    additional_booth_option = models.CharField(max_length=400, default='-')
     additional_lunch_option = models.CharField(max_length=400, default='-')
     wifi_for_device = models.CharField(max_length=400, default='-')
 
@@ -105,7 +103,6 @@ class EdmontonFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
-    additional_booth_option = models.CharField(max_length=400, default='-')
     additional_lunch_option = models.CharField(max_length=400, default='-')
     wifi_for_device = models.CharField(max_length=400, default='-')
     electricity = models.BooleanField(default=False)
@@ -147,7 +144,6 @@ class WinnipegFair(models.Model):
     related_sale = models.ForeignKey(SalesFormData, on_delete=models.CASCADE, null=True)
     date_selection = models.CharField(max_length=400, blank=True, default='Value Determined By Checkbox')
     booth_option = models.CharField(max_length=100, default='-')
-    additional_booth_option = models.CharField(max_length=400, default='-')
     additional_lunch_option = models.CharField(max_length=400, default='-')
 
     subtotal = models.DecimalField(max_digits=7, decimal_places=2, blank=False, default=0.00)

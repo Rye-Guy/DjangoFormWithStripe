@@ -29,11 +29,10 @@ def calculate_fair_total(obj):
 
     province = obj.related_sale.province
     booth_option = obj.booth_option
-    additional_booth_option = int(obj.additional_booth_option) * 995
     tax_cal = obj.related_sale.province
     discount = obj.related_sale.discount_percentage
     discount_dec = discount.replace('%', '.')
-    someTotal += int(booth_option) + additional_booth_option
+    someTotal += int(booth_option)
     purchase_discount = int(someTotal) * float(discount_dec)
     my_cost_bf_tax = someTotal - purchase_discount
 
