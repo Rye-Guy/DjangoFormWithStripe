@@ -38,12 +38,15 @@ viewCartBtn.addEventListener('click', (ev)=>{
 
 
 viewRepTools.addEventListener('click', (ev)=>{
+
     if(repTools.className == 'animated fadeInLeft'){
         viewRepTools.value = 'View Tools'
+        repTools.style = 'display: flex;'
         repTools.className = 'animated fadeOutLeft';
     }
     else if(repTools.className == 'animated' || repTools.className == 'animated fadeOutLeft'){
         viewRepTools.value = 'Hide Tools'
+        repTools.style = 'display: flex;'
         repTools.className = 'animated fadeInLeft';
     }
 

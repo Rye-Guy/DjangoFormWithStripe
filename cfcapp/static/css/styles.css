@@ -474,7 +474,7 @@ h5{
 }
 
 #repTools{
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 300px;
     position: fixed;

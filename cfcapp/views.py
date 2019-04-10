@@ -422,6 +422,7 @@ def CompanyProfiles(request, pk):
         'instagram_link': qs.instagram_link
     }
 
+
     return JsonResponse(data, content_type='application/json')
 
 
