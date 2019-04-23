@@ -48,7 +48,7 @@ function GetCompanyInfo(e) {
             document.getElementById('id_instagram_link').value = myJson.instagram_link
 
     }).catch((err)=> {
-        console.log('Error Fetching Data: ', err)
+        console.log({'Error Fetching Data' : err})
     });
 }
 

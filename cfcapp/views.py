@@ -50,6 +50,8 @@ class IndexPageView(TemplateView):
 
             subtotal = request.POST.get('subtotalInput', 0.00)
 
+            discounted_subtotal = request.POST.get('subtotalWithDiscountApplied', 0.00)
+
 
             discount_amount = request.POST.get('discountAmount', '')
 
@@ -216,6 +218,7 @@ class IndexPageView(TemplateView):
                 subtotal=subtotal,
                 discount_amount=discount_amount,
                 discount_percentage=discount_percentage,
+                discounted_subtotal=discounted_subtotal,
                 address=address,
                 secondary_address=secondary_address,
                 city=city,

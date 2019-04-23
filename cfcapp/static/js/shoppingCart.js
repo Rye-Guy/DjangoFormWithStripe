@@ -476,9 +476,9 @@ function calculateGrandTotal(){
        document.getElementById('taxValue').innerText = parseFloat(taxToCharge).toFixed(2)
        let overallTotalWithTax = totalAfterDiscount + taxToCharge
        document.getElementById('totalValue').innerText = parseFloat(overallTotalWithTax).toFixed(2)
-    // document.getElementById('cart-total').innerText = overallTotalWithTax
        document.getElementById('priceInput').value = '$'+overallTotalWithTax
        document.getElementById('subtotalHiddenInput').value = subtotal
+        document.getElementById('subtotalWithDiscountInput').value = subtotal -  parseInt(document.getElementById('discountValue').innerText)
        return overallTotalWithTax
 }
 
@@ -531,11 +531,9 @@ city_inputs.forEach((input)=>{
                 deleteFairOptionsOnUnselectedCity('label[for="id_winnipeg_dates_1"]')
             }
 
-            }
-        })
+        }
     })
-
-
+})
 
 cartTotal = document.getElementById('cart-total')
 setInterval(calculateGrandTotal, 100)
