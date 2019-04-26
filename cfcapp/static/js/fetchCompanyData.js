@@ -53,3 +53,24 @@ function GetCompanyInfo(e) {
 }
 
 
+function orderSelect(select) {
+    var options   = select,
+        n_options = options.length,
+        temp = [],
+        parts,
+        i;
+
+    for(i = n_options; i --;) {
+        temp[i] = options[i].text + "," + options[i].value ;
+    }
+
+    temp.sort();
+
+    for(i = n_options; i --;) {
+        parts = temp[i].split(',');
+        options[i].text  = parts[0];
+        options[i].value = parts[1];
+    }
+}
+
+orderSelect(document.querySelector('select[name="company"]'))

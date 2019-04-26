@@ -6,25 +6,37 @@ from django.contrib.auth.models import User
 import json
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 from cfcapp.forms import PaymentForm
 from cfcapp.models import SalesFormData
 from fairs.models import TorontoFair, CalgaryFair, EdmontonFair,  WinnipegFair
 
-class SuccessPage(TemplateView):
+class SuccessPage(LoginRequiredMixin, TemplateView):
+    login_url = '/admin/'
+    redirect_field_name = ''
     template_name = 'success.html'
 
-class IndexPageView(TemplateView):
+
+
+
+class IndexPageView(LoginRequiredMixin, TemplateView):
+    login_url = '/admin/'
+    redirect_field_name = ''
     template_name = 'main-form.html'
     formPayment = PaymentForm()
     form_class = PaymentForm
     all_sales_data = SalesFormData.objects.all()
 
+
     def get_context_data(self, **kwargs):
         context = super(IndexPageView, self).get_context_data(**kwargs)
         context.update({'form': self.formPayment, 'users': User.objects.all(), 'companies': SalesFormData.objects.all()})
         return context
+
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
@@ -404,7 +416,7 @@ class IndexPageView(TemplateView):
             return HttpResponseRedirect('/success')
 
         return render(request, self.template_name, {'form': PaymentForm()})
-
+@login_required(login_url='/admin', redirect_field_name='/admin/')
 def CompanyProfiles(request, pk):
     qs = SalesFormData.objects.get(pk=pk)
     data = {
