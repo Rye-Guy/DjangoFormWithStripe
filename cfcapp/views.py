@@ -416,6 +416,8 @@ class IndexPageView(LoginRequiredMixin, TemplateView):
             return HttpResponseRedirect('/success')
 
         return render(request, self.template_name, {'form': PaymentForm()})
+
+
 @login_required(login_url='/admin', redirect_field_name='/admin/')
 def CompanyProfiles(request, pk):
     qs = SalesFormData.objects.get(pk=pk)
