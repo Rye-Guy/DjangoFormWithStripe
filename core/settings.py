@@ -11,21 +11,18 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+from .__init__ import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm#=^9pi0f-lm_v_zbki)$62$%ht1w^b#*fq%bzk$gq1+e17jz+'
+    ###Guess where I am?###
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,7 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'form'
+    'gtm',
+    'import_export',
+    'fairs',
+    'cfcapp'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +81,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -114,12 +113,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+GOOGLE_TAG_ID = 'UA-135455057-1'
+CSRF_COOKIE_HTTPONLY = False
+CSRF_USE_SESSIONS = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_URL = '/static/'
-
-
-STRIPE_SECRET_KEY = 'sk_test_bYfxBI6vsLYZOKOSfJj8wtr1'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_a7U192xASjxwJjzWoBEJtXEg'

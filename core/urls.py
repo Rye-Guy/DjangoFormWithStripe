@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from form.views import IndexPageView #, PaymentSuccessView
+from cfcapp.views import IndexPageView, SuccessPage, CompanyProfiles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexPageView.as_view(), name="index"),
-    path('payment/', IndexPageView.as_view(), name="payment"),
+    path('success/', SuccessPage.as_view()),
+    path(r'company-profiles/<int:pk>/', CompanyProfiles, name='company_profile')
 ]
