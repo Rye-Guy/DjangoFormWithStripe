@@ -490,7 +490,10 @@ document.getElementById('applyNewBoothCost').addEventListener('click', function 
     discountedCost = boothOption - parseInt(customBoothCost)
     somePercentOff = discountedCost / boothOption
     percentToApply = somePercentOff.toString().slice(2, somePercentOff.length)
-    document.getElementById('id_discount_amount').value = percentToApply.slice(0, -13)
+    if(percentToApply.length > 6){
+        percentToApply = percentToApply.slice(0, -13)
+    }
+    document.getElementById('id_discount_amount').value = percentToApply
     console.log(customBoothCost, discountedCost, somePercentOff, percentToApply)
     console.log('clicked', applyBtn)
 })

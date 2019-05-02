@@ -149,6 +149,7 @@
           <div id='manuelBoothCostInput'><h3>Booth Cost: <input type='text' id='manuelBoothCost'/></h3></div>
             <button class='btn' id='applyNewBoothCost'>Apply Cost</button>
         <div>
+             {% csrf_token %}
              <select name="company">
              {% for company in companies %}
                  <option value={{company.id}}>{{company.company_name}} | {{company.contact_name}}</option>
@@ -159,7 +160,18 @@
     </div>
     {% endif %}
 </div>
-
+<!--<form action="/payment/" method="POST">-->
+ <!--<script-->
+    <!--src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
+    <!--data-key="###"-->
+    <!--data-amount="overallTotalWithTax"-->
+    <!--data-name="Stripe.com"-->
+    <!--data-description="Widget"-->
+    <!--data-image="https://stripe.com/img/documentation/checkout/marketplace.png"-->
+    <!--data-locale="auto"-->
+    <!--data-zip-code="true">-->
+  <!--</script>-->
+<!--</form>-->
 <script>
      function createTextArea(fairDate, fairLocation){
          const container = document.createElement('div')
